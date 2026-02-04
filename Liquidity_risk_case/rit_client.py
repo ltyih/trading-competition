@@ -1,5 +1,6 @@
 """
 RIT Client API wrapper with auto-reconnection and auto-login capabilities
+Supports 24/7 operation with automatic recovery from disconnections.
 """
 import requests
 import subprocess
@@ -7,8 +8,22 @@ import time
 import logging
 from typing import Optional, Dict, Any, List, Tuple
 from datetime import datetime
-import pyautogui
 import psutil
+
+# GUI automation imports with fallback
+try:
+    import pyautogui
+    PYAUTOGUI_AVAILABLE = True
+except ImportError:
+    PYAUTOGUI_AVAILABLE = False
+    logging.warning("pyautogui not available - GUI automation disabled")
+
+try:
+    import pygetwindow as gw
+    PYGETWINDOW_AVAILABLE = True
+except ImportError:
+    PYGETWINDOW_AVAILABLE = False
+    logging.warning("pygetwindow not available - window management disabled")
 
 from config import (
     API_BASE_URL, API_KEY, API_HOST, API_PORT,
@@ -148,48 +163,59 @@ class RITClient:
         3. User is logged in
 
         If not, it attempts to restart/re-login.
+
+        For 24/7 operation, this will continue trying with exponential backoff.
         """
         logger.info("Attempting to reconnect...")
         self.reconnect_attempts += 1
 
+        # Calculate backoff delay (exponential with max cap at 5 minutes)
+        backoff_delay = min(RECONNECT_DELAY_SEC * (2 ** min(self.reconnect_attempts - 1, 6)), 300)
+
+        # Log warning if many attempts but continue trying for 24/7 operation
         if self.reconnect_attempts > MAX_RECONNECT_ATTEMPTS:
-            logger.error(f"Max reconnect attempts ({MAX_RECONNECT_ATTEMPTS}) exceeded")
-            return False
+            logger.warning(f"Reconnect attempt {self.reconnect_attempts} (still trying for 24/7 operation)...")
 
         # Check if RIT Client is running
         if not self._is_rit_client_running():
             logger.warning("RIT Client not running, attempting to start...")
             if not self._start_rit_client():
                 logger.error("Failed to start RIT Client")
-                time.sleep(RECONNECT_DELAY_SEC)
+                time.sleep(backoff_delay)
                 return False
 
         # Wait for client to be ready
-        time.sleep(2)
+        time.sleep(3)
 
         # Try to ping the API
-        for attempt in range(3):
+        for attempt in range(5):
             try:
-                response = self.session.get(f"{self.base_url}/case", timeout=5)
+                response = self.session.get(f"{self.base_url}/case", timeout=10)
                 if response.status_code == 401:
                     # API is up but needs login
                     logger.warning("API accessible but not authenticated - attempting auto-login")
                     if self._attempt_auto_login():
-                        self.reconnect_attempts = 0
+                        self.reconnect_attempts = 0  # Reset on success
+                        self.is_connected = True
                         return True
                     else:
-                        time.sleep(RECONNECT_DELAY_SEC)
+                        # Don't return False immediately, will retry in outer loop
+                        logger.warning("Auto-login attempt failed, will retry...")
+                        time.sleep(backoff_delay)
                         return False
                 elif response.ok:
                     logger.info("Successfully reconnected!")
                     self.is_connected = True
-                    self.reconnect_attempts = 0
+                    self.reconnect_attempts = 0  # Reset on success
                     return True
             except requests.exceptions.ConnectionError:
-                logger.debug(f"Connection attempt {attempt + 1} failed, retrying...")
-                time.sleep(2)
+                logger.debug(f"Connection attempt {attempt + 1}/5 failed, retrying...")
+                time.sleep(3)
+            except Exception as e:
+                logger.debug(f"Connection attempt {attempt + 1}/5 error: {e}")
+                time.sleep(3)
 
-        time.sleep(RECONNECT_DELAY_SEC)
+        time.sleep(backoff_delay)
         return False
 
     def _is_rit_client_running(self) -> bool:
@@ -233,41 +259,173 @@ class RITClient:
         """
         Attempt automatic login using GUI automation.
 
-        This uses pyautogui to interact with the RIT Client login window.
-
-        WARNING: This is a fallback mechanism and may not work reliably.
+        This uses pyautogui and pygetwindow to interact with the RIT Client login window.
+        Supports 24/7 operation with robust error handling.
         """
         logger.info(f"Attempting auto-login for user: {USERNAME}")
 
+        # Check if GUI automation is available
+        if not PYAUTOGUI_AVAILABLE:
+            logger.warning("pyautogui not available - waiting for manual login...")
+            # Wait and poll for manual login
+            for i in range(60):
+                time.sleep(1)
+                if self._check_api_accessible():
+                    logger.info("Manual login detected - connection restored!")
+                    return True
+                if i % 15 == 0 and i > 0:
+                    logger.info(f"Waiting for manual login... ({i}/60s)")
+            return False
+
         try:
             # Give the login window time to appear
-            time.sleep(2)
+            time.sleep(3)
 
-            # Try to find and interact with login fields
-            # This is highly dependent on the RIT Client GUI layout
-
-            # Note: The actual implementation would need to be adjusted
-            # based on the specific RIT Client GUI
-
-            # For now, log the attempt and inform user
-            logger.warning("Auto-login GUI automation may require user intervention")
-            logger.info(f"Please ensure RIT Client is logged in with server: {RIT_SERVER}:{RIT_PORT}")
-
-            # Wait and check if login succeeded
-            for i in range(30):  # Wait up to 30 seconds for manual login
-                time.sleep(1)
+            # Try to find and focus the RIT Client window
+            rit_window = self._find_rit_window()
+            if rit_window:
+                logger.info("Found RIT Client window, attempting to focus...")
                 try:
-                    response = self.session.get(f"{self.base_url}/case", timeout=5)
-                    if response.ok:
-                        logger.info("Login successful!")
-                        return True
-                except:
-                    pass
+                    rit_window.activate()
+                    time.sleep(1)
+                except Exception as e:
+                    logger.warning(f"Could not activate window: {e}")
 
+            # Configure pyautogui for reliability
+            pyautogui.PAUSE = 0.5
+            pyautogui.FAILSAFE = False  # Disable failsafe for 24/7 operation
+
+            # Method 1: Try keyboard-based login FIRST (most reliable)
+            logger.info("Attempting keyboard-based login...")
+            if self._keyboard_based_login():
+                time.sleep(5)
+                if self._check_api_accessible():
+                    logger.info("Keyboard-based login successful!")
+                    return True
+                logger.info("Credentials entered, waiting for connection...")
+
+            # Method 2: Wait and poll for successful login
+            logger.info("Waiting for login to complete...")
+            max_wait = 30  # Wait up to 30 seconds
+            for i in range(max_wait):
+                time.sleep(1)
+                if self._check_api_accessible():
+                    logger.info("Login successful!")
+                    return True
+                if i % 10 == 0 and i > 0:
+                    logger.info(f"Still waiting for login... ({i}/{max_wait}s)")
+
+            logger.warning("Auto-login could not complete. Will retry...")
             return False
 
         except Exception as e:
             logger.error(f"Auto-login failed: {e}")
+            return False
+
+    def _find_rit_window(self):
+        """Find the RIT Client window."""
+        if not PYGETWINDOW_AVAILABLE:
+            return None
+
+        try:
+            # Look for windows with RIT in the title
+            windows = gw.getWindowsWithTitle('RIT')
+            if not windows:
+                windows = gw.getWindowsWithTitle('Rotman')
+            if not windows:
+                windows = gw.getWindowsWithTitle('Interactive Trader')
+            if windows:
+                return windows[0]
+        except Exception as e:
+            logger.debug(f"Could not find RIT window: {e}")
+        return None
+
+    def _try_click_connect_button(self) -> bool:
+        """Try to find and click the Connect button in RIT Client."""
+        if not PYAUTOGUI_AVAILABLE:
+            return False
+
+        try:
+            # Look for the Connect button on screen
+            connect_btn = pyautogui.locateOnScreen('connect_button.png', confidence=0.8)
+            if connect_btn:
+                pyautogui.click(pyautogui.center(connect_btn))
+                logger.info("Clicked Connect button")
+                return True
+        except Exception as e:
+            logger.debug(f"Could not find Connect button: {e}")
+
+        # Try clicking at common button positions (fallback)
+        try:
+            rit_window = self._find_rit_window()
+            if rit_window:
+                # Click near common Connect button positions
+                center_x = rit_window.left + rit_window.width // 2
+                center_y = rit_window.top + rit_window.height // 2
+                # Try clicking Connect button area (usually near center-bottom of login dialog)
+                pyautogui.click(center_x, center_y + 50)
+                return True
+        except Exception as e:
+            logger.debug(f"Fallback click failed: {e}")
+
+        return False
+
+    def _keyboard_based_login(self) -> bool:
+        """Attempt login using keyboard input."""
+        if not PYAUTOGUI_AVAILABLE:
+            return False
+
+        try:
+            rit_window = self._find_rit_window()
+            if rit_window:
+                try:
+                    rit_window.activate()
+                    time.sleep(0.5)
+                except:
+                    pass
+
+            # RIT Login dialog field order: Trader ID, Password, Server, Port
+            logger.info(f"Typing Trader ID: {USERNAME}")
+            pyautogui.hotkey('ctrl', 'a')  # Select all
+            pyautogui.typewrite(USERNAME, interval=0.02)
+            pyautogui.press('tab')
+            time.sleep(0.2)
+
+            # Password field
+            logger.info("Typing Password...")
+            pyautogui.hotkey('ctrl', 'a')
+            pyautogui.typewrite(PASSWORD, interval=0.02)
+            pyautogui.press('tab')
+            time.sleep(0.2)
+
+            # Server field
+            logger.info(f"Typing Server: {RIT_SERVER}")
+            pyautogui.hotkey('ctrl', 'a')
+            pyautogui.typewrite(RIT_SERVER, interval=0.02)
+            pyautogui.press('tab')
+            time.sleep(0.2)
+
+            # Port field
+            logger.info(f"Typing Port: {RIT_PORT}")
+            pyautogui.hotkey('ctrl', 'a')
+            pyautogui.typewrite(str(RIT_PORT), interval=0.02)
+
+            # Press Enter to submit
+            time.sleep(0.3)
+            pyautogui.press('enter')
+            logger.info("Submitted login credentials via keyboard")
+            return True
+
+        except Exception as e:
+            logger.error(f"Keyboard-based login failed: {e}")
+            return False
+
+    def _check_api_accessible(self) -> bool:
+        """Quick check if API is accessible and authenticated."""
+        try:
+            response = self.session.get(f"{self.base_url}/case", timeout=5)
+            return response.ok
+        except:
             return False
 
     # =============== API Methods ===============

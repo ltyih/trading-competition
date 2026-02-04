@@ -134,15 +134,33 @@ class DataCollector:
         # Main collection loop
         last_health_check = time.time()
 
+        # Track consecutive connection failures for backoff
+        connection_failures = 0
+
         while self.running:
             try:
                 # Periodic health check
                 if time.time() - last_health_check > HEALTH_CHECK_INTERVAL_SEC:
                     if not self.client.health_check():
-                        logger.warning("Health check failed, attempting reconnect...")
-                        self.data_store.log_connection_event("HEALTH_CHECK_FAILED",
-                            "Health check failed", False)
+                        connection_failures += 1
+                        logger.warning(f"Health check failed (attempt {connection_failures}), attempting reconnect...")
+                        if self.data_store:
+                            self.data_store.log_connection_event("HEALTH_CHECK_FAILED",
+                                f"Health check failed (attempt {connection_failures})", False)
+
+                        # Exponential backoff for connection failures (max 2 minutes)
+                        backoff_time = min(5 * (2 ** min(connection_failures - 1, 5)), 120)
+                        logger.info(f"Waiting {backoff_time}s before retry...")
+                        time.sleep(backoff_time)
                         continue
+                    else:
+                        # Reset failure counter on successful health check
+                        if connection_failures > 0:
+                            logger.info(f"Connection restored after {connection_failures} failures")
+                            if self.data_store:
+                                self.data_store.log_connection_event("CONNECTION_RESTORED",
+                                    f"Restored after {connection_failures} failures", True)
+                        connection_failures = 0
                     last_health_check = time.time()
 
                 # Collect all data
@@ -164,9 +182,11 @@ class DataCollector:
             except Exception as e:
                 self.stats['errors'] += 1
                 logger.error(f"Error in collection cycle: {e}")
-                self.data_store.log_system_event("ERROR", str(e),
-                    self.current_period, self.current_tick)
-                time.sleep(1)
+                if self.data_store:
+                    self.data_store.log_system_event("ERROR", str(e),
+                        self.current_period, self.current_tick)
+                # Brief pause on error before continuing
+                time.sleep(2)
 
         # Cleanup
         self._shutdown()
@@ -440,7 +460,7 @@ class TenderMonitor:
     Provides real-time alerts and analysis of incoming tenders.
     """
 
-    def __init__(self, client: RITClient, data_store: DataStore):
+    def __init__(self, client: RITClient, data_store: SessionDataStore):
         self.client = client
         self.data_store = data_store
         self.active_tenders: Dict[int, Dict[str, Any]] = {}

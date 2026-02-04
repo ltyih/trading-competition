@@ -337,6 +337,18 @@ class SessionManager:
             )
         """)
 
+        # Connection log table for tracking connection events
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS connection_log (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                timestamp TEXT NOT NULL,
+                event_type TEXT NOT NULL,
+                message TEXT,
+                success INTEGER,
+                details TEXT
+            )
+        """)
+
         # Create indexes
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_securities_ticker_tick ON securities(ticker, tick)")
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_order_book_ticker_tick ON order_book(ticker, tick)")
@@ -762,6 +774,23 @@ class SessionDataStore:
             tick,
             message,
             json.dumps(data) if data else None
+        ))
+        conn.commit()
+        conn.close()
+
+    def log_connection_event(self, event_type: str, message: str, success: bool, details: Any = None):
+        """Log a connection event (health check, reconnect, etc.)."""
+        conn = self._get_connection()
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO connection_log (timestamp, event_type, message, success, details)
+            VALUES (?, ?, ?, ?, ?)
+        """, (
+            self._get_timestamp(),
+            event_type,
+            message,
+            1 if success else 0,
+            json.dumps(details) if details else None
         ))
         conn.commit()
         conn.close()

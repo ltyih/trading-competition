@@ -142,17 +142,17 @@ Or set it in config.py as API_KEY = "YOUR_KEY"
     logger.info("Starting data collector...")
     logger.info(f"API Key: {'*' * (len(api_key) - 4) + api_key[-4:] if api_key and len(api_key) > 4 else 'Not provided'}")
 
-    # Run with auto-restart on crash
-    max_restarts = 10
+    # Run with auto-restart on crash - unlimited restarts for 24/7 operation
     restart_count = 0
-    restart_delay = 30  # seconds
+    base_restart_delay = 10  # seconds
 
-    while restart_count < max_restarts:
+    while True:
         try:
             collector = DataCollector(api_key=api_key)
             collector.start()
 
             # If we get here normally (graceful shutdown), exit
+            logger.info("Collector stopped gracefully")
             break
 
         except KeyboardInterrupt:
@@ -161,15 +161,30 @@ Or set it in config.py as API_KEY = "YOUR_KEY"
 
         except Exception as e:
             restart_count += 1
-            logger.error(f"Collector crashed: {e}")
-            logger.error(f"Restart attempt {restart_count}/{max_restarts}")
+            # Exponential backoff for restarts (max 10 minutes)
+            restart_delay = min(base_restart_delay * (2 ** min(restart_count - 1, 6)), 600)
 
-            if restart_count < max_restarts:
-                logger.info(f"Restarting in {restart_delay} seconds...")
-                time.sleep(restart_delay)
-            else:
-                logger.error("Max restarts exceeded. Exiting.")
-                sys.exit(1)
+            logger.error(f"Collector crashed: {e}")
+            logger.error(f"Restart attempt #{restart_count} - will retry in {restart_delay}s")
+
+            # Log to file for post-mortem analysis
+            try:
+                import traceback
+                error_log = LOGS_DIR / f"crash_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+                with open(error_log, 'w') as f:
+                    f.write(f"Crash at {datetime.now().isoformat()}\n")
+                    f.write(f"Restart count: {restart_count}\n")
+                    f.write(f"Error: {e}\n\n")
+                    traceback.print_exc(file=f)
+                logger.info(f"Crash details saved to {error_log}")
+            except:
+                pass
+
+            logger.info(f"Restarting in {restart_delay} seconds... (Ctrl+C to stop)")
+            time.sleep(restart_delay)
+
+            # Reset restart count after successful run of 1 hour
+            # (handled by successful collector.start() returning normally)
 
     logger.info("Data collector finished.")
 
