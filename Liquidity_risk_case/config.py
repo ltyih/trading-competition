@@ -1,7 +1,12 @@
 """
 Configuration for RIT Data Collector
+
+Enhanced with unique collector identification for multi-user data collection.
 """
 import os
+import socket
+import getpass
+import uuid
 from pathlib import Path
 
 # Base paths
@@ -12,6 +17,42 @@ LOGS_DIR = BASE_DIR / "logs"
 # Ensure directories exist
 DATA_DIR.mkdir(exist_ok=True)
 LOGS_DIR.mkdir(exist_ok=True)
+
+# =============================================================================
+# COLLECTOR IDENTIFICATION
+# =============================================================================
+# Each collector instance gets a unique identifier for multi-user scenarios
+# This allows multiple team members to run collectors simultaneously and
+# easily identify/merge data in pandas later
+
+def get_collector_id() -> str:
+    """
+    Generate a unique collector ID combining:
+    - Machine hostname
+    - Username
+    - Short UUID for this session
+
+    Format: hostname_username_uuid8
+    Example: DESKTOP-ABC_john_a1b2c3d4
+    """
+    # Clean hostname and username to be filesystem/database safe
+    hostname = socket.gethostname()
+    hostname = "".join(c if c.isalnum() else "_" for c in hostname)[:20]
+
+    username = getpass.getuser()
+    username = "".join(c if c.isalnum() else "_" for c in username)[:15]
+
+    session_uuid = uuid.uuid4().hex[:8]
+    return f"{hostname}_{username}_{session_uuid}"
+
+# Generate collector ID at module load time (persists for the session)
+COLLECTOR_ID = get_collector_id()
+COLLECTOR_HOSTNAME = socket.gethostname()
+COLLECTOR_USERNAME = getpass.getuser()
+
+# Optional: Set a custom collector name (e.g., "kanish", "trader1")
+# If set, this will be used instead of the auto-generated ID
+COLLECTOR_NAME = os.environ.get("RIT_COLLECTOR_NAME", None)
 
 # RIT Server Configuration
 RIT_SERVER = "flserver.rotman.utoronto.ca"
@@ -52,8 +93,10 @@ SESSIONS_DIR = DATA_DIR / "sessions"
 SESSIONS_DIR.mkdir(exist_ok=True)
 
 # CSV Export settings
-EXPORT_CSV = True
-CSV_EXPORT_INTERVAL_SEC = 300  # Export to CSV every 5 minutes
+# Disabled by default - use analyze_data.py for data export instead
+# The periodic CSV exports create many redundant files
+EXPORT_CSV = False
+CSV_EXPORT_INTERVAL_SEC = 300  # Export to CSV every 5 minutes (if enabled)
 
 # Logging settings
 LOG_LEVEL = "INFO"
@@ -96,3 +139,22 @@ COMMISSIONS = {
 GROSS_LIMIT = 250000
 NET_LIMIT = 150000
 MAX_ORDER_SIZE = 10000
+
+# =============================================================================
+# ENHANCED DATA COLLECTION SETTINGS
+# =============================================================================
+
+# Filter settings for player limit orders
+# Orders from these trader_ids are considered "anonymous" market maker/system orders
+ANON_TRADER_IDS = {"ANON", "anon", "MM", "mm", "MARKET", "market", None, ""}
+
+# Tick snapshot settings (for efficient price/volume per tick tracking)
+SAVE_TICK_SNAPSHOTS = True  # Enable per-tick snapshot table
+TICK_SNAPSHOT_FIELDS = [
+    "last_price", "bid", "ask", "bid_size", "ask_size",
+    "volume", "spread", "mid_price"
+]
+
+# Player order tracking
+TRACK_PLAYER_ORDERS = True  # Track non-ANON limit orders separately
+PLAYER_ORDER_BOOK_DEPTH = 20  # How many levels deep to track player orders

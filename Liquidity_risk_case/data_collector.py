@@ -18,7 +18,9 @@ from config import (
     POLL_INTERVAL_SEC, BOOK_DEPTH_LIMIT, NEWS_LIMIT,
     HEALTH_CHECK_INTERVAL_SEC, KNOWN_SECURITIES,
     DATA_DIR, CSV_EXPORT_INTERVAL_SEC, EXPORT_CSV,
-    SEPARATE_DB_PER_SESSION
+    SEPARATE_DB_PER_SESSION,
+    COLLECTOR_ID, COLLECTOR_HOSTNAME, COLLECTOR_USERNAME, COLLECTOR_NAME,
+    SAVE_TICK_SNAPSHOTS, TRACK_PLAYER_ORDERS
 )
 from session_manager import SessionManager, SessionDataStore
 from rit_client import RITClient, RITClientManager
@@ -68,11 +70,14 @@ class DataCollector:
             'polls': 0,
             'securities_saved': 0,
             'order_books_saved': 0,
+            'tick_snapshots_saved': 0,
+            'player_orders_tracked': 0,
             'tenders_saved': 0,
             'news_saved': 0,
             'tas_saved': 0,
             'errors': 0,
-            'start_time': None
+            'start_time': None,
+            'collector_id': COLLECTOR_ID
         }
 
         # CSV export tracking
@@ -112,11 +117,18 @@ class DataCollector:
         self.setup_signal_handlers()
 
         logger.info("=" * 60)
-        logger.info("RIT Data Collector Starting (Session-Based Storage)")
+        logger.info("RIT Data Collector Starting (Enhanced Edition)")
+        logger.info("=" * 60)
+        logger.info(f"Collector ID: {COLLECTOR_ID}")
+        logger.info(f"Collector Name: {COLLECTOR_NAME or 'Auto-generated'}")
+        logger.info(f"Hostname: {COLLECTOR_HOSTNAME}")
+        logger.info(f"Username: {COLLECTOR_USERNAME}")
         logger.info("=" * 60)
         logger.info(f"Poll interval: {POLL_INTERVAL_SEC}s")
         logger.info(f"Book depth: {BOOK_DEPTH_LIMIT}")
         logger.info(f"Session storage: {SEPARATE_DB_PER_SESSION}")
+        logger.info(f"Tick snapshots: {SAVE_TICK_SNAPSHOTS}")
+        logger.info(f"Player order tracking: {TRACK_PLAYER_ORDERS}")
         logger.info("=" * 60)
 
         # Wait for initial connection
@@ -436,14 +448,27 @@ class DataCollector:
     def _shutdown(self):
         """Perform cleanup on shutdown."""
         logger.info("Shutting down data collector...")
+        logger.info(f"Collector ID: {COLLECTOR_ID}")
 
         if self.data_store:
             self.data_store.log_system_event("SHUTDOWN", "Collector stopped",
                 self.current_period, self.current_tick, self.stats)
 
-        # End current session
+        # Calculate total records saved
+        total_records = (
+            self.stats['securities_saved'] +
+            self.stats['order_books_saved'] +
+            self.stats['tenders_saved'] +
+            self.stats['news_saved'] +
+            self.stats['tas_saved']
+        )
+
+        # End current session with stats
         if self.current_session:
-            self.session_manager.end_session()
+            self.session_manager.end_session(
+                polls_completed=self.stats['polls'],
+                records_saved=total_records
+            )
 
         # Final CSV export
         if EXPORT_CSV:
