@@ -1,0 +1,73 @@
+api:
+  base_url: "http://localhost:9999/v1"
+  api_key: "REPLACE_WITH_RIT_API_KEY"
+  timeout_seconds: 0.5
+  max_get_retries: 2
+  retry_backoff_seconds: 0.25
+  retry_jitter_seconds: 0.05
+
+universe:
+  tickers:
+    - SPNG
+    - SMMR
+    - ATMN
+    - WNTR
+
+polling:
+  case_interval_ms: 500
+  book_interval_ms: 300
+  tas_interval_ms: 300
+  news_interval_ms: 500
+
+logging:
+  level: "INFO"
+  format: "json"
+  console_enabled: true
+  file_enabled: true
+  file_path: "logs/ritc_mm.log"
+  include_fields:
+    - timestamp
+    - level
+    - message
+    - logger
+    - module
+    - ticker
+    - regime
+    - order_id
+    - request_id
+    - correlation_id
+
+tunables:
+  tick_size: 0.01
+  rounding_decimals: 2
+
+  base_hs_ticks: 2
+  min_hs_ticks: 1
+  vol_k: 3.0
+  fv_update_threshold_ticks: 1
+  quote_interval_ms: 300
+  min_rest_ms: 250
+  max_order_age_ms: 1200
+
+  base_size: 300
+  max_quote_size: 1500
+  size_vol_cut: 0.5
+  size_limit_cut: 0.3
+
+  soft_cap_tkr: 2500
+  hard_cap_tkr: 5000
+  agg_safety: 0.85
+  inv_k: 1.2
+
+  news_lockout_seconds: 1.0
+  news_cooldown_seconds: 3.0
+  jump_thresh_bps: 20
+  reprice_window_seconds: 2.0
+
+  minute_closeout_start_s: 50
+  minute_closeout_hard_s: 58
+  heat_closeout_start_s: 270
+
+  cross_edge_ticks: 2
+  ioc_slice_size: 800
+  market_slice_size: 1200
