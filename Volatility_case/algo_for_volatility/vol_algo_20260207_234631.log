@@ -1,0 +1,135 @@
+2026-02-07 23:47:16,378 [INFO] news_parser: NEWS: Delta limit = 8000
+2026-02-07 23:47:16,378 [INFO] news_parser: NEWS: Penalty rate = 2.00%
+2026-02-07 23:47:51,492 [INFO] news_parser: NEWS: Forecast vol next week = 33.0% - 38.0% (mid=35.5%)
+2026-02-07 23:47:51,605 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=1570
+2026-02-07 23:47:51,711 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=1572
+2026-02-07 23:47:51,818 [INFO] rit_api: MARKET BUY 30 RTM1C50 -> order_id=1574
+2026-02-07 23:47:51,924 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=1576
+2026-02-07 23:47:52,034 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=1578
+2026-02-07 23:47:52,140 [INFO] rit_api: MARKET BUY 30 RTM1P50 -> order_id=1579
+2026-02-07 23:47:52,253 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:47:52,365 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:47:52,475 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:47:52,599 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:47:52,656 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:47:52,764 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:47:52,893 [INFO] rit_api: MARKET SELL 6809 RTM -> order_id=1623
+2026-02-07 23:47:52,895 [INFO] trading_engine: HEDGE SELL 6809 RTM (delta=8009 -> target=1200, limit=8000)
+2026-02-07 23:47:53,316 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:47:53,424 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:47:53,488 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:47:53,551 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:47:53,608 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:47:53,662 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:47:53,662 [INFO] trading_engine: POSITION BUILT at tick 37: gross=749 net=749
+2026-02-07 23:48:30,783 [INFO] news_parser: NEWS: Current realized vol = 35.0% (history: ['35%'])
+2026-02-07 23:48:42,082 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=3879
+2026-02-07 23:48:42,082 [INFO] trading_engine: HEDGE SELL 10000 RTM (delta=11405 -> target=1200, limit=8000)
+2026-02-07 23:48:43,825 [INFO] trading_engine: REVERSAL APPROVED at tick 88: 1 -> -1 (edge=6.4%)
+2026-02-07 23:48:43,825 [INFO] trading_engine: VOL REVERSAL at tick 88: 1 -> -1 (edge=6.4%)
+2026-02-07 23:48:44,041 [INFO] rit_api: MARKET BUY 60 RTM1C45 -> order_id=3997
+2026-02-07 23:48:44,147 [INFO] rit_api: MARKET BUY 60 RTM1P45 -> order_id=4000
+2026-02-07 23:48:44,258 [INFO] rit_api: MARKET BUY 68 RTM1C46 -> order_id=4003
+2026-02-07 23:48:44,365 [INFO] rit_api: MARKET BUY 68 RTM1P46 -> order_id=4006
+2026-02-07 23:48:44,478 [INFO] rit_api: MARKET BUY 71 RTM1C47 -> order_id=4010
+2026-02-07 23:48:44,589 [INFO] rit_api: MARKET BUY 71 RTM1P47 -> order_id=4012
+2026-02-07 23:48:44,742 [INFO] rit_api: MARKET BUY 70 RTM1C48 -> order_id=4057
+2026-02-07 23:48:44,870 [INFO] rit_api: MARKET BUY 70 RTM1P48 -> order_id=4060
+2026-02-07 23:48:44,925 [INFO] rit_api: MARKET BUY 65 RTM1C49 -> order_id=4062
+2026-02-07 23:48:45,038 [INFO] rit_api: MARKET BUY 65 RTM1P49 -> order_id=4064
+2026-02-07 23:48:45,095 [INFO] rit_api: MARKET BUY 45 RTM1C50 -> order_id=4065
+2026-02-07 23:48:45,150 [INFO] rit_api: MARKET BUY 45 RTM1P50 -> order_id=4067
+2026-02-07 23:48:45,576 [INFO] rit_api: MARKET SELL 100 RTM1P48 -> order_id=4076
+2026-02-07 23:48:45,714 [INFO] rit_api: MARKET SELL 100 RTM1P48 -> order_id=4121
+2026-02-07 23:48:45,842 [INFO] rit_api: MARKET SELL 22 RTM1P48 -> order_id=4124
+2026-02-07 23:48:45,954 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:48:46,070 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:48:46,179 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:48:46,237 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:48:46,345 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:48:46,402 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:48:46,462 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:48:46,906 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:48:47,016 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:48:47,072 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:48:47,140 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:48:47,197 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:48:47,254 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:48:47,317 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:48:47,378 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 23:48:47,378 [INFO] trading_engine: POSITION BUILT at tick 91: gross=838 net=-838
+2026-02-07 23:48:48,010 [INFO] rit_api: MARKET BUY 4576 RTM -> order_id=4233
+2026-02-07 23:48:48,010 [INFO] trading_engine: HEDGE BUY 4576 RTM (delta=-5776 -> target=-1200, limit=8000)
+2026-02-07 23:48:49,926 [INFO] rit_api: MARKET BUY 3705 RTM -> order_id=4329
+2026-02-07 23:48:49,926 [INFO] trading_engine: HEDGE BUY 3705 RTM (delta=-4905 -> target=-1200, limit=8000)
+2026-02-07 23:48:59,039 [INFO] rit_api: MARKET BUY 4232 RTM -> order_id=4788
+2026-02-07 23:48:59,044 [INFO] trading_engine: HEDGE BUY 4232 RTM (delta=-5432 -> target=-1200, limit=8000)
+2026-02-07 23:49:07,907 [INFO] news_parser: NEWS: Forecast vol next week = 23.0% - 28.0% (mid=25.5%)
+2026-02-07 23:49:36,253 [INFO] rit_api: MARKET BUY 4245 RTM -> order_id=6456
+2026-02-07 23:49:36,254 [INFO] trading_engine: HEDGE BUY 4245 RTM (delta=-5445 -> target=-1200, limit=8000)
+2026-02-07 23:49:44,170 [INFO] rit_api: MARKET BUY 3999 RTM -> order_id=6805
+2026-02-07 23:49:44,170 [INFO] trading_engine: HEDGE BUY 3999 RTM (delta=-5199 -> target=-1200, limit=8000)
+2026-02-07 23:49:46,156 [INFO] news_parser: NEWS: Current realized vol = 27.0% (history: ['35%', '27%'])
+2026-02-07 23:49:47,116 [INFO] trading_engine: BLOCKED reversal at tick 151 (after 150)
+2026-02-07 23:49:48,156 [INFO] trading_engine: BLOCKED reversal at tick 152 (after 150)
+2026-02-07 23:49:49,168 [INFO] trading_engine: BLOCKED reversal at tick 153 (after 150)
+2026-02-07 23:49:50,041 [INFO] trading_engine: BLOCKED reversal at tick 154 (after 150)
+2026-02-07 23:49:51,249 [INFO] trading_engine: BLOCKED reversal at tick 155 (after 150)
+2026-02-07 23:49:52,022 [INFO] trading_engine: BLOCKED reversal at tick 156 (after 150)
+2026-02-07 23:49:53,079 [INFO] trading_engine: BLOCKED reversal at tick 157 (after 150)
+2026-02-07 23:49:54,109 [INFO] trading_engine: BLOCKED reversal at tick 158 (after 150)
+2026-02-07 23:49:55,149 [INFO] trading_engine: BLOCKED reversal at tick 159 (after 150)
+2026-02-07 23:49:56,108 [INFO] trading_engine: BLOCKED reversal at tick 160 (after 150)
+2026-02-07 23:49:57,140 [INFO] trading_engine: BLOCKED reversal at tick 161 (after 150)
+2026-02-07 23:49:58,060 [INFO] trading_engine: BLOCKED reversal at tick 162 (after 150)
+2026-02-07 23:49:59,085 [INFO] trading_engine: BLOCKED reversal at tick 163 (after 150)
+2026-02-07 23:50:00,111 [INFO] trading_engine: BLOCKED reversal at tick 164 (after 150)
+2026-02-07 23:50:01,139 [INFO] trading_engine: BLOCKED reversal at tick 165 (after 150)
+2026-02-07 23:50:02,165 [INFO] trading_engine: BLOCKED reversal at tick 166 (after 150)
+2026-02-07 23:50:03,076 [INFO] trading_engine: BLOCKED reversal at tick 167 (after 150)
+2026-02-07 23:50:04,096 [INFO] trading_engine: BLOCKED reversal at tick 168 (after 150)
+2026-02-07 23:50:05,121 [INFO] trading_engine: BLOCKED reversal at tick 169 (after 150)
+2026-02-07 23:50:06,153 [INFO] trading_engine: BLOCKED reversal at tick 170 (after 150)
+2026-02-07 23:50:07,181 [INFO] trading_engine: BLOCKED reversal at tick 171 (after 150)
+2026-02-07 23:50:08,207 [INFO] trading_engine: BLOCKED reversal at tick 172 (after 150)
+2026-02-07 23:50:09,117 [INFO] trading_engine: BLOCKED reversal at tick 173 (after 150)
+2026-02-07 23:50:10,143 [INFO] trading_engine: BLOCKED reversal at tick 174 (after 150)
+2026-02-07 23:50:11,169 [INFO] trading_engine: BLOCKED reversal at tick 175 (after 150)
+2026-02-07 23:50:12,205 [INFO] trading_engine: BLOCKED reversal at tick 176 (after 150)
+2026-02-07 23:50:13,236 [INFO] trading_engine: BLOCKED reversal at tick 177 (after 150)
+2026-02-07 23:50:14,147 [INFO] trading_engine: BLOCKED reversal at tick 178 (after 150)
+2026-02-07 23:50:15,185 [INFO] trading_engine: BLOCKED reversal at tick 179 (after 150)
+2026-02-07 23:50:16,260 [INFO] trading_engine: BLOCKED reversal at tick 180 (after 150)
+2026-02-07 23:50:17,281 [INFO] trading_engine: BLOCKED reversal at tick 181 (after 150)
+2026-02-07 23:50:18,200 [INFO] trading_engine: BLOCKED reversal at tick 182 (after 150)
+2026-02-07 23:50:19,225 [INFO] trading_engine: BLOCKED reversal at tick 183 (after 150)
+2026-02-07 23:50:20,249 [INFO] trading_engine: BLOCKED reversal at tick 184 (after 150)
+2026-02-07 23:50:21,275 [INFO] trading_engine: BLOCKED reversal at tick 185 (after 150)
+2026-02-07 23:50:22,303 [INFO] trading_engine: BLOCKED reversal at tick 186 (after 150)
+2026-02-07 23:50:23,220 [INFO] news_parser: NEWS: Forecast vol next week = 21.0% - 26.0% (mid=23.5%)
+2026-02-07 23:50:23,228 [INFO] trading_engine: BLOCKED reversal at tick 187 (after 150)
+2026-02-07 23:50:24,249 [INFO] trading_engine: BLOCKED reversal at tick 188 (after 150)
+2026-02-07 23:50:25,279 [INFO] trading_engine: BLOCKED reversal at tick 189 (after 150)
+2026-02-07 23:50:26,330 [INFO] trading_engine: BLOCKED reversal at tick 190 (after 150)
+2026-02-07 23:50:27,239 [INFO] trading_engine: BLOCKED reversal at tick 191 (after 150)
+2026-02-07 23:50:28,307 [INFO] trading_engine: BLOCKED reversal at tick 192 (after 150)
+2026-02-07 23:50:29,333 [INFO] trading_engine: BLOCKED reversal at tick 193 (after 150)
+2026-02-07 23:50:30,242 [INFO] trading_engine: BLOCKED reversal at tick 194 (after 150)
+2026-02-07 23:50:31,275 [INFO] trading_engine: BLOCKED reversal at tick 195 (after 150)
+2026-02-07 23:50:32,298 [INFO] trading_engine: BLOCKED reversal at tick 196 (after 150)
+2026-02-07 23:50:33,365 [INFO] trading_engine: BLOCKED reversal at tick 197 (after 150)
+2026-02-07 23:50:34,277 [INFO] trading_engine: BLOCKED reversal at tick 198 (after 150)
+2026-02-07 23:50:35,320 [INFO] trading_engine: BLOCKED reversal at tick 199 (after 150)
+2026-02-07 23:50:36,354 [INFO] trading_engine: BLOCKED reversal at tick 200 (after 150)
+2026-02-07 23:50:37,386 [INFO] trading_engine: BLOCKED reversal at tick 201 (after 150)
+2026-02-07 23:50:38,301 [INFO] trading_engine: BLOCKED reversal at tick 202 (after 150)
+2026-02-07 23:50:39,330 [INFO] trading_engine: BLOCKED reversal at tick 203 (after 150)
+2026-02-07 23:50:40,356 [INFO] trading_engine: BLOCKED reversal at tick 204 (after 150)
+2026-02-07 23:50:41,385 [INFO] trading_engine: BLOCKED reversal at tick 205 (after 150)
+2026-02-07 23:50:42,421 [INFO] trading_engine: BLOCKED reversal at tick 206 (after 150)
+2026-02-07 23:50:43,325 [INFO] trading_engine: BLOCKED reversal at tick 207 (after 150)
+2026-02-07 23:50:44,398 [INFO] trading_engine: BLOCKED reversal at tick 208 (after 150)
+2026-02-07 23:50:44,519 [INFO] rit_api: MARKET SELL 3603 RTM -> order_id=9676
+2026-02-07 23:50:44,519 [INFO] trading_engine: HEDGE SELL 3603 RTM (delta=4803 -> target=1200, limit=8000)
+2026-02-07 23:50:46,432 [INFO] trading_engine: BLOCKED reversal at tick 210 (after 150)
+2026-02-07 23:50:47,345 [INFO] trading_engine: BLOCKED reversal at tick 211 (after 150)

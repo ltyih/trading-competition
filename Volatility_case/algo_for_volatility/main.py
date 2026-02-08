@@ -1,9 +1,12 @@
 """
-Volatility Trading Algorithm V4 - Maximum Profit
+Volatility Trading Algorithm V7 - Fixed Delta Hedging
 RITC 2026 Volatility Case
 
-Strategy: Target portfolio approach with aggressive position building,
-vega-weighted ATM straddles, gamma-aware delta hedging.
+Key fixes:
+- Single delta hedge path (no oscillation death spiral)
+- Market-only hedging with cooldown
+- Concentrate on ATM strikes for max vega
+- Build once, hold, hedge only
 """
 
 import sys
@@ -14,17 +17,17 @@ from datetime import datetime
 from config import LOOP_INTERVAL_SEC, UNWIND_START_TICK, TICKS_PER_SUBHEAT
 from rit_api import RITApi
 from trading_engine import TradingEngine
+from news_parser import VolatilityState
 
 BANNER = r"""
 ============================================================
-  RITC 2026 - Volatility Trading Algorithm V4
-  Strategy: Max Profit - Target Portfolio + Gamma Scalping
+  RITC 2026 - Volatility Trading Algorithm V7
+  Strategy: Single-Path Hedge + ATM Concentration
 ============================================================
 """
 
 
 def setup_logging():
-    """Configure logging to file and console."""
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     log_file = f"vol_algo_{timestamp}.log"
 
@@ -40,7 +43,6 @@ def setup_logging():
 
 
 def wait_for_connection(api: RITApi):
-    """Wait until RIT client is reachable."""
     print("Waiting for RIT connection...")
     while True:
         if api.is_connected():
@@ -50,7 +52,6 @@ def wait_for_connection(api: RITApi):
 
 
 def wait_for_active(api: RITApi):
-    """Wait until the case is in ACTIVE status."""
     status = api.get_status()
     if status in ("ACTIVE", "RUNNING"):
         return True
@@ -67,7 +68,6 @@ def wait_for_active(api: RITApi):
 
 
 def print_cycle_status(result: dict):
-    """Print a compact V4 status line."""
     tick = result["tick"]
     vol = result.get("vol")
     mkt_iv = result.get("market_iv")
@@ -82,11 +82,11 @@ def print_cycle_status(result: dict):
     hedges = result.get("hedge_trades", 0)
     unwinds = result.get("unwind_trades", 0)
     reversal = result.get("reversal", False)
+    rtm_vol = result.get("rtm_vol", 0)
 
     vol_str = f"{vol:.1f}%" if vol else "N/A"
     iv_str = f"{mkt_iv:.1f}%" if mkt_iv else "N/A"
     dir_str = {1: "LONG", -1: "SHORT", 0: "FLAT"}.get(direction, "?")
-    dl_str = f"{delta_limit:.0f}" if delta_limit else "N/A"
 
     delta_pct = ""
     if delta_limit and delta_limit > 0:
@@ -118,12 +118,13 @@ def print_cycle_status(result: dict):
         parts.append(f"Unw={unwinds}")
     if reversal:
         parts.append("**REVERSAL**")
+    if rtm_vol > 0:
+        parts.append(f"RTMvol={rtm_vol}")
 
     print(" | ".join(parts))
 
 
 def run_trading_loop(api: RITApi, engine: TradingEngine):
-    """Main trading loop for one sub-heat."""
     last_tick = -1
     cycle_count = 0
 
@@ -164,6 +165,7 @@ def run_trading_loop(api: RITApi, engine: TradingEngine):
                 nlv = api.get_nlv()
                 if nlv:
                     print(f"  NLV: ${nlv:,.2f}")
+                print(f"  RTM Volume: {engine.rtm_volume}")
                 print()
 
         time.sleep(LOOP_INTERVAL_SEC)
@@ -185,7 +187,7 @@ def main():
         print(f"Trader: {trader.get('trader_id', '?')} | "
               f"NLV: ${trader.get('nlv', 0):,.2f}")
 
-    print("\nV4 MAX PROFIT engine starting (Ctrl+C to stop)...\n")
+    print("\nV7 engine starting (Ctrl+C to stop)...\n")
     print("-" * 80)
 
     session_results = []
@@ -201,12 +203,15 @@ def main():
             session_num += 1
 
             # Reset engine state for new sub-heat
-            engine.vol_state = __import__("news_parser").VolatilityState()
+            engine.vol_state = VolatilityState()
             engine.last_tick = 0
             engine.last_direction = 0
             engine.direction_changes = 0
             engine.last_reversal_tick = -100
             engine.position_built = False
+            engine.rtm_volume = 0
+            engine.last_hedge_tick = -100
+            engine.unwinding = False
 
             start_nlv = api.get_nlv()
 
@@ -226,19 +231,22 @@ def main():
                 "start_nlv": start_nlv,
                 "end_nlv": end_nlv,
                 "pnl": pnl,
+                "rtm_volume": engine.rtm_volume,
             })
 
             print(f"\n  Session {session_num} ended.")
             print(f"  Start NLV: ${start_nlv:,.2f} -> End NLV: ${end_nlv:,.2f}")
             print(f"  P&L: ${pnl:>+,.2f}")
+            print(f"  RTM Volume: {engine.rtm_volume}")
             print(f"\n  --- SESSION HISTORY ---")
             for s in session_results:
                 marker = " <--" if s["session"] == session_num else ""
                 print(f"  S{s['session']:>2} (P{s['period']}): "
                       f"${s['start_nlv']:>10,.2f} -> ${s['end_nlv']:>10,.2f} "
-                      f"| P&L: ${s['pnl']:>+10,.2f}{marker}")
+                      f"| P&L: ${s['pnl']:>+10,.2f} "
+                      f"| RTMvol: {s.get('rtm_volume', 0):>7}{marker}")
             total_pnl = sum(s["pnl"] for s in session_results)
-            print(f"  {'':->55}")
+            print(f"  {'':->65}")
             print(f"  Total P&L across {len(session_results)} sessions: ${total_pnl:>+,.2f}")
             print(f"{'='*60}\n")
 

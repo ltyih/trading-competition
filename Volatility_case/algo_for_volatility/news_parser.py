@@ -2,7 +2,7 @@
 
 import re
 import logging
-from typing import Optional, Tuple
+from typing import Optional
 
 logger = logging.getLogger(__name__)
 
@@ -27,16 +27,18 @@ class VolatilityState:
     """Tracks the current volatility state from news announcements."""
 
     def __init__(self):
-        self.current_vol: Optional[float] = None       # Current week's realized vol (decimal)
-        self.forecast_vol_low: Optional[float] = None   # Next week forecast low (decimal)
-        self.forecast_vol_high: Optional[float] = None  # Next week forecast high (decimal)
-        self.delta_limit: Optional[float] = None         # Delta limit for this sub-heat
-        self.penalty_rate: Optional[float] = None        # Penalty rate (decimal)
+        self.current_vol: Optional[float] = None
+        self.forecast_vol_low: Optional[float] = None
+        self.forecast_vol_high: Optional[float] = None
+        self.delta_limit: Optional[float] = None
+        self.penalty_rate: Optional[float] = None
         self.last_news_id: int = 0
+        # Track history for better estimates
+        self.vol_history: list = []  # list of realized vols received
+        self.news_count: int = 0
 
     @property
     def forecast_vol_mid(self) -> Optional[float]:
-        """Midpoint of the forecast range."""
         if self.forecast_vol_low is not None and self.forecast_vol_high is not None:
             return (self.forecast_vol_low + self.forecast_vol_high) / 2.0
         return None
@@ -44,16 +46,16 @@ class VolatilityState:
     @property
     def best_vol_estimate(self) -> Optional[float]:
         """Best estimate of current realized volatility.
-        Falls back to forecast midpoint if current vol not yet announced."""
+
+        Priority:
+        1. Current week's realized vol (most accurate)
+        2. Forecast midpoint (if no realized vol yet)
+        """
         if self.current_vol is not None:
             return self.current_vol
         return self.forecast_vol_mid
 
     def process_news(self, news_items: list) -> bool:
-        """
-        Process a list of news items and update volatility state.
-        Returns True if any new volatility info was found.
-        """
         updated = False
 
         for news in news_items:
@@ -69,8 +71,15 @@ class VolatilityState:
             match = RE_CURRENT_VOL.search(text)
             if match:
                 vol_pct = float(match.group(1))
-                self.current_vol = vol_pct / 100.0
-                logger.info("NEWS: Current realized vol = %.1f%%", vol_pct)
+                new_vol = vol_pct / 100.0
+                # When new current vol arrives, it updates our estimate
+                # The previous current_vol becomes stale
+                self.current_vol = new_vol
+                self.vol_history.append(new_vol)
+                self.news_count += 1
+                logger.info("NEWS: Current realized vol = %.1f%% (history: %s)",
+                            vol_pct,
+                            [f"{v*100:.0f}%" for v in self.vol_history])
                 updated = True
 
             # Parse forecast volatility range
@@ -80,8 +89,9 @@ class VolatilityState:
                 high_pct = float(match.group(2))
                 self.forecast_vol_low = low_pct / 100.0
                 self.forecast_vol_high = high_pct / 100.0
-                logger.info("NEWS: Forecast vol next week = %.1f%% - %.1f%%",
-                            low_pct, high_pct)
+                self.news_count += 1
+                logger.info("NEWS: Forecast vol next week = %.1f%% - %.1f%% (mid=%.1f%%)",
+                            low_pct, high_pct, (low_pct + high_pct) / 2)
                 updated = True
 
             # Parse delta limit

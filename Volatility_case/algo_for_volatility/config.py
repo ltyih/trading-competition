@@ -1,4 +1,4 @@
-"""Configuration for Volatility Trading Algorithm - V4 Maximum Profit."""
+"""Configuration for Volatility Trading Algorithm - V7 Profit Maximizer."""
 
 # =============================================================================
 # RIT API CONFIGURATION
@@ -26,7 +26,6 @@ TICKS_PER_WEEK = 75
 TRADING_DAYS_PER_YEAR = 240
 TRADING_DAYS_PER_MONTH = 20
 
-# Week boundaries (tick ranges within a sub-heat)
 WEEK_BOUNDARIES = {
     1: (1, 75),
     2: (76, 150),
@@ -34,7 +33,6 @@ WEEK_BOUNDARIES = {
     4: (226, 300),
 }
 
-# Mid-week forecast ticks
 MID_WEEK_TICKS = [37, 112, 187, 262]
 
 # =============================================================================
@@ -53,28 +51,69 @@ RTM_FEE_PER_SHARE = 0.01
 OPTIONS_FEE_PER_CONTRACT = 1.00
 
 # =============================================================================
-# V4 ALGORITHM PARAMETERS - MAXIMUM PROFIT
+# V7 ALGORITHM PARAMETERS
 # =============================================================================
-# Minimum vol edge to trigger trading (1% = very sensitive)
-VOL_EDGE_THRESHOLD = 0.01
+# Minimum vol edge to initiate a position
+VOL_EDGE_THRESHOLD = 0.005       # 0.5% - enter early, edge compounds over time
 
-# Target net position (max = 1000, leave 50 buffer)
-TARGET_NET_POSITION = 950
+# Target option net position - USE THE LIMIT (net limit = 1000)
+# We build straddles: buy N calls + N puts at each strike
+# Gross = 2*N (each call + put counted), Net = 0 (balanced long)
+# So we can go up to gross=2500 → 1250 straddles across strikes
+# But net limit = 1000, so if direction=LONG, net = +1000
+# For short vol, net = -1000
+TARGET_NET_POSITION = 900        # Stay just under 1000 net limit
 
-# Maximum edge for full position scaling (linear scale up to this)
-FULL_EDGE_THRESHOLD = 0.08  # 8% edge = full position
+# Number of strikes to concentrate on (ATM ± this many)
+NUM_STRIKES = 4                  # 4 strikes centered on ATM = highest vega
 
-# Maximum option orders per cycle (10 = aggressive building)
-MAX_OPTION_ORDERS_PER_CYCLE = 10
+# Edge for full position scaling
+FULL_EDGE_THRESHOLD = 0.04      # 4% edge = full position
 
-# Minimum option price to trade (below this, commission > profit)
-MIN_OPTION_PRICE = 0.05
+# Maximum option orders per cycle (fast build)
+MAX_OPTION_ORDERS_PER_CYCLE = 20
+
+# Minimum option price to trade
+MIN_OPTION_PRICE = 0.02
 
 # Risk-free rate
 RISK_FREE_RATE = 0.0
 
-# Main loop interval
-LOOP_INTERVAL_SEC = 0.25  # Faster cycling for more responsive trading
+# Main loop interval - fast enough but not too fast
+LOOP_INTERVAL_SEC = 0.25
 
 # End-of-period position unwinding
-UNWIND_START_TICK = 285  # Late unwind - maximize trading time
+UNWIND_START_TICK = 270          # Start earlier for cleaner unwind
+
+# =============================================================================
+# V7 DELTA HEDGING - SINGLE PATH, NO OSCILLATION
+# =============================================================================
+# CRITICAL FIX: Only ONE hedging mechanism, MARKET orders only,
+# CANCEL all RTM orders before every new hedge
+
+# Only hedge when delta exceeds this % of delta_limit
+HEDGE_TRIGGER_PCT = 0.60         # 60% of limit before hedging
+
+# Hedge back to this % of limit (same sign as current delta)
+HEDGE_TARGET_PCT = 0.15          # 15% - leave room for natural movement
+
+# Minimum hedge size to avoid small costly trades
+MIN_HEDGE_SIZE = 800
+
+# Cooldown: minimum ticks between hedge trades
+HEDGE_COOLDOWN_TICKS = 2         # Wait 2 ticks between hedges
+
+# =============================================================================
+# V7 POSITION MANAGEMENT
+# =============================================================================
+# Once position is built, NEVER touch options until unwind
+# Only delta hedge with RTM
+
+# No reversals after this tick
+NO_REVERSAL_AFTER_TICK = 150     # Earlier cutoff - reversals destroy profit
+
+# Minimum edge to justify a reversal
+MIN_REVERSAL_EDGE = 0.06         # 6% - very high bar for reversal
+
+# Cooldown after reversal
+REVERSAL_COOLDOWN_TICKS = 30
