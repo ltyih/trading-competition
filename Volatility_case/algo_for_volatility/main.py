@@ -21,8 +21,8 @@ from news_parser import VolatilityState
 
 BANNER = r"""
 ============================================================
-  RITC 2026 - Volatility Trading Algorithm V7
-  Strategy: Single-Path Hedge + ATM Concentration
+  RITC 2026 - Volatility Trading Algorithm V8
+  Strategy: Maximum Aggression + Controlled Risk
 ============================================================
 """
 
@@ -187,7 +187,7 @@ def main():
         print(f"Trader: {trader.get('trader_id', '?')} | "
               f"NLV: ${trader.get('nlv', 0):,.2f}")
 
-    print("\nV7 engine starting (Ctrl+C to stop)...\n")
+    print("\nV8 MAX AGGRESSION engine starting (Ctrl+C to stop)...\n")
     print("-" * 80)
 
     session_results = []

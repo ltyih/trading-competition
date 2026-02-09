@@ -1,14 +1,11 @@
 """
-V7 Trading Engine - Fixed Delta Hedging, Maximum Option Usage.
+V8.1 Trading Engine - Adaptive Aggression.
 
-Key fixes from V6:
-- SINGLE delta hedge path (no dual hedge/emergency oscillation)
-- MARKET orders only for hedging (no stale limit order fills)
-- CANCEL all RTM orders before every hedge (prevent accumulation)
-- Hedge COOLDOWN to prevent oscillation
-- Concentrate on fewer ATM strikes (higher vega per contract)
-- Build position FAST, then hold - zero option churning
-- Proper gross/net limit tracking with safety buffers
+Key changes from V8:
+- ADAPTIVE position sizing: delta_limit/10 for high limits, /13 for low
+- ADAPTIVE hedge bands: trigger/target scale with gamma-to-limit ratio
+- 5 strikes for max capacity
+- Build position FAST, hold, hedge only
 """
 
 import logging
@@ -71,7 +68,7 @@ class PortfolioState:
 
 
 class TradingEngine:
-    """V7 Trading Engine - Single hedge path, maximum option usage."""
+    """V8 Trading Engine - Maximum aggression, controlled risk."""
 
     def __init__(self, api: RITApi):
         self.api = api
@@ -243,7 +240,27 @@ class TradingEngine:
         # Scale position by edge strength
         target_scale = min(edge / FULL_EDGE_THRESHOLD, 1.0)
         target_scale = max(target_scale, 0.40)
-        total_target = int(TARGET_NET_POSITION * target_scale)
+
+        # V8.1: ADAPTIVE position sizing based on delta_limit.
+        # Higher delta limits allow more aggressive sizing.
+        # gamma_per_contract * 100 ≈ 9 delta/$1 at ATM.
+        # Target: gamma/delta_limit ratio ≈ 75% per $1 move.
+        # This means: max_contracts = delta_limit * 0.75 / 9 ≈ delta_limit / 12.
+        # But for high limits (10k+), we can be more aggressive: delta_limit / 10.
+        delta_limit = self.vol_state.delta_limit or 10000
+        if delta_limit >= 10000:
+            divisor = 10  # Aggressive for high limits
+        elif delta_limit >= 7000:
+            divisor = 11
+        else:
+            divisor = 13  # Conservative for low limits
+        max_position_for_limit = int(delta_limit / divisor)
+        max_position_for_limit = max(max_position_for_limit, 300)  # Floor at 300
+
+        base_target = min(TARGET_NET_POSITION, max_position_for_limit)
+        total_target = int(base_target * target_scale)
+        logger.info("Position sizing: delta_limit=%.0f, max_for_limit=%d, base=%d, scaled=%d",
+                    delta_limit, max_position_for_limit, base_target, total_target)
 
         # Get best strikes
         best_strikes = self.get_best_strikes(S)
@@ -271,7 +288,7 @@ class TradingEngine:
             # Allocate proportionally by vega weight
             # NOTE: strike_target is the TARGET POSITION, not order size.
             # Order size is capped at OPTIONS_MAX_TRADE_SIZE (100) in build_position()
-            strike_target = int(total_target * w)
+            strike_target = int(total_target * w / 2)  # /2 because each strike has call+put pair
             strike_target = max(strike_target, 0)
             targets[opt.ticker] = direction * strike_target
 
@@ -356,14 +373,11 @@ class TradingEngine:
 
     def delta_hedge(self, state: PortfolioState, tick: int) -> int:
         """
-        V7 DELTA HEDGING - THE CRITICAL FIX.
+        V8.1 DELTA HEDGING - ADAPTIVE thresholds.
 
-        Rules:
-        1. SINGLE hedge path - no emergency/regular split
-        2. ALWAYS cancel ALL pending RTM orders first
-        3. MARKET orders only (no stale limit fills)
-        4. Cooldown between hedges (prevent oscillation)
-        5. Wide trigger band, moderate target
+        Key insight: trigger/target should adapt to gamma-to-limit ratio.
+        High gamma relative to limit → tighter trigger (hedge earlier).
+        Low gamma → wider trigger (hedge less, save on commissions).
         """
         delta_limit = self.vol_state.delta_limit
         if delta_limit is None:
@@ -372,9 +386,25 @@ class TradingEngine:
         current_delta = state.total_delta
         abs_delta = abs(current_delta)
 
-        # Calculate thresholds
-        trigger_threshold = delta_limit * HEDGE_TRIGGER_PCT
-        target_magnitude = delta_limit * HEDGE_TARGET_PCT
+        # ADAPTIVE trigger based on gamma/limit ratio
+        abs_gamma = abs(state.total_gamma)
+        gamma_ratio = abs_gamma / delta_limit if delta_limit > 0 else 1.0
+
+        if gamma_ratio > 1.0:
+            # Very high gamma - tight trigger, moderate target
+            trigger_pct = 0.65
+            target_pct = 0.20
+        elif gamma_ratio > 0.7:
+            # Medium-high gamma
+            trigger_pct = 0.75
+            target_pct = 0.25
+        else:
+            # Low gamma - wide trigger, save commissions
+            trigger_pct = 0.85
+            target_pct = 0.35
+
+        trigger_threshold = delta_limit * trigger_pct
+        target_magnitude = delta_limit * target_pct
 
         # Check if delta is within acceptable band
         if abs_delta < trigger_threshold:
@@ -384,7 +414,7 @@ class TradingEngine:
         ticks_since_hedge = tick - self.last_hedge_tick
         if ticks_since_hedge < HEDGE_COOLDOWN_TICKS:
             # Only bypass cooldown for truly extreme delta (>90% of limit)
-            if abs_delta < delta_limit * 0.90:
+            if abs_delta < delta_limit * 0.95:
                 return 0
             logger.warning("BYPASSING cooldown: delta=%.0f exceeds 90%% of limit %.0f",
                           current_delta, delta_limit)
