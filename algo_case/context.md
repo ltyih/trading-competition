@@ -1,11 +1,11 @@
 # Context Log
 
 ## Current Status
-- Phase: Feature 2 implementation complete and ready for review.
-- Last completed feature: Feature 2 - API client skeleton with robust error handling and GET retry/backoff policy.
-- Next feature queued: Feature 3 - Market data ingestion and state persistence.
+- Phase: Feature 4 implementation complete and ready for review.
+- Last completed feature: Feature 4 - Core strategy logic (3-regime dry-run + fair value + quote targets).
+- Next feature queued: Feature 5 - Execution and risk management (order reconciliation + limits enforcement).
 - How to run: `cd algo_case && python3 -m venv .venv && .venv/bin/pip install -e . && .venv/bin/python -m pytest src/ritc_mm/tests/ -v`
-- Known issues: Live API connectivity tests will fail on macOS; all tests use mocked HTTP so macOS development is fully supported.
+- Known issues: Unit tests are fully mocked and platform-independent; live runner validation still requires a reachable RIT Client API (commonly Windows VM from macOS). Feature 4 strategy mode is dry-run only and does not submit/cancel orders.
 
 ## Decisions (with rationale)
 - [2026-02-07 13:50] Decision: Use `pyproject.toml` with pinned dependencies and a `src/` package layout.
@@ -32,6 +32,30 @@
 - [2026-02-12 17:40] Decision: All tests use mocked HTTP — no live RIT connectivity required.
   Rationale: RIT Client only runs on Windows; development is on macOS.
   Impact: Full test suite runs on any platform.
+- [2026-02-13 09:10] Decision: Scope Feature 3 to ingestion/state only, with no strategy or order execution behavior.
+  Rationale: Keeps implementation boundary aligned with roadmap and avoids mixing concerns before data truth is stable.
+  Impact: New `data/*` modules and runner changes only ingest and log state; no quotes or order actions are emitted.
+- [2026-02-13 09:10] Decision: Represent L2 books as aggregated price levels (not raw per-order queue objects).
+  Rationale: Strategy math uses level depth and BBO; aggregated levels simplify downstream logic and tests.
+  Impact: `parse_book_response()` combines same-price quantities and produces deterministic best-first level ordering.
+- [2026-02-13 09:10] Decision: Use a single-loop deterministic scheduler for ingestion.
+  Rationale: Simpler than threaded polling and sufficient for current cadence/rate-limit constraints.
+  Impact: `run_live.py` maintains per-endpoint due timers but executes one ingestion update call when any timer is due.
+- [2026-02-13 09:10] Decision: Continue-on-error per endpoint while retaining last good state.
+  Rationale: Live ingestion should degrade gracefully during transient API issues.
+  Impact: `GlobalState.update()` logs warnings and preserves prior slice values when an endpoint call fails.
+- [2026-02-13 10:05] Decision: Scope Feature 4 to strategy dry-run only with no execution calls.
+  Rationale: Keep boundary clean between signal generation (Feature 4) and order management (Feature 5).
+  Impact: `run_live.py` in `strategy_dry_run` computes/logs targets only; no `submit_order`, `cancel_order`, or `bulk_cancel`.
+- [2026-02-13 10:05] Decision: Implement Day-1 regime subset (`NORMAL_MM`, `NEWS_LOCKOUT`, `CLOSEOUT`) first.
+  Rationale: Delivers practical behavior quickly while deferring jump/rebalance complexity.
+  Impact: Regime engine supports closeout priority and news lockout transitions; `JUMP_REPRICE` and `INVENTORY_REBALANCE` remain future work.
+- [2026-02-13 10:05] Decision: Use typed quote target dataclasses as strategy output contract.
+  Rationale: Stable typed interface simplifies Feature 5 reconciliation integration and testing.
+  Impact: `StrategyEngine.step()` returns per-ticker `QuoteTarget` objects with bid/ask/cancel intent and reason fields.
+- [2026-02-13 10:05] Decision: Use EMA mid-price with one-shot rule-based news impulse for fair value.
+  Rationale: Deterministic and testable baseline that captures first-order news effects without model-training overhead.
+  Impact: `FairValueEngine` tracks per-ticker EMA and applies sentiment impulse once per new news id.
 
 ## Changes Implemented (per feature)
 ### Feature 1: Project scaffold + configuration + logging foundation
@@ -103,6 +127,95 @@
   - All tests use mocked HTTP via `unittest.mock` — no live RIT Client required.
   - API endpoint paths and field names strictly follow `rit_api_documentation.yaml` (Swagger 2.0, v1.0.3).
   - POST/DELETE requests are NOT retried automatically to avoid duplicate order submission.
+
+### Feature 3: Market data ingestion and global state
+- Files added/changed:
+  - `algo_case/src/ritc_mm/data/book.py` — L2 aggregation + L1 projection data structures and parsing helpers.
+  - `algo_case/src/ritc_mm/data/tape.py` — Per-ticker TAS ring buffers, monotonic deduplication, incremental pointers.
+  - `algo_case/src/ritc_mm/data/news.py` — Incremental news storage, deduplication, and query helpers.
+  - `algo_case/src/ritc_mm/data/state.py` — `GlobalState` aggregator polling `/case`, `/securities`, `/orders`, `/limits`, `/news`, `/securities/book`, `/securities/tas`.
+  - `algo_case/src/ritc_mm/data/__init__.py` — Public exports for new data/state interfaces.
+  - `algo_case/scripts/run_live.py` — Ingestion-only polling loop using `ApiClient` + `GlobalState` with startup health check preserved.
+  - `algo_case/config/default.yaml` — Added polling keys: `loop_sleep_ms`, `book_depth`, `tape_maxlen_per_ticker`, `news_max_items`.
+  - `algo_case/src/ritc_mm/tests/test_book.py` — Book aggregation and L1 tests.
+  - `algo_case/src/ritc_mm/tests/test_tape.py` — TAS incremental/dedup/ring-buffer tests.
+  - `algo_case/src/ritc_mm/tests/test_news.py` — News incremental/dedup/query tests.
+  - `algo_case/src/ritc_mm/tests/test_state.py` — Global state aggregation and per-endpoint failure resilience tests.
+- What was implemented:
+  - Added pure data-layer dataclasses for books, prints, and news events.
+  - Implemented incremental ingestion primitives:
+    - TAS pointer tracking per ticker (`tas_after` semantics via latest accepted `id`).
+    - News pointer tracking (`news_since` semantics via latest accepted `news_id`).
+  - Implemented `GlobalState.update(api)` with required endpoint order:
+    - `get_case()`, `get_securities()`, `get_orders(status=\"OPEN\")`, `get_limits()`, `get_news(since=...)`, then per ticker `get_book()` and `get_tas(after=...)`.
+  - Implemented resilient per-slice refresh behavior:
+    - endpoint failures log warnings and keep prior in-memory values.
+  - Converted `run_live.py` from one-shot health check to ingestion loop:
+    - keeps startup `/case` health check fail-fast behavior.
+    - uses single-loop deterministic scheduling.
+    - logs periodic ingestion summaries with counts, pointers, and BBO snapshots.
+    - exits cleanly on non-`ACTIVE` case status or keyboard interrupt.
+  - Confirmed no order-placement behavior is introduced in Feature 3.
+- Tests added/updated:
+  - `src/ritc_mm/tests/test_book.py` (3 tests)
+  - `src/ritc_mm/tests/test_tape.py` (3 tests)
+  - `src/ritc_mm/tests/test_news.py` (3 tests)
+  - `src/ritc_mm/tests/test_state.py` (2 tests)
+- How to verify:
+  - `cd algo_case`
+  - `python3 -m venv .venv && .venv/bin/pip install -e .`
+  - `.venv/bin/python -m pytest src/ritc_mm/tests/ -v`
+  - Expected: `61 passed` (50 existing + 11 Feature 3 tests).
+  - Optional live ingestion check: `.venv/bin/python scripts/run_live.py --config config/default.yaml`
+- Notes:
+  - Feature boundary intentionally excludes strategy/risk/execution logic.
+  - State persistence in Feature 3 is in-memory only (no disk checkpointing).
+
+### Feature 4: Core strategy logic (dry-run)
+- Files added/changed:
+  - `algo_case/src/ritc_mm/strategy/regimes.py` — 3-regime state machine with per-ticker persistent state and decision reasons.
+  - `algo_case/src/ritc_mm/strategy/fair_value.py` — EMA fair value engine with one-shot rule-based news impulse.
+  - `algo_case/src/ritc_mm/strategy/quoting.py` — Typed quote target construction, inventory skew, hard-cap gating, and cancel logic.
+  - `algo_case/src/ritc_mm/strategy/engine.py` — Orchestrator composing regimes, fair value, and quote builder.
+  - `algo_case/src/ritc_mm/strategy/__init__.py` — Public exports for Feature 4 strategy interfaces.
+  - `algo_case/scripts/run_live.py` — Added `runtime.run_mode` gating; strategy dry-run computes and logs targets after ingestion updates.
+  - `algo_case/config/default.yaml` — Added `runtime.run_mode` and FV/news keyword tunables.
+  - `algo_case/src/ritc_mm/tests/test_regimes.py` — Regime transition and closeout-priority tests.
+  - `algo_case/src/ritc_mm/tests/test_fair_value.py` — EMA and news-impulse tests.
+  - `algo_case/src/ritc_mm/tests/test_quoting.py` — Quote math, skew, hard-cap, and cancel behavior tests.
+  - `algo_case/src/ritc_mm/tests/test_strategy_engine.py` — End-to-end strategy orchestration tests.
+- What was implemented:
+  - Added a `RegimeEngine` for `NORMAL_MM`, `NEWS_LOCKOUT`, and `CLOSEOUT`.
+    - `CLOSEOUT` has highest priority based on minute and heat windows.
+    - news lockout triggers from ticker-specific or market-wide news (`ticker == \"\"`).
+  - Added `FairValueEngine`:
+    - per-ticker EMA of mid-price.
+    - polarity-based impulse from configured positive/negative keyword lists.
+    - news impulse applied at most once per new news id per ticker.
+  - Added `QuoteBuilder`:
+    - normal-mode bid/ask generation from FV with fixed half-spread.
+    - inventory skew via normalized position.
+    - hard-cap side suppression and cancel-all fallback.
+    - lockout/closeout emit cancel/no-passive targets.
+  - Added `StrategyEngine.step(state)` returning typed `QuoteTarget` map.
+  - Integrated dry-run mode in `run_live.py`:
+    - `runtime.run_mode=ingest` keeps existing behavior.
+    - `runtime.run_mode=strategy_dry_run` logs per-ticker regime/FV/target payloads.
+    - no execution methods are called.
+- Tests added/updated:
+  - `src/ritc_mm/tests/test_regimes.py` (5 tests)
+  - `src/ritc_mm/tests/test_fair_value.py` (6 tests)
+  - `src/ritc_mm/tests/test_quoting.py` (5 tests)
+  - `src/ritc_mm/tests/test_strategy_engine.py` (4 tests)
+- How to verify:
+  - `cd algo_case`
+  - `python3 -m venv .venv && .venv/bin/pip install -e .`
+  - `.venv/bin/python -m pytest src/ritc_mm/tests/ -v`
+  - Expected: `81 passed` (61 existing + 20 Feature 4 tests).
+  - Optional dry-run strategy check: set `runtime.run_mode: strategy_dry_run` in `config/default.yaml`, then run `.venv/bin/python scripts/run_live.py --config config/default.yaml`.
+- Notes:
+  - Feature 4 intentionally does not place/cancel orders.
+  - Strategy targets are designed for Feature 5 order-manager integration.
 
 ## Open Questions / Review Items
 - Item: Should `run_live.py` auto-detect VM host IP when `localhost` fails, or remain explicit via config.

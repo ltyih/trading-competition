@@ -13,11 +13,18 @@ universe:
     - ATMN
     - WNTR
 
+runtime:
+  run_mode: "ingest"
+
 polling:
   case_interval_ms: 500
   book_interval_ms: 300
   tas_interval_ms: 300
   news_interval_ms: 500
+  loop_sleep_ms: 50
+  book_depth: 20
+  tape_maxlen_per_ticker: 500
+  news_max_items: 500
 
 logging:
   level: "INFO"
@@ -40,6 +47,20 @@ logging:
 tunables:
   tick_size: 0.01
   rounding_decimals: 2
+  fv_ema_alpha: 0.2
+  news_impulse_bps: 12
+  news_positive_keywords:
+    - beat
+    - strong
+    - growth
+    - raised
+    - demand
+  news_negative_keywords:
+    - miss
+    - weak
+    - lowered
+    - decline
+    - warning
 
   base_hs_ticks: 2
   min_hs_ticks: 1
