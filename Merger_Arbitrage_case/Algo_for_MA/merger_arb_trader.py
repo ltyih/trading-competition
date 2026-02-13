@@ -1,23 +1,26 @@
 # -*- coding: utf-8 -*-
 """
-MERGER ARBITRAGE TRADING SYSTEM V5 - RITC 2026
+MERGER ARBITRAGE TRADING SYSTEM V6 - RITC 2026
 ================================================
-LESSONS FROM V4 ($30.9k NLV - need $200k+):
-- Convergence fights news trades (buy 19.8k then sell 19.8k = burned commissions)
-- Missing deal-specific sensitivity multipliers from PDF
-- Many [???] news items - body text has deal clues being ignored
-- ourP diverges 20-40% from mktP with no correction
-- "Competing bid" wrongly classified as NEGATIVE
-- Unwind too early pays spread + commissions for no benefit
-- Position concentration (D3 at -23.8k, using 84k gross)
+V6 FIXES FROM V5 ($30.9k NLV - need $200k+):
 
-STRATEGY V5:
-1. Initialize analyst prob from market-implied at startup
-2. On news: classify -> trade with per-deal limits (15k max)
-3. NO convergence trading (was fighting news signals)
-4. Blend ourP toward market after each news update (30%)
-5. NO early unwind - let auto close-out handle it at tick 600
-6. Per-deal cooldown (20 ticks) prevents whiplash
+FIX  1: NEWS_IMPACT values corrected to match PDF (were 30-80% too low)
+FIX  2: Market blend 70/30 (was 50/50, killing our news edge)
+FIX  3: Deal ID threshold raised to 3 (was 1, false positives)
+FIX  4: Strong/weak sector scoring (+3/+1) instead of flat +1
+FIX  5: STRONG_POSITIVE/STRONG_NEGATIVE layer (instant classification)
+FIX  6: Negation prefix handling ("No obstacles" = positive)
+FIX  7: Body weight 1.0x with headline 2.0x (was 0.3x body)
+FIX  8: Body search uses body-only text (was double-counting headline)
+FIX  9: NEWS_COOLDOWN 15 ticks (was 20)
+FIX 10: Category boost 1.3x (was 1.5x)
+FIX 11: 4-level market sanity (was 2-level)
+FIX 12: Minimum trade size 500 (was 100)
+FIX 13: Missing severity words added
+FIX 14: Intrinsic price / mispricing check added (MIN_MISPRICING=$0.20)
+FIX 15: Missing category keywords added
+FIX 16: No-new-trades after tick 580 (was only 600)
+FIX 17: News template lookup table (Tier 1 instant classification)
 """
 
 import requests
@@ -32,8 +35,8 @@ from typing import Dict, List, Optional, Tuple, Any
 # =============================================================================
 # CONFIGURATION
 # =============================================================================
-API_KEY = 'AJDSYHVCES'
-API_BASE = 'http://localhost:9998/v1'
+API_KEY = 'AJDSYHVC'
+API_BASE = 'http://localhost:10000/v1'
 
 DEALS = {
     'D1': {
@@ -64,33 +67,40 @@ DEALS = {
 }
 
 CATEGORY_MULTIPLIERS = {'REG': 1.25, 'FIN': 1.00, 'SHR': 0.90, 'ALT': 1.40, 'PRC': 0.70}
+
+# FIX 1: Corrected to match PDF Table 1 (were 30-80% too low)
 NEWS_IMPACT = {
-    'positive': {'small': 0.02, 'medium': 0.05, 'large': 0.10},
-    'negative': {'small': -0.03, 'medium': -0.06, 'large': -0.10},
+    'positive': {'small': 0.03, 'medium': 0.07, 'large': 0.14},
+    'negative': {'small': -0.04, 'medium': -0.09, 'large': -0.18},
 }
 
 GROSS_LIMIT = 100000
 NET_LIMIT = 50000
 MAX_ORDER_SIZE = 5000
-POLL_INTERVAL = 0.15  # faster polling for quicker news reaction
-UNWIND_START_TICK = 600  # effectively disabled - let auto close-out handle it
-UNWIND_CLOSE_TICK = 600  # effectively disabled
+POLL_INTERVAL = 0.15
+NO_NEW_TRADES_TICK = 580      # FIX 16: Stop opening new positions at tick 580
+UNWIND_CLOSE_TICK = 600       # Let auto close-out handle it
 
-# Per-deal position limit (prevents concentration risk, leaves room for all 5 deals)
 MAX_DEAL_POSITION = 15000
-
-# Deal-specific sensitivity multipliers from case PDF
 DEAL_SENSITIVITY = {'D1': 1.00, 'D2': 1.05, 'D3': 1.10, 'D4': 1.30, 'D5': 1.15}
 
-# News trade cooldown per deal (ticks)
-NEWS_COOLDOWN_TICKS = 20
+# FIX 9: Cooldown 15 ticks (was 20)
+NEWS_COOLDOWN_TICKS = 15
 
-# Position targets per news severity (shares of target to hold)
+# FIX 14: Minimum mispricing to trade
+MIN_MISPRICING = 0.20
+
+# FIX 2: Market blend weight (30% market, was 50%)
+MARKET_BLEND_WEIGHT = 0.30
+
 TRADE_SIZE = {
     'large': 15000,
     'medium': 10000,
     'small': 5000,
 }
+
+# FIX 12: Minimum trade size (was 100)
+MIN_TRADE_SIZE = 500
 
 # =============================================================================
 # LOGGING
@@ -110,154 +120,396 @@ log = setup_logging()
 
 
 # =============================================================================
-# NEWS CLASSIFIER V5
+# FIX 17: NEWS TEMPLATE LOOKUP TABLE (Tier 1 - instant, 100% accuracy)
+# =============================================================================
+# Built from practice session observations. Normalized headlines map to
+# known classifications. This is the #1 competitive advantage.
+
+ALL_TICKERS = ['TGX', 'PHR', 'BYL', 'CLD', 'GGD', 'PNR', 'FSR', 'ATB', 'SPK', 'EEC']
+ALL_COMPANY_NAMES = [
+    'TARGENIX', 'PHARMACO', 'BYTELAYER', 'CLOUDSYS', 'GREENGRID',
+    'PETRONORTH', 'FINSURE', 'ATLAS BANK', 'ATLAS', 'SOLARPEAK',
+    'EASTENERGY', 'EAST ENERGY',
+]
+
+
+def normalize_headline(headline: str) -> str:
+    """Strip tickers, company names, and normalize for fuzzy matching."""
+    text = headline.upper().strip()
+    for ticker in ALL_TICKERS:
+        text = text.replace(ticker, 'TICKER')
+    for name in ALL_COMPANY_NAMES:
+        text = text.replace(name, 'COMPANY')
+    text = ' '.join(text.split())
+    return text
+
+
+# Lookup table: normalized_headline -> classification
+# Populated from practice session observations (logs show actual news items)
+NEWS_TEMPLATES = {
+    # === POSITIVE templates ===
+    'PROJECT FINANCE COMMITMENT SECURED': {
+        'direction': 'positive', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
+    },
+    'INTERCONNECTION RIGHTS CONFIRMED': {
+        'direction': 'positive', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
+    },
+    'CANADIAN REGULATORS PROVIDE CLEARANCE': {
+        'direction': 'positive', 'severity': 'medium', 'category': 'REG', 'confidence': 1.0,
+    },
+    'REGULATORS INDICATE REMEDIES FRAMEWORK IS ACCEPTABLE': {
+        'direction': 'positive', 'severity': 'medium', 'category': 'REG', 'confidence': 1.0,
+    },
+    'UNCONDITIONAL REGULATORY APPROVAL GRANTED': {
+        'direction': 'positive', 'severity': 'large', 'category': 'REG', 'confidence': 1.0,
+    },
+    'REGULATORY CLEARANCE OBTAINED': {
+        'direction': 'positive', 'severity': 'large', 'category': 'REG', 'confidence': 1.0,
+    },
+    'EARLY TERMINATION OF HSR WAITING PERIOD': {
+        'direction': 'positive', 'severity': 'large', 'category': 'REG', 'confidence': 1.0,
+    },
+    'SHAREHOLDER VOTE SCHEDULED': {
+        'direction': 'positive', 'severity': 'small', 'category': 'SHR', 'confidence': 1.0,
+    },
+    'SHAREHOLDERS APPROVE MERGER': {
+        'direction': 'positive', 'severity': 'large', 'category': 'SHR', 'confidence': 1.0,
+    },
+    'DEFINITIVE AGREEMENT SIGNED': {
+        'direction': 'positive', 'severity': 'large', 'category': 'REG', 'confidence': 1.0,
+    },
+    'FINANCING COMMITMENT SECURED': {
+        'direction': 'positive', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
+    },
+    'DEBT FINANCING COMMITTED': {
+        'direction': 'positive', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
+    },
+    'COMPETING BID EMERGES': {
+        'direction': 'positive', 'severity': 'large', 'category': 'ALT', 'confidence': 1.0,
+    },
+    'RIVAL BID ANNOUNCED': {
+        'direction': 'positive', 'severity': 'large', 'category': 'ALT', 'confidence': 1.0,
+    },
+    'SUPERIOR PROPOSAL RECEIVED': {
+        'direction': 'positive', 'severity': 'large', 'category': 'ALT', 'confidence': 1.0,
+    },
+    'SWEETENED OFFER ANNOUNCED': {
+        'direction': 'positive', 'severity': 'large', 'category': 'ALT', 'confidence': 1.0,
+    },
+    'SETTLEMENT REACHED': {
+        'direction': 'positive', 'severity': 'medium', 'category': 'REG', 'confidence': 1.0,
+    },
+    'LAWSUIT DISMISSED': {
+        'direction': 'positive', 'severity': 'medium', 'category': 'REG', 'confidence': 1.0,
+    },
+    'CONVERTIBLE DEBT REFINANCED': {
+        'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
+    },
+    'OUTSIDE DATE EXTENDED': {
+        'direction': 'positive', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
+    },
+    'STANDSTILL AGREEMENT REACHED': {
+        'direction': 'positive', 'severity': 'small', 'category': 'SHR', 'confidence': 1.0,
+    },
+    'EMPLOYEE RETENTION AGREEMENTS SIGNED': {
+        'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
+    },
+    'INTEGRATION PLANNING ANNOUNCED': {
+        'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
+    },
+    'STRONG QUARTERLY RESULTS REPORTED': {
+        'direction': 'positive', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
+    },
+    'SYNERGY ESTIMATES RAISED': {
+        'direction': 'positive', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
+    },
+    'ISS RECOMMENDS APPROVAL': {
+        'direction': 'positive', 'severity': 'medium', 'category': 'SHR', 'confidence': 1.0,
+    },
+    'GLASS LEWIS RECOMMENDS APPROVAL': {
+        'direction': 'positive', 'severity': 'medium', 'category': 'SHR', 'confidence': 1.0,
+    },
+    'INTEREST RATE HEDGING STRATEGY IMPLEMENTED': {
+        'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
+    },
+    'ENHANCED LIQUIDITY FACILITY ARRANGED': {
+        'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
+    },
+
+    # === NEGATIVE templates ===
+    'EUROPEAN COMMISSION OPENS PHASE II INVESTIGATION': {
+        'direction': 'negative', 'severity': 'large', 'category': 'REG', 'confidence': 1.0,
+    },
+    'SELL-SIDE ANALYSTS ISSUE DIVERGENT VALUATION ASSESSMENTS': {
+        'direction': 'negative', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
+    },
+    'CREDIT CONDITIONS DETERIORATE': {
+        'direction': 'negative', 'severity': 'large', 'category': 'FIN', 'confidence': 1.0,
+    },
+    'DEPOSIT OUTFLOWS ACCELERATE': {
+        'direction': 'negative', 'severity': 'large', 'category': 'FIN', 'confidence': 1.0,
+    },
+    'MATERIAL ADVERSE CHANGE ALLEGED': {
+        'direction': 'negative', 'severity': 'large', 'category': 'REG', 'confidence': 1.0,
+    },
+    'ANTITRUST CONCERNS RAISED': {
+        'direction': 'negative', 'severity': 'medium', 'category': 'REG', 'confidence': 1.0,
+    },
+    'SHAREHOLDER LAWSUIT FILED': {
+        'direction': 'negative', 'severity': 'medium', 'category': 'REG', 'confidence': 1.0,
+    },
+    'CLASS ACTION COMPLAINT FILED': {
+        'direction': 'negative', 'severity': 'medium', 'category': 'REG', 'confidence': 1.0,
+    },
+    'REGULATORY HURDLES IDENTIFIED': {
+        'direction': 'negative', 'severity': 'medium', 'category': 'REG', 'confidence': 1.0,
+    },
+    'SECOND REQUEST ISSUED': {
+        'direction': 'negative', 'severity': 'large', 'category': 'REG', 'confidence': 1.0,
+    },
+    'DEAL TERMINATION RISK INCREASES': {
+        'direction': 'negative', 'severity': 'large', 'category': 'REG', 'confidence': 1.0,
+    },
+    'POISON PILL ADOPTED': {
+        'direction': 'negative', 'severity': 'medium', 'category': 'SHR', 'confidence': 1.0,
+    },
+    'CREDIT DOWNGRADE ANNOUNCED': {
+        'direction': 'negative', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
+    },
+    'REVENUE SHORTFALL REPORTED': {
+        'direction': 'negative', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
+    },
+    'ENVIRONMENTAL IMPACT CONCERNS RAISED': {
+        'direction': 'negative', 'severity': 'medium', 'category': 'REG', 'confidence': 1.0,
+    },
+    'INJUNCTION SOUGHT': {
+        'direction': 'negative', 'severity': 'large', 'category': 'REG', 'confidence': 1.0,
+    },
+    'STRESS TEST CONCERNS EMERGE': {
+        'direction': 'negative', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
+    },
+    'ACTIVIST INVESTOR OPPOSES DEAL': {
+        'direction': 'negative', 'severity': 'medium', 'category': 'SHR', 'confidence': 1.0,
+    },
+    'DEAL SPREADS WIDEN': {
+        'direction': 'negative', 'severity': 'medium', 'category': 'PRC', 'confidence': 1.0,
+    },
+
+    # === NEUTRAL/AMBIGUOUS templates ===
+    'FEDERAL RESERVE STAFF HOLDS TECHNICAL WORKING SESSION': {
+        'direction': 'ambiguous', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
+    },
+    'REGULATORY FILINGS SUBMITTED': {
+        'direction': 'ambiguous', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
+    },
+    'COUNSEL PROVIDES UPDATED RISK FACTOR DISCLOSURE': {
+        'direction': 'ambiguous', 'severity': 'small', 'category': 'SHR', 'confidence': 1.0,
+    },
+    'INDUSTRY CONFERENCE GENERATES TRANSACTION SPECULATION': {
+        'direction': 'ambiguous', 'severity': 'small', 'category': 'SHR', 'confidence': 1.0,
+    },
+    'UNUSUAL INSTITUTIONAL TRADING ACTIVITY DETECTED': {
+        'direction': 'ambiguous', 'severity': 'small', 'category': 'SHR', 'confidence': 1.0,
+    },
+    'MANAGEMENT PROVIDES UPDATED MARKET OUTLOOK': {
+        'direction': 'ambiguous', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
+    },
+    'BOARD DEFENDS TRANSACTION TERMS': {
+        'direction': 'ambiguous', 'severity': 'small', 'category': 'SHR', 'confidence': 1.0,
+    },
+    'ANALYSIS PUBLISHED': {
+        'direction': 'ambiguous', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
+    },
+    'STRATEGIC REVIEW ANNOUNCED': {
+        'direction': 'ambiguous', 'severity': 'small', 'category': 'SHR', 'confidence': 1.0,
+    },
+    'PREFERRED STOCK ISSUANCE ANNOUNCED': {
+        'direction': 'ambiguous', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
+    },
+    'COMMENT PERIOD EXTENDED': {
+        'direction': 'ambiguous', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
+    },
+}
+
+
+def lookup_news(headline: str) -> Optional[Dict]:
+    """Tier 1: Look up headline in template table. Returns classification or None."""
+    normalized = normalize_headline(headline)
+
+    # Exact match
+    if normalized in NEWS_TEMPLATES:
+        return NEWS_TEMPLATES[normalized]
+
+    # Substring match (template contained in headline, or headline in template)
+    for template, classification in NEWS_TEMPLATES.items():
+        if template in normalized or normalized in template:
+            return classification
+
+    return None
+
+
+# =============================================================================
+# NEWS CLASSIFIER V6
 # =============================================================================
 class NewsClassifier:
-    """Context-aware news classifier."""
+    """Multi-layer context-aware news classifier with Tier 1 lookup."""
 
+    # FIX 4: Strong/weak sector differentiation for deal identification
     DEAL_KEYWORDS = {
         'D1': {
             'tickers': ['TGX', 'PHR'],
             'names': ['TARGENIX', 'PHARMACO'],
-            'sector': ['PHARMACEUTICAL', 'DRUG', 'FDA', 'BIOTECH', 'CLINICAL',
-                       'TRIAL', 'PATENT', 'THERAPY', 'MEDICINE', 'PHARMA',
-                       'DIVESTITURE', 'HEALTH', 'ONCOLOGY', 'THERAPEUTICS',
-                       'BIOLOGIC', 'PIPELINE', 'DIAGNOSTIC', 'GENERIC',
-                       'DRUG PRICE', 'THERAPEUTIC AREA', 'THERAPEUTIC',
-                       'STATE AG', 'ATTORNEY GENERAL'],
+            'strong_sector': ['FDA', 'CLINICAL TRIAL', 'DRUG APPROVAL', 'BIOTECH',
+                              'DIVESTITURE', 'PATENT', 'ONCOLOGY', 'THERAPEUTICS',
+                              'STATE AG', 'ATTORNEY GENERAL', 'BIOLOGIC', 'PIPELINE'],
+            'weak_sector': ['PHARMACEUTICAL', 'DRUG', 'THERAPY', 'MEDICINE',
+                            'PHARMA', 'HEALTH', 'DIAGNOSTIC', 'GENERIC'],
         },
         'D2': {
             'tickers': ['BYL', 'CLD'],
             'names': ['BYTELAYER', 'CLOUDSYS'],
-            'sector': ['CLOUD', 'SOFTWARE', 'DATA CENTER', 'SAAS',
-                       'DEVELOPER', 'DIGITAL', 'FTC', 'ANTITRUST',
-                       'PLATFORM', 'COMPUTE', 'IAAS',
-                       'TECH ACQUISITION', 'MARKET SHARE'],
+            'strong_sector': ['CLOUD COMPUTING', 'DATA CENTER', 'SAAS', 'IAAS',
+                              'FTC', 'ANTITRUST REVIEW', 'MARKET SHARE',
+                              'TECH ACQUISITION', 'PLATFORM'],
+            'weak_sector': ['CLOUD', 'SOFTWARE', 'DIGITAL', 'DEVELOPER',
+                            'COMPUTE', 'TECHNOLOGY'],
         },
         'D3': {
             'tickers': ['GGD', 'PNR'],
             'names': ['GREENGRID', 'PETRONORTH'],
-            'sector': ['INFRASTRUCTURE', 'OIL', 'GAS', 'PIPELINE', 'GRID',
-                       'UTILITY', 'FOSSIL', 'CARBON', 'EMISSIONS',
-                       'ENVIRONMENTAL', 'GREEN', 'TRANSITION',
-                       'PIPELINE CORRIDOR', 'GRID OPERATOR',
-                       'ENVIRONMENTAL IMPACT', 'ENERGY INFRASTRUCTURE'],
+            'strong_sector': ['PIPELINE CORRIDOR', 'GRID OPERATOR', 'FOSSIL',
+                              'CARBON EMISSIONS', 'ENVIRONMENTAL IMPACT',
+                              'ENERGY INFRASTRUCTURE', 'OIL AND GAS'],
+            'weak_sector': ['INFRASTRUCTURE', 'OIL', 'GAS', 'PIPELINE', 'GRID',
+                            'UTILITY', 'CARBON', 'EMISSIONS', 'ENVIRONMENTAL',
+                            'GREEN', 'TRANSITION'],
         },
         'D4': {
             'tickers': ['FSR', 'ATB'],
             'names': ['FINSURE', 'ATLAS BANK', 'ATLAS'],
-            'sector': ['BANKING', 'FINANCIAL', 'INSURANCE', 'BANK', 'FDIC',
-                       'OCC', 'DEPOSIT', 'BRANCH', 'LENDING', 'CREDIT UNION',
-                       'CAPITAL RATIO', 'STRESS TEST',
-                       'BANK MERGER', 'COMBINED ASSETS', 'COMMUNITY BANKING',
-                       'FED ENHANCED', 'ENHANCED REVIEW'],
+            'strong_sector': ['FDIC', 'OCC', 'COMMUNITY BANKING', 'BANK MERGER',
+                              'COMBINED ASSETS', 'FED ENHANCED', 'ENHANCED REVIEW',
+                              'STRESS TEST', 'CAPITAL RATIO', 'DEPOSIT'],
+            'weak_sector': ['BANKING', 'FINANCIAL', 'INSURANCE', 'BANK',
+                            'BRANCH', 'LENDING', 'CREDIT UNION'],
         },
         'D5': {
             'tickers': ['SPK', 'EEC'],
             'names': ['SOLARPEAK', 'EASTENERGY', 'EAST ENERGY'],
-            'sector': ['SOLAR', 'RENEWABLE', 'WIND', 'CLEAN ENERGY',
-                       'TAX CREDIT', 'TURBINE', 'PANEL', 'FERC',
-                       'INTERCONNECT', 'GENERATION', 'PHOTOVOLTAIC',
-                       'MEGAWATT', 'GENERATION CAPACITY',
-                       'RENEWABLE ENERGY', 'SOLAR FARM'],
+            'strong_sector': ['FERC', 'INTERCONNECT', 'SOLAR FARM', 'PHOTOVOLTAIC',
+                              'MEGAWATT', 'GENERATION CAPACITY', 'TAX CREDIT',
+                              'RENEWABLE ENERGY'],
+            'weak_sector': ['SOLAR', 'RENEWABLE', 'WIND', 'CLEAN ENERGY',
+                            'TURBINE', 'PANEL', 'GENERATION'],
         },
     }
 
-    POSITIVE_PHRASES = [
-        'APPROV', 'SUCCESS', 'SUPPORT', 'FAVOR', 'AGREE', 'ACCEPT',
-        'PROGRESS', 'ADVANCE', 'GREEN LIGHT', 'ENDORSE',
-        'RECOMMEND', 'BOOST', 'STRONG REVENUE', 'STRONG EARNINGS',
-        'ABOVE EXPECT', 'EXCEED', 'COMPLETE', 'FINALIZ', 'CONFIRM',
-        'ON TRACK', 'SWEETENED', 'IMPROVED', 'POSITIVE', 'REVENUE GROWTH',
-        'SECURED', 'REFINANC', 'REMEDY ACCEPTED', 'UNCONDITIONAL',
-        'UNANIM', 'EXPEDIT', 'FAST-TRACK', 'WELCOMES', 'BACKS',
-        'FACILITAT', 'CLEARS PATH', 'NO OBJECTION', 'SATISFIED',
-        'SYNERG', 'ACCRETIVE', 'UPGRADE', 'OUTPERFORM',
-        'DEFINITIVE AGREEMENT', 'FINANCING SECURED', 'DEBT COMMITMENT',
-        'RETENTION AGREEMENT', 'EMPLOYEE RETENTION',
-        'SMOOTH TRANSITION', 'INTEGRATION PLAN', 'REGULATORY CLEARANCE',
-        'SHAREHOLDER APPROVAL', 'VOTE IN FAVOR',
-        'SETTLED', 'SETTLEMENT', 'RESOLVED', 'DISMISSED',
-        'CLEARED', 'CLEARS', 'WAIVED', 'NO ISSUE', 'NO CONCERN',
-        # HSR "Early Termination" = FTC cleared the deal (very positive!)
-        'EARLY TERMINATION',
-        # Competing bids are POSITIVE for target (drives price up)
-        'COMPETING BID', 'RIVAL BID', 'COMPETING INTEREST',
-        'COUNTER BID', 'COUNTER OFFER', 'COUNTEROFFER',
-        'TOPPING BID', 'SUPERIOR PROPOSAL', 'WHITE KNIGHT',
-        'RIVAL OFFER', 'COMPETING OFFER', 'UNSOLICITED BID',
-        # Interest rate hedge = risk reduction = positive
-        'INTEREST RATE HEDGE', 'RATE HEDGE', 'HEDGING STRATEGY',
-        # Deal process milestones = positive
-        'MEETING SCHEDULED', 'SETS MEETING', 'SHAREHOLDER VOTE',
-        'DIVIDEND MAINTAINED', 'DIVIDEND POLICY MAINTAINED',
-        'QUARTERLY RESULTS', 'STRONG QUARTER',
-        'LIQUIDITY FACILIT', 'ENHANCED LIQUIDITY',
-        'CLEARANCE', 'PROVIDE CLEARANCE', 'PROVIDES CLEARANCE',
-        'RECOMMENDS APPROVAL', 'ISSUES FAVORABLE',
-        'FAVORABLE OPINION',
-        'COMMITMENT SECURED', 'FINANCE COMMITMENT',
-        'AGREEMENT SIGNED', 'AGREEMENT EXECUTED', 'AGREEMENT ANNOUNCED',
-        'REFINANCED', 'CONVERTIBLE DEBT REFINANCED',
-        'OUTSIDE DATE EXTENDED', 'EXTENDS OUTSIDE DATE', 'DEADLINE EXTENDED',
-        'STANDSTILL', 'STANDSTILL AGREEMENT',
+    # FIX 5: Separate STRONG signal lists for instant high-confidence classification
+    STRONG_POSITIVE = [
+        # Regulatory clearances
+        'UNCONDITIONAL APPROVAL', 'UNCONDITIONAL CLEARANCE',
+        'REGULATORY CLEARANCE', 'CLEARS WITHOUT CONDITIONS',
+        'EARLY TERMINATION',  # HSR early termination = FTC cleared
+        'GREEN LIGHT', 'PROVIDES CLEARANCE', 'ISSUES FAVORABLE',
+        'REMEDY ACCEPTED', 'REMEDIES ACCEPTED',
+        # Competing bids (POSITIVE for target!)
+        'COMPETING BID', 'RIVAL BID', 'TOPPING BID', 'COUNTER BID',
+        'COUNTEROFFER', 'COUNTER OFFER', 'SUPERIOR PROPOSAL',
+        'WHITE KNIGHT', 'RIVAL OFFER', 'COMPETING OFFER',
+        'UNSOLICITED BID', 'SWEETENED',
+        # Deal milestones
+        'DEFINITIVE AGREEMENT', 'AGREEMENT SIGNED', 'AGREEMENT EXECUTED',
+        'FINANCING SECURED', 'DEBT COMMITMENT', 'COMMITMENT SECURED',
+        'SHAREHOLDER APPROVAL', 'VOTE IN FAVOR', 'UNANIM',
+        # Legal resolution
+        'SETTLED', 'SETTLEMENT', 'DISMISSED', 'RESOLVED',
+        'WAIVED', 'NO OBJECTION',
+        # Process acceleration
+        'EXPEDIT', 'FAST-TRACK', 'ACCELERAT',
+        'OUTSIDE DATE EXTENDED', 'DEADLINE EXTENDED',
     ]
 
-    NEGATIVE_PHRASES = [
-        'REJECT', 'BLOCK', 'OPPOS', 'FAIL', 'DECLINE',
+    STRONG_NEGATIVE = [
+        # Deal killers
+        'BLOCK', 'BLOCKED', 'TERMIN', 'CANCEL',
+        'WALK AWAY', 'ABANDON', 'COLLAPSE',
+        # Regulatory opposition
+        'PHASE II', 'SECOND REQUEST', 'EXTENDED REVIEW',
+        'ANTITRUST CONCERN', 'REGULATORY HURDLE',
+        # Legal threats
+        'INJUNCTION', 'CLASS ACTION', 'SHAREHOLDER LAWSUIT',
+        'POISON PILL',
+        # Credit/financial deterioration
+        'CREDIT DOWNGRADE', 'RATING CUT', 'MATERIAL ADVERSE',
+        # Severe process issues
+        'DEADLOCK', 'IMPAIR',
+    ]
+
+    # Regular positive/negative words (Layer 3)
+    POSITIVE_WORDS = [
+        'APPROV', 'SUCCESS', 'SUPPORT', 'FAVOR', 'AGREE', 'ACCEPT',
+        'PROGRESS', 'ADVANCE', 'ENDORSE', 'RECOMMEND', 'BOOST',
+        'STRONG REVENUE', 'STRONG EARNINGS', 'ABOVE EXPECT', 'EXCEED',
+        'COMPLETE', 'FINALIZ', 'CONFIRM', 'ON TRACK',
+        'IMPROVED', 'POSITIVE', 'REVENUE GROWTH',
+        'SECURED', 'REFINANC',
+        'SMOOTH TRANSITION', 'INTEGRATION PLAN',
+        'CLEARED', 'CLEARS',
+        'INTEREST RATE HEDGE', 'HEDGING STRATEGY',
+        'MEETING SCHEDULED', 'SETS MEETING', 'SHAREHOLDER VOTE',
+        'DIVIDEND MAINTAINED', 'STRONG QUARTER',
+        'LIQUIDITY FACILIT', 'ENHANCED LIQUIDITY',
+        'RECOMMENDS APPROVAL', 'FAVORABLE OPINION',
+        'REFINANCED', 'STANDSTILL AGREEMENT',
+        'RETENTION AGREEMENT', 'EMPLOYEE RETENTION',
+        'CLEARANCE', 'WELCOMES', 'BACKS',
+        'SYNERG', 'ACCRETIVE', 'UPGRADE', 'OUTPERFORM',
+    ]
+
+    NEGATIVE_WORDS = [
+        'REJECT', 'OPPOS', 'FAIL', 'DECLINE',
         'DELAY', 'OBSTACLE', 'THREAT', 'WITHDRAW',
-        'CANCEL', 'TERMIN', 'DOUBT', 'LAWSUIT', 'SUE',
-        'DISAPPROV', 'BELOW EXPECT', 'WEAK',
-        'PROBLEM', 'COMPLICATE', 'PUSHED BACK',
-        'SIGNALS CONCERN', 'SCRUTIN', 'PROBE',
-        'EXTENDED REVIEW', 'PHASE II', 'SECOND REQUEST',
-        'ANTITRUST CONCERN', 'SHAREHOLDER LAWSUIT', 'CLASS ACTION',
-        'INJUNCTION', 'POISON PILL', 'DEADLOCK', 'IMPAIR',
+        'DOUBT', 'LAWSUIT', 'SUE', 'DISAPPROV',
+        'BELOW EXPECT', 'WEAK', 'PROBLEM', 'COMPLICATE',
+        'PUSHED BACK', 'SIGNALS CONCERN', 'SCRUTIN', 'PROBE',
+        'ANTITRUST CONCERN',
         'OVERPAY', 'OVERVALUED', 'DOWNGRADE', 'SELL RATING',
         'UNDERPERFORM', 'SHORTFALL',
         'OUTFLOW', 'DETERIORAT',
-        'MATERIAL ADVERSE', 'ADVERSE CHANGE',
-        'STRICTER', 'TIGHTER',
-        'WALK AWAY', 'ABANDON',
-        'REGULATORY HURDLE', 'REGULATORY OBSTACLE',
-        'CREDIT DOWNGRADE', 'RATING CUT',
-        'COLLAPSES', 'COLLAPSE',
-        'WIDEN', 'SPREADS WIDEN',
+        'ADVERSE CHANGE', 'STRICTER', 'TIGHTER',
+        'SPREADS WIDEN', 'WIDEN',
     ]
+
+    # FIX 6: Negation prefixes that flip word meaning
+    NEGATION_PREFIXES = ['NO ', 'NOT ', 'WITHOUT ', "DON'T ", 'FAILS TO ', 'UNABLE TO ']
 
     NEGATION_CONTEXT = [
         ('OUTFLOW', 'ACCELERAT'),
-        ('SHORTFALL', 'RAISE'),
-        ('MAC', 'QUESTION'),
+        ('SHORTFALL', 'REVENUE'),
         ('CONCERN', 'RAISE'),
         ('RISK', 'INCREASE'),
         ('DOUBT', 'GROW'),
         ('OBSTACLE', 'EMERGE'),
         ('DECLINE', 'ACCELERAT'),
         ('LOSS', 'WIDEN'),
+        ('MAC', 'QUESTION'),
     ]
 
-    # Phrases that are NEUTRAL despite containing positive/negative keywords
     NEUTRAL_PHRASES = [
         'ANALYSIS PUBLISHED', 'WORKING SESSION', 'TECHNICAL SESSION',
         'NOTIFICATION FILED', 'REPORT ISSUED', 'STAFF MEETING',
         'PROCEDURAL', 'ROUTINE', 'SCHEDULED',
-        # "Unusual Institutional Trading Activity" = ambiguous, not negative
         'UNUSUAL INSTITUTIONAL', 'TRADING ACTIVITY',
-        'INSTITUTIONAL TRADING', 'UNUSUAL TRADING',
-        # "Management Provides Updated Market Outlook" = routine, not negative
         'MARKET OUTLOOK', 'UPDATED MARKET', 'UPDATED OUTLOOK',
-        # "Engages Advisors for Strategic Review" = could mean exploring sale
         'STRATEGIC REVIEW', 'ENGAGES ADVISORS',
-        # Routine filings/events that aren't directional
         'PREFERRED STOCK ISSUANCE', 'STOCK ISSUANCE',
         'COMMENT PERIOD', 'EXTENDS COMMENT',
         'RISK FACTOR DISCLOSURE', 'UPDATED RISK',
-        # Board discussions are neutral
         'BOARD DISCUSSION', 'BOARD DEFENDS',
         'INVESTOR RELATIONS',
     ]
 
+    # FIX 15: Complete category keywords from strategy spec
     CATEGORY_KEYWORDS = {
         'REG': ['REGULAT', 'ANTITRUST', 'APPROVAL', 'COMMISSION', 'FTC', 'DOJ',
                 'COMPLIANCE', 'GOVERNMENT', 'AUTHORITY', 'RULING', 'LEGAL',
@@ -266,39 +518,64 @@ class NewsClassifier:
                 'CFIUS', 'SEC ', 'SAMR'],
         'FIN': ['FINANC', 'EARNINGS', 'REVENUE', 'PROFIT', 'LOSS', 'DEBT',
                 'CREDIT', 'VALUATION', 'CASH FLOW', 'REFINANC', 'RETENTION',
-                'SYNERG', 'LEVERAGE', 'DOWNGRADE', 'UPGRADE', 'RATE'],
+                'SYNERG', 'LEVERAGE', 'DOWNGRADE', 'UPGRADE', 'RATE',
+                'BALANCE', 'QUARTER', 'ANNUAL', 'EPS', 'MARKET CAP'],
         'SHR': ['SHAREHOLD', 'VOTE', 'PROXY', 'ACTIVIST', 'BOARD', 'DIRECTOR',
                 'DISSENT', 'OPPOSITION', 'STAKE', 'INVESTOR', 'FAIRNESS',
-                'MANAGEMENT', 'SPECULATION', 'INSTITUTIONAL'],
+                'MANAGEMENT', 'SPECULATION', 'INSTITUTIONAL', 'ADVOCACY'],
         'ALT': ['ALTERNATIVE', 'COMPETING', 'RIVAL', 'COUNTER', 'BIDDER',
                 'HOSTILE', 'UNSOLICITED', 'SWEETENED', 'TOPPING',
-                'WHITE KNIGHT', 'SUPERIOR PROPOSAL'],
+                'WHITE KNIGHT', 'SUPERIOR PROPOSAL', 'REVISED'],
         'PRC': ['PRICE', 'PREMIUM', 'DISCOUNT', 'FAIR VALUE', 'SPREAD',
-                'BOOK VALUE', 'NAV'],
+                'BOOK VALUE', 'NAV', 'COST', 'SAVING'],
     }
 
+    # FIX 13: Complete severity indicators from strategy spec
     LARGE_WORDS = ['MAJOR', 'SIGNIFICANT', 'CRITICAL', 'DECISIVE', 'FUNDAMENTAL',
                    'BLOCK', 'TERMIN', 'CANCEL', 'FINAL', 'DEFINITIVE',
-                   'UNCONDITIONAL', 'COMPLET', 'PHASE II', 'UNANIM', 'LANDMARK']
+                   'UNCONDITIONAL', 'COMPLET', 'PHASE II', 'UNANIM', 'LANDMARK',
+                   'COLLAPSE', 'TRANSFORM']
     MEDIUM_WORDS = ['IMPORTANT', 'NOTABLE', 'SUBSTANT', 'CONSIDER', 'MATERIAL',
-                    'MEANINGFUL', 'PRELIMINARY', 'GROWING', 'REVISED', 'UPDATED']
+                    'MEANINGFUL', 'PRELIMINARY', 'GROWING', 'REVISED', 'UPDATED',
+                    'EMERGES', 'EXTENDS', 'MODERATE']
 
     def classify(self, headline: str, body: str = '') -> Dict[str, Any]:
         full_text = f"{headline} {body}".upper()
         headline_upper = headline.upper()
+        body_upper = body.upper()  # FIX 8: separate body text
 
+        # FIX 17: Tier 1 - lookup table (instant, high confidence)
+        lookup_result = lookup_news(headline)
+        if lookup_result is not None:
+            deal_id = self._identify_deal(full_text)
+            result = {
+                'deal_id': deal_id,
+                'direction': lookup_result['direction'],
+                'severity': lookup_result['severity'],
+                'category': lookup_result['category'],
+                'confidence': lookup_result['confidence'],
+                'tier': 1,
+            }
+            result['delta_p'] = self._compute_delta_p(
+                deal_id, result['category'], result['direction'], result['severity'])
+            return result
+
+        # Tier 2: Keyword classifier fallback
         deal_id = self._identify_deal(full_text)
         category = self._identify_category(full_text)
-        direction = self._identify_direction(headline_upper, full_text)
+        direction = self._identify_direction(headline_upper, body_upper, full_text)
         severity = self._identify_severity(full_text)
         delta_p = self._compute_delta_p(deal_id, category, direction, severity)
 
         return {
             'deal_id': deal_id, 'category': category,
             'direction': direction, 'severity': severity, 'delta_p': delta_p,
+            'confidence': 0.7 if direction != 'ambiguous' else 0.0,
+            'tier': 2,
         }
 
     def _identify_deal(self, text: str) -> Optional[str]:
+        """FIX 3 & 4: Strong/weak sector scoring with threshold 3."""
         scores = {}
         for deal_id, kw in self.DEAL_KEYWORDS.items():
             score = 0
@@ -307,15 +584,20 @@ class NewsClassifier:
                     score += 10
             for n in kw['names']:
                 if n in text:
-                    score += 7
-            for w in kw['sector']:
+                    score += 8
+            # FIX 4: Strong sector keywords +3, weak sector +1
+            for w in kw['strong_sector']:
+                if w in text:
+                    score += 3
+            for w in kw['weak_sector']:
                 if w in text:
                     score += 1
             if score > 0:
                 scores[deal_id] = score
         if scores:
             best = max(scores, key=scores.get)
-            if scores[best] >= 1:  # lowered from 2 to catch body-text matches
+            # FIX 3: Threshold 3 (was 1) to avoid false positives
+            if scores[best] >= 3:
                 return best
         return None
 
@@ -327,40 +609,81 @@ class NewsClassifier:
                 scores[cat] = s
         return max(scores, key=scores.get) if scores else 'FIN'
 
-    def _identify_direction(self, headline: str, full_text: str) -> str:
-        """Context-aware direction identification."""
-        # Check for neutral/procedural phrases first
+    def _identify_direction(self, headline: str, body: str, full_text: str) -> str:
+        """Multi-layer direction classification per strategy spec."""
+
+        # Layer 1: Neutral/procedural filter
         for phrase in self.NEUTRAL_PHRASES:
             if phrase in headline:
                 return 'ambiguous'
 
-        # Check for negation contexts
-        has_negation = False
+        # Layer 2: Strong signal phrases (FIX 5)
+        strong_pos = sum(1 for p in self.STRONG_POSITIVE if p in headline)
+        strong_neg = sum(1 for p in self.STRONG_NEGATIVE if p in headline)
+        if strong_pos > 0 and strong_neg == 0:
+            return 'positive'
+        if strong_neg > 0 and strong_pos == 0:
+            return 'negative'
+        # If both > 0, fall through to word-level scoring
+
+        # Layer 3: Word-level scoring with negation handling
+        # FIX 6: Negation prefix handling
+        # FIX 7: Headline words count at 2x weight
+        pos_h = 0
+        neg_h = 0
+        for word in self.POSITIVE_WORDS:
+            if word in headline:
+                # Check if preceded by negation -> flip to negative
+                if self._is_negated(headline, word):
+                    neg_h += 2
+                else:
+                    pos_h += 2
+        for word in self.NEGATIVE_WORDS:
+            if word in headline:
+                # Check if preceded by negation -> flip to positive
+                if self._is_negated(headline, word):
+                    pos_h += 2
+                else:
+                    neg_h += 2
+
+        # Layer 4: Body fallback (only if headline is tied)
+        # FIX 7: Body weight 1.0x (was 0.3x)
+        # FIX 8: Search body-only text (was searching full_text = double-counting)
+        if pos_h == neg_h:
+            for word in self.POSITIVE_WORDS:
+                if word in body:
+                    if self._is_negated(body, word):
+                        neg_h += 1
+                    else:
+                        pos_h += 1
+            for word in self.NEGATIVE_WORDS:
+                if word in body:
+                    if self._is_negated(body, word):
+                        pos_h += 1
+                    else:
+                        neg_h += 1
+
+        # Layer 5: Negation context pairs (always negative)
         for trigger, modifier in self.NEGATION_CONTEXT:
             if trigger in full_text and modifier in full_text:
-                has_negation = True
-                break
-
-        # Score headline (primary signal)
-        pos_h = sum(1 for w in self.POSITIVE_PHRASES if w in headline)
-        neg_h = sum(1 for w in self.NEGATIVE_PHRASES if w in headline)
-
-        # If headline is ambiguous, check body with reduced weight
-        if pos_h == neg_h:
-            pos_b = sum(1 for w in self.POSITIVE_PHRASES if w in full_text)
-            neg_b = sum(1 for w in self.NEGATIVE_PHRASES if w in full_text)
-            pos_h += pos_b * 0.3
-            neg_h += neg_b * 0.3
-
-        # Apply negation context
-        if has_negation:
-            neg_h += 2
+                neg_h += 2
 
         if pos_h > neg_h:
             return 'positive'
         elif neg_h > pos_h:
             return 'negative'
         return 'ambiguous'
+
+    def _is_negated(self, text: str, word: str) -> bool:
+        """FIX 6: Check if a word is preceded by a negation prefix."""
+        idx = text.find(word)
+        if idx < 0:
+            return False
+        prefix = text[max(0, idx - 12):idx]
+        for neg in self.NEGATION_PREFIXES:
+            if prefix.endswith(neg):
+                return True
+        return False
 
     def _identify_severity(self, text: str) -> str:
         large = sum(1 for w in self.LARGE_WORDS if w in text)
@@ -374,6 +697,7 @@ class NewsClassifier:
     def _compute_delta_p(self, deal_id, category, direction, severity) -> float:
         if deal_id is None or direction == 'ambiguous':
             return 0.0
+        # FIX 1: Uses corrected NEWS_IMPACT values
         base = NEWS_IMPACT.get(direction, {}).get(severity, 0.0)
         cat_mult = CATEGORY_MULTIPLIERS.get(category, 1.0)
         deal_sens = DEAL_SENSITIVITY.get(deal_id, 1.0)
@@ -405,6 +729,13 @@ class ProbabilityEngine:
         if abs(denom) < 0.01:
             return None
         return max(0.0, min(1.0, (tp - V) / denom))
+
+    def intrinsic_target_price(self, did: str, ap: float) -> float:
+        """FIX 14: Compute intrinsic target price from analyst probability."""
+        p = self.analyst_prob[did]
+        K = self.deal_value(did, ap)
+        V = self.standalone_values[did]
+        return p * K + (1 - p) * V
 
     def apply_news(self, did: str, dp: float) -> Tuple[float, float]:
         old = self.analyst_prob[did]
@@ -449,7 +780,7 @@ class OrderExecutor:
 
 
 # =============================================================================
-# MAIN TRADING ENGINE V5
+# MAIN TRADING ENGINE V6
 # =============================================================================
 class MergerArbTrader:
 
@@ -467,11 +798,11 @@ class MergerArbTrader:
         self.prices = {}
         self.positions = {}
         self.news_traded = 0
+        self.tier1_hits = 0
+        self.tier2_hits = 0
         self.start_time = None
 
-        # Target positions per deal (positive = long target, negative = short)
         self.deal_targets = {did: 0 for did in DEALS}
-        # Per-deal cooldown: last tick a news trade was made
         self.deal_last_trade_tick = {did: -100 for did in DEALS}
 
     def start(self):
@@ -479,10 +810,16 @@ class MergerArbTrader:
         self.start_time = datetime.now()
 
         log.info("=" * 70)
-        log.info("  MERGER ARB TRADER V5 - NEWS ONLY + DEAL LIMITS + NO UNWIND")
+        log.info("  MERGER ARB TRADER V6 - LOOKUP TABLE + MULTI-LAYER CLASSIFIER")
         log.info("=" * 70)
+        log.info(f"  NEWS_IMPACT: pos large={NEWS_IMPACT['positive']['large']}, "
+                 f"neg large={NEWS_IMPACT['negative']['large']}")
+        log.info(f"  BLEND: {1-MARKET_BLEND_WEIGHT:.0%} news / {MARKET_BLEND_WEIGHT:.0%} market")
+        log.info(f"  COOLDOWN: {NEWS_COOLDOWN_TICKS} ticks | MIN_TRADE: {MIN_TRADE_SIZE}")
+        log.info(f"  TEMPLATES: {len(NEWS_TEMPLATES)} known headlines")
         for did, d in DEALS.items():
-            log.info(f"  {d['name']}: {d['structure']} p0={d['p0']:.0%}")
+            log.info(f"  {d['name']}: {d['structure']} p0={d['p0']:.0%} "
+                     f"sens={DEAL_SENSITIVITY[did]:.2f}")
         log.info("=" * 70)
 
         # Wait for case
@@ -514,7 +851,6 @@ class MergerArbTrader:
                 self.tick = case.get('tick', 0)
                 status = case.get('status', '')
 
-                # Reset counters when a new heat starts (tick < old values)
                 if self.tick < last_status:
                     last_status = 0
                     last_tender = 0
@@ -551,23 +887,18 @@ class MergerArbTrader:
                             self.prices[t] = sec['last']
                         self.positions[t] = sec.get('position', 0)
 
-                # ===== UNWIND MODE =====
-                if self.tick >= UNWIND_CLOSE_TICK:
-                    self._unwind()
-                elif self.tick >= UNWIND_START_TICK:
-                    # No new trades, but don't start unwinding yet
-                    # (skip news to avoid opening new positions)
+                # FIX 16: No new trades after tick 580 (was 600)
+                if self.tick >= NO_NEW_TRADES_TICK:
+                    # Still track news IDs but don't trade
                     if news_resp.ok:
-                        # Still track news IDs to avoid processing later
                         for n in news_resp.json():
                             nid = n.get('news_id', 0)
                             if nid > self.last_news_id:
                                 headline = n.get('headline', '')
-                                log.info(f"  SKIP (unwind): {headline[:60]}")
+                                log.info(f"  SKIP (t>={NO_NEW_TRADES_TICK}): {headline[:60]}")
                                 self.last_news_id = max(self.last_news_id, nid)
                 else:
-                    # ===== ACTIVE TRADING =====
-                    # NEWS TRADING - sole trading signal (convergence removed in V5)
+                    # ACTIVE TRADING
                     if news_resp.ok:
                         self._process_news(news_resp.json())
 
@@ -638,6 +969,8 @@ class MergerArbTrader:
         self.positions = {}
         self.prices = {}
         self.news_traded = 0
+        self.tier1_hits = 0
+        self.tier2_hits = 0
         self.deal_targets = {did: 0 for did in DEALS}
         self.deal_last_trade_tick = {did: -100 for did in DEALS}
 
@@ -655,10 +988,17 @@ class MergerArbTrader:
             did = c['deal_id']
             direction = c['direction']
             dp = c['delta_p']
+            tier = c.get('tier', 2)
 
+            tier_tag = f"T{tier}"
             tag = f"[{did}]" if did else "[???]"
-            log.info(f"NEWS {tag} {c['category']} {direction}/{c['severity']} "
+            log.info(f"NEWS {tag} {tier_tag} {c['category']} {direction}/{c['severity']} "
                      f"dp={dp:+.4f}: {headline[:90]}")
+
+            if tier == 1:
+                self.tier1_hits += 1
+            else:
+                self.tier2_hits += 1
 
             if did and dp != 0:
                 self._trade_on_news(did, c)
@@ -666,24 +1006,25 @@ class MergerArbTrader:
             self.last_news_id = max(self.last_news_id, nid)
 
     def _trade_on_news(self, did: str, classification: Dict):
-        """Trade on news with per-deal limits, cooldown, and market blending."""
+        """Trade on news with all V6 fixes applied."""
         deal = DEALS[did]
         direction = classification['direction']
         dp = classification['delta_p']
         severity = classification['severity']
         category = classification['category']
+        tier = classification.get('tier', 2)
+        confidence = classification.get('confidence', 0.7)
 
-        # Fix 8: Check cooldown - skip if traded this deal too recently
+        # FIX 9: Cooldown check (15 ticks, was 20)
         ticks_since = self.tick - self.deal_last_trade_tick[did]
         if ticks_since < NEWS_COOLDOWN_TICKS:
             log.info(f"  COOLDOWN: {did} traded {ticks_since} ticks ago, need {NEWS_COOLDOWN_TICKS}")
-            # Still apply news to probability even if we don't trade
             self.prob.apply_news(did, dp)
             return
 
         old_p, new_p = self.prob.apply_news(did, dp)
 
-        # Fix 3: Blend ourP toward market after news update
+        # FIX 2: Blend 70% news / 30% market (was 50/50)
         target = deal['target']
         acquirer = deal['acquirer']
         tp = self.prices.get(target, 0)
@@ -693,58 +1034,77 @@ class MergerArbTrader:
 
         mp = self.prob.implied_prob(did, tp, ap)
         if mp is not None:
-            blended = 0.5 * self.prob.analyst_prob[did] + 0.5 * mp
+            blended = (1 - MARKET_BLEND_WEIGHT) * self.prob.analyst_prob[did] + \
+                      MARKET_BLEND_WEIGHT * mp
             self.prob.analyst_prob[did] = blended
             new_p = blended
 
         K = self.prob.deal_value(did, ap)
         V = self.prob.standalone_values[did]
-        expected_move = dp * (K - V)
 
-        # Position size based on severity
-        desired_size = TRADE_SIZE.get(severity, 5000)
+        # FIX 14: Check intrinsic price mispricing before trading
+        intrinsic = self.prob.intrinsic_target_price(did, ap)
+        mispricing = intrinsic - tp
+        if abs(mispricing) < MIN_MISPRICING:
+            log.info(f"  SKIP MISPRICING: {did} intrinsic=${intrinsic:.2f} "
+                     f"market=${tp:.2f} gap=${mispricing:+.2f} < ${MIN_MISPRICING}")
+            return
 
-        # Category boost for REG and ALT (highest impact)
+        # Position sizing: Tier 1 gets full size, Tier 2 gets base size
+        if tier == 1:
+            desired_size = TRADE_SIZE.get(severity, 5000)
+            # Tier 1 gets a confidence boost
+            desired_size = min(MAX_DEAL_POSITION, int(desired_size * 1.2))
+        else:
+            desired_size = TRADE_SIZE.get(severity, 5000)
+
+        # FIX 10: Category boost 1.3x (was 1.5x)
         if category in ('REG', 'ALT'):
-            desired_size = min(MAX_DEAL_POSITION, int(desired_size * 1.5))
+            desired_size = min(MAX_DEAL_POSITION, int(desired_size * 1.3))
 
-        # Fix 6: Per-deal position limits
         current_pos = int(self.positions.get(target, 0))
 
-        # Market sanity check: don't trade against strong market consensus
+        # FIX 11: 4-level market sanity check (was 2-level)
         if mp is not None:
-            if direction == 'negative' and mp > 0.75:
-                log.info(f"  MARKET OVERRIDE: {did} skip SELL - mktP={mp:.1%} too high")
+            if direction == 'positive' and mp > 0.90:
+                log.info(f"  SANITY: {did} skip BUY - mktP={mp:.1%} > 90% (limited upside)")
                 return
-            if direction == 'positive' and mp < 0.25:
-                log.info(f"  MARKET OVERRIDE: {did} skip BUY - mktP={mp:.1%} too low")
+            if direction == 'negative' and mp < 0.10:
+                log.info(f"  SANITY: {did} skip SELL - mktP={mp:.1%} < 10% (limited downside)")
+                return
+            if direction == 'negative' and mp > 0.80:
+                log.warning(f"  SANITY: {did} skip SELL - mktP={mp:.1%} > 80% (market disagrees)")
+                return
+            if direction == 'positive' and mp < 0.20:
+                log.warning(f"  SANITY: {did} skip BUY - mktP={mp:.1%} < 20% (market disagrees)")
                 return
 
         if direction == 'positive':
-            # Cap so we don't exceed MAX_DEAL_POSITION long
             room_in_deal = max(0, MAX_DEAL_POSITION - current_pos)
             trade_qty = min(desired_size, room_in_deal)
             action = 'BUY'
         else:
-            # Cap so we don't exceed MAX_DEAL_POSITION short
             room_in_deal = max(0, MAX_DEAL_POSITION + current_pos)
             trade_qty = min(desired_size, room_in_deal)
             action = 'SELL'
 
-        if trade_qty < 100:
-            log.info(f"  DEAL LIMIT: {did} {action} pos={current_pos} limit={MAX_DEAL_POSITION}")
+        # FIX 12: Minimum trade size 500 (was 100)
+        if trade_qty < MIN_TRADE_SIZE:
+            log.info(f"  DEAL LIMIT: {did} {action} pos={current_pos} "
+                     f"room={room_in_deal} < {MIN_TRADE_SIZE}")
             return
 
-        # Cap by available gross/net room
         avail = self._available_room(target, action)
         actual = min(trade_qty, avail)
-        if actual < 100:
+        if actual < MIN_TRADE_SIZE:
             log.info(f"  NO ROOM: {did} {action} wanted={trade_qty} avail={avail}")
             return
 
-        log.info(f"  TRADE: {did} {direction} dp={dp:+.3f} "
-                 f"p={old_p:.1%}->{new_p:.1%} exp=${expected_move:+.2f} "
-                 f"size={actual} (wanted {desired_size})")
+        expected_move = dp * (K - V)
+        log.info(f"  TRADE: {did} T{tier} {direction} dp={dp:+.3f} "
+                 f"p={old_p:.1%}->{new_p:.1%} intrinsic=${intrinsic:.2f} "
+                 f"mkt=${tp:.2f} gap=${mispricing:+.2f} "
+                 f"exp=${expected_move:+.2f} size={actual} (wanted {desired_size})")
 
         self.executor.market(target, action, actual)
 
@@ -760,10 +1120,9 @@ class MergerArbTrader:
 
         self.news_traded += 1
         self.deal_targets[did] = current_pos + (actual if action == 'BUY' else -actual)
-        self.deal_last_trade_tick[did] = self.tick  # Fix 8: record cooldown
+        self.deal_last_trade_tick[did] = self.tick
 
     def _available_room(self, ticker: str, action: str) -> int:
-        """How many shares we can trade. NO cap at MAX_ORDER_SIZE - executor handles chunking."""
         gross = sum(abs(v) for v in self.positions.values())
         net = sum(v for v in self.positions.values())
         gross_room = GROSS_LIMIT - gross
@@ -788,12 +1147,11 @@ class MergerArbTrader:
                 if mp <= 0:
                     continue
 
-                # Accept tenders that are favorable
                 accept = False
                 if action == 'BUY' and price > mp * 1.001:
-                    accept = True  # Someone wants to buy at above market
+                    accept = True
                 elif action == 'SELL' and price < mp * 0.999:
-                    accept = True  # Someone wants to sell below market
+                    accept = True
 
                 if accept:
                     log.info(f"TENDER: Accept {action} {qty} {ticker} @ ${price:.2f} "
@@ -805,11 +1163,6 @@ class MergerArbTrader:
         except:
             pass
 
-    def _unwind(self):
-        """V5: Disabled. Let auto close-out at tick 600 handle positions.
-        Unwinding early pays spread + commissions for no benefit."""
-        pass
-
     def _status(self):
         try:
             r = self.session.get(f'{API_BASE}/trader', timeout=5)
@@ -820,7 +1173,7 @@ class MergerArbTrader:
         log.info("=" * 70)
         log.info(f"TICK {self.tick:3d} | NLV: ${nlv:,.2f} | "
                  f"Orders: {self.executor.total_orders} | "
-                 f"News traded: {self.news_traded}")
+                 f"News: {self.news_traded} (T1:{self.tier1_hits} T2:{self.tier2_hits})")
 
         for did, deal in DEALS.items():
             tp = self.prices.get(deal['target'], 0)
@@ -828,12 +1181,15 @@ class MergerArbTrader:
             our_p = self.prob.analyst_prob[did]
             mp = self.prob.implied_prob(did, tp, ap)
             K = self.prob.deal_value(did, ap) if ap > 0 else 0
+            intrinsic = self.prob.intrinsic_target_price(did, ap) if ap > 0 else 0
             t_pos = int(self.positions.get(deal['target'], 0))
             a_pos = int(self.positions.get(deal['acquirer'], 0))
             mp_str = f"{mp:.1%}" if mp is not None else "N/A"
+            gap = intrinsic - tp if tp > 0 else 0
 
             log.info(f"  {did}: T=${tp:.2f} A=${ap:.2f} K=${K:.2f} "
                      f"ourP={our_p:.1%} mktP={mp_str} "
+                     f"intrin=${intrinsic:.2f} gap=${gap:+.2f} "
                      f"tPos={t_pos:+d} aPos={a_pos:+d}")
 
         gross = sum(abs(v) for v in self.positions.values())
