@@ -1,0 +1,7 @@
+2026-02-08 17:57:58,424 [INFO] news_parser: NEWS: Forecast vol next week = 27.0% - 32.0% (mid=29.5%)
+2026-02-08 17:57:59,398 [INFO] rit_api: MARKET SELL 50 RTM1C51 -> order_id=3699
+2026-02-08 17:57:59,457 [INFO] rit_api: MARKET SELL 50 RTM1P51 -> order_id=3700
+2026-02-08 17:59:13,700 [INFO] news_parser: NEWS: Current realized vol = 31.0% (history: ['31%'])
+2026-02-08 17:59:14,796 [INFO] rit_api: MARKET BUY 50 RTM1C51 -> order_id=7505
+2026-02-08 17:59:14,857 [INFO] rit_api: MARKET BUY 50 RTM1P51 -> order_id=7506
+2026-02-08 17:59:14,925 [INFO] rit_api: MARKET SELL 5000 RTM -> order_id=7507

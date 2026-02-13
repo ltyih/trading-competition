@@ -1,0 +1,43 @@
+2026-02-08 17:37:31,820 [INFO] news_parser: NEWS: Delta limit = 10000
+2026-02-08 17:37:31,820 [INFO] news_parser: NEWS: Penalty rate = 4.00%
+2026-02-08 17:37:32,921 [INFO] rit_api: MARKET BUY 50 RTM1C50 -> order_id=86
+2026-02-08 17:37:32,980 [INFO] rit_api: MARKET BUY 50 RTM1P50 -> order_id=89
+2026-02-08 17:38:45,196 [INFO] news_parser: NEWS: Forecast vol next week = 19.0% - 24.0% (mid=21.5%)
+2026-02-08 17:38:46,295 [INFO] rit_api: MARKET SELL 50 RTM1C50 -> order_id=3888
+2026-02-08 17:38:46,355 [INFO] rit_api: MARKET SELL 50 RTM1P50 -> order_id=3889
+2026-02-08 17:38:46,415 [INFO] rit_api: MARKET SELL 50 RTM1C52 -> order_id=3891
+2026-02-08 17:38:46,474 [INFO] rit_api: MARKET SELL 50 RTM1P52 -> order_id=3893
+2026-02-08 17:40:00,695 [INFO] news_parser: NEWS: Forecast vol next week = 19.0% - 24.0% (mid=21.5%)
+2026-02-08 17:40:01,795 [INFO] rit_api: MARKET BUY 50 RTM1C52 -> order_id=7664
+2026-02-08 17:40:01,854 [INFO] rit_api: MARKET BUY 50 RTM1P52 -> order_id=7665
+2026-02-08 17:40:01,917 [INFO] rit_api: MARKET SELL 50 RTM1C53 -> order_id=7666
+2026-02-08 17:40:01,974 [INFO] rit_api: MARKET SELL 50 RTM1P53 -> order_id=7667
+2026-02-08 17:41:16,083 [INFO] news_parser: NEWS: Forecast vol next week = 16.0% - 21.0% (mid=18.5%)
+2026-02-08 17:41:17,184 [INFO] rit_api: MARKET BUY 50 RTM1C53 -> order_id=11075
+2026-02-08 17:41:17,242 [INFO] rit_api: MARKET BUY 50 RTM1P53 -> order_id=11076
+2026-02-08 17:41:17,303 [INFO] rit_api: MARKET SELL 50 RTM1C51 -> order_id=11077
+2026-02-08 17:41:17,361 [INFO] rit_api: MARKET SELL 50 RTM1P51 -> order_id=11078
+2026-02-08 17:41:17,430 [INFO] rit_api: MARKET SELL 5000 RTM -> order_id=11079
+2026-02-08 17:41:21,104 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=11270
+2026-02-08 17:45:09,582 [INFO] news_parser: NEWS: Forecast vol next week = 23.0% - 28.0% (mid=25.5%)
+2026-02-08 17:45:10,685 [INFO] rit_api: MARKET SELL 50 RTM1C48 -> order_id=3917
+2026-02-08 17:45:10,744 [INFO] rit_api: MARKET SELL 50 RTM1P48 -> order_id=3918
+2026-02-08 17:46:25,027 [INFO] news_parser: NEWS: Forecast vol next week = 10.0% - 15.0% (mid=12.5%)
+2026-02-08 17:46:26,018 [INFO] rit_api: MARKET SELL 5000 RTM -> order_id=7660
+2026-02-08 17:46:49,271 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=8803
+2026-02-08 17:46:50,244 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=8847
+2026-02-08 17:46:52,244 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=8953
+2026-02-08 17:46:53,210 [INFO] rit_api: MARKET SELL 9996 RTM -> order_id=9004
+2026-02-08 17:47:05,330 [INFO] rit_api: MARKET BUY 9996 RTM -> order_id=9509
+2026-02-08 17:47:06,296 [INFO] rit_api: MARKET SELL 9996 RTM -> order_id=9552
+2026-02-08 17:47:25,447 [INFO] rit_api: MARKET BUY 9996 RTM -> order_id=10351
+2026-02-08 17:47:40,386 [INFO] news_parser: NEWS: Forecast vol next week = 11.0% - 16.0% (mid=13.5%)
+2026-02-08 17:47:46,542 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=11234
+2026-02-08 17:48:16,649 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=12525
+2026-02-08 17:48:18,693 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=12610
+2026-02-08 17:48:28,704 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=13031
+2026-02-08 17:48:30,703 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=13116
+2026-02-08 17:48:31,798 [INFO] rit_api: MARKET BUY 9990 RTM -> order_id=13159
+2026-02-08 17:48:33,800 [INFO] rit_api: MARKET SELL 9990 RTM -> order_id=13244
+2026-02-08 17:48:36,836 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=13371
+2026-02-08 17:50:02,417 [WARNING] rit_api: POST /commands/cancel returned 401: {"code":"UNAUTHORIZED","message":"Simulation must be running."}

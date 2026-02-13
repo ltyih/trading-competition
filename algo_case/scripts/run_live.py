@@ -1,7 +1,7 @@
-"""Live entrypoint stub for the RITC market making bot.
+"""Live entrypoint for ingestion-only runtime checks.
 
-This script currently performs startup initialization and a single `/case`
-health check against the RIT Client REST API.
+This script initializes configuration/logging, runs an initial `/case` health check,
+then enters a polling loop that ingests market data into ``GlobalState``.
 """
 
 from __future__ import annotations
@@ -24,7 +24,11 @@ SRC_PATH = PROJECT_ROOT / "src"
 if str(SRC_PATH) not in sys.path:
     sys.path.insert(0, str(SRC_PATH))
 
+from ritc_mm.api.client import ApiClient
+from ritc_mm.api.models import CaseStatus
 from ritc_mm.config import ConfigError, load_config, validate_required_keys
+from ritc_mm.data.state import GlobalState
+from ritc_mm.strategy.engine import StrategyEngine
 from ritc_mm.telemetry.logger import LoggerConfig, bind_context, get_logger, new_request_id
 
 
@@ -36,6 +40,36 @@ REQUIRED_CONFIG_KEYS: tuple[str, ...] = (
     "api.max_get_retries",
     "api.retry_backoff_seconds",
     "api.retry_jitter_seconds",
+    "universe",
+    "universe.tickers",
+    "polling",
+    "polling.case_interval_ms",
+    "polling.book_interval_ms",
+    "polling.tas_interval_ms",
+    "polling.news_interval_ms",
+    "polling.loop_sleep_ms",
+    "polling.book_depth",
+    "polling.tape_maxlen_per_ticker",
+    "polling.news_max_items",
+    "runtime",
+    "runtime.run_mode",
+    "tunables",
+    "tunables.tick_size",
+    "tunables.rounding_decimals",
+    "tunables.base_hs_ticks",
+    "tunables.min_hs_ticks",
+    "tunables.base_size",
+    "tunables.max_quote_size",
+    "tunables.soft_cap_tkr",
+    "tunables.hard_cap_tkr",
+    "tunables.inv_k",
+    "tunables.news_lockout_seconds",
+    "tunables.minute_closeout_start_s",
+    "tunables.heat_closeout_start_s",
+    "tunables.fv_ema_alpha",
+    "tunables.news_impulse_bps",
+    "tunables.news_positive_keywords",
+    "tunables.news_negative_keywords",
     "logging",
     "logging.level",
     "logging.console_enabled",
@@ -53,20 +87,7 @@ class HealthCheckFailure(Exception):
 
 
 def _extract_wait_seconds(response: requests.Response, default_wait: float) -> float:
-    """Extract retry wait duration from HTTP headers/body.
-
-    Parameters
-    ----------
-    response:
-        HTTP response object returned by `requests`.
-    default_wait:
-        Fallback wait duration if response does not include wait hints.
-
-    Returns
-    -------
-    float
-        Number of seconds to wait before the next retry attempt.
-    """
+    """Extract retry wait duration from HTTP headers/body."""
     header_wait = response.headers.get("Retry-After")
     if header_wait:
         try:
@@ -97,35 +118,7 @@ def _health_check_case(
     retry_jitter_seconds: float,
     logger: logging.Logger | logging.LoggerAdapter[logging.Logger],
 ) -> dict[str, Any]:
-    """Perform a robust GET `/case` health check.
-
-    Parameters
-    ----------
-    base_url:
-        API base URL including `/v1`.
-    api_key:
-        API key used in the `X-API-Key` header.
-    timeout_seconds:
-        Per-request timeout.
-    max_get_retries:
-        Maximum retries for idempotent GET failures (connection/timeout/5xx).
-    retry_backoff_seconds:
-        Base retry sleep.
-    retry_jitter_seconds:
-        Max random jitter added to retry sleeps.
-    logger:
-        Logger adapter for structured logs.
-
-    Returns
-    -------
-    dict[str, Any]
-        Parsed JSON body for successful `/case` requests.
-
-    Raises
-    ------
-    HealthCheckFailure
-        If health check fails with mapped exit code.
-    """
+    """Perform a robust GET `/case` health check."""
     url = f"{base_url.rstrip('/')}/case"
     headers = {"X-API-Key": api_key}
 
@@ -209,9 +202,31 @@ def _health_check_case(
         raise HealthCheckFailure(exit_code=5, reason=f"unexpected_status_{status_code}")
 
 
+def _summarize_top_of_book(state: GlobalState) -> dict[str, dict[str, float | None]]:
+    """Build a compact per-ticker top-of-book summary."""
+    summary: dict[str, dict[str, float | None]] = {}
+    for ticker in state.universe:
+        l1 = state.l1.get(ticker)
+        if l1 is None:
+            summary[ticker] = {
+                "bid": None,
+                "ask": None,
+                "mid": None,
+                "spread": None,
+            }
+            continue
+        summary[ticker] = {
+            "bid": l1.bid_px,
+            "ask": l1.ask_px,
+            "mid": l1.mid,
+            "spread": l1.spread,
+        }
+    return summary
+
+
 def main() -> int:
-    """Run startup initialization and one `/case` health check request."""
-    parser = argparse.ArgumentParser(description="Run RITC live bot startup stub.")
+    """Run startup initialization and ingestion polling loop."""
+    parser = argparse.ArgumentParser(description="Run RITC ingestion loop.")
     parser.add_argument(
         "--config",
         default="config/default.yaml",
@@ -226,6 +241,11 @@ def main() -> int:
         print(f"Configuration error: {exc}")
         return 1
 
+    run_mode = str(config["runtime"]["run_mode"]).strip().lower()
+    if run_mode not in {"ingest", "strategy_dry_run"}:
+        print(f"Configuration error: unsupported runtime.run_mode={run_mode!r}")
+        return 1
+
     logging_cfg = config["logging"]
     logger = get_logger(
         name="ritc_mm.run_live",
@@ -238,7 +258,16 @@ def main() -> int:
         correlation_id=new_request_id(),
     )
 
-    logger.info("Starting RITC market making live runner stub")
+    logger.info(
+        "Starting RITC ingestion runner",
+        extra={
+            "request_id": new_request_id(),
+            "ticker": None,
+            "regime": None,
+            "order_id": None,
+            "run_mode": run_mode,
+        },
+    )
 
     api_cfg = config["api"]
     try:
@@ -268,6 +297,156 @@ def main() -> int:
             "tick": case_info.get("tick"),
         },
     )
+
+    polling_cfg = config["polling"]
+    universe = list(config["universe"]["tickers"])
+
+    state = GlobalState(
+        universe=universe,
+        book_depth=int(polling_cfg["book_depth"]),
+        tape_maxlen=int(polling_cfg["tape_maxlen_per_ticker"]),
+        news_max_items=int(polling_cfg["news_max_items"]),
+        logger=logger,
+    )
+    strategy_engine = StrategyEngine(config["tunables"]) if run_mode == "strategy_dry_run" else None
+
+    client = ApiClient(
+        base_url=str(api_cfg["base_url"]),
+        api_key=str(api_cfg["api_key"]),
+        timeout_seconds=float(api_cfg["timeout_seconds"]),
+        max_get_retries=int(api_cfg["max_get_retries"]),
+        retry_backoff_seconds=float(api_cfg["retry_backoff_seconds"]),
+        retry_jitter_seconds=float(api_cfg["retry_jitter_seconds"]),
+        logger=logger,
+    )
+
+    intervals_ms = {
+        "case": int(polling_cfg["case_interval_ms"]),
+        "book": int(polling_cfg["book_interval_ms"]),
+        "tas": int(polling_cfg["tas_interval_ms"]),
+        "news": int(polling_cfg["news_interval_ms"]),
+    }
+    loop_sleep_seconds = max(1, int(polling_cfg["loop_sleep_ms"])) / 1000.0
+    next_due = {name: time.monotonic() for name in intervals_ms}
+
+    logger.info(
+        "Entering ingestion loop",
+        extra={
+            "request_id": new_request_id(),
+            "ticker": None,
+            "regime": None,
+            "order_id": None,
+            "intervals_ms": json.dumps(intervals_ms, separators=(",", ":")),
+            "run_mode": run_mode,
+        },
+    )
+
+    try:
+        while True:
+            now_mono = time.monotonic()
+            due = [name for name, due_ts in next_due.items() if now_mono >= due_ts]
+
+            if due:
+                counts = state.update(client)
+
+                for name in due:
+                    step_seconds = intervals_ms[name] / 1000.0
+                    while next_due[name] <= now_mono:
+                        next_due[name] += step_seconds
+
+                top_of_book = _summarize_top_of_book(state)
+                case_status = state.case.status.value if state.case else "UNKNOWN"
+                period = state.case.period if state.case else -1
+                tick = state.case.tick if state.case else -1
+
+                logger.info(
+                    "Ingestion update %s",
+                    json.dumps(
+                        {
+                            "due": due,
+                            "period": period,
+                            "tick": tick,
+                            "case_status": case_status,
+                            "counts": counts,
+                            "tas_after": state.tas_after,
+                            "news_since": state.news_since,
+                            "top_of_book": top_of_book,
+                        },
+                        separators=(",", ":"),
+                        ensure_ascii=True,
+                    ),
+                    extra={
+                        "request_id": new_request_id(),
+                        "ticker": None,
+                        "regime": None,
+                        "order_id": None,
+                    },
+                )
+
+                if strategy_engine is not None:
+                    targets = strategy_engine.step(state)
+                    for ticker, target in targets.items():
+                        security = state.positions_by_ticker.get(ticker)
+                        position = float(security.position) if security is not None else 0.0
+                        l1 = state.l1.get(ticker)
+                        mid = l1.mid if l1 is not None else None
+
+                        payload = {
+                            "ticker": ticker,
+                            "period": period,
+                            "tick": tick,
+                            "regime": target.regime.name,
+                            "reason": target.reason,
+                            "fair_value": target.fair_value,
+                            "cancel_all": target.cancel_all,
+                            "position": position,
+                            "mid": mid,
+                            "bid": (
+                                {"price": target.bid.price, "quantity": target.bid.quantity}
+                                if target.bid is not None
+                                else None
+                            ),
+                            "ask": (
+                                {"price": target.ask.price, "quantity": target.ask.quantity}
+                                if target.ask is not None
+                                else None
+                            ),
+                        }
+
+                        logger.info(
+                            "Strategy target %s",
+                            json.dumps(payload, separators=(",", ":"), ensure_ascii=True),
+                            extra={
+                                "request_id": new_request_id(),
+                                "ticker": ticker,
+                                "regime": target.regime.name,
+                                "order_id": None,
+                            },
+                        )
+
+                if state.case is not None and state.case.status != CaseStatus.ACTIVE:
+                    logger.info(
+                        "Case status is not ACTIVE; exiting",
+                        extra={
+                            "request_id": new_request_id(),
+                            "ticker": None,
+                            "regime": None,
+                            "order_id": None,
+                            "case_status": state.case.status.value,
+                        },
+                    )
+                    break
+
+            time.sleep(loop_sleep_seconds)
+
+    except KeyboardInterrupt:
+        logger.info(
+            "Interrupted by user; exiting",
+            extra={"request_id": new_request_id(), "ticker": None, "regime": None, "order_id": None},
+        )
+    finally:
+        client.close()
+
     return 0
 
 
