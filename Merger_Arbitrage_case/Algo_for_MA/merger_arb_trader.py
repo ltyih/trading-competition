@@ -21,6 +21,7 @@ FIX 14: Intrinsic price / mispricing check added (MIN_MISPRICING=$0.20)
 FIX 15: Missing category keywords added
 FIX 16: No-new-trades after tick 580 (was only 600)
 FIX 17: News template lookup table (Tier 1 instant classification)
+FIX 18: Smart position unwind (cut reversed losers, free stale dead weight)
 """
 
 import requests
@@ -101,6 +102,16 @@ TRADE_SIZE = {
 
 # FIX 12: Minimum trade size (was 100)
 MIN_TRADE_SIZE = 500
+
+# FIX 18: Smart unwind configuration
+# Unwind cost = ~$0.12/share (commission $0.02 + spread ~$0.10)
+# On 10k shares = $1,200. Only unwind when expected loss from holding > this.
+UNWIND_REVERSAL_GAP = 0.15      # $ - unwind if intrinsic flipped against us by this much
+UNWIND_STALE_GAP = 0.10         # $ - edge considered "gone" below this
+UNWIND_MIN_HOLD_TICKS = 30      # Don't unwind before news has had time to absorb
+UNWIND_STALE_HOLD_TICKS = 60    # Must hold this long before stale cleanup triggers
+UNWIND_STOP_TICK = 560          # Don't unwind near end - auto close-out is cheaper
+UNWIND_CHECK_INTERVAL = 5       # Check every N ticks (not every 150ms cycle)
 
 # =============================================================================
 # LOGGING
@@ -800,6 +811,8 @@ class MergerArbTrader:
         self.news_traded = 0
         self.tier1_hits = 0
         self.tier2_hits = 0
+        self.unwinds = 0
+        self.last_unwind_check = 0
         self.start_time = None
 
         self.deal_targets = {did: 0 for did in DEALS}
@@ -907,6 +920,12 @@ class MergerArbTrader:
                         self._check_tenders()
                         last_tender = self.tick
 
+                    # FIX 18: Smart unwind check (every N ticks, not every cycle)
+                    if (self.tick - self.last_unwind_check >= UNWIND_CHECK_INTERVAL
+                            and self.tick < UNWIND_STOP_TICK):
+                        self._check_unwind()
+                        self.last_unwind_check = self.tick
+
                 # STATUS
                 if self.tick - last_status >= 30:
                     self._status()
@@ -971,6 +990,8 @@ class MergerArbTrader:
         self.news_traded = 0
         self.tier1_hits = 0
         self.tier2_hits = 0
+        self.unwinds = 0
+        self.last_unwind_check = 0
         self.deal_targets = {did: 0 for did in DEALS}
         self.deal_last_trade_tick = {did: -100 for did in DEALS}
 
@@ -1122,6 +1143,108 @@ class MergerArbTrader:
         self.deal_targets[did] = current_pos + (actual if action == 'BUY' else -actual)
         self.deal_last_trade_tick[did] = self.tick
 
+    def _check_unwind(self):
+        """FIX 18: Smart unwind - close positions when holding them loses money.
+
+        Two rules (both require minimum hold time so news can absorb):
+
+        RULE 1 - REVERSED: Our intrinsic price now points AGAINST our position.
+          We're long but intrinsic < market (model says target is overpriced).
+          We're short but intrinsic > market (model says target is cheap).
+          This means new news or market blend flipped us. Cut the loss.
+          Threshold: reversal > $0.15/share to cover unwind cost.
+
+        RULE 2 - STALE: Edge evaporated, position is dead weight.
+          abs(intrinsic - market) < $0.10. No remaining conviction.
+          Held for 60+ ticks with no new signal. Random walk risk > 0 edge.
+          Frees up gross/net room for fresh high-conviction trades.
+
+        NEVER unwind after tick 560 - auto close-out at 600 is free.
+        """
+        for did, deal in DEALS.items():
+            target = deal['target']
+            pos = int(self.positions.get(target, 0))
+            if abs(pos) < MIN_TRADE_SIZE:
+                continue  # No meaningful position to unwind
+
+            tp = self.prices.get(target, 0)
+            ap = self.prices.get(deal['acquirer'], 0)
+            if tp <= 0 or ap <= 0:
+                continue
+
+            # How long since we last traded this deal?
+            ticks_held = self.tick - self.deal_last_trade_tick[did]
+
+            intrinsic = self.prob.intrinsic_target_price(did, ap)
+            mispricing = intrinsic - tp  # +ve = target cheap, -ve = target expensive
+
+            should_unwind = False
+            reason = ""
+
+            if pos > 0:
+                # LONG target: we expected price to go UP (intrinsic > market)
+                # RULE 1: Intrinsic now BELOW market - we're on the wrong side
+                if (ticks_held >= UNWIND_MIN_HOLD_TICKS
+                        and mispricing < -UNWIND_REVERSAL_GAP):
+                    should_unwind = True
+                    reason = (f"REVERSED long: intrinsic=${intrinsic:.2f} "
+                              f"< mkt=${tp:.2f} by ${-mispricing:.2f}")
+                # RULE 2: Edge gone, no conviction left
+                elif (ticks_held >= UNWIND_STALE_HOLD_TICKS
+                        and abs(mispricing) < UNWIND_STALE_GAP):
+                    should_unwind = True
+                    reason = (f"STALE long: gap=${mispricing:+.2f} "
+                              f"held {ticks_held} ticks")
+
+            elif pos < 0:
+                # SHORT target: we expected price to go DOWN (intrinsic < market)
+                # RULE 1: Intrinsic now ABOVE market - we're on the wrong side
+                if (ticks_held >= UNWIND_MIN_HOLD_TICKS
+                        and mispricing > UNWIND_REVERSAL_GAP):
+                    should_unwind = True
+                    reason = (f"REVERSED short: intrinsic=${intrinsic:.2f} "
+                              f"> mkt=${tp:.2f} by ${mispricing:.2f}")
+                # RULE 2: Edge gone, no conviction left
+                elif (ticks_held >= UNWIND_STALE_HOLD_TICKS
+                        and abs(mispricing) < UNWIND_STALE_GAP):
+                    should_unwind = True
+                    reason = (f"STALE short: gap=${mispricing:+.2f} "
+                              f"held {ticks_held} ticks")
+
+            if not should_unwind:
+                continue
+
+            # Execute the unwind
+            unwind_qty = abs(pos)
+            action = 'SELL' if pos > 0 else 'BUY'
+
+            avail = self._available_room(target, action)
+            actual = min(unwind_qty, avail)
+            if actual < MIN_TRADE_SIZE:
+                continue
+
+            log.info(f"  UNWIND: {did} {action} {actual} {target} ({reason})")
+            self.executor.market(target, action, actual)
+
+            # Also unwind the acquirer hedge if one exists
+            if deal['structure'] != 'ALL_CASH' and deal['ratio'] > 0:
+                acquirer = deal['acquirer']
+                a_pos = int(self.positions.get(acquirer, 0))
+                if a_pos != 0:
+                    hedge_action = 'BUY' if a_pos < 0 else 'SELL'
+                    hedge_qty = min(abs(a_pos), int(actual * deal['ratio']))
+                    if hedge_qty >= 100:
+                        hedge_avail = self._available_room(acquirer, hedge_action)
+                        hedge_actual = min(hedge_qty, hedge_avail)
+                        if hedge_actual >= 100:
+                            log.info(f"  UNWIND HEDGE: {did} {hedge_action} "
+                                     f"{hedge_actual} {acquirer}")
+                            self.executor.market(acquirer, hedge_action, hedge_actual)
+
+            self.unwinds += 1
+            # Prevents re-unwind and news whiplash for COOLDOWN ticks
+            self.deal_last_trade_tick[did] = self.tick
+
     def _available_room(self, ticker: str, action: str) -> int:
         gross = sum(abs(v) for v in self.positions.values())
         net = sum(v for v in self.positions.values())
@@ -1173,7 +1296,8 @@ class MergerArbTrader:
         log.info("=" * 70)
         log.info(f"TICK {self.tick:3d} | NLV: ${nlv:,.2f} | "
                  f"Orders: {self.executor.total_orders} | "
-                 f"News: {self.news_traded} (T1:{self.tier1_hits} T2:{self.tier2_hits})")
+                 f"News: {self.news_traded} (T1:{self.tier1_hits} T2:{self.tier2_hits}) | "
+                 f"Unwinds: {self.unwinds}")
 
         for did, deal in DEALS.items():
             tp = self.prices.get(deal['target'], 0)
