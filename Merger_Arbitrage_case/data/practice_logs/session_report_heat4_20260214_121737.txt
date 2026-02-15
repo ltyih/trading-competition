@@ -1,0 +1,394 @@
+====================================================================================================
+PRACTICE SESSION REPORT
+Generated: 2026-02-14T12:27:39.388463
+Database: C:\Users\Kanish Khanna\OneDrive - UBC\Desktop\RITC\RITC-2026\Merger_Arbitrage_case\Algo_for_MA\..\data\practice_logs\heat4_20260214_121737.db
+====================================================================================================
+
+NLV: $42.50 (min) -> $18,987.00 (max)
+Ticks: 37 to 570
+
+----------------------------------------------------------------------------------------------------
+NEWS ITEMS AND THEIR PRICE IMPACT
+----------------------------------------------------------------------------------------------------
+
+#  1 tick=  1: Welcome to the RITC 2026 Merger Arbitrage Case - practice server
+     normalized: WELCOME TO THE RITC 2026 MERGER ARBITRAGE CASE - PRACTICE SERVER
+     impact: BYL:1.13:0.0023 | FSR:-0.08:-0.0052 | GGD:-0.07:-0.0011 | SPK:-0.02:0.0031 | TGX:0.11:0.0052
+
+#  2 tick= 21: Political Opposition Voiced
+     normalized: POLITICAL OPPOSITION VOICED
+     impact: BYL:0.52:-0.0023 | FSR:0.09:0.0059 | GGD:0.07:0.0024 | SPK:0.24:-0.0134 | TGX:-0.13:-0.0062
+
+#  3 tick= 27: Tax Credit Extension Uncertainty
+     normalized: TAX CREDIT EXTENSION UNCERTAINTY
+     impact: BYL:-0.05:0.0038 | FSR:-0.02:-0.0013 | GGD:0.08:0.0016 | SPK:0.05:0.0078 | TGX:0.06:0.0029
+
+#  4 tick= 29: Shareholder Derivative Suit Filed
+     normalized: SHAREHOLDER DERIVATIVE SUIT FILED
+     impact: BYL:-0.01:0.0052 | FSR:-0.22:-0.0144 | GGD:0.07:0.0007 | SPK:0.4:0.0169 | TGX:0.02:0.001
+
+#  5 tick= 29: Strong Project Pipeline Announced
+     normalized: STRONG PROJECT PIPELINE ANNOUNCED
+     impact: BYL:-0.01:0.0052 | FSR:-0.22:-0.0144 | GGD:0.07:0.0007 | SPK:0.4:0.0169 | TGX:0.02:0.001
+
+#  6 tick= 42: Executive Order Targets Competition Policy Across Industries
+     normalized: EXECUTIVE ORDER TARGETS COMPETITION POLICY ACROSS INDUSTRIES
+     impact: BYL:-0.23:-0.0027 | FSR:-0.11:-0.0072 | GGD:-1.54:-0.0578 | SPK:-0.06:-0.0034 | TGX:0.07:0.0033
+
+#  7 tick= 77: Integration Planning Commences
+     normalized: INTEGRATION PLANNING COMMENCES
+     impact: BYL:-0.91:-0.009 | FSR:0.275:0.0179 | GGD:-0.02:-0.0001 | SPK:-0.04:-0.0012 | TGX:-0.08:-0.0038
+
+#  8 tick= 78: Central Bank Announces Enhanced Liquidity Facilities
+     normalized: CENTRAL BANK ANNOUNCES ENHANCED LIQUIDITY FACILITIES
+     impact: BYL:-0.81:-0.007 | FSR:0.24:0.0157 | GGD:-0.07:-0.0017 | SPK:-0.46:0.0001 | TGX:-0.115:-0.0055
+
+#  9 tick= 79: Activist Hedge Fund Opposes Deal
+     normalized: ACTIVIST HEDGE FUND OPPOSES DEAL
+     impact: BYL:-0.93:-0.0066 | FSR:0.14:0.0091 | GGD:-0.07:-0.0017 | SPK:-0.48:-0.0017 | TGX:-0.08:-0.0038
+
+# 10 tick= 83: Antitrust Experts Raise Competition Concerns
+     normalized: ANTITRUST EXPERTS RAISE COMPETITION CONCERNS
+     impact: BYL:-0.79:-0.0004 | FSR:-0.09:-0.0059 | GGD:-0.05:-0.0004 | SPK:-0.95:0.0277 | TGX:0.01:0.0005
+
+# 11 tick= 84: Outside Date Extended to Year-End
+     normalized: OUTSIDE DATE EXTENDED TO YEAR-END
+     impact: BYL:-0.395:0.0008 | FSR:-0.08:-0.0052 | GGD:-0.02:-0.0003 | SPK:-0.74:0.0285 | TGX:0.73:0.0348
+
+# 12 tick= 84: Mixed Economic Data Creates Cross-Currents for Deal Markets
+     normalized: MIXED ECONOMIC DATA CREATES CROSS-CURRENTS FOR DEAL MARKETS
+     impact: BYL:-0.395:0.0008 | FSR:-0.08:-0.0052 | GGD:-0.02:-0.0003 | SPK:-0.74:0.0285 | TGX:0.73:0.0348
+
+# 13 tick= 88: FERC Review Initiated for Energy Deal
+     normalized: FERC REVIEW INITIATED FOR ENERGY DEAL
+     impact: BYL:0.96:0.0055 | FSR:0.68:0.0444 | GGD:0.03:0.0001 | SPK:-0.72:0.0245 | TGX:0.73:0.0348
+
+# 14 tick=135: Material Adverse Change Clause Concern
+     normalized: MATERIAL ADVERSE CHANGE CLAUSE CONCERN
+     impact: BYL:-0.08:-0.0002 | FSR:0.05:0.0033 | GGD:-0.04:0.0 | SPK:-0.1:0.0055 | TGX:-0.07:-0.0033
+
+# 15 tick=136: Sector Multiple Compression
+     normalized: SECTOR MULTIPLE COMPRESSION
+     impact: BYL:0.2:-0.0003 | FSR:0.07:0.0046 | GGD:-0.08:-0.0001 | SPK:0.02:0.0092 | TGX:-0.08:-0.0038
+
+# 16 tick=187: Pharmaco Stock Price Decline
+     normalized: COMPANY STOCK PRICE DECLINE
+     impact: BYL:0.18:0.003 | FSR:0.11:0.0072 | GGD:-0.03:0.0004 | SPK:-0.25:-0.0072 | TGX:0.09:0.0043
+
+# 17 tick=188: Definitive Agreement Announced
+     normalized: DEFINITIVE AGREEMENT ANNOUNCED
+     impact: BYL:0.35:0.0032 | FSR:0.0:0.0 | GGD:-0.02:0.0006 | SPK:-0.06:-0.0065 | TGX:0.04:0.0019
+
+# 18 tick=193: Asset Sales to Fund Transaction
+     normalized: ASSET SALES TO FUND TRANSACTION
+     impact: BYL:0.76:0.0008 | FSR:0.01:0.0007 | GGD:-0.02:0.0027 | SPK:-0.31:-0.0135 | TGX:-0.61:-0.029
+
+# 19 tick=197: Federal Reserve Staff Holds Technical Working Session
+     normalized: FEDERAL RESERVE STAFF HOLDS TECHNICAL WORKING SESSION
+     impact: BYL:0.08:0.0031 | FSR:0.09:0.0059 | GGD:0.02:0.0026 | SPK:-0.23:-0.0111 | TGX:-1.46:-0.0695
+
+# 20 tick=241: Employee Retention Packages Offered
+     normalized: EMPLOYEE RETENTION PACKAGES OFFERED
+     impact: BYL:0.03:0.0075 | FSR:0.01:0.0007 | GGD:0.0:-0.0029 | SPK:-0.39:-0.0394 | TGX:0.1:0.0048
+
+# 21 tick=246: Community Groups Raise CRA Concerns
+     normalized: COMMUNITY GROUPS RAISE CRA CONCERNS
+     impact: BYL:0.09:0.0014 | FSR:-0.03:-0.002 | GGD:-0.09:-0.0031 | SPK:-0.32:-0.0038 | TGX:0.08:0.0038
+
+# 22 tick=251: Growing Market Speculation Surrounds Deal Viability
+     normalized: GROWING MARKET SPECULATION SURROUNDS DEAL VIABILITY
+     impact: BYL:-0.22:-0.0023 | FSR:-0.09:-0.0059 | GGD:0.54:0.0232 | SPK:-0.53:-0.0306 | TGX:-0.03:-0.0014
+
+# 23 tick=253: Sell-Side Analysts Issue Divergent Valuation Assessments
+     normalized: SELL-SIDE ANALYSTS ISSUE DIVERGENT VALUATION ASSESSMENTS
+     impact: BYL:-0.63:-0.0038 | FSR:-0.05:-0.0033 | GGD:0.59:0.024 | SPK:-0.29:-0.0698 | TGX:-0.02:-0.001
+
+# 24 tick=253: PetroNorth Management Provides Updated Market Outlook
+     normalized: COMPANY MANAGEMENT PROVIDES UPDATED MARKET OUTLOOK
+     impact: BYL:-0.63:-0.0038 | FSR:-0.05:-0.0033 | GGD:0.59:0.024 | SPK:-0.29:-0.0698 | TGX:-0.02:-0.001
+
+# 25 tick=254: Sell-Side Analysts Issue Divergent Valuation Assessments
+     normalized: SELL-SIDE ANALYSTS ISSUE DIVERGENT VALUATION ASSESSMENTS
+     impact: BYL:-0.31:-0.0011 | FSR:-0.01:-0.0007 | GGD:0.61:0.0247 | SPK:-0.3:-0.0839 | TGX:0.0:0.0
+
+# 26 tick=254: Integration Teams Formed
+     normalized: INTEGRATION TEAMS FORMED
+     impact: BYL:-0.31:-0.0011 | FSR:-0.01:-0.0007 | GGD:0.61:0.0247 | SPK:-0.3:-0.0839 | TGX:0.0:0.0
+
+# 27 tick=304: Expected Closing Date Pushed Back
+     normalized: EXPECTED CLOSING DATE PUSHED BACK
+     impact: BYL:0.47:0.001 | FSR:0.12:0.0078 | GGD:0.02:0.0028 | SPK:-0.35:-0.0281 | TGX:0.0:0.0
+
+# 28 tick=304: Developer Retention Incentives
+     normalized: DEVELOPER RETENTION INCENTIVES
+     impact: BYL:0.47:0.001 | FSR:0.12:0.0078 | GGD:0.02:0.0028 | SPK:-0.35:-0.0281 | TGX:0.0:0.0
+
+# 29 tick=312: Banks Propose Enhanced CRA Plan
+     normalized: BANKS PROPOSE ENHANCED CRA PLAN
+     impact: BYL:0.05:-0.0072 | FSR:0.01:0.0007 | GGD:-0.09:-0.0005 | SPK:-0.52:0.0308 | TGX:0.15:0.0071
+
+# 30 tick=350: FERC Staff Holds Technical Working Session
+     normalized: FERC STAFF HOLDS TECHNICAL WORKING SESSION
+     impact: BYL:-0.46:0.0033 | FSR:-0.14:-0.0091 | GGD:-0.04:-0.0003 | SPK:-0.01:0.1332 | TGX:0.04:0.0019
+
+# 31 tick=357: Congressional Banking Committee Inquiry
+     normalized: CONGRESSIONAL BANKING COMMITTEE INQUIRY
+     impact: BYL:-0.18:-0.0001 | FSR:-0.41:-0.0268 | GGD:0.05:0.0018 | SPK:-1.06:-0.3132 | TGX:0.01:0.0005
+
+# 32 tick=358: All-Stock Structure Eliminates Financing
+     normalized: ALL-STOCK STRUCTURE ELIMINATES FINANCING
+     impact: BYL:0.01:0.0019 | FSR:-0.29:-0.0189 | GGD:0.0:0.0017 | SPK:-1.39:-0.3367 | TGX:0.06:0.0029
+
+# 33 tick=358: Closing Conditions Status
+     normalized: CLOSING CONDITIONS STATUS
+     impact: BYL:0.01:0.0019 | FSR:-0.29:-0.0189 | GGD:0.0:0.0017 | SPK:-1.39:-0.3367 | TGX:0.06:0.0029
+
+# 34 tick=361: Hedge Fund Activist Opposes Deal
+     normalized: HEDGE FUND ACTIVIST OPPOSES DEAL
+     impact: BYL:0.19:-0.0067 | FSR:-0.13:-0.0085 | GGD:0.0:0.0017 | SPK:-0.94:-0.3527 | TGX:-0.09:-0.0043
+
+# 35 tick=361: Closing Conditions Tracker Updated
+     normalized: CLOSING CONDITIONS TRACKER UPDATED
+     impact: BYL:0.19:-0.0067 | FSR:-0.13:-0.0085 | GGD:0.0:0.0017 | SPK:-0.94:-0.3527 | TGX:-0.09:-0.0043
+
+# 36 tick=364: Utility Company Interest Reported
+     normalized: UTILITY COMPANY INTEREST REPORTED
+     impact: BYL:0.23:-0.0054 | FSR:0.04:0.0026 | GGD:-0.03:0.0 | SPK:0.04:0.1092 | TGX:-0.155:-0.0074
+
+# 37 tick=409: Unusual Institutional Trading Activity Observed in BYL
+     normalized: UNUSUAL INSTITUTIONAL TRADING ACTIVITY OBSERVED IN TICKER
+     impact: BYL:-0.48:-0.0027 | FSR:0.17:0.0 | GGD:0.0:-0.0009 | SPK:0.1:-0.0696 | TGX:-0.17:-0.0081
+
+# 38 tick=411: FERC Staff Holds Technical Working Session
+     normalized: FERC STAFF HOLDS TECHNICAL WORKING SESSION
+     impact: BYL:-0.38:-0.0018 | FSR:0.08:0.0 | GGD:0.02:0.0008 | SPK:0.16:-0.0548 | TGX:-0.18:-0.0086
+
+# 39 tick=414: Expected Timeline Revised
+     normalized: EXPECTED TIMELINE REVISED
+     impact: BYL:-0.08:-0.0016 | FSR:0.1:0.0 | GGD:0.0:-0.0012 | SPK:1.07:0.0735 | TGX:-0.06:-0.0029
+
+# 40 tick=417: Reverse Termination Fee Increased
+     normalized: REVERSE TERMINATION FEE INCREASED
+     impact: BYL:0.11:0.0088 | FSR:0.13:0.0 | GGD:-0.02:-0.0025 | SPK:1.45:-0.0828 | TGX:-0.03:-0.0014
+
+# 41 tick=417: Earnings Shortfall Raises MAC Questions
+     normalized: EARNINGS SHORTFALL RAISES MAC QUESTIONS
+     impact: BYL:0.11:0.0088 | FSR:0.13:0.0 | GGD:-0.02:-0.0025 | SPK:1.45:-0.0828 | TGX:-0.03:-0.0014
+
+# 42 tick=419: Counsel Provides Updated Risk Factor Disclosure
+     normalized: COUNSEL PROVIDES UPDATED RISK FACTOR DISCLOSURE
+     impact: BYL:1.24:0.0247 | FSR:0.17:0.0 | GGD:0.02:0.0001 | SPK:0.93:0.2999 | TGX:-0.035:-0.0017
+
+# 43 tick=461: GreenGrid Schedules Shareholder Vote
+     normalized: COMPANY SCHEDULES SHAREHOLDER VOTE
+     impact: BYL:0.5:0.0041 | FSR:0.3:0.0073 | GGD:0.01:0.0011 | SPK:-0.18:0.06 | TGX:0.065:0.0031
+
+# 44 tick=465: FERC Grants Expedited Approval
+     normalized: FERC GRANTS EXPEDITED APPROVAL
+     impact: BYL:0.48:0.0013 | FSR:0.15:0.0098 | GGD:0.0:-0.0017 | SPK:-0.04:-0.0317 | TGX:0.19:0.009
+
+# 45 tick=467: Final Closing Conditions Checklist Published
+     normalized: FINAL CLOSING CONDITIONS CHECKLIST PUBLISHED
+     impact: BYL:0.3:-0.0008 | FSR:0.19:0.0067 | GGD:0.68:0.027 | SPK:-0.37:-0.2325 | TGX:0.2:0.0095
+
+# 46 tick=468: Industry Conference Generates Transaction Speculation
+     normalized: INDUSTRY CONFERENCE GENERATES TRANSACTION SPECULATION
+     impact: BYL:0.26:-0.0023 | FSR:0.31:0.0132 | GGD:0.68:0.0273 | SPK:-0.53:-0.159 | TGX:0.13:0.0062
+
+# 47 tick=469: Share Buyback Program Announced
+     normalized: SHARE BUYBACK PROGRAM ANNOUNCED
+     impact: BYL:0.18:-0.0042 | FSR:0.3:0.0132 | GGD:1.39:0.0558 | SPK:-0.66:0.2506 | TGX:0.155:0.0074
+
+# 48 tick=516: Political Opposition Emerges From Fossil Fuel-Dependent States
+     normalized: POLITICAL OPPOSITION EMERGES FROM FOSSIL FUEL-DEPENDENT STATES
+     impact: BYL:0.62:0.002 | FSR:-0.02:-0.0013 | GGD:0.08:-0.001 | SPK:0.79:0.0133 | TGX:0.11:0.0052
+
+# 49 tick=518: Asset Sale Proceeds Exceed Target
+     normalized: ASSET SALE PROCEEDS EXCEED TARGET
+     impact: BYL:0.43:-0.0046 | FSR:0.06:0.0008 | GGD:0.13:0.0008 | SPK:1.24:0.0103 | TGX:0.12:0.0057
+
+# 50 tick=522: Industry Conference Generates Transaction Speculation
+     normalized: INDUSTRY CONFERENCE GENERATES TRANSACTION SPECULATION
+     impact: BYL:0.29:-0.0041 | FSR:0.09:0.0015 | GGD:0.06:0.0014 | SPK:0.8:-0.0035 | TGX:0.05:0.0024
+
+# 51 tick=523: Bridge Loan Replaced with Term Facility
+     normalized: BRIDGE LOAN REPLACED WITH TERM FACILITY
+     impact: BYL:0.09:-0.0046 | FSR:0.14:0.0 | GGD:0.0:0.0 | SPK:-0.01:-0.0703 | TGX:-0.02:-0.001
+
+# 52 tick=525: Renewable Energy Sector Sell-Off
+     normalized: RENEWABLE ENERGY SECTOR SELL-OFF
+     impact: BYL:-0.11:-0.0051 | FSR:0.05:0.0 | GGD:0.0:0.0004 | SPK:-0.42:-0.0608 | TGX:0.06:0.0029
+
+# 53 tick=557: DOJ Antitrust Division Signals Stricter Merger Enforcement
+     normalized: DOJ ANTITRUST DIVISION SIGNALS STRICTER MERGER ENFORCEMENT
+     impact: BYL:-0.63:-0.0007 | FSR:0.11:0.0047 | GGD:0.08:0.0006 | SPK:-1.09:-0.0102 | TGX:-0.06:-0.0029
+
+# 54 tick=570: Key Engineer Retention Plan Announced
+     normalized: KEY ENGINEER RETENTION PLAN ANNOUNCED
+     impact: BYL:0.56:0.0012 | FSR:-0.03:-0.0015 | GGD:-0.75:-0.0296 | SPK:1.06:0.0066 | TGX:0.02:0.001
+
+# 55 tick=571: EU Commission Requests Detailed Market Share Data
+     normalized: EU COMMISSION REQUESTS DETAILED MARKET SHARE DATA
+     impact: BYL:0.6:-0.0007 | FSR:0.04:0.0 | GGD:-0.78:-0.0308 | SPK:1.0:-0.0317 | TGX:0.12:0.0057
+
+# 56 tick=578: Debt Financing Fully Committed
+     normalized: DEBT FINANCING FULLY COMMITTED
+     impact: BYL:0.78:-0.0299 | FSR:0.11:0.0 | GGD:0.005:-0.0013 | SPK:0.67:-0.0236 | TGX:-0.06:-0.0029
+
+----------------------------------------------------------------------------------------------------
+WORD FREQUENCY IN NEWS HEADLINES
+----------------------------------------------------------------------------------------------------
+
+Top words in POSITIVE-impact news:
+  ANNOUNCED                 pos= 4 neg= 0 ratio=100%
+  TRANSACTION               pos= 3 neg= 0 ratio=100%
+  SPECULATION               pos= 3 neg= 0 ratio=100%
+  POLITICAL                 pos= 2 neg= 0 ratio=100%
+  OPPOSITION                pos= 2 neg= 0 ratio=100%
+  SHAREHOLDER               pos= 2 neg= 0 ratio=100%
+  FERC                      pos= 2 neg= 2 ratio=50%
+  DEAL                      pos= 2 neg= 3 ratio=40%
+  ASSET                     pos= 2 neg= 0 ratio=100%
+  MARKET                    pos= 2 neg= 1 ratio=67%
+  EXPECTED                  pos= 2 neg= 0 ratio=100%
+  CLOSING                   pos= 2 neg= 2 ratio=50%
+  RETENTION                 pos= 2 neg= 1 ratio=67%
+  INDUSTRY                  pos= 2 neg= 0 ratio=100%
+  CONFERENCE                pos= 2 neg= 0 ratio=100%
+  GENERATES                 pos= 2 neg= 0 ratio=100%
+  SHARE                     pos= 2 neg= 0 ratio=100%
+  WELCOME                   pos= 1 neg= 0 ratio=100%
+  THE                       pos= 1 neg= 0 ratio=100%
+  RITC                      pos= 1 neg= 0 ratio=100%
+  2026                      pos= 1 neg= 0 ratio=100%
+  MERGER                    pos= 1 neg= 1 ratio=50%
+  ARBITRAGE                 pos= 1 neg= 0 ratio=100%
+  CASE                      pos= 1 neg= 0 ratio=100%
+  PRACTICE                  pos= 1 neg= 0 ratio=100%
+  SERVER                    pos= 1 neg= 0 ratio=100%
+  VOICED                    pos= 1 neg= 0 ratio=100%
+  TAX                       pos= 1 neg= 0 ratio=100%
+  CREDIT                    pos= 1 neg= 0 ratio=100%
+  EXTENSION                 pos= 1 neg= 0 ratio=100%
+  UNCERTAINTY               pos= 1 neg= 0 ratio=100%
+  DERIVATIVE                pos= 1 neg= 0 ratio=100%
+  SUIT                      pos= 1 neg= 0 ratio=100%
+  FILED                     pos= 1 neg= 0 ratio=100%
+  STRONG                    pos= 1 neg= 0 ratio=100%
+  PROJECT                   pos= 1 neg= 0 ratio=100%
+  PIPELINE                  pos= 1 neg= 0 ratio=100%
+  REVIEW                    pos= 1 neg= 0 ratio=100%
+  INITIATED                 pos= 1 neg= 0 ratio=100%
+  FOR                       pos= 1 neg= 1 ratio=50%
+
+Top words in NEGATIVE-impact news:
+  DEAL                      neg= 3 pos= 2 ratio=60%
+  STAFF                     neg= 3 pos= 0 ratio=100%
+  HOLDS                     neg= 3 pos= 0 ratio=100%
+  TECHNICAL                 neg= 3 pos= 0 ratio=100%
+  WORKING                   neg= 3 pos= 0 ratio=100%
+  SESSION                   neg= 3 pos= 0 ratio=100%
+  COMPETITION               neg= 2 pos= 0 ratio=100%
+  ENHANCED                  neg= 2 pos= 0 ratio=100%
+  ACTIVIST                  neg= 2 pos= 0 ratio=100%
+  HEDGE                     neg= 2 pos= 0 ratio=100%
+  FUND                      neg= 2 pos= 1 ratio=67%
+  OPPOSES                   neg= 2 pos= 0 ratio=100%
+  ANTITRUST                 neg= 2 pos= 0 ratio=100%
+  RAISE                     neg= 2 pos= 0 ratio=100%
+  CONCERNS                  neg= 2 pos= 0 ratio=100%
+  CRA                       neg= 2 pos= 0 ratio=100%
+  UPDATED                   neg= 2 pos= 1 ratio=67%
+  FERC                      neg= 2 pos= 2 ratio=50%
+  CLOSING                   neg= 2 pos= 2 ratio=50%
+  CONDITIONS                neg= 2 pos= 1 ratio=67%
+  EXECUTIVE                 neg= 1 pos= 0 ratio=100%
+  ORDER                     neg= 1 pos= 0 ratio=100%
+  TARGETS                   neg= 1 pos= 0 ratio=100%
+  POLICY                    neg= 1 pos= 0 ratio=100%
+  ACROSS                    neg= 1 pos= 0 ratio=100%
+  INDUSTRIES                neg= 1 pos= 0 ratio=100%
+  INTEGRATION               neg= 1 pos= 1 ratio=50%
+  PLANNING                  neg= 1 pos= 0 ratio=100%
+  COMMENCES                 neg= 1 pos= 0 ratio=100%
+  CENTRAL                   neg= 1 pos= 0 ratio=100%
+  BANK                      neg= 1 pos= 0 ratio=100%
+  ANNOUNCES                 neg= 1 pos= 0 ratio=100%
+  LIQUIDITY                 neg= 1 pos= 0 ratio=100%
+  FACILITIES                neg= 1 pos= 0 ratio=100%
+  EXPERTS                   neg= 1 pos= 0 ratio=100%
+  OUTSIDE                   neg= 1 pos= 0 ratio=100%
+  DATE                      neg= 1 pos= 1 ratio=50%
+  EXTENDED                  neg= 1 pos= 0 ratio=100%
+  YEAR-END                  neg= 1 pos= 0 ratio=100%
+  MIXED                     neg= 1 pos= 0 ratio=100%
+
+----------------------------------------------------------------------------------------------------
+DEAL PROBABILITY TRAJECTORIES
+----------------------------------------------------------------------------------------------------
+
+D1: 70.1% -> 61.6% (range 49.8%-77.7%)
+D2: 54.8% -> 35.9% (range 32.9%-55.4%)
+D3: 49.9% -> 47.7% (range 40.9%-51.1%)
+D4: 38.1% -> 3.9% (range 0.0%-47.6%)
+D5: 45.6% -> 77.0% (range 0.0%-100.0%)
+
+----------------------------------------------------------------------------------------------------
+ORDERS PLACED
+----------------------------------------------------------------------------------------------------
+
+  tick= 21: BUY   5000 BYL @ $    0.00 [TRANSACTED]
+  tick= 21: BUY   5000 BYL @ $    0.00 [TRANSACTED]
+  tick= 21: BUY   5000 BYL @ $    0.00 [TRANSACTED]
+  tick= 21: SELL  5000 CLD @ $    0.00 [TRANSACTED]
+  tick= 21: SELL  5000 CLD @ $    0.00 [TRANSACTED]
+  tick= 21: SELL  1250 CLD @ $    0.00 [TRANSACTED]
+  tick= 29: BUY   2500 SPK @ $    0.00 [TRANSACTED]
+  tick= 29: SELL  3000 EEC @ $    0.00 [TRANSACTED]
+  tick= 79: BUY   5000 TGX @ $    0.00 [TRANSACTED]
+  tick= 79: BUY   5000 TGX @ $    0.00 [TRANSACTED]
+  tick=110: SELL  5000 TGX @ $    0.00 [TRANSACTED]
+  tick=110: SELL  5000 TGX @ $    0.00 [TRANSACTED]
+  tick=135: SELL  2500 TGX @ $    0.00 [TRANSACTED]
+  tick=160: BUY   2500 TGX @ $    0.00 [TRANSACTED]
+  tick=160: SELL  2500 SPK @ $    0.00 [TRANSACTED]
+  tick=160: BUY   2500 TGX @ $    0.00 [TRANSACTED]
+  tick=160: SELL  2500 SPK @ $    0.00 [TRANSACTED]
+  tick=187: SELL  2500 TGX @ $    0.00 [TRANSACTED]
+  tick=197: BUY   3000 FSR @ $    0.00 [TRANSACTED]
+  tick=200: SELL  3000 FSR @ $    0.00 [TRANSACTED]
+  tick=200: SELL  3000 FSR @ $    0.00 [TRANSACTED]
+  tick=270: BUY   3000 FSR @ $    0.00 [TRANSACTED]
+  tick=270: BUY   3000 FSR @ $    0.00 [TRANSACTED]
+  tick=350: BUY   5000 GGD @ $    0.00 [TRANSACTED]
+  tick=350: BUY   1000 GGD @ $    0.00 [TRANSACTED]
+  tick=350: SELL  1200 PNR @ $    0.00 [TRANSACTED]
+  tick=358: BUY   2500 SPK @ $    0.00 [TRANSACTED]
+  tick=358: SELL  3000 EEC @ $    0.00 [TRANSACTED]
+  tick=361: BUY   5000 FSR @ $    0.00 [TRANSACTED]
+  tick=361: BUY   1000 FSR @ $    0.00 [TRANSACTED]
+  tick=411: BUY   5000 SPK @ $    0.00 [TRANSACTED]
+  tick=411: BUY   1000 SPK @ $    0.00 [TRANSACTED]
+  tick=411: SELL  5000 EEC @ $    0.00 [TRANSACTED]
+  tick=411: SELL  2200 EEC @ $    0.00 [TRANSACTED]
+  tick=417: BUY   5000 TGX @ $    0.00 [TRANSACTED]
+  tick=417: BUY   5000 TGX @ $    0.00 [TRANSACTED]
+  tick=417: BUY   5000 TGX @ $    0.00 [TRANSACTED]
+  tick=417: SELL  5000 GGD @ $    0.00 [TRANSACTED]
+  tick=417: SELL  1000 GGD @ $    0.00 [TRANSACTED]
+  tick=417: BUY   1200 PNR @ $    0.00 [TRANSACTED]
+  tick=500: SELL  5000 SPK @ $    0.00 [TRANSACTED]
+  tick=500: SELL  5000 SPK @ $    0.00 [TRANSACTED]
+  tick=516: BUY   5000 SPK @ $    0.00 [TRANSACTED]
+  tick=516: SELL  5000 EEC @ $    0.00 [TRANSACTED]
+  tick=516: SELL  1000 EEC @ $    0.00 [TRANSACTED]
+  tick=520: SELL  1000 SPK @ $    0.00 [TRANSACTED]
+  tick=520: SELL  1000 SPK @ $    0.00 [TRANSACTED]
+  tick=520: SELL  1000 SPK @ $    0.00 [TRANSACTED]
+  tick=525: SELL  5000 SPK @ $    0.00 [TRANSACTED]
+  tick=525: BUY   5000 EEC @ $    0.00 [TRANSACTED]
+  tick=525: BUY   1000 EEC @ $    0.00 [TRANSACTED]
+  tick=571: SELL  5000 BYL @ $    0.00 [TRANSACTED]
+  tick=571: SELL  1000 BYL @ $    0.00 [TRANSACTED]
+  tick=571: BUY   4500 CLD @ $    0.00 [TRANSACTED]
+  tick=578: BUY   2500 FSR @ $    0.00 [TRANSACTED]
