@@ -1,11 +1,15 @@
 """
-V8.1 Trading Engine - Adaptive Aggression.
+V10 Trading Engine - Liam's Optimal Straddle Method.
 
-Key changes from V8:
-- ADAPTIVE position sizing: delta_limit/10 for high limits, /13 for low
-- ADAPTIVE hedge bands: trigger/target scale with gamma-to-limit ratio
-- 5 strikes for max capacity
-- Build position FAST, hold, hedge only
+Weekly straddle positioning with mathematically optimal sizing.
+Each week:
+  1. Close old position
+  2. Run optimizer to find n* straddles at ATM strike
+  3. Execute position
+  4. Delta hedge ONLY when approaching delta limit
+  5. Repeat at next week boundary
+
+Delta hedging: hedge to zero delta when |delta| hits ~88% of limit.
 """
 
 import logging
@@ -15,79 +19,155 @@ from dataclasses import dataclass, field
 
 from config import (
     UNDERLYING_TICKER, STRIKE_PRICES, OPTIONS_MULTIPLIER,
-    RISK_FREE_RATE, TICKS_PER_SUBHEAT, TRADING_DAYS_PER_MONTH,
-    TRADING_DAYS_PER_YEAR, VOL_EDGE_THRESHOLD,
-    MAX_OPTION_ORDERS_PER_CYCLE, TARGET_NET_POSITION,
-    FULL_EDGE_THRESHOLD, RTM_MAX_TRADE_SIZE,
-    OPTIONS_MAX_TRADE_SIZE, UNWIND_START_TICK,
-    OPTIONS_GROSS_LIMIT, OPTIONS_NET_LIMIT, MIN_OPTION_PRICE,
-    HEDGE_TRIGGER_PCT, HEDGE_TARGET_PCT, MIN_HEDGE_SIZE,
-    HEDGE_COOLDOWN_TICKS, NUM_STRIKES,
-    NO_REVERSAL_AFTER_TICK, MIN_REVERSAL_EDGE, REVERSAL_COOLDOWN_TICKS,
+    RISK_FREE_RATE, TICKS_PER_SUBHEAT, TICKS_PER_WEEK,
+    TRADING_DAYS_PER_MONTH, TRADING_DAYS_PER_YEAR,
+    MAX_ORDERS_PER_CYCLE, OPTIONS_MAX_TRADE_SIZE,
+    RTM_MAX_TRADE_SIZE, RTM_GROSS_LIMIT, RTM_NET_LIMIT,
+    OPTIONS_GROSS_LIMIT, OPTIONS_NET_LIMIT,
+    MIN_OPTION_PRICE, HEDGE_TRIGGER_PCT, HEDGE_TARGET_DELTA,
+    MIN_HEDGE_SIZE, HEDGE_COOLDOWN_TICKS, POSITION_TICKS,
+    UNWIND_START_TICK, MAX_STRADDLES,
 )
-from black_scholes import (
-    bs_price, bs_delta, bs_gamma, bs_vega, implied_volatility,
-)
+from black_scholes import bs_gamma, bs_delta, bs_vega, bs_price, implied_volatility
 from news_parser import VolatilityState
 from rit_api import RITApi
+from optimizer import find_optimal_n, compute_straddle_gamma, MULTIPLIER
 
 logger = logging.getLogger(__name__)
 
+# Holding period: 1 week in years
+T_HOLD = 1.0 / 52.0
+
+
+# ============================================================================
+# Data classes
+# ============================================================================
 
 @dataclass
-class OptionData:
+class OptionInfo:
     ticker: str
-    option_type: str
+    option_type: str  # "CALL" or "PUT"
     strike: float
     bid: float
     ask: float
     mid: float
     position: int
-    bs_fair_price: float = 0.0
-    market_iv: float = 0.0
-    bs_delta: float = 0.0
-    bs_gamma: float = 0.0
-    bs_vega: float = 0.0
-    mispricing: float = 0.0
-    mispricing_pct: float = 0.0
+    iv: float = 0.0
 
 
 @dataclass
-class PortfolioState:
-    underlying_position: int = 0
-    underlying_price: float = 0.0
-    underlying_bid: float = 0.0
-    underlying_ask: float = 0.0
-    options: List[OptionData] = field(default_factory=list)
+class MarketState:
+    """Snapshot of current market and portfolio state."""
+    spot: float = 0.0
+    spot_bid: float = 0.0
+    spot_ask: float = 0.0
+    stock_position: int = 0
+    options: List[OptionInfo] = field(default_factory=list)
     total_delta: float = 0.0
     total_gamma: float = 0.0
-    total_vega: float = 0.0
     options_gross: int = 0
     options_net: int = 0
-    avg_market_iv: float = 0.0
 
 
-class TradingEngine:
-    """V8 Trading Engine - Maximum aggression, controlled risk."""
+# ============================================================================
+# Engine states
+# ============================================================================
+
+class Phase:
+    IDLE = "IDLE"              # No position, waiting for news/positioning tick
+    CLOSING = "CLOSING"        # Flattening old position
+    POSITIONING = "POSITIONING"  # Building new straddle position
+    HOLDING = "HOLDING"        # Position built, only delta hedging
+    UNWINDING = "UNWINDING"    # End of sub-heat, closing everything
+
+
+class StraddleEngine:
+    """Week-based straddle trading engine with optimal sizing."""
 
     def __init__(self, api: RITApi):
         self.api = api
         self.vol_state = VolatilityState()
-        self.last_tick = 0
-        self.last_direction = 0
-        self.direction_changes = 0
-        self.last_reversal_tick = -100
-        self.position_built = False
-        self.rtm_volume = 0
-        # Hedge cooldown tracking
+        self.phase = Phase.IDLE
+
+        # Current position info
+        self.current_n = 0          # Straddles held (magnitude)
+        self.current_direction = 0  # +1 long, -1 short
+        self.current_strike = None
+        self.expected_profit = 0.0
+
+        # Week tracking
+        self.weeks_positioned = set()
+
+        # Saved optimizer result from before close (use this for positioning)
+        self.pending_n = 0
+        self.pending_direction = 0
+        self.pending_strike = None
+        self.pending_profit = 0.0
+
+        # Delta hedging
         self.last_hedge_tick = -100
-        # Track if we're in unwind phase
-        self.unwinding = False
+        self.rtm_volume = 0
+
+        # Cycle tracking for closing/positioning
+        self.close_ticks = 0
+        self.position_ticks = 0
+        self.close_cancel_phase = True  # True = cancel phase, False = close phase
+
+    def reset(self):
+        """Reset for new sub-heat."""
+        self.vol_state = VolatilityState()
+        self.phase = Phase.IDLE
+        self.current_n = 0
+        self.current_direction = 0
+        self.current_strike = None
+        self.expected_profit = 0.0
+        self.weeks_positioned = set()
+        self.pending_n = 0
+        self.pending_direction = 0
+        self.pending_strike = None
+        self.pending_profit = 0.0
+        self.last_hedge_tick = -100
+        self.rtm_volume = 0
+        self.close_ticks = 0
+        self.position_ticks = 0
+        self.close_cancel_phase = True
+
+    # ========================================================================
+    # Time helpers
+    # ========================================================================
 
     def get_time_to_expiry(self, tick: int) -> float:
+        """Time to option expiry in years."""
         ticks_remaining = max(TICKS_PER_SUBHEAT - tick, 1)
         days_remaining = (ticks_remaining / TICKS_PER_SUBHEAT) * TRADING_DAYS_PER_MONTH
         return days_remaining / TRADING_DAYS_PER_YEAR
+
+    def get_current_week(self, tick: int) -> int:
+        """Which week (1-4) we're in."""
+        for i, pt in enumerate(POSITION_TICKS):
+            next_pt = POSITION_TICKS[i + 1] if i + 1 < len(POSITION_TICKS) else TICKS_PER_SUBHEAT + 1
+            if pt <= tick < next_pt:
+                return i + 1
+        return 4
+
+    def is_position_tick(self, tick: int) -> bool:
+        """Should we take a new position at this tick?
+        Week 1: allow anytime from tick 1 to 70 (vol news can arrive late).
+        Other weeks: 5-tick window after each position tick."""
+        week = self.get_current_week(tick)
+        if week in self.weeks_positioned:
+            return False
+        # Week 1: wide window so we don't miss it
+        if week == 1 and 1 <= tick <= 70:
+            return True
+        for pt in POSITION_TICKS:
+            if pt <= tick <= pt + 5:
+                return True
+        return False
+
+    # ========================================================================
+    # Market data
+    # ========================================================================
 
     def update_news(self) -> bool:
         news = self.api.get_news(since=self.vol_state.last_news_id)
@@ -95,14 +175,15 @@ class TradingEngine:
             return self.vol_state.process_news(news)
         return False
 
-    def get_portfolio_state(self, tick: int) -> Optional[PortfolioState]:
+    def get_market_state(self, tick: int) -> Optional[MarketState]:
+        """Get current market snapshot with positions and Greeks."""
         securities = self.api.get_securities()
         if not securities:
             return None
 
-        state = PortfolioState()
-        analyst_vol = self.vol_state.best_vol_estimate
-        T = self.get_time_to_expiry(tick)
+        state = MarketState()
+        vol = self.vol_state.best_vol_estimate
+        T_exp = self.get_time_to_expiry(tick)
 
         for sec in securities:
             ticker = sec.get("ticker", "")
@@ -112,535 +193,667 @@ class TradingEngine:
             mid = (bid + ask) / 2.0 if bid > 0 and ask > 0 else 0
 
             if ticker == UNDERLYING_TICKER:
-                state.underlying_position = position
-                state.underlying_price = mid if mid > 0 else (sec.get("last", 0) or 0)
-                state.underlying_bid = bid
-                state.underlying_ask = ask
+                state.spot = mid if mid > 0 else (sec.get("last", 0) or 0)
+                state.spot_bid = bid
+                state.spot_ask = ask
+                state.stock_position = position
                 continue
 
-            if "C" in ticker and ticker.startswith("RTM"):
-                option_type = "CALL"
-            elif "P" in ticker and ticker.startswith("RTM"):
-                option_type = "PUT"
-            else:
-                continue
-
-            try:
-                strike = float(ticker[-2:])
-            except ValueError:
-                continue
-            if strike not in STRIKE_PRICES:
-                continue
-
-            opt = OptionData(
-                ticker=ticker, option_type=option_type, strike=strike,
-                bid=bid, ask=ask, mid=mid, position=position,
-            )
-
-            S = state.underlying_price
-            if analyst_vol and analyst_vol > 0 and S > 0 and T > 0:
-                opt.bs_fair_price = bs_price(S, strike, T, RISK_FREE_RATE, analyst_vol, option_type)
-                opt.bs_delta = bs_delta(S, strike, T, RISK_FREE_RATE, analyst_vol, option_type)
-                opt.bs_gamma = bs_gamma(S, strike, T, RISK_FREE_RATE, analyst_vol)
-                opt.bs_vega = bs_vega(S, strike, T, RISK_FREE_RATE, analyst_vol)
-
-                if mid > 0:
-                    opt.market_iv = implied_volatility(mid, S, strike, T, RISK_FREE_RATE, option_type)
-                    opt.mispricing = opt.bs_fair_price - mid
-                    opt.mispricing_pct = opt.mispricing / mid if mid > 0 else 0
-
-            if position != 0 and S > 0 and T > 0 and analyst_vol and analyst_vol > 0:
-                d = bs_delta(S, strike, T, RISK_FREE_RATE, analyst_vol, option_type)
-                g = bs_gamma(S, strike, T, RISK_FREE_RATE, analyst_vol)
-                v = bs_vega(S, strike, T, RISK_FREE_RATE, analyst_vol)
-                state.total_delta += position * d * OPTIONS_MULTIPLIER
-                state.total_gamma += position * g * OPTIONS_MULTIPLIER
-                state.total_vega += position * v * OPTIONS_MULTIPLIER
-
-            state.options_gross += abs(position)
-            state.options_net += position
-            state.options.append(opt)
-
-        state.total_delta += state.underlying_position
-
-        # Vega-weighted avg market IV
-        total_vega_weight = 0.0
-        weighted_iv_sum = 0.0
-        for opt in state.options:
-            if opt.market_iv > 0 and opt.bs_vega > 0:
-                w = abs(opt.bs_vega)
-                weighted_iv_sum += opt.market_iv * w
-                total_vega_weight += w
-        if total_vega_weight > 0:
-            state.avg_market_iv = weighted_iv_sum / total_vega_weight
-
-        return state
-
-    def get_vol_direction(self, state: PortfolioState, tick: int) -> Tuple[int, float]:
-        """Determine long/short vol direction with strict reversal protection."""
-        analyst_vol = self.vol_state.best_vol_estimate
-        if not analyst_vol or analyst_vol <= 0:
-            return 0, 0.0
-
-        market_iv = state.avg_market_iv
-        if market_iv <= 0:
-            return 0, 0.0
-
-        edge = analyst_vol - market_iv
-        abs_edge = abs(edge)
-        new_direction = 1 if edge > 0 else -1
-
-        # No direction yet
-        if self.last_direction == 0:
-            if abs_edge < VOL_EDGE_THRESHOLD:
-                return 0, abs_edge
-            return new_direction, abs_edge
-
-        # Same direction - keep it
-        if new_direction == self.last_direction:
-            return new_direction, abs_edge
-
-        # DIFFERENT direction - strict reversal protection
-        if tick > NO_REVERSAL_AFTER_TICK:
-            logger.info("BLOCKED reversal at tick %d (after %d)", tick, NO_REVERSAL_AFTER_TICK)
-            return self.last_direction, abs_edge
-
-        ticks_since_reversal = tick - self.last_reversal_tick
-        if ticks_since_reversal < REVERSAL_COOLDOWN_TICKS:
-            return self.last_direction, abs_edge
-
-        if abs_edge < MIN_REVERSAL_EDGE:
-            return self.last_direction, abs_edge
-
-        # Genuine reversal approved
-        logger.info("REVERSAL APPROVED at tick %d: %d -> %d (edge=%.1f%%)",
-                    tick, self.last_direction, new_direction, abs_edge * 100)
-        return new_direction, abs_edge
-
-    def get_best_strikes(self, spot: float) -> List[float]:
-        """Get the N strikes closest to ATM, sorted by distance."""
-        sorted_strikes = sorted(STRIKE_PRICES, key=lambda k: abs(k - spot))
-        return sorted_strikes[:NUM_STRIKES]
-
-    def calculate_targets(self, state: PortfolioState, direction: int,
-                          edge: float) -> Dict[str, int]:
-        """
-        Calculate target positions. Key change from V6:
-        - Focus on NUM_STRIKES closest to ATM
-        - Weight by vega
-        - direction=1 (long vol) -> BUY options, direction=-1 (short vol) -> SELL options
-        """
-        if direction == 0:
-            return {}
-
-        S = state.underlying_price
-        if S <= 0:
-            return {}
-
-        # Scale position by edge strength
-        target_scale = min(edge / FULL_EDGE_THRESHOLD, 1.0)
-        target_scale = max(target_scale, 0.40)
-
-        # V8.1: ADAPTIVE position sizing based on delta_limit.
-        # Higher delta limits allow more aggressive sizing.
-        # gamma_per_contract * 100 ≈ 9 delta/$1 at ATM.
-        # Target: gamma/delta_limit ratio ≈ 75% per $1 move.
-        # This means: max_contracts = delta_limit * 0.75 / 9 ≈ delta_limit / 12.
-        # But for high limits (10k+), we can be more aggressive: delta_limit / 10.
-        delta_limit = self.vol_state.delta_limit or 10000
-        if delta_limit >= 10000:
-            divisor = 10  # Aggressive for high limits
-        elif delta_limit >= 7000:
-            divisor = 11
-        else:
-            divisor = 13  # Conservative for low limits
-        max_position_for_limit = int(delta_limit / divisor)
-        max_position_for_limit = max(max_position_for_limit, 300)  # Floor at 300
-
-        base_target = min(TARGET_NET_POSITION, max_position_for_limit)
-        total_target = int(base_target * target_scale)
-        logger.info("Position sizing: delta_limit=%.0f, max_for_limit=%d, base=%d, scaled=%d",
-                    delta_limit, max_position_for_limit, base_target, total_target)
-
-        # Get best strikes
-        best_strikes = self.get_best_strikes(S)
-
-        # Calculate vega weights for best strikes
-        vega_list = []
-        for opt in state.options:
-            if opt.strike in best_strikes and opt.option_type == "CALL" and opt.bs_vega > 0:
-                vega_list.append((opt.strike, opt.bs_vega))
-
-        if not vega_list:
-            return {}
-
-        total_vega = sum(v for _, v in vega_list)
-        if total_vega <= 0:
-            return {}
-
-        vega_weights = {s: v / total_vega for s, v in vega_list}
-
-        targets = {}
-        for opt in state.options:
-            if opt.strike not in vega_weights:
-                continue
-            w = vega_weights[opt.strike]
-            # Allocate proportionally by vega weight
-            # NOTE: strike_target is the TARGET POSITION, not order size.
-            # Order size is capped at OPTIONS_MAX_TRADE_SIZE (100) in build_position()
-            strike_target = int(total_target * w / 2)  # /2 because each strike has call+put pair
-            strike_target = max(strike_target, 0)
-            targets[opt.ticker] = direction * strike_target
-
-        return targets
-
-    def build_position(self, state: PortfolioState, targets: Dict[str, int],
-                       tick: int) -> int:
-        """
-        Build toward target positions using MARKET orders for speed.
-        Track limits carefully to avoid rejections.
-        """
-        orders_sent = 0
-        positions = {opt.ticker: opt.position for opt in state.options}
-        running_gross = state.options_gross
-        running_net = state.options_net
-
-        # Build trade list
-        trade_list = []
-        for ticker, target in targets.items():
-            current = positions.get(ticker, 0)
-            gap = target - current
-            if abs(gap) < 5:  # Close enough
-                continue
-            trade_list.append((ticker, current, target, gap))
-
-        if not trade_list:
-            # All positions within tolerance -> mark as built
-            if state.options_gross > 20:
-                self.position_built = True
-            return 0
-
-        # Sort by gap size (build biggest positions first)
-        trade_list.sort(key=lambda x: abs(x[3]), reverse=True)
-
-        for ticker, current, target, gap in trade_list:
-            if orders_sent >= MAX_OPTION_ORDERS_PER_CYCLE:
-                break
-
-            action = "BUY" if gap > 0 else "SELL"
-            remaining_gap = abs(gap)
-
-            # Check price viability once
-            opt = next((o for o in state.options if o.ticker == ticker), None)
-            if opt:
-                price_check = opt.ask if action == "BUY" else opt.bid
-                if price_check < MIN_OPTION_PRICE:
+            # Parse option ticker
+            if ticker.startswith("RTM") and ("C" in ticker or "P" in ticker):
+                option_type = "CALL" if "C" in ticker else "PUT"
+                try:
+                    strike = float(ticker[-2:])
+                except ValueError:
+                    continue
+                if strike not in STRIKE_PRICES:
                     continue
 
-            # Submit multiple orders of up to 100 contracts each to fill the gap
-            while remaining_gap >= 5 and orders_sent < MAX_OPTION_ORDERS_PER_CYCLE:
-                qty = min(remaining_gap, OPTIONS_MAX_TRADE_SIZE)
+                opt = OptionInfo(
+                    ticker=ticker, option_type=option_type, strike=strike,
+                    bid=bid, ask=ask, mid=mid, position=position,
+                )
 
-                # Check limits BEFORE submitting
-                if action == "BUY":
-                    if running_gross + qty > OPTIONS_GROSS_LIMIT - 30:
-                        qty = max(0, OPTIONS_GROSS_LIMIT - 30 - running_gross)
-                    if running_net + qty > OPTIONS_NET_LIMIT - 20:
-                        qty = min(qty, max(0, OPTIONS_NET_LIMIT - 20 - running_net))
+                # Compute IV from market mid price
+                if mid > 0 and state.spot > 0 and T_exp > 0:
+                    opt.iv = implied_volatility(mid, state.spot, strike,
+                                                T_exp, RISK_FREE_RATE, option_type)
+
+                # Accumulate Greeks from positions
+                if position != 0 and vol and vol > 0 and state.spot > 0 and T_exp > 0:
+                    d = bs_delta(state.spot, strike, T_exp, RISK_FREE_RATE, vol, option_type)
+                    g = bs_gamma(state.spot, strike, T_exp, RISK_FREE_RATE, vol)
+                    state.total_delta += position * d * OPTIONS_MULTIPLIER
+                    state.total_gamma += position * g * OPTIONS_MULTIPLIER
+
+                state.options_gross += abs(position)
+                state.options_net += position
+                state.options.append(opt)
+
+        # Add stock delta
+        state.total_delta += state.stock_position
+        return state
+
+    def get_best_strike(self, spot: float) -> float:
+        """Get the strike closest to current spot (ATM)."""
+        return min(STRIKE_PRICES, key=lambda k: abs(k - spot))
+
+    def get_option_at_strike(self, state: MarketState, strike: float,
+                             opt_type: str) -> Optional[OptionInfo]:
+        """Find option info for a given strike and type."""
+        for opt in state.options:
+            if opt.strike == strike and opt.option_type == opt_type:
+                return opt
+        return None
+
+    def get_straddle_spread(self, state: MarketState, strike: float) -> float:
+        """Bo = call_spread + put_spread at this strike."""
+        call = self.get_option_at_strike(state, strike, "CALL")
+        put = self.get_option_at_strike(state, strike, "PUT")
+
+        Bo = 0.0
+        if call and call.bid > 0 and call.ask > 0:
+            Bo += call.ask - call.bid
+        if put and put.bid > 0 and put.ask > 0:
+            Bo += put.ask - put.bid
+        return Bo
+
+    def get_implied_vol_at_strike(self, state: MarketState, strike: float) -> float:
+        """Average implied vol of call and put at this strike."""
+        call = self.get_option_at_strike(state, strike, "CALL")
+        put = self.get_option_at_strike(state, strike, "PUT")
+
+        ivs = []
+        if call and call.iv > 0:
+            ivs.append(call.iv)
+        if put and put.iv > 0:
+            ivs.append(put.iv)
+
+        if ivs:
+            return sum(ivs) / len(ivs)
+        return 0.0
+
+    # ========================================================================
+    # Run optimizer
+    # ========================================================================
+
+    def run_optimizer(self, state: MarketState, tick: int) -> Tuple[int, int, float, float]:
+        """
+        Run Liam's optimizer to find optimal straddle position.
+
+        Returns: (n_star, direction, expected_pnl, strike)
+        """
+        sigma = self.vol_state.best_vol_estimate
+        L = self.vol_state.delta_limit
+
+        if not sigma or sigma <= 0:
+            logger.info("No vol estimate yet, cannot optimize")
+            return 0, 0, 0.0, 0.0
+
+        if not L or L <= 0:
+            L = 10000.0  # Default delta limit
+            logger.info("No delta limit from news, using default %.0f", L)
+
+        S0 = state.spot
+        if S0 <= 0:
+            return 0, 0, 0.0, 0.0
+
+        # Choose ATM strike
+        X = self.get_best_strike(S0)
+
+        # Time to option expiry (for gamma calculation)
+        T_exp = self.get_time_to_expiry(tick)
+
+        # Call gamma per share at ATM
+        gamma_c = bs_gamma(S0, X, T_exp, RISK_FREE_RATE, sigma)
+        if gamma_c <= 0:
+            return 0, 0, 0.0, X
+
+        # Implied vol from market
+        sigma_hat = self.get_implied_vol_at_strike(state, X)
+        if sigma_hat <= 0:
+            # Fallback: average across all options
+            all_ivs = [o.iv for o in state.options if o.iv > 0]
+            sigma_hat = sum(all_ivs) / len(all_ivs) if all_ivs else 0.0
+        if sigma_hat <= 0:
+            logger.info("No implied vol data, cannot optimize")
+            return 0, 0, 0.0, X
+
+        # Market spreads
+        Bo = self.get_straddle_spread(state, X)
+        Bs = (state.spot_ask - state.spot_bid) if state.spot_ask > state.spot_bid else 0.02
+
+        # Run the optimizer (equation 5)
+        n_star, direction, f_star = find_optimal_n(
+            S0=S0, X=X,
+            gamma_call_per_share=gamma_c,
+            sigma=sigma,
+            sigma_hat=sigma_hat,
+            L=L, Bo=Bo, Bs=Bs,
+            T_hold=T_HOLD,
+            max_n=MAX_STRADDLES,
+        )
+
+        return n_star, direction, f_star, X
+
+    # ========================================================================
+    # Position execution
+    # ========================================================================
+
+    def close_all_positions(self, state: MarketState) -> int:
+        """Flatten all options and stock with market orders.
+        Uses cancel-then-close phasing to prevent oscillation.
+        Ignores tiny residual positions (<=2 options, <=200 stock)."""
+        orders = 0
+
+        # Cancel all open orders first
+        self.api.cancel_all_orders()
+
+        # If in cancel phase, just cancel and wait one cycle for cancels to settle
+        if self.close_cancel_phase:
+            self.close_cancel_phase = False
+            logger.info("CLOSE: cancel phase - waiting for cancels to settle")
+            return 0
+
+        # Close options ONLY first (ignore tiny residuals <= 2)
+        # Stock is closed separately after options are flat (avoids delta fight)
+        has_options = False
+        for opt in state.options:
+            if abs(opt.position) <= 2:
+                continue
+            has_options = True
+            action = "SELL" if opt.position > 0 else "BUY"
+            remaining = abs(opt.position)
+            while remaining > 0 and orders < MAX_ORDERS_PER_CYCLE:
+                qty = min(remaining, OPTIONS_MAX_TRADE_SIZE)
+                result = self.api.submit_market_order(opt.ticker, qty, action)
+                if result:
+                    orders += 1
+                    remaining -= qty
                 else:
-                    if running_gross + qty > OPTIONS_GROSS_LIMIT - 30:
-                        qty = max(0, OPTIONS_GROSS_LIMIT - 30 - running_gross)
-                    if running_net - qty < -(OPTIONS_NET_LIMIT - 20):
-                        qty = min(qty, max(0, running_net + OPTIONS_NET_LIMIT - 20))
-
-                if qty < 5:
                     break
 
-                result = self.api.submit_market_order(ticker, qty, action)
-                if result:
-                    orders_sent += 1
-                    remaining_gap -= qty
-                    if action == "BUY":
-                        running_gross += qty
-                        running_net += qty
+        # Only close stock AFTER all options are flat (no gamma = no delta fight)
+        if not has_options:
+            stock_remaining = abs(state.stock_position)
+            if stock_remaining > 200:
+                action = "SELL" if state.stock_position > 0 else "BUY"
+                while stock_remaining > 200 and orders < MAX_ORDERS_PER_CYCLE:
+                    qty = min(stock_remaining, RTM_MAX_TRADE_SIZE)
+                    result = self.api.submit_market_order(UNDERLYING_TICKER, qty, action)
+                    if result:
+                        self.rtm_volume += qty
+                        orders += 1
+                        stock_remaining -= qty
                     else:
-                        running_gross += qty
-                        running_net -= qty
-                else:
-                    break  # API error, don't retry same ticker
+                        break
 
-        return orders_sent
+        return orders
 
-    def delta_hedge(self, state: PortfolioState, tick: int) -> int:
+    def _submit_leg_orders(self, ticker: str, qty_total: int, action: str,
+                           running_gross: int, running_net: int) -> tuple:
+        """Submit orders for one leg (call or put). Returns (orders_sent, qty_filled, gross, net)."""
+        orders = 0
+        filled = 0
+        g = running_gross
+        n = running_net
+        remaining = qty_total
+
+        while remaining > 0 and orders < MAX_ORDERS_PER_CYCLE:
+            qty = min(remaining, OPTIONS_MAX_TRADE_SIZE)
+
+            # Pre-flight limit check
+            new_gross = g + qty
+            new_net = n + qty if action == "BUY" else n - qty
+            if new_gross > OPTIONS_GROSS_LIMIT - 20:
+                logger.warning("Gross limit approaching (%d), stopping", new_gross)
+                break
+            if abs(new_net) > OPTIONS_NET_LIMIT - 10:
+                logger.warning("Net limit approaching (%d), stopping", new_net)
+                break
+
+            result = self.api.submit_market_order(ticker, qty, action)
+            if result:
+                orders += 1
+                filled += qty
+                remaining -= qty
+                g = new_gross
+                n = new_net
+            else:
+                break
+
+        return orders, filled, g, n
+
+    def take_straddle_position(self, n: int, direction: int,
+                               strike: float, state: MarketState) -> int:
         """
-        V8.1 DELTA HEDGING - ADAPTIVE thresholds.
-
-        Key insight: trigger/target should adapt to gamma-to-limit ratio.
-        High gamma relative to limit → tighter trigger (hedge earlier).
-        Low gamma → wider trigger (hedge less, save on commissions).
+        Execute n straddles at strike with interleaved call/put batches.
+        direction: +1 = buy (long), -1 = sell (short)
+        Submits in small interleaved batches (100C, 100P, 100C, 100P...)
+        to ensure balanced legs. If one leg fails, closes the unmatched leg.
         """
-        delta_limit = self.vol_state.delta_limit
-        if delta_limit is None:
-            delta_limit = 10000
+        if n <= 0 or direction == 0:
+            return 0
+
+        # Cap at MAX_STRADDLES
+        n = min(n, MAX_STRADDLES)
+
+        action = "BUY" if direction > 0 else "SELL"
+        call_ticker = f"RTM1C{int(strike)}"
+        put_ticker = f"RTM1P{int(strike)}"
+
+        # Track running limits
+        g = state.options_gross
+        net = state.options_net
+        total_orders = 0
+        total_calls = 0
+        total_puts = 0
+        remaining = n
+        batch_size = OPTIONS_MAX_TRADE_SIZE  # 100
+
+        while remaining > 0:
+            qty = min(remaining, batch_size)
+
+            # Submit call batch
+            c_ord, c_fill, g, net = self._submit_leg_orders(
+                call_ticker, qty, action, g, net)
+            total_orders += c_ord
+            total_calls += c_fill
+
+            if c_fill == 0:
+                logger.warning("Call leg failed, stopping straddle build")
+                break
+
+            # Submit matching put batch
+            p_ord, p_fill, g, net = self._submit_leg_orders(
+                put_ticker, c_fill, action, g, net)
+            total_orders += p_ord
+            total_puts += p_fill
+
+            if p_fill < c_fill:
+                # Put leg failed to match calls - close the unmatched calls
+                unmatched = c_fill - p_fill
+                reverse = "SELL" if action == "BUY" else "BUY"
+                logger.warning("Put leg short by %d, closing unmatched calls", unmatched)
+                self._submit_leg_orders(call_ticker, unmatched, reverse, g, net)
+                total_calls -= unmatched
+                break
+
+            remaining -= c_fill
+
+        straddles_filled = min(total_calls, total_puts)
+        logger.info("STRADDLE %s %d/%d @ K=%.0f: %d orders (%dC+%dP filled)",
+                    action, straddles_filled, n, strike,
+                    total_orders, total_calls, total_puts)
+        return total_orders
+
+    # ========================================================================
+    # Delta hedging
+    # ========================================================================
+
+    def delta_hedge(self, state: MarketState, tick: int) -> int:
+        """
+        Hedge when |delta| approaches delta limit.
+        Hedge to zero delta (paper's recommendation).
+        """
+        L = self.vol_state.delta_limit
+        if not L or L <= 0:
+            L = 10000.0
 
         current_delta = state.total_delta
         abs_delta = abs(current_delta)
 
-        # ADAPTIVE trigger based on gamma/limit ratio
-        abs_gamma = abs(state.total_gamma)
-        gamma_ratio = abs_gamma / delta_limit if delta_limit > 0 else 1.0
-
-        if gamma_ratio > 1.0:
-            # Very high gamma - tight trigger, moderate target
-            trigger_pct = 0.65
-            target_pct = 0.20
-        elif gamma_ratio > 0.7:
-            # Medium-high gamma
-            trigger_pct = 0.75
-            target_pct = 0.25
-        else:
-            # Low gamma - wide trigger, save commissions
-            trigger_pct = 0.85
-            target_pct = 0.35
-
-        trigger_threshold = delta_limit * trigger_pct
-        target_magnitude = delta_limit * target_pct
-
-        # Check if delta is within acceptable band
-        if abs_delta < trigger_threshold:
+        # Only hedge when approaching the limit
+        trigger = L * HEDGE_TRIGGER_PCT
+        if abs_delta < trigger:
             return 0
 
-        # Cooldown check - prevent oscillation
-        ticks_since_hedge = tick - self.last_hedge_tick
-        if ticks_since_hedge < HEDGE_COOLDOWN_TICKS:
-            # Only bypass cooldown for truly extreme delta (>90% of limit)
-            if abs_delta < delta_limit * 0.95:
-                return 0
-            logger.warning("BYPASSING cooldown: delta=%.0f exceeds 90%% of limit %.0f",
-                          current_delta, delta_limit)
+        # Cooldown check - ABSOLUTE, no bypass (prevents oscillation death spiral)
+        ticks_since = tick - self.last_hedge_tick
+        if ticks_since < HEDGE_COOLDOWN_TICKS:
+            return 0
 
-        # CRITICAL: Cancel ALL pending RTM orders first to prevent accumulation
+        # Cancel pending stock orders to prevent accumulation
         self.api.cancel_orders_for_ticker(UNDERLYING_TICKER)
 
-        # Calculate hedge amount: bring delta to target_magnitude (same sign)
-        if current_delta > 0:
-            target_delta = target_magnitude
-            hedge_needed = -(current_delta - target_delta)  # Negative = sell RTM
-        else:
-            target_delta = -target_magnitude
-            hedge_needed = -(current_delta - target_delta)  # Positive = buy RTM
+        # Hedge to zero: trade -current_delta shares
+        hedge_needed = -current_delta
+        hedge_total = abs(int(round(hedge_needed)))
 
-        hedge_qty = abs(int(round(hedge_needed)))
-        hedge_qty = min(hedge_qty, RTM_MAX_TRADE_SIZE)
-
-        if hedge_qty < MIN_HEDGE_SIZE:
+        if hedge_total < MIN_HEDGE_SIZE:
             return 0
 
+        # Check stock position limits before hedging
         action = "BUY" if hedge_needed > 0 else "SELL"
+        current_stock = abs(state.stock_position)
+        if action == "BUY":
+            max_allowed = RTM_NET_LIMIT - state.stock_position
+        else:
+            max_allowed = RTM_NET_LIMIT + state.stock_position
+        max_allowed = max(max_allowed, 0)
+        hedge_total = min(hedge_total, max_allowed)
 
-        # MARKET order only - no limit orders for hedging
+        if hedge_total < MIN_HEDGE_SIZE:
+            logger.warning("Hedge capped by ETF limit: need %d, allowed %d",
+                          abs(int(round(hedge_needed))), max_allowed)
+            return 0
+
+        # Submit ONE hedge order per cycle (prevents overshoot from stale position)
+        hedge_qty = min(hedge_total, RTM_MAX_TRADE_SIZE)
         result = self.api.submit_market_order(UNDERLYING_TICKER, hedge_qty, action)
+        orders_sent = 0
         if result:
-            self.last_hedge_tick = tick
+            orders_sent = 1
             self.rtm_volume += hedge_qty
-            logger.info("HEDGE %s %d RTM (delta=%.0f -> target=%.0f, limit=%.0f)",
-                        action, hedge_qty, current_delta, target_delta, delta_limit)
-            return 1
 
-        return 0
-
-    def flatten_all_options(self, state: PortfolioState) -> int:
-        """Flatten all option positions with market orders."""
-        orders_sent = 0
-        for opt in state.options:
-            if opt.position == 0:
-                continue
-            action = "SELL" if opt.position > 0 else "BUY"
-            qty = min(abs(opt.position), OPTIONS_MAX_TRADE_SIZE)
-            if qty > 0:
-                self.api.submit_market_order(opt.ticker, qty, action)
-                orders_sent += 1
+        if orders_sent > 0:
+            self.last_hedge_tick = tick
+            logger.info("HEDGE %s %d RTM | delta %.0f -> ~%.0f | limit %.0f (%.0f%%)",
+                        action, hedge_qty, current_delta,
+                        current_delta + (hedge_qty if action == "BUY" else -hedge_qty),
+                        L, abs_delta / L * 100)
         return orders_sent
 
-    def unwind_positions(self, state: PortfolioState, tick: int) -> int:
-        """Gradually unwind all positions near end of period."""
-        orders_sent = 0
-        ticks_left = TICKS_PER_SUBHEAT - tick
+    # ========================================================================
+    # Unwind
+    # ========================================================================
 
-        # Options: flatten gradually
+    def unwind_positions(self, state: MarketState, tick: int) -> int:
+        """Close all positions near end of sub-heat.
+        ALL market orders (no limit orders - prevents stale fill oscillation).
+        Cancel all open orders every cycle to prevent accumulation.
+        Ignore tiny residuals to prevent flip-flopping."""
+        orders = 0
+
+        # Cancel ALL open orders every cycle during unwind
+        self.api.cancel_all_orders()
+
+        # Options: close everything with market orders (ignore residuals <= 5)
         for opt in state.options:
-            if opt.position == 0:
+            if abs(opt.position) <= 5:
                 continue
             action = "SELL" if opt.position > 0 else "BUY"
-            abs_pos = abs(opt.position)
-
-            if ticks_left <= 5:
-                # Final ticks - dump everything with market orders
-                qty = min(abs_pos, OPTIONS_MAX_TRADE_SIZE)
+            remaining = abs(opt.position)
+            while remaining > 0 and orders < MAX_ORDERS_PER_CYCLE:
+                qty = min(remaining, OPTIONS_MAX_TRADE_SIZE)
                 self.api.submit_market_order(opt.ticker, qty, action)
-                orders_sent += 1
-            elif ticks_left <= 15:
-                # Aggressive unwind
-                qty = min(abs_pos, OPTIONS_MAX_TRADE_SIZE)
-                if opt.bid > MIN_OPTION_PRICE or action == "BUY":
-                    self.api.submit_market_order(opt.ticker, qty, action)
-                    orders_sent += 1
-            else:
-                # Gradual unwind - use limit orders for better price
-                qty = min(abs_pos, OPTIONS_MAX_TRADE_SIZE)
-                if opt.mid > MIN_OPTION_PRICE and opt.bid > 0 and opt.ask > 0:
-                    if action == "SELL":
-                        price = round(max(opt.mid - 0.01, opt.bid), 2)
-                        self.api.submit_limit_order(opt.ticker, qty, action, price)
-                    else:
-                        price = round(min(opt.mid + 0.01, opt.ask), 2)
-                        self.api.submit_limit_order(opt.ticker, qty, action, price)
-                    orders_sent += 1
+                orders += 1
+                remaining -= qty
 
-        # RTM: flatten
-        if abs(state.underlying_position) > 100:
-            action = "SELL" if state.underlying_position > 0 else "BUY"
-            qty = min(abs(state.underlying_position), RTM_MAX_TRADE_SIZE)
-            if ticks_left <= 8:
+        # Stock: flatten with market orders, loop for large positions
+        stock_remaining = abs(state.stock_position)
+        if stock_remaining > 200:
+            action = "SELL" if state.stock_position > 0 else "BUY"
+            while stock_remaining > 200 and orders < MAX_ORDERS_PER_CYCLE:
+                qty = min(stock_remaining, RTM_MAX_TRADE_SIZE)
                 self.api.submit_market_order(UNDERLYING_TICKER, qty, action)
-            else:
-                mid = state.underlying_price
-                if mid > 0:
-                    offset = 0.03
-                    price = round(mid - offset if action == "SELL" else mid + offset, 2)
-                    self.api.submit_limit_order(UNDERLYING_TICKER, qty, action, price)
-            self.rtm_volume += qty
-            orders_sent += 1
+                self.rtm_volume += qty
+                orders += 1
+                stock_remaining -= qty
 
-        return orders_sent
+        return orders
+
+    # ========================================================================
+    # Check if position is flat
+    # ========================================================================
+
+    def is_flat(self, state: MarketState) -> bool:
+        """Are all positions closed?"""
+        if abs(state.stock_position) > 100:
+            return False
+        for opt in state.options:
+            if abs(opt.position) > 2:
+                return False
+        return True
+
+    # ========================================================================
+    # Main cycle
+    # ========================================================================
 
     def execute_cycle(self, tick: int) -> Dict:
-        """Execute one trading cycle - clean, single-path logic."""
-        self.last_tick = tick
-
+        """Execute one trading cycle."""
         result = {
             "tick": tick,
+            "phase": self.phase,
             "vol": None,
             "market_iv": None,
-            "direction": 0,
+            "direction": self.current_direction,
+            "n_straddles": self.current_n,
+            "strike": self.current_strike,
             "edge": 0.0,
             "delta": 0.0,
             "delta_limit": None,
-            "option_trades": 0,
-            "hedge_trades": 0,
-            "unwind_trades": 0,
             "spot": 0.0,
             "gross": 0,
             "net": 0,
-            "reversal": False,
-            "built": self.position_built,
+            "hedge_trades": 0,
+            "option_trades": 0,
+            "expected_pnl": self.expected_profit,
             "rtm_vol": self.rtm_volume,
         }
 
         # 1. Update news
         self.update_news()
-        vol_est = self.vol_state.best_vol_estimate
-        result["vol"] = (vol_est * 100) if vol_est else None
+        vol = self.vol_state.best_vol_estimate
+        result["vol"] = (vol * 100) if vol else None
         result["delta_limit"] = self.vol_state.delta_limit
 
-        # 2. Get portfolio state
-        state = self.get_portfolio_state(tick)
+        # 2. Get market state
+        state = self.get_market_state(tick)
         if state is None:
             return result
 
-        result["spot"] = state.underlying_price
+        result["spot"] = state.spot
         result["delta"] = state.total_delta
         result["gross"] = state.options_gross
         result["net"] = state.options_net
-        result["market_iv"] = state.avg_market_iv * 100 if state.avg_market_iv > 0 else None
 
-        # 3. UNWIND PHASE
+        # Compute market IV for display
+        if self.current_strike:
+            iv = self.get_implied_vol_at_strike(state, self.current_strike)
+            result["market_iv"] = iv * 100 if iv > 0 else None
+
+        # Compute edge for display
+        if vol and result.get("market_iv"):
+            result["edge"] = (vol * 100) - result["market_iv"]
+
+        # ===== Phase: UNWINDING =====
         if tick >= UNWIND_START_TICK:
-            if not self.unwinding:
-                self.unwinding = True
-                # Cancel all open orders when entering unwind
+            if self.phase != Phase.UNWINDING:
+                self.phase = Phase.UNWINDING
+                self.current_n = 0
+                self.current_direction = 0
                 self.api.cancel_all_orders()
-                logger.info("ENTERING UNWIND PHASE at tick %d", tick)
+                logger.info("ENTERING UNWIND at tick %d", tick)
 
-            unwind_count = self.unwind_positions(state, tick)
-            result["unwind_trades"] = unwind_count
-            return result
-
-        # 4. Determine direction
-        direction, edge = self.get_vol_direction(state, tick)
-        result["direction"] = direction
-        result["edge"] = edge * 100
-
-        # 5. Handle reversal (flatten and rebuild)
-        if (self.last_direction != 0 and direction != 0 and
-                direction != self.last_direction):
-            logger.info("VOL REVERSAL at tick %d: %d -> %d (edge=%.1f%%)",
-                        tick, self.last_direction, direction, edge * 100)
-            # Cancel everything
-            self.api.cancel_all_orders()
-            # Flatten options
-            self.flatten_all_options(state)
-            result["reversal"] = True
-            self.direction_changes += 1
-            self.last_reversal_tick = tick
-            self.position_built = False
-            self.last_direction = direction
-            # Hedge the remaining delta after flattening
-            state = self.get_portfolio_state(tick)
-            if state:
-                result["delta"] = state.total_delta
-                result["gross"] = state.options_gross
-                result["net"] = state.options_net
-                hedges = self.delta_hedge(state, tick)
-                result["hedge_trades"] = hedges
-            return result
-
-        if direction != 0:
-            self.last_direction = direction
-
-        # 6. If position built - ONLY delta hedge, never touch options
-        if self.position_built:
-            hedges = self.delta_hedge(state, tick)
-            result["hedge_trades"] = hedges
-            result["built"] = True
-            return result
-
-        # 7. Build position toward targets
-        if direction != 0:
-            targets = self.calculate_targets(state, direction, edge)
-            trades = self.build_position(state, targets, tick)
+            trades = self.unwind_positions(state, tick)
             result["option_trades"] = trades
+            result["phase"] = self.phase
+            return result
 
-            if trades == 0 and state.options_gross > 20:
-                self.position_built = True
-                result["built"] = True
-                logger.info("POSITION BUILT at tick %d: gross=%d net=%d",
-                           tick, state.options_gross, state.options_net)
+        # ===== Phase: CLOSING (flattening old position) =====
+        if self.phase == Phase.CLOSING:
+            self.close_ticks += 1
+            if self.is_flat(state):
+                logger.info("Position flat. Ready to reposition.")
+                self.phase = Phase.POSITIONING
+                self.position_ticks = 0
+                self.current_n = 0
+                self.current_direction = 0
+                self.current_strike = None
+            elif self.close_ticks > 5:
+                # Force: try closing again
+                trades = self.close_all_positions(state)
+                result["option_trades"] = trades
+                if self.close_ticks > 10:
+                    # Give up - go IDLE, do NOT build new position on top of old one
+                    logger.warning("Could not fully flatten after 10 ticks, going IDLE (not repositioning)")
+                    self.phase = Phase.IDLE
+                    week = self.get_current_week(tick)
+                    self.weeks_positioned.add(week)
+                    self.current_n = 0
+                    self.current_direction = 0
+                    self.current_strike = None
+            result["phase"] = self.phase
+            return result
 
-        # 8. Delta hedge AFTER option trades (single path only)
-        # Re-fetch state to get accurate delta after option fills
-        state = self.get_portfolio_state(tick)
-        if state:
-            result["delta"] = state.total_delta
-            result["gross"] = state.options_gross
-            result["net"] = state.options_net
-            result["built"] = self.position_built
+        # ===== Phase: POSITIONING (building new straddle) =====
+        if self.phase == Phase.POSITIONING:
+            self.position_ticks += 1
+            if self.current_n == 0:
+                # Use saved optimizer result if available (from before close phase)
+                if self.pending_n > 0 and self.pending_direction != 0:
+                    n_star = self.pending_n
+                    direction = self.pending_direction
+                    f_star = self.pending_profit
+                    strike = self.pending_strike
+                    logger.info("Using saved optimizer result: n=%d %s @ K=%.0f",
+                                n_star, "LONG" if direction > 0 else "SHORT", strike)
+                    # Clear pending
+                    self.pending_n = 0
+                    self.pending_direction = 0
+                    self.pending_strike = None
+                    self.pending_profit = 0.0
+                else:
+                    # Fresh optimizer run (first position of sub-heat, or from IDLE)
+                    n_star, direction, f_star, strike = self.run_optimizer(state, tick)
+
+                if n_star > 0 and direction != 0:
+                    self.current_n = n_star
+                    self.current_direction = direction
+                    self.current_strike = strike
+                    self.expected_profit = f_star
+                    result["n_straddles"] = n_star
+                    result["direction"] = direction
+                    result["strike"] = strike
+                    result["expected_pnl"] = f_star
+
+                    # Execute the straddle position
+                    trades = self.take_straddle_position(n_star, direction, strike, state)
+                    result["option_trades"] = trades
+                    self.phase = Phase.HOLDING
+                    week = self.get_current_week(tick)
+                    self.weeks_positioned.add(week)
+                    logger.info("POSITIONED: %d %s straddles @ %.0f (week %d, expected $%.0f)",
+                                n_star, "LONG" if direction > 0 else "SHORT",
+                                strike, week, f_star)
+                else:
+                    # No profitable trade found
+                    logger.info("No profitable trade for this week (n*=0)")
+                    self.phase = Phase.IDLE
+                    week = self.get_current_week(tick)
+                    self.weeks_positioned.add(week)
+            result["phase"] = self.phase
+            return result
+
+        # ===== Check if it's a positioning tick =====
+        if self.is_position_tick(tick) and vol:
+            week = self.get_current_week(tick)
+            logger.info("WEEK %d positioning tick %d", week, tick)
+
+            if self.phase == Phase.HOLDING and self.current_n > 0:
+                # SMART REPOSITIONING: check if we need to change
+                n_new, dir_new, f_new, strike_new = self.run_optimizer(state, tick)
+
+                # Skip repositioning if direction unchanged and strike within $3
+                same_direction = (dir_new == self.current_direction)
+                same_strike = (self.current_strike is not None and
+                               abs(strike_new - self.current_strike) <= 3.0)
+
+                if same_direction and same_strike and n_new > 0:
+                    logger.info("HOLD THROUGH week %d: same direction=%s strike=%.0f "
+                                "(saved $%.0f in repositioning costs)",
+                                week,
+                                "LONG" if dir_new > 0 else "SHORT",
+                                self.current_strike,
+                                self.current_n * 8.0)
+                    self.weeks_positioned.add(week)
+                    self.expected_profit += f_new
+                    result["expected_pnl"] = self.expected_profit
+                    result["phase"] = self.phase
+                    hedges = self.delta_hedge(state, tick)
+                    result["hedge_trades"] = hedges
+                    return result
+
+                # Reposition cost threshold: only reposition if new expected profit
+                # exceeds the cost of closing + reopening (~$8/contract * n)
+                reposition_cost = self.current_n * 8.0 + (n_new * 4.0 if n_new > 0 else 0)
+                if f_new <= reposition_cost and n_new > 0:
+                    logger.info("HOLD (reposition not worth it): f_new=$%.0f <= cost=$%.0f",
+                                f_new, reposition_cost)
+                    self.weeks_positioned.add(week)
+                    result["phase"] = self.phase
+                    hedges = self.delta_hedge(state, tick)
+                    result["hedge_trades"] = hedges
+                    return result
+
+                if n_new <= 0 or dir_new == 0:
+                    # New optimizer says unprofitable - keep holding old position
+                    logger.info("HOLD (new optimizer unprofitable, keeping current position)")
+                    self.weeks_positioned.add(week)
+                    result["phase"] = self.phase
+                    hedges = self.delta_hedge(state, tick)
+                    result["hedge_trades"] = hedges
+                    return result
+
+                # Direction changed significantly - must reposition
+                # Save optimizer result to use AFTER close (market moves during close)
+                logger.info("REPOSITIONING: dir %d->%d, strike %s->%.0f (f=$%.0f)",
+                            self.current_direction, dir_new,
+                            self.current_strike, strike_new, f_new)
+                self.pending_n = n_new
+                self.pending_direction = dir_new
+                self.pending_strike = strike_new
+                self.pending_profit = f_new
+                self.phase = Phase.CLOSING
+                self.close_ticks = 0
+                self.close_cancel_phase = True
+                trades = self.close_all_positions(state)
+                result["option_trades"] = trades
+                result["phase"] = self.phase
+                return result
+            else:
+                # No old position, go straight to positioning
+                self.phase = Phase.POSITIONING
+                self.position_ticks = 0
+                self.current_n = 0
+                self.current_direction = 0
+                self.current_strike = None
+                # Will run optimizer next cycle
+
+        # ===== Phase: HOLDING (just delta hedge) =====
+        if self.phase == Phase.HOLDING:
             hedges = self.delta_hedge(state, tick)
             result["hedge_trades"] = hedges
 
+        # ===== Phase: IDLE (waiting) =====
+        # Nothing to do, wait for positioning tick or news
+
+        result["phase"] = self.phase
         return result
 
-    def print_options_table(self, state: PortfolioState):
+    # ========================================================================
+    # Display helpers
+    # ========================================================================
+
+    def print_position_summary(self, state: MarketState):
+        """Print current position details."""
         if not state.options:
             return
 
         print(f"\n{'Ticker':<10} {'Type':<5} {'K':>3} {'Bid':>7} {'Ask':>7} "
-              f"{'BS Fair':>7} {'MktIV':>6} {'Misp%':>7} {'Pos':>4}")
-        print("-" * 70)
+              f"{'IV':>6} {'Pos':>5}")
+        print("-" * 50)
 
-        for opt in sorted(state.options, key=lambda o: (o.option_type, o.strike)):
-            iv_str = f"{opt.market_iv*100:.1f}%" if opt.market_iv > 0 else "  -  "
+        for opt in sorted(state.options, key=lambda o: (o.strike, o.option_type)):
+            if opt.position == 0:
+                continue
+            iv_str = f"{opt.iv*100:.1f}%" if opt.iv > 0 else "  -  "
             print(f"{opt.ticker:<10} {opt.option_type:<5} {opt.strike:>3.0f} "
-                  f"{opt.bid:>7.3f} {opt.ask:>7.3f} {opt.bs_fair_price:>7.3f} "
-                  f"{iv_str:>6} {opt.mispricing_pct*100:>6.2f}% "
-                  f"{int(opt.position):>4}")
+                  f"{opt.bid:>7.3f} {opt.ask:>7.3f} {iv_str:>6} "
+                  f"{int(opt.position):>5}")
+
+        print(f"\n  RTM position: {state.stock_position:>+6d}")
+        print(f"  Total delta:  {state.total_delta:>+8.0f}")
+        print(f"  Total gamma:  {state.total_gamma:>+8.1f}")
+        print(f"  Options gross/net: {state.options_gross}/{state.options_net}")

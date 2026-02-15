@@ -1,42 +1,49 @@
-"""Configuration for Volatility Trading Algorithm - V8 Maximum Aggression."""
+"""
+Configuration for Volatility Algorithm V10 - Liam's Optimal Straddle Method.
+
+Based on "Optimisation method for options" by Liam Yih (Aug 2025).
+Uses mathematical optimization (eq 5) to find the optimal number of
+delta-hedged straddles per week.
+"""
 
 # =============================================================================
-# RIT API CONFIGURATION
+# RIT API
 # =============================================================================
+# RIT Server (for GUI login - not used by algo directly)
+RIT_SERVER = "flserver.rotman.utoronto.ca"
+RIT_SERVER_PORT = 16520
+USERNAME = "UBCT-4"
+PASSWORD = "target"
+
+# Local RIT Client REST API (our algo connects here)
 API_HOST = "localhost"
-API_PORT = 9998
+API_PORT = 10000         # Default RIT Client API port - check your RIT Client settings
 API_BASE_URL = f"http://{API_HOST}:{API_PORT}/v1"
-API_KEY = "AJDSYHVCES"
+API_KEY = "AJDSYHVC"     # Confirmed working
 
 # =============================================================================
 # SECURITIES
 # =============================================================================
 UNDERLYING_TICKER = "RTM"
 STRIKE_PRICES = [45, 46, 47, 48, 49, 50, 51, 52, 53, 54]
-CALL_TICKERS = [f"RTM1C{k}" for k in STRIKE_PRICES]
-PUT_TICKERS = [f"RTM1P{k}" for k in STRIKE_PRICES]
-ALL_OPTION_TICKERS = CALL_TICKERS + PUT_TICKERS
+OPTIONS_MULTIPLIER = 100
 
 # =============================================================================
 # CASE TIMING
 # =============================================================================
 TICKS_PER_SUBHEAT = 300
-WEEKS_PER_SUBHEAT = 4
 TICKS_PER_WEEK = 75
 TRADING_DAYS_PER_YEAR = 240
 TRADING_DAYS_PER_MONTH = 20
 
-WEEK_BOUNDARIES = {
-    1: (1, 75),
-    2: (76, 150),
-    3: (151, 225),
-    4: (226, 300),
-}
+# Ticks at which to take new straddle positions (start of each week)
+POSITION_TICKS = [1, 75, 150, 225]
 
-MID_WEEK_TICKS = [37, 112, 187, 262]
+# Start unwinding all positions (must be flat by 300)
+UNWIND_START_TICK = 270
 
 # =============================================================================
-# TRADING LIMITS (from case brief)
+# TRADING LIMITS (case rules - do not change)
 # =============================================================================
 RTM_GROSS_LIMIT = 50000
 RTM_NET_LIMIT = 50000
@@ -45,69 +52,37 @@ RTM_MAX_TRADE_SIZE = 10000
 OPTIONS_GROSS_LIMIT = 2500
 OPTIONS_NET_LIMIT = 1000
 OPTIONS_MAX_TRADE_SIZE = 100
-OPTIONS_MULTIPLIER = 100
 
-RTM_FEE_PER_SHARE = 0.01
-OPTIONS_FEE_PER_CONTRACT = 1.00
-
-# =============================================================================
-# V8 ALGORITHM PARAMETERS - MAXIMUM AGGRESSION
-# =============================================================================
-# Minimum vol edge to initiate a position
-VOL_EDGE_THRESHOLD = 0.005       # 0.5% - enter early
-
-# Target option net position - PUSH CLOSE TO 1000 LIMIT
-TARGET_NET_POSITION = 950        # 950 out of 1000 net limit
-
-# Number of strikes to concentrate on (ATM-focused)
-NUM_STRIKES = 5                  # 5 strikes = more capacity, still ATM-focused
-
-# Edge for full position scaling (reach full size faster)
-FULL_EDGE_THRESHOLD = 0.03      # 3% edge = full position (was 4%)
-
-# Maximum option orders per cycle (build as fast as possible)
-MAX_OPTION_ORDERS_PER_CYCLE = 30
-
-# Minimum option price to trade
-MIN_OPTION_PRICE = 0.01
-
-# Risk-free rate
 RISK_FREE_RATE = 0.0
 
-# Main loop interval
-LOOP_INTERVAL_SEC = 0.20        # Faster for more responsive hedging
+# =============================================================================
+# DELTA HEDGING
+# =============================================================================
+# Hedge when |delta| exceeds this fraction of delta_limit.
+# Paper says "only hedge when reaching delta limit."
+# We trigger at 88% to avoid actually breaching (penalty).
+HEDGE_TRIGGER_PCT = 0.88
 
-# End-of-period position unwinding
-UNWIND_START_TICK = 272          # Slightly later - maximize edge capture time
+# Hedge back to zero delta (as paper recommends)
+HEDGE_TARGET_DELTA = 0
+
+# Minimum shares to bother hedging
+MIN_HEDGE_SIZE = 200
+
+# Cooldown between hedge trades (ticks) to prevent oscillation
+HEDGE_COOLDOWN_TICKS = 5
 
 # =============================================================================
-# V8 DELTA HEDGING - AGGRESSIVE BUT CONTROLLED
+# EXECUTION
 # =============================================================================
-# With bigger position (950 contracts), gamma is ~50% higher.
-# Need tighter hedge bands to avoid breaching delta limit.
+# Max option orders per cycle (for building/closing positions)
+MAX_ORDERS_PER_CYCLE = 20
 
-# Hedge when delta exceeds this % of delta_limit
-HEDGE_TRIGGER_PCT = 0.70         # 70% trigger (was 85%) - tighter for bigger position
+# Main loop speed
+LOOP_INTERVAL_SEC = 0.10
 
-# Hedge back to this % of limit
-HEDGE_TARGET_PCT = 0.15          # 15% target (was 40%) - hedge closer to neutral
+# Minimum option price to trade (avoid penny options)
+MIN_OPTION_PRICE = 0.01
 
-# Minimum hedge size
-MIN_HEDGE_SIZE = 800             # Smaller min (was 1500) - more responsive
-
-# Cooldown: minimum ticks between hedge trades
-HEDGE_COOLDOWN_TICKS = 3         # 3 ticks (was 5) - faster hedging for bigger gamma
-
-# =============================================================================
-# V8 POSITION MANAGEMENT
-# =============================================================================
-# Build MAXIMUM position, hold, delta hedge only.
-
-# No reversals after this tick
-NO_REVERSAL_AFTER_TICK = 250     # Block reversals earlier (was 260) - protect gains
-
-# Minimum edge to justify a reversal (higher = fewer false reversals)
-MIN_REVERSAL_EDGE = 0.05         # 5% (was 4%) - only reverse on strong signal
-
-# Cooldown after reversal
-REVERSAL_COOLDOWN_TICKS = 35     # 35 ticks (was 30) - more protection
+# Maximum straddles per position (leave headroom: 400*2=800 < 1000 net limit)
+MAX_STRADDLES = 400

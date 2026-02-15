@@ -1,12 +1,12 @@
 """
-Volatility Trading Algorithm V7 - Fixed Delta Hedging
+Volatility Trading Algorithm V9 - Liam's Optimal Straddle Method
 RITC 2026 Volatility Case
 
-Key fixes:
-- Single delta hedge path (no oscillation death spiral)
-- Market-only hedging with cooldown
-- Concentrate on ATM strikes for max vega
-- Build once, hold, hedge only
+Strategy:
+  - Trade delta-hedged straddles with mathematically optimal sizing
+  - Reposition at each week boundary (ticks 1/75/150/225)
+  - Position size n* maximizes: vol_profit - positioning_cost - rebalancing_cost
+  - Delta hedge only when approaching the delta limit
 """
 
 import sys
@@ -14,23 +14,22 @@ import time
 import logging
 from datetime import datetime
 
-from config import LOOP_INTERVAL_SEC, UNWIND_START_TICK, TICKS_PER_SUBHEAT
+from config import LOOP_INTERVAL_SEC, TICKS_PER_SUBHEAT, UNWIND_START_TICK
 from rit_api import RITApi
-from trading_engine import TradingEngine
-from news_parser import VolatilityState
+from trading_engine import StraddleEngine, Phase
 
 BANNER = r"""
-============================================================
-  RITC 2026 - Volatility Trading Algorithm V8
-  Strategy: Maximum Aggression + Controlled Risk
-============================================================
+================================================================
+  RITC 2026 - Volatility Algorithm V9
+  Liam's Optimal Straddle Method
+  Strategy: Eq5 Optimization + MFPT Delta Hedging
+================================================================
 """
 
 
 def setup_logging():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     log_file = f"vol_algo_{timestamp}.log"
-
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
@@ -55,8 +54,7 @@ def wait_for_active(api: RITApi):
     status = api.get_status()
     if status in ("ACTIVE", "RUNNING"):
         return True
-
-    print(f"Case status: {status} - waiting for ACTIVE...")
+    print(f"Case status: {status} - waiting...")
     while True:
         status = api.get_status()
         if status in ("ACTIVE", "RUNNING"):
@@ -67,64 +65,58 @@ def wait_for_active(api: RITApi):
         time.sleep(0.5)
 
 
-def print_cycle_status(result: dict):
-    tick = result["tick"]
-    vol = result.get("vol")
-    mkt_iv = result.get("market_iv")
-    direction = result.get("direction", 0)
-    edge = result.get("edge", 0)
-    delta = result.get("delta", 0)
-    delta_limit = result.get("delta_limit")
-    spot = result.get("spot", 0)
-    gross = result.get("gross", 0)
-    net = result.get("net", 0)
-    opt_trades = result.get("option_trades", 0)
-    hedges = result.get("hedge_trades", 0)
-    unwinds = result.get("unwind_trades", 0)
-    reversal = result.get("reversal", False)
-    rtm_vol = result.get("rtm_vol", 0)
+def print_cycle(r: dict):
+    """Print compact one-line status."""
+    tick = r["tick"]
+    phase = r["phase"]
+    vol = r.get("vol")
+    iv = r.get("market_iv")
+    edge = r.get("edge", 0)
+    delta = r.get("delta", 0)
+    dlim = r.get("delta_limit")
+    spot = r.get("spot", 0)
+    n = r.get("n_straddles", 0)
+    direction = r.get("direction", 0)
+    strike = r.get("strike")
+    gross = r.get("gross", 0)
+    net = r.get("net", 0)
+    hedges = r.get("hedge_trades", 0)
+    opt_trades = r.get("option_trades", 0)
+    expected = r.get("expected_pnl", 0)
 
     vol_str = f"{vol:.1f}%" if vol else "N/A"
-    iv_str = f"{mkt_iv:.1f}%" if mkt_iv else "N/A"
+    iv_str = f"{iv:.1f}%" if iv else "N/A"
     dir_str = {1: "LONG", -1: "SHORT", 0: "FLAT"}.get(direction, "?")
+    strike_str = f"K={strike:.0f}" if strike else "K=-"
 
     delta_pct = ""
-    if delta_limit and delta_limit > 0:
-        pct = abs(delta) / delta_limit * 100
+    if dlim and dlim > 0:
+        pct = abs(delta) / dlim * 100
         delta_pct = f"({pct:.0f}%)"
-
-    phase = "UNWIND" if tick >= UNWIND_START_TICK else "TRADE"
 
     parts = [
         f"T={tick:>3}/{TICKS_PER_SUBHEAT}",
-        f"[{phase}]",
+        f"[{phase:<11s}]",
         f"S={spot:.2f}",
         f"Vol={vol_str}",
         f"IV={iv_str}",
-        f"Edge={edge:.1f}%",
-        f"Dir={dir_str}",
+        f"Edge={edge:>+.1f}%",
+        f"{dir_str} n={n}",
+        f"{strike_str}",
         f"D={delta:>+8.0f}{delta_pct}",
-        f"G={gross}/N={net}",
     ]
 
-    built = result.get("built", False)
-    if built:
-        parts.append("[BUILT]")
     if opt_trades > 0:
         parts.append(f"Trd={opt_trades}")
     if hedges > 0:
         parts.append(f"Hdg={hedges}")
-    if unwinds > 0:
-        parts.append(f"Unw={unwinds}")
-    if reversal:
-        parts.append("**REVERSAL**")
-    if rtm_vol > 0:
-        parts.append(f"RTMvol={rtm_vol}")
+    if expected > 0 and phase == Phase.HOLDING:
+        parts.append(f"E[$]={expected:.0f}")
 
     print(" | ".join(parts))
 
 
-def run_trading_loop(api: RITApi, engine: TradingEngine):
+def run_trading_loop(api: RITApi, engine: StraddleEngine):
     last_tick = -1
     cycle_count = 0
 
@@ -137,11 +129,10 @@ def run_trading_loop(api: RITApi, engine: TradingEngine):
         status = case.get("status", "")
         if status not in ("ACTIVE", "RUNNING"):
             if cycle_count > 0:
-                print(f"\nCase status changed to {status}. Sub-heat complete.")
+                print(f"\nCase status: {status}. Sub-heat complete.")
             return status
 
         tick = case.get("tick", 0)
-
         if tick == last_tick:
             time.sleep(LOOP_INTERVAL_SEC / 2)
             continue
@@ -150,18 +141,13 @@ def run_trading_loop(api: RITApi, engine: TradingEngine):
         cycle_count += 1
 
         result = engine.execute_cycle(tick)
-        print_cycle_status(result)
+        print_cycle(result)
 
-        # Detailed table every 50 ticks
-        if tick % 50 == 0 or tick == 1:
-            state = engine.get_portfolio_state(tick)
+        # Detailed summary at key ticks
+        if tick % 75 == 1 or tick == 1:
+            state = engine.get_market_state(tick)
             if state:
-                engine.print_options_table(state)
-                print(f"\n  Portfolio: RTM={int(state.underlying_position):>+6d} | "
-                      f"Delta={state.total_delta:>+8.1f} | "
-                      f"Gamma={state.total_gamma:>+8.1f} | "
-                      f"Vega={state.total_vega:>+8.2f} | "
-                      f"OptGross={state.options_gross} OptNet={state.options_net}")
+                engine.print_position_summary(state)
                 nlv = api.get_nlv()
                 if nlv:
                     print(f"  NLV: ${nlv:,.2f}")
@@ -178,7 +164,7 @@ def main():
     print(f"Logging to: {log_file}\n")
 
     api = RITApi()
-    engine = TradingEngine(api)
+    engine = StraddleEngine(api)
 
     wait_for_connection(api)
 
@@ -187,7 +173,7 @@ def main():
         print(f"Trader: {trader.get('trader_id', '?')} | "
               f"NLV: ${trader.get('nlv', 0):,.2f}")
 
-    print("\nV8 MAX AGGRESSION engine starting (Ctrl+C to stop)...\n")
+    print("\nV9 Optimal Straddle engine starting (Ctrl+C to stop)...\n")
     print("-" * 80)
 
     session_results = []
@@ -201,27 +187,18 @@ def main():
                 continue
 
             session_num += 1
-
-            # Reset engine state for new sub-heat
-            engine.vol_state = VolatilityState()
-            engine.last_tick = 0
-            engine.last_direction = 0
-            engine.direction_changes = 0
-            engine.last_reversal_tick = -100
-            engine.position_built = False
-            engine.rtm_volume = 0
-            engine.last_hedge_tick = -100
-            engine.unwinding = False
+            engine.reset()
 
             start_nlv = api.get_nlv()
-
             case = api.get_case()
             period = case.get("period", "?") if case else "?"
+
             print(f"\n{'='*60}")
-            print(f"  SESSION {session_num} | SUB-HEAT {period} | Start NLV: ${start_nlv:,.2f}")
+            print(f"  SESSION {session_num} | PERIOD {period} | Start NLV: ${start_nlv:,.2f}")
+            print(f"  Strategy: Liam's Eq5 Optimal Straddles")
             print(f"{'='*60}\n")
 
-            final_status = run_trading_loop(api, engine)
+            run_trading_loop(api, engine)
 
             end_nlv = api.get_nlv()
             pnl = end_nlv - start_nlv
@@ -235,7 +212,7 @@ def main():
             })
 
             print(f"\n  Session {session_num} ended.")
-            print(f"  Start NLV: ${start_nlv:,.2f} -> End NLV: ${end_nlv:,.2f}")
+            print(f"  Start: ${start_nlv:,.2f} -> End: ${end_nlv:,.2f}")
             print(f"  P&L: ${pnl:>+,.2f}")
             print(f"  RTM Volume: {engine.rtm_volume}")
             print(f"\n  --- SESSION HISTORY ---")
@@ -244,10 +221,10 @@ def main():
                 print(f"  S{s['session']:>2} (P{s['period']}): "
                       f"${s['start_nlv']:>10,.2f} -> ${s['end_nlv']:>10,.2f} "
                       f"| P&L: ${s['pnl']:>+10,.2f} "
-                      f"| RTMvol: {s.get('rtm_volume', 0):>7}{marker}")
+                      f"| RTM: {s.get('rtm_volume', 0):>7}{marker}")
             total_pnl = sum(s["pnl"] for s in session_results)
             print(f"  {'':->65}")
-            print(f"  Total P&L across {len(session_results)} sessions: ${total_pnl:>+,.2f}")
+            print(f"  Total P&L: ${total_pnl:>+,.2f}")
             print(f"{'='*60}\n")
 
             time.sleep(3)
@@ -261,7 +238,7 @@ def main():
             print(f"Final NLV: ${nlv:,.2f}")
         if session_results:
             total_pnl = sum(s["pnl"] for s in session_results)
-            print(f"Total P&L across {len(session_results)} sessions: ${total_pnl:>+,.2f}")
+            print(f"Total P&L: ${total_pnl:>+,.2f}")
         print("Goodbye.")
 
 
