@@ -6,9 +6,9 @@ Uses same API connection pattern as the working volatility algo.
 
 # ========== API Connection (matching volatility algo pattern) ==========
 API_HOST = "localhost"
-API_PORT = 10000
+API_PORT = 9999
 API_BASE_URL = f"http://{API_HOST}:{API_PORT}/v1"
-API_KEY = "AJDSYHVC"
+API_KEY = "LPJEV4YS"
 
 # ========== Position Limits ==========
 NET_LIMIT = 140_000       # Buffer below 150K hard limit
@@ -26,13 +26,13 @@ BOOK_DEPTH = 100          # Order book depth to fetch
 # ========== Tender Acceptance (AGGRESSIVE) ==========
 MIN_PROFIT_PER_SHARE = 0.003   # Accept almost any profitable tender
 MAX_DEPTH_RATIO = 0.50         # Accept even if liquidity is thin
-MIN_CONFIDENCE = 0.05          # Very low confidence threshold
-AUCTION_AGGRESSION = 0.005     # Tight margin on auction bids to WIN
+MIN_CONFIDENCE = 0.1          # Very low confidence threshold
+AUCTION_AGGRESSION = 0.01     # Tight margin on auction bids to WIN
 
 # ========== Almgren-Chriss Parameters ==========
-AC_GRADIENT_LOW_VOL = 0.3      # Less front-loaded for calm markets
-AC_GRADIENT_MED_VOL = 0.5      # Balanced
-AC_GRADIENT_HIGH_VOL = 0.7     # More front-loaded for volatile markets
+AC_GRADIENT_LOW_VOL = 0.5     # Less front-loaded for calm markets
+AC_GRADIENT_MED_VOL = 0.85      # Balanced
+AC_GRADIENT_HIGH_VOL = 0.9     # More front-loaded for volatile markets
 AC_TAU = 1                     # Trade every tick
 AC_MIN_HORIZON = 5             # Minimum ticks for AC schedule
 AC_FALLBACK_TWAP = True        # Fall back to TWAP if AC fails
@@ -103,6 +103,17 @@ EXECUTION_PROFILES = {
     ('HIGH', 'HIGH'):   {'participation': 0.30, 'limit_eps': 0.02,  'be_slack': 0.03},
     ('HIGH', 'MEDIUM'): {'participation': 0.22, 'limit_eps': 0.015, 'be_slack': 0.025},
     ('HIGH', 'LOW'):    {'participation': 0.15, 'limit_eps': 0.01,  'be_slack': 0.02},
+}
+
+# ========== Pre-calculated Volatility (per-tick) ==========
+# Calculate from historical data: std_dev of (price[t] - price[t-1]) / price[t-1]
+# If None, will use dynamic calculation from live mid-price history
+STATIC_VOLATILITY = {
+    # Example format - replace with your calculated values:
+    # 'RITC': 0.0005,   # LOW volatility
+    # 'COMP': 0.0012,   # MEDIUM volatility
+    # 'TRNT': 0.0025,   # HIGH volatility
+    # Add your tickers here with pre-calculated volatility values
 }
 
 EPS = 1e-9
