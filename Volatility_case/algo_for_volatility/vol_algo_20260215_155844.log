@@ -1,0 +1,232 @@
+2026-02-15 15:58:44,323 [INFO] news_parser: NEWS: Current realized vol = 21.0% (history: ['21%']) [NOW USING REALIZED]
+2026-02-15 15:58:44,323 [INFO] news_parser: NEWS: Delta limit = 11000
+2026-02-15 15:58:44,323 [INFO] news_parser: NEWS: Penalty rate = 3.00%
+2026-02-15 15:58:44,324 [INFO] news_parser: NEWS: Current realized vol = 39.0% (history: ['21%', '39%']) [NOW USING REALIZED]
+2026-02-15 15:58:44,324 [INFO] news_parser: NEWS: Forecast vol next week = 39.0% - 44.0% (mid=41.5%) [NOW USING FORECAST]
+2026-02-15 15:58:44,324 [INFO] news_parser: NEWS: Current realized vol = 39.0% (history: ['21%', '39%', '39%']) [NOW USING REALIZED]
+2026-02-15 15:58:46,882 [INFO] trading_engine: Scheduled close complete week 2 by tick 111
+2026-02-15 15:58:47,889 [INFO] news_parser: NEWS: Current realized vol = 29.0% (history: ['21%', '39%', '39%', '29%']) [NOW USING REALIZED]
+2026-02-15 15:58:47,889 [INFO] news_parser: NEWS: Forecast vol next week = 29.0% - 34.0% (mid=31.5%) [NOW USING FORECAST]
+2026-02-15 15:58:47,892 [INFO] trading_engine: Scheduled close complete week 2 by tick 112
+2026-02-15 15:58:48,902 [INFO] trading_engine: Scheduled close complete week 2 by tick 113
+2026-02-15 15:58:49,915 [INFO] trading_engine: Scheduled close complete week 2 by tick 114
+2026-02-15 15:58:50,928 [INFO] trading_engine: Scheduled close complete week 2 by tick 115
+2026-02-15 15:58:51,937 [INFO] trading_engine: Scheduled close complete week 2 by tick 116
+2026-02-15 15:58:52,899 [INFO] trading_engine: Scheduled close complete week 2 by tick 117
+2026-02-15 15:58:53,916 [INFO] trading_engine: Scheduled close complete week 2 by tick 118
+2026-02-15 15:58:54,929 [INFO] trading_engine: Scheduled close complete week 2 by tick 119
+2026-02-15 15:58:55,937 [INFO] trading_engine: Scheduled close complete week 2 by tick 120
+2026-02-15 15:58:56,945 [INFO] trading_engine: Scheduled close complete week 2 by tick 121
+2026-02-15 15:58:57,957 [INFO] trading_engine: Scheduled close complete week 2 by tick 122
+2026-02-15 15:58:58,971 [INFO] trading_engine: Scheduled close complete week 2 by tick 123
+2026-02-15 15:58:59,981 [INFO] trading_engine: Scheduled close complete week 2 by tick 124
+2026-02-15 15:59:00,946 [INFO] trading_engine: Scheduled close complete week 2 by tick 125
+2026-02-15 15:59:01,966 [INFO] trading_engine: Scheduled close complete week 2 by tick 126
+2026-02-15 15:59:02,980 [INFO] trading_engine: Scheduled close complete week 2 by tick 127
+2026-02-15 15:59:03,999 [INFO] trading_engine: Scheduled close complete week 2 by tick 128
+2026-02-15 15:59:05,013 [INFO] trading_engine: Scheduled close complete week 2 by tick 129
+2026-02-15 15:59:05,980 [INFO] trading_engine: Scheduled close complete week 2 by tick 130
+2026-02-15 15:59:06,992 [INFO] trading_engine: Scheduled close complete week 2 by tick 131
+2026-02-15 15:59:08,006 [INFO] trading_engine: Scheduled close complete week 2 by tick 132
+2026-02-15 15:59:09,020 [INFO] trading_engine: Scheduled close complete week 2 by tick 133
+2026-02-15 15:59:10,040 [INFO] trading_engine: Scheduled close complete week 2 by tick 134
+2026-02-15 15:59:11,050 [INFO] trading_engine: Scheduled close complete week 2 by tick 135
+2026-02-15 15:59:12,013 [INFO] trading_engine: Scheduled close complete week 2 by tick 136
+2026-02-15 15:59:13,029 [INFO] trading_engine: Scheduled close complete week 2 by tick 137
+2026-02-15 15:59:14,035 [INFO] trading_engine: Scheduled close complete week 2 by tick 138
+2026-02-15 15:59:15,085 [INFO] trading_engine: Scheduled close complete week 2 by tick 139
+2026-02-15 15:59:16,083 [INFO] trading_engine: Scheduled close complete week 2 by tick 140
+2026-02-15 15:59:17,089 [INFO] trading_engine: Scheduled close complete week 2 by tick 141
+2026-02-15 15:59:18,089 [INFO] trading_engine: Scheduled close complete week 2 by tick 142
+2026-02-15 15:59:19,093 [INFO] trading_engine: Scheduled close complete week 2 by tick 143
+2026-02-15 15:59:20,092 [INFO] trading_engine: Scheduled close complete week 2 by tick 144
+2026-02-15 15:59:21,092 [INFO] trading_engine: Scheduled close complete week 2 by tick 145
+2026-02-15 15:59:22,098 [INFO] trading_engine: Scheduled close complete week 2 by tick 146
+2026-02-15 15:59:23,097 [INFO] trading_engine: Scheduled close complete week 2 by tick 147
+2026-02-15 15:59:24,094 [INFO] trading_engine: Scheduled close complete week 2 by tick 148
+2026-02-15 15:59:25,096 [INFO] trading_engine: Scheduled close complete week 2 by tick 149
+2026-02-15 15:59:26,148 [INFO] news_parser: NEWS: Current realized vol = 30.0% (history: ['21%', '39%', '39%', '29%', '30%']) [NOW USING REALIZED]
+2026-02-15 15:59:26,151 [INFO] trading_engine: WEEK 3 positioning tick 150
+2026-02-15 15:59:26,151 [INFO] trading_engine: Immediate positioning at week 3 tick 150
+2026-02-15 15:59:26,152 [INFO] optimizer: ============================================================
+2026-02-15 15:59:26,152 [INFO] optimizer: OPTIMIZER RESULT: n*=400 SHORT straddles @ strike 52
+2026-02-15 15:59:26,152 [INFO] optimizer:   Expected profit: $13847.15
+2026-02-15 15:59:26,153 [INFO] optimizer:   Gain/contract: $40.3333 | Pos cost/contract: $4.0200
+2026-02-15 15:59:26,153 [INFO] optimizer:   Rebalancing cost: $678.19 | Z=1.11
+2026-02-15 15:59:26,153 [INFO] optimizer:   Inputs: S0=52.31 sigma=0.3000 sigma_hat=0.3899 L=11000 Gamma=24.7058
+2026-02-15 15:59:26,153 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-15 15:59:26,153 [INFO] optimizer: ============================================================
+2026-02-15 15:59:26,227 [INFO] rit_api: MARKET SELL 100 RTM1C52 -> order_id=6386
+2026-02-15 15:59:26,284 [INFO] rit_api: MARKET SELL 100 RTM1P52 -> order_id=6387
+2026-02-15 15:59:26,342 [INFO] rit_api: MARKET SELL 100 RTM1C52 -> order_id=6388
+2026-02-15 15:59:26,402 [INFO] rit_api: MARKET SELL 100 RTM1P52 -> order_id=6389
+2026-02-15 15:59:26,465 [INFO] rit_api: MARKET SELL 100 RTM1C52 -> order_id=6390
+2026-02-15 15:59:26,522 [INFO] rit_api: MARKET SELL 100 RTM1P52 -> order_id=6391
+2026-02-15 15:59:26,580 [INFO] rit_api: MARKET SELL 100 RTM1C52 -> order_id=6392
+2026-02-15 15:59:26,641 [INFO] rit_api: MARKET SELL 100 RTM1P52 -> order_id=6393
+2026-02-15 15:59:26,641 [INFO] trading_engine: STRADDLE SELL 400/400 @ K=52: 8 orders (400C+400P filled)
+2026-02-15 15:59:26,641 [INFO] trading_engine: POSITIONED: 400 SHORT straddles @ 52 (week 3, expected $13847)
+2026-02-15 15:59:29,276 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=6520
+2026-02-15 15:59:29,277 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -10875 -> ~-875 | limit 11000 (99%)
+2026-02-15 15:59:37,315 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=6858
+2026-02-15 15:59:37,316 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 10206 -> ~206 | limit 11000 (93%)
+2026-02-15 16:00:02,339 [INFO] rit_api: MARKET BUY 11 RTM1C52 -> order_id=7925
+2026-02-15 16:00:02,397 [INFO] rit_api: MARKET BUY 11 RTM1P52 -> order_id=7926
+2026-02-15 16:00:02,398 [INFO] trading_engine: Scheduled close week 3 tick 186 (window 186-224), trades=2
+2026-02-15 16:00:03,288 [INFO] news_parser: NEWS: Current realized vol = 17.0% (history: ['21%', '39%', '39%', '29%', '30%', '17%']) [NOW USING REALIZED]
+2026-02-15 16:00:03,289 [INFO] news_parser: NEWS: Forecast vol next week = 17.0% - 22.0% (mid=19.5%) [NOW USING FORECAST]
+2026-02-15 16:00:03,349 [INFO] rit_api: MARKET BUY 11 RTM1C52 -> order_id=7971
+2026-02-15 16:00:03,406 [INFO] rit_api: MARKET BUY 11 RTM1P52 -> order_id=7972
+2026-02-15 16:00:03,407 [INFO] trading_engine: Scheduled close week 3 tick 187 (window 186-224), trades=2
+2026-02-15 16:00:04,370 [INFO] rit_api: MARKET BUY 11 RTM1C52 -> order_id=8016
+2026-02-15 16:00:04,428 [INFO] rit_api: MARKET BUY 11 RTM1P52 -> order_id=8017
+2026-02-15 16:00:04,429 [INFO] trading_engine: Scheduled close week 3 tick 188 (window 186-224), trades=2
+2026-02-15 16:00:05,344 [INFO] rit_api: MARKET BUY 11 RTM1C52 -> order_id=8060
+2026-02-15 16:00:05,404 [INFO] rit_api: MARKET BUY 11 RTM1P52 -> order_id=8061
+2026-02-15 16:00:05,404 [INFO] trading_engine: Scheduled close week 3 tick 189 (window 186-224), trades=2
+2026-02-15 16:00:06,363 [INFO] rit_api: MARKET BUY 11 RTM1C52 -> order_id=8106
+2026-02-15 16:00:06,423 [INFO] rit_api: MARKET BUY 11 RTM1P52 -> order_id=8107
+2026-02-15 16:00:06,424 [INFO] trading_engine: Scheduled close week 3 tick 190 (window 186-224), trades=2
+2026-02-15 16:00:07,392 [INFO] rit_api: MARKET BUY 11 RTM1C52 -> order_id=8150
+2026-02-15 16:00:07,452 [INFO] rit_api: MARKET BUY 11 RTM1P52 -> order_id=8151
+2026-02-15 16:00:07,453 [INFO] trading_engine: Scheduled close week 3 tick 191 (window 186-224), trades=2
+2026-02-15 16:00:08,366 [INFO] rit_api: MARKET BUY 11 RTM1C52 -> order_id=8197
+2026-02-15 16:00:08,425 [INFO] rit_api: MARKET BUY 11 RTM1P52 -> order_id=8198
+2026-02-15 16:00:08,426 [INFO] trading_engine: Scheduled close week 3 tick 192 (window 186-224), trades=2
+2026-02-15 16:00:09,395 [INFO] rit_api: MARKET BUY 11 RTM1C52 -> order_id=8241
+2026-02-15 16:00:09,454 [INFO] rit_api: MARKET BUY 11 RTM1P52 -> order_id=8242
+2026-02-15 16:00:09,455 [INFO] trading_engine: Scheduled close week 3 tick 193 (window 186-224), trades=2
+2026-02-15 16:00:10,375 [INFO] rit_api: MARKET BUY 11 RTM1C52 -> order_id=8285
+2026-02-15 16:00:10,434 [INFO] rit_api: MARKET BUY 11 RTM1P52 -> order_id=8286
+2026-02-15 16:00:10,435 [INFO] trading_engine: Scheduled close week 3 tick 194 (window 186-224), trades=2
+2026-02-15 16:00:11,401 [INFO] rit_api: MARKET BUY 11 RTM1C52 -> order_id=8329
+2026-02-15 16:00:11,463 [INFO] rit_api: MARKET BUY 11 RTM1P52 -> order_id=8330
+2026-02-15 16:00:11,463 [INFO] trading_engine: Scheduled close week 3 tick 195 (window 186-224), trades=2
+2026-02-15 16:00:12,376 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=8373
+2026-02-15 16:00:12,435 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=8374
+2026-02-15 16:00:12,436 [INFO] trading_engine: Scheduled close week 3 tick 196 (window 186-224), trades=2
+2026-02-15 16:00:13,404 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=8417
+2026-02-15 16:00:13,465 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=8418
+2026-02-15 16:00:13,466 [INFO] trading_engine: Scheduled close week 3 tick 197 (window 186-224), trades=2
+2026-02-15 16:00:14,427 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=8461
+2026-02-15 16:00:14,486 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=8462
+2026-02-15 16:00:14,486 [INFO] trading_engine: Scheduled close week 3 tick 198 (window 186-224), trades=2
+2026-02-15 16:00:15,403 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=8505
+2026-02-15 16:00:15,465 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=8506
+2026-02-15 16:00:15,466 [INFO] trading_engine: Scheduled close week 3 tick 199 (window 186-224), trades=2
+2026-02-15 16:00:16,444 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=8549
+2026-02-15 16:00:16,504 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=8550
+2026-02-15 16:00:16,504 [INFO] trading_engine: Scheduled close week 3 tick 200 (window 186-224), trades=2
+2026-02-15 16:00:17,420 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=8593
+2026-02-15 16:00:17,479 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=8594
+2026-02-15 16:00:17,480 [INFO] trading_engine: Scheduled close week 3 tick 201 (window 186-224), trades=2
+2026-02-15 16:00:18,449 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=8637
+2026-02-15 16:00:18,512 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=8638
+2026-02-15 16:00:18,512 [INFO] trading_engine: Scheduled close week 3 tick 202 (window 186-224), trades=2
+2026-02-15 16:00:19,468 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=8681
+2026-02-15 16:00:19,525 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=8682
+2026-02-15 16:00:19,526 [INFO] trading_engine: Scheduled close week 3 tick 203 (window 186-224), trades=2
+2026-02-15 16:00:20,443 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=8727
+2026-02-15 16:00:20,503 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=8728
+2026-02-15 16:00:20,504 [INFO] trading_engine: Scheduled close week 3 tick 204 (window 186-224), trades=2
+2026-02-15 16:00:21,426 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=8772
+2026-02-15 16:00:21,486 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=8773
+2026-02-15 16:00:21,486 [INFO] trading_engine: Scheduled close week 3 tick 205 (window 186-224), trades=2
+2026-02-15 16:00:22,461 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=8816
+2026-02-15 16:00:22,523 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=8818
+2026-02-15 16:00:22,524 [INFO] trading_engine: Scheduled close week 3 tick 206 (window 186-224), trades=2
+2026-02-15 16:00:23,489 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=8863
+2026-02-15 16:00:23,549 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=8864
+2026-02-15 16:00:23,550 [INFO] trading_engine: Scheduled close week 3 tick 207 (window 186-224), trades=2
+2026-02-15 16:00:24,467 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=8907
+2026-02-15 16:00:24,527 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=8908
+2026-02-15 16:00:24,527 [INFO] trading_engine: Scheduled close week 3 tick 208 (window 186-224), trades=2
+2026-02-15 16:00:25,494 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=8953
+2026-02-15 16:00:25,553 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=8954
+2026-02-15 16:00:25,554 [INFO] trading_engine: Scheduled close week 3 tick 209 (window 186-224), trades=2
+2026-02-15 16:00:26,474 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=8997
+2026-02-15 16:00:26,533 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=8998
+2026-02-15 16:00:26,533 [INFO] trading_engine: Scheduled close week 3 tick 210 (window 186-224), trades=2
+2026-02-15 16:00:27,500 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=9043
+2026-02-15 16:00:27,561 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=9044
+2026-02-15 16:00:27,562 [INFO] trading_engine: Scheduled close week 3 tick 211 (window 186-224), trades=2
+2026-02-15 16:00:28,478 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=9087
+2026-02-15 16:00:28,537 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=9088
+2026-02-15 16:00:28,537 [INFO] trading_engine: Scheduled close week 3 tick 212 (window 186-224), trades=2
+2026-02-15 16:00:29,463 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=9132
+2026-02-15 16:00:29,522 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=9133
+2026-02-15 16:00:29,523 [INFO] trading_engine: Scheduled close week 3 tick 213 (window 186-224), trades=2
+2026-02-15 16:00:30,497 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=9177
+2026-02-15 16:00:30,556 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=9178
+2026-02-15 16:00:30,556 [INFO] trading_engine: Scheduled close week 3 tick 214 (window 186-224), trades=2
+2026-02-15 16:00:31,468 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=9221
+2026-02-15 16:00:31,546 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=9222
+2026-02-15 16:00:31,546 [INFO] trading_engine: Scheduled close week 3 tick 215 (window 186-224), trades=2
+2026-02-15 16:00:32,516 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=9268
+2026-02-15 16:00:32,578 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=9269
+2026-02-15 16:00:32,579 [INFO] trading_engine: Scheduled close week 3 tick 216 (window 186-224), trades=2
+2026-02-15 16:00:33,495 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=9312
+2026-02-15 16:00:33,555 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=9313
+2026-02-15 16:00:33,556 [INFO] trading_engine: Scheduled close week 3 tick 217 (window 186-224), trades=2
+2026-02-15 16:00:34,527 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=9358
+2026-02-15 16:00:34,586 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=9359
+2026-02-15 16:00:34,587 [INFO] trading_engine: Scheduled close week 3 tick 218 (window 186-224), trades=2
+2026-02-15 16:00:35,503 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=9402
+2026-02-15 16:00:35,562 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=9403
+2026-02-15 16:00:35,563 [INFO] trading_engine: Scheduled close week 3 tick 219 (window 186-224), trades=2
+2026-02-15 16:00:36,532 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=9447
+2026-02-15 16:00:36,592 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=9448
+2026-02-15 16:00:36,592 [INFO] trading_engine: Scheduled close week 3 tick 220 (window 186-224), trades=2
+2026-02-15 16:00:37,562 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=9493
+2026-02-15 16:00:37,622 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=9494
+2026-02-15 16:00:37,622 [INFO] trading_engine: Scheduled close week 3 tick 221 (window 186-224), trades=2
+2026-02-15 16:00:38,542 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=9537
+2026-02-15 16:00:38,602 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=9538
+2026-02-15 16:00:38,602 [INFO] trading_engine: Scheduled close week 3 tick 222 (window 186-224), trades=2
+2026-02-15 16:00:39,568 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=9583
+2026-02-15 16:00:39,626 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=9584
+2026-02-15 16:00:39,626 [INFO] trading_engine: Scheduled close week 3 tick 223 (window 186-224), trades=2
+2026-02-15 16:00:40,598 [INFO] rit_api: MARKET BUY 10 RTM1C52 -> order_id=9628
+2026-02-15 16:00:40,658 [INFO] rit_api: MARKET BUY 10 RTM1P52 -> order_id=9629
+2026-02-15 16:00:40,659 [INFO] trading_engine: Scheduled close week 3 tick 224 (window 186-224), trades=2
+2026-02-15 16:00:41,516 [INFO] news_parser: NEWS: Current realized vol = 22.0% (history: ['21%', '39%', '39%', '29%', '30%', '17%', '22%']) [NOW USING REALIZED]
+2026-02-15 16:00:41,519 [INFO] trading_engine: Position flat. Ready to reposition.
+2026-02-15 16:00:42,534 [INFO] optimizer: ============================================================
+2026-02-15 16:00:42,535 [INFO] optimizer: OPTIMIZER RESULT: n*=400 SHORT straddles @ strike 53
+2026-02-15 16:00:42,535 [INFO] optimizer:   Expected profit: $50630.25
+2026-02-15 16:00:42,535 [INFO] optimizer:   Gain/contract: $134.7796 | Pos cost/contract: $4.0200
+2026-02-15 16:00:42,535 [INFO] optimizer:   Rebalancing cost: $1673.59 | Z=0.59
+2026-02-15 16:00:42,536 [INFO] optimizer:   Inputs: S0=53.30 sigma=0.2200 sigma_hat=0.3928 L=11000 Gamma=46.5685
+2026-02-15 16:00:42,536 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-15 16:00:42,536 [INFO] optimizer: ============================================================
+2026-02-15 16:00:42,595 [INFO] rit_api: MARKET SELL 100 RTM1C53 -> order_id=9714
+2026-02-15 16:00:42,655 [INFO] rit_api: MARKET SELL 100 RTM1P53 -> order_id=9715
+2026-02-15 16:00:42,714 [INFO] rit_api: MARKET SELL 100 RTM1C53 -> order_id=9716
+2026-02-15 16:00:42,774 [INFO] rit_api: MARKET SELL 100 RTM1P53 -> order_id=9717
+2026-02-15 16:00:42,832 [INFO] rit_api: MARKET SELL 100 RTM1C53 -> order_id=9718
+2026-02-15 16:00:42,895 [INFO] rit_api: MARKET SELL 100 RTM1P53 -> order_id=9719
+2026-02-15 16:00:42,954 [INFO] rit_api: MARKET SELL 100 RTM1C53 -> order_id=9720
+2026-02-15 16:00:43,013 [INFO] rit_api: MARKET SELL 100 RTM1P53 -> order_id=9721
+2026-02-15 16:00:43,013 [INFO] trading_engine: STRADDLE SELL 400/400 @ K=53: 8 orders (400C+400P filled)
+2026-02-15 16:00:43,014 [INFO] trading_engine: POSITIONED: 400 SHORT straddles @ 53 (week 4, expected $50630)
+2026-02-15 16:00:52,684 [INFO] rit_api: MARKET SELL 9889 RTM -> order_id=10151
+2026-02-15 16:00:52,684 [INFO] trading_engine: HEDGE SELL 9889 RTM | delta 9889 -> ~-0 | limit 11000 (90%)
+2026-02-15 16:01:11,805 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=10967
+2026-02-15 16:01:11,805 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -12967 -> ~-2967 | limit 11000 (118%)
+2026-02-15 16:01:16,807 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=11181
+2026-02-15 16:01:16,807 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 19549 -> ~9549 | limit 11000 (178%)
+2026-02-15 16:01:21,870 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=11398
+2026-02-15 16:01:21,871 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 18268 -> ~8268 | limit 11000 (166%)
+2026-02-15 16:01:26,809 [INFO] trading_engine: ENTERING UNWIND at tick 270
+2026-02-15 16:01:26,926 [INFO] rit_api: MARKET BUY 100 RTM1C53 -> order_id=11613
+2026-02-15 16:01:26,985 [INFO] rit_api: MARKET BUY 100 RTM1C53 -> order_id=11614
+2026-02-15 16:01:27,046 [INFO] rit_api: MARKET BUY 100 RTM1C53 -> order_id=11615
+2026-02-15 16:01:27,107 [INFO] rit_api: MARKET BUY 100 RTM1C53 -> order_id=11616
+2026-02-15 16:01:27,166 [INFO] rit_api: MARKET BUY 100 RTM1P53 -> order_id=11617
+2026-02-15 16:01:27,226 [INFO] rit_api: MARKET BUY 100 RTM1P53 -> order_id=11618
+2026-02-15 16:01:27,285 [INFO] rit_api: MARKET BUY 100 RTM1P53 -> order_id=11619
+2026-02-15 16:01:27,348 [INFO] rit_api: MARKET BUY 100 RTM1P53 -> order_id=11620
+2026-02-15 16:01:27,407 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=11621
+2026-02-15 16:01:27,468 [INFO] rit_api: MARKET BUY 9889 RTM -> order_id=11622
+2026-02-15 16:01:57,089 [WARNING] rit_api: POST /commands/cancel returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Simulation is not active."}
+2026-02-15 16:02:47,940 [WARNING] rit_api: POST /commands/cancel returned 401: {"code":"UNAUTHORIZED","message":"Simulation must be running."}
