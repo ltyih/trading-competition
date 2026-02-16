@@ -11,8 +11,8 @@ API_BASE_URL = f"http://{API_HOST}:{API_PORT}/v1"
 API_KEY = "LPJEV4YS"
 
 # ========== Position Limits ==========
-NET_LIMIT = 140_000       # Buffer below 150K hard limit
-GROSS_LIMIT = 240_000     # Buffer below 250K hard limit
+NET_LIMIT = 150_000       # Buffer below 150K hard limit
+GROSS_LIMIT = 250_000     # Buffer below 250K hard limit
 MAX_ORDER_SIZE = 10_000   # RIT hard cap per order
 
 # ========== Timing ==========
@@ -24,10 +24,10 @@ ENDGAME_MAX_SLICES = 5    # Max order slices per tick in endgame
 BOOK_DEPTH = 100          # Order book depth to fetch
 
 # ========== Tender Acceptance (AGGRESSIVE) ==========
-MIN_PROFIT_PER_SHARE = 0.003   # Accept almost any profitable tender
-MAX_DEPTH_RATIO = 0.50         # Accept even if liquidity is thin
-MIN_CONFIDENCE = 0.1          # Very low confidence threshold
-AUCTION_AGGRESSION = 0.01     # Tight margin on auction bids to WIN
+MIN_PROFIT_PER_SHARE = 0.01   # Accept almost any profitable tender
+MAX_DEPTH_RATIO = 0.75         # Accept even if liquidity is thin
+MIN_CONFIDENCE = 0..075          # Very low confidence threshold
+AUCTION_AGGRESSION = 0.005     # Tight margin on auction bids to WIN
 
 # ========== Almgren-Chriss Parameters ==========
 AC_GRADIENT_LOW_VOL = 0.5     # Less front-loaded for calm markets
