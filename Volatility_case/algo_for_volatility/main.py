@@ -4,7 +4,7 @@ RITC 2026 Volatility Case
 
 Strategy:
   - Trade delta-hedged straddles with mathematically optimal sizing
-  - Reposition at each week boundary (ticks 1/75/150/225)
+  - Reposition at each week boundary (ticks 2/75/150/225)
   - Position size n* maximizes: vol_profit - positioning_cost - rebalancing_cost
   - Delta hedge only when approaching the delta limit
 """
@@ -14,7 +14,7 @@ import time
 import logging
 from datetime import datetime
 
-from config import LOOP_INTERVAL_SEC, TICKS_PER_SUBHEAT, UNWIND_START_TICK
+from config import LOOP_INTERVAL_SEC, TICKS_PER_SUBHEAT
 from rit_api import RITApi
 from trading_engine import StraddleEngine, Phase
 

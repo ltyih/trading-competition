@@ -2,14 +2,17 @@
 
 import re
 import logging
-from typing import Optional
+from typing import Optional, Tuple
 
 logger = logging.getLogger(__name__)
 
 RE_CURRENT_VOL = re.compile(
-    r"realized volatility.*?(?:this week|for this week).*?(\d+(?:\.\d+)?)\s*%",
+    r"(?:current\s+)?(?:annualized\s+)?realized volatility"
+    r"(?:\s*(?:is|for this week|this week|for the current week|currently is))?"
+    r".*?(\d+(?:\.\d+)?)\s*%",
     re.IGNORECASE,
 )
+RE_PERCENT = re.compile(r"(\d+(?:\.\d+)?)\s*%")
 RE_FORECAST_VOL = re.compile(
     r"next week.*?between\s*(\d+(?:\.\d+)?)\s*%?\s*and\s*(\d+(?:\.\d+)?)\s*%",
     re.IGNORECASE,
@@ -64,10 +67,32 @@ class VolatilityState:
             return self.current_vol
         return self.forecast_vol_mid
 
+    def _extract_realized_vol_pct(self, text: str) -> Tuple[Optional[float], Optional[str]]:
+        """Extract realized vol percent from a news item.
+
+        Returns: (percent_value, source_tag)
+        """
+        match = RE_CURRENT_VOL.search(text)
+        if match:
+            return float(match.group(1)), "explicit"
+
+        # Fallback: if realized-vol language appears, use second percentage token when possible.
+        lowered = text.lower()
+        if "realized volatility" not in lowered:
+            return None, None
+
+        pct_tokens = RE_PERCENT.findall(text)
+        if not pct_tokens:
+            return None, None
+        if len(pct_tokens) >= 2:
+            return float(pct_tokens[1]), "fallback-second"
+        return float(pct_tokens[0]), "fallback-first"
+
     def process_news(self, news_items: list) -> bool:
         updated = False
 
-        for news in news_items:
+        # Process in ascending id order to avoid skipping items when API order varies.
+        for news in sorted(news_items, key=lambda n: n.get("news_id", 0)):
             news_id = news.get("news_id", 0)
             if news_id <= self.last_news_id:
                 continue
@@ -77,17 +102,27 @@ class VolatilityState:
             text = f"{headline} {body}"
 
             # Parse current volatility
-            match = RE_CURRENT_VOL.search(text)
-            if match:
-                vol_pct = float(match.group(1))
+            vol_pct, vol_source = self._extract_realized_vol_pct(text)
+            if vol_pct is not None:
                 new_vol = vol_pct / 100.0
                 self.current_vol = new_vol
                 self._last_vol_source = 'realized'
                 self.vol_history.append(new_vol)
                 self.news_count += 1
-                logger.info("NEWS: Current realized vol = %.1f%% (history: %s) [NOW USING REALIZED]",
-                            vol_pct,
-                            [f"{v*100:.0f}%" for v in self.vol_history])
+                if vol_source == "fallback-second":
+                    logger.info("NEWS: Current realized vol = %.1f%% (fallback: second %% token) "
+                                "(history: %s) [NOW USING REALIZED]",
+                                vol_pct,
+                                [f"{v*100:.0f}%" for v in self.vol_history])
+                elif vol_source == "fallback-first":
+                    logger.info("NEWS: Current realized vol = %.1f%% (fallback: first %% token) "
+                                "(history: %s) [NOW USING REALIZED]",
+                                vol_pct,
+                                [f"{v*100:.0f}%" for v in self.vol_history])
+                else:
+                    logger.info("NEWS: Current realized vol = %.1f%% (history: %s) [NOW USING REALIZED]",
+                                vol_pct,
+                                [f"{v*100:.0f}%" for v in self.vol_history])
                 updated = True
 
             # Parse forecast volatility range

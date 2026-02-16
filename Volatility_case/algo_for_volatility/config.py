@@ -17,7 +17,7 @@ PASSWORD = "target"
 
 # Local RIT Client REST API (our algo connects here)
 API_HOST = "localhost"
-API_PORT = 10000         # Default RIT Client API port - check your RIT Client settings
+API_PORT = 9999       # Default RIT Client API port - check your RIT Client settings
 API_BASE_URL = f"http://{API_HOST}:{API_PORT}/v1"
 API_KEY = "AJDSYHVC"     # Confirmed working
 
@@ -37,10 +37,12 @@ TRADING_DAYS_PER_YEAR = 240
 TRADING_DAYS_PER_MONTH = 20
 
 # Ticks at which to take new straddle positions (start of each week)
-POSITION_TICKS = [1, 75, 150, 225]
+POSITION_TICKS = [2, 75, 150, 225]
 
-# Start unwinding all positions (must be flat by 300)
-UNWIND_START_TICK = 270
+# Scheduled gradual close windows for weeks 1-4.
+# Close starts at each start tick and must be complete by the deadline tick.
+WEEKLY_CLOSE_START_TICKS = [35, 111, 186, 255]
+WEEKLY_CLOSE_DEADLINE_TICKS = [74, 149, 224, 299]
 
 # =============================================================================
 # TRADING LIMITS (case rules - do not change)
@@ -63,11 +65,12 @@ RISK_FREE_RATE = 0.0
 # We trigger at 88% to avoid actually breaching (penalty).
 HEDGE_TRIGGER_PCT = 0.88
 
-# Hedge back to zero delta (as paper recommends)
-HEDGE_TARGET_DELTA = 0
+# Target absolute delta after hedge as a fraction of delta limit (0.0 to 1.0).
+# Examples: 0.0 -> flat delta, 0.5 -> hedge back to 50% of delta limit.
+HEDGE_TARGET_DELTA = 0.0
 
 # Minimum shares to bother hedging
-MIN_HEDGE_SIZE = 200
+MIN_HEDGE_SIZE = 0
 
 # Cooldown between hedge trades (ticks) to prevent oscillation
 HEDGE_COOLDOWN_TICKS = 5
@@ -76,7 +79,7 @@ HEDGE_COOLDOWN_TICKS = 5
 # EXECUTION
 # =============================================================================
 # Max option orders per cycle (for building/closing positions)
-MAX_ORDERS_PER_CYCLE = 20
+MAX_ORDERS_PER_CYCLE = 100
 
 # Main loop speed
 LOOP_INTERVAL_SEC = 0.10
@@ -85,4 +88,4 @@ LOOP_INTERVAL_SEC = 0.10
 MIN_OPTION_PRICE = 0.01
 
 # Maximum straddles per position (leave headroom: 400*2=800 < 1000 net limit)
-MAX_STRADDLES = 400
+MAX_STRADDLES = 1250
