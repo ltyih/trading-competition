@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-"""Algo Market Making Bot - RIT API Layer. V9."""
+"""Algo Market Making Bot - RIT API Layer. V11."""
 
 import time
 import logging
 import requests
-from typing import Optional, Dict, Any, List
 
 from config import API_BASE_URL, API_KEY, MAX_ORDER_SIZE
 
@@ -21,12 +20,12 @@ class RITApi:
 
     def _get(self, endpoint, params=None, _retry=0):
         try:
-            resp = self.session.get(f"{self.base_url}{endpoint}", params=params, timeout=5)
+            resp = self.session.get(f"{self.base_url}{endpoint}", params=params, timeout=3)
             if resp.status_code == 429:
                 if _retry >= MAX_RETRIES:
                     return None
-                wait = float(resp.json().get("wait", 0.25))
-                time.sleep(min(wait, 1.0))
+                wait = float(resp.json().get("wait", 0.15))
+                time.sleep(min(wait, 0.5))
                 return self._get(endpoint, params, _retry + 1)
             if resp.ok:
                 self.consecutive_errors = 0
@@ -42,12 +41,12 @@ class RITApi:
 
     def _post(self, endpoint, params=None, _retry=0):
         try:
-            resp = self.session.post(f"{self.base_url}{endpoint}", params=params, timeout=5)
+            resp = self.session.post(f"{self.base_url}{endpoint}", params=params, timeout=3)
             if resp.status_code == 429:
                 if _retry >= MAX_RETRIES:
                     return None
-                wait = float(resp.json().get("wait", 0.25))
-                time.sleep(min(wait, 1.0))
+                wait = float(resp.json().get("wait", 0.15))
+                time.sleep(min(wait, 0.5))
                 return self._post(endpoint, params, _retry + 1)
             if resp.ok:
                 self.consecutive_errors = 0
@@ -60,12 +59,12 @@ class RITApi:
 
     def _delete(self, endpoint, params=None, _retry=0):
         try:
-            resp = self.session.delete(f"{self.base_url}{endpoint}", params=params, timeout=5)
+            resp = self.session.delete(f"{self.base_url}{endpoint}", params=params, timeout=3)
             if resp.status_code == 429:
                 if _retry >= MAX_RETRIES:
                     return None
-                wait = float(resp.json().get("wait", 0.25))
-                time.sleep(min(wait, 1.0))
+                wait = float(resp.json().get("wait", 0.15))
+                time.sleep(min(wait, 0.5))
                 return self._delete(endpoint, params, _retry + 1)
             if resp.ok:
                 self.consecutive_errors = 0
