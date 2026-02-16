@@ -254,9 +254,16 @@ class MarketMaker:
             if not self.circuit_breaker_active:
                 print(f"    [CB CAUTION] PnL=${self.current_pnl:,.2f}")
                 self.circuit_breaker_active = True
+            # RECOVER from halt if P&L improved above halt threshold
+            if self.circuit_breaker_halt:
+                print(f"    [CB HALT→CAUTION] PnL recovered to ${self.current_pnl:,.2f}")
+                self.circuit_breaker_halt = False
         else:
             if self.circuit_breaker_active:
                 self.circuit_breaker_active = False
+            if self.circuit_breaker_halt:
+                print(f"    [CB HALT→CLEAR] PnL recovered to ${self.current_pnl:,.2f}")
+                self.circuit_breaker_halt = False
 
     def update_adaptive_spreads(self, tick: int):
         if tick - self.last_adaptive_tick < ADAPTIVE_INTERVAL:
@@ -759,7 +766,8 @@ class MarketMaker:
                     last_day = current_day
 
                 if self.circuit_breaker_halt:
-                    time.sleep(1.0)
+                    self.update_pnl()  # Re-check so recovery can trigger
+                    time.sleep(0.5)
                     continue
 
                 # State updates

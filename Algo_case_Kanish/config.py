@@ -105,16 +105,16 @@ DAY_LENGTH = 60
 # ========== Market Close Protocol (V12.1: EARLIER START) ==========
 # The close-time limit is 9,000. We need to go from ~30k to <7k.
 # That's ~23k shares to flatten in ~14 seconds. Very doable with market orders.
-PRE_CLOSE_WIDEN_SEC = 36       # Second 36: widen spreads (was 45)
-PRE_CLOSE_REDUCE_SEC = 38     # Second 38: begin passive flattening (was 48)
-PRE_CLOSE_CANCEL_SEC = 42     # Second 42: cancel ALL orders (was 52)
-PRE_CLOSE_FLATTEN_SEC = 43    # Second 43: market-order flatten (was 53)
+PRE_CLOSE_WIDEN_SEC = 44       # Second 44: widen spreads (was 36 - too early!)
+PRE_CLOSE_REDUCE_SEC = 46     # Second 46: begin passive flattening
+PRE_CLOSE_CANCEL_SEC = 50     # Second 50: cancel ALL orders
+PRE_CLOSE_FLATTEN_SEC = 51    # Second 51: market-order flatten
 # Seconds 43-59: aggressive market-order flattening to get under close limit
 CLOSE_TARGET_UTILIZATION = 0.70  # Target 70% of close-time limit = 6,300 shares
 
-POST_CLOSE_RECOVERY_SEC = 5
-POST_CLOSE_SPREAD_MULT = 2.0
-POST_CLOSE_SIZE_MULT = 0.3    # Start slow after news
+POST_CLOSE_RECOVERY_SEC = 1      # Was 5 → trade from second 1 (saves 4 sec/day × 5 days)
+POST_CLOSE_SPREAD_MULT = 1.5     # Slightly wider just for second 0
+POST_CLOSE_SIZE_MULT = 0.5       # Half size just for second 0 (was 0.3)
 PRE_CLOSE_SPREAD_MULT = 1.5
 PRE_CLOSE_SIZE_MULT = 0.3
 
@@ -137,8 +137,8 @@ IMBALANCE_SKEW_FACTOR = 0.002
 PENNY_IMPROVE = False      # Still disabled
 
 # ========== Circuit Breaker ==========
-CIRCUIT_BREAKER_CAUTION = -8000    # Higher threshold (we expect some drawdowns)
-CIRCUIT_BREAKER_HALT = -25000
+CIRCUIT_BREAKER_CAUTION = -20000    # Was -8000 (too aggressive, caused flat periods)
+CIRCUIT_BREAKER_HALT = -50000       # Was -25000 (had no recovery, permanent halt!)
 
 # ========== Adaptive Spread ==========
 ADAPTIVE_INTERVAL = 15
