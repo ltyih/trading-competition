@@ -57,6 +57,28 @@
       "start_time": "2026-02-05T18:59:37.594288",
       "case_name": "RITC 2026 Liquidity Risk Case - Practice",
       "period": 1
+    },
+    {
+      "session_id": "RITC_2026_Volatility_Trading_Case_-_practice_period1_20260207_225004",
+      "collector_id": "Kanish_Kanish_Khanna_7f88cb36",
+      "collector_name": null,
+      "collector_hostname": "Kanish",
+      "collector_username": "Kanish Khanna",
+      "db_path": "C:\\Users\\Kanish Khanna\\OneDrive - UBC\\Desktop\\RITC\\RITC-2026\\Volatility_case\\data\\sessions\\RITC_2026_Volatility_Trading_Case_-_practice_period1_20260207_225004.db",
+      "start_time": "2026-02-07T22:50:04.904082",
+      "case_name": "RITC 2026 Volatility Trading Case - practice",
+      "period": 1
+    },
+    {
+      "session_id": "RITC_2026_Volatility_Trading_Case_-_practice_period1_20260209_085118",
+      "collector_id": "Kanish_Kanish_Khanna_3d0ca714",
+      "collector_name": null,
+      "collector_hostname": "Kanish",
+      "collector_username": "Kanish Khanna",
+      "db_path": "C:\\Users\\Kanish Khanna\\OneDrive - UBC\\Desktop\\RITC\\RITC-2026\\Volatility_case\\data\\sessions\\RITC_2026_Volatility_Trading_Case_-_practice_period1_20260209_085118.db",
+      "start_time": "2026-02-09T08:51:18.569288",
+      "case_name": "RITC 2026 Volatility Trading Case - practice",
+      "period": 1
     }
   ]
 }
