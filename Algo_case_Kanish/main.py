@@ -1,29 +1,23 @@
 # -*- coding: utf-8 -*-
 """
-ALGO MARKET MAKING BOT - V12 AGGREGATE-LIMIT-AWARE REBATE HARVESTER
-====================================================================
-Complete rewrite from V11 based on analysis of 6 performance reports.
+ALGO MARKET MAKING BOT - V12.1 AGGRESSIVE CAPACITY UTILIZATION
+===============================================================
+V12 result: +$20,073 (sim max: $63,786)
+V12.1 target: $40,000-60,000
 
-V11 FAILURE ANALYSIS:
-- Run 1: -$5,907 (328k vol, no fines but adverse selection)
-- Run 2: -$4,089 (302k vol)
-- Run 3: -$1,335 (273k vol, improving)
-- Run 4: -$2,990 (306k vol, SMMR first profitable: +$62)
-- Run 5: -$2,272 (500k vol, SMMR +$3,335, WNTR +$798, but SPNG -$3,966)
-- Run 6: -$1,722 (23k vol, stopped early)
+WHAT CHANGED FROM V12 → V12.1:
+1. ORDER SIZES 3x BIGGER: WNTR 5000, SMMR 4500, ATMN 3000, SPNG 2000
+2. 3 LAYERS of quotes (was 2): capture 3x more passive fills
+3. EARLIER FLATTENING: start at second 36 (was 45), cancel at 42 (was 52)
+4. SEPARATE CLOSE-TIME LIMIT: 9,000 (logged from API) vs 50k intraday
+5. HIGHER PER-STOCK LIMITS: 12,500 per stock (was ~3,500)
+6. FASTER CYCLE: 40ms (was 50ms)
 
-KEY INSIGHT FROM DATA:
-- WNTR and SMMR (highest rebates) ARE profitable
-- SPNG and ATMN (lowest rebates) consistently LOSE money
-- Passive:Active ratios are good (1.4-2.9x) = rebate capture works
-- The losses come from: adverse selection on low-rebate stocks + position penalties
-
-V12 STRATEGY:
-1. AGGRESSIVE on WNTR/SMMR (tight spreads, large sizes, high priority)
-2. CONSERVATIVE on ATMN/SPNG (wide spreads, small sizes, reduced priority)
-3. RESPECT THE CLOSE: flatten positions before each 60-second market close
-4. EARN REBATES: limit orders only, market orders only for emergency flatten
-5. SURVIVE: avoid $10/share aggregate penalty at all costs
+KEY DATA INSIGHT:
+- Intraday gross limit = 50,000 → V12 only used 12% average
+- Close-time limit = 9,000 → need to flatten from ~30k to <7k
+- Flattening cost: ~25k × $0.02/share = $500/day
+- Extra volume revenue: potentially $20k-40k more profit
 """
 
 import sys
@@ -53,12 +47,13 @@ from config import (
     VOL_SIZE_MULT,
     SKEW_FACTOR,
     UTIL_NORMAL, UTIL_SKEW, UTIL_REDUCE, UTIL_EMERGENCY, UTIL_PANIC,
-    DEFAULT_AGGREGATE_LIMIT, DEFAULT_GROSS_LIMIT, DEFAULT_NET_LIMIT,
+    DEFAULT_GROSS_LIMIT, DEFAULT_NET_LIMIT, CLOSE_TIME_LIMIT,
     GROSS_LIMIT_BUFFER, NET_LIMIT_BUFFER,
-    PER_STOCK_LIMIT_FRACTION, MIN_PER_STOCK_LIMIT,
+    PER_STOCK_LIMIT_FRACTION, MIN_PER_STOCK_LIMIT, MAX_PER_STOCK_LIMIT,
     CYCLE_SLEEP, HEAT_DURATION, DAY_LENGTH,
     PRE_CLOSE_WIDEN_SEC, PRE_CLOSE_REDUCE_SEC,
     PRE_CLOSE_CANCEL_SEC, PRE_CLOSE_FLATTEN_SEC,
+    CLOSE_TARGET_UTILIZATION,
     POST_CLOSE_RECOVERY_SEC, POST_CLOSE_SPREAD_MULT, POST_CLOSE_SIZE_MULT,
     PRE_CLOSE_SPREAD_MULT, PRE_CLOSE_SIZE_MULT,
     VOL_LOOKBACK, VOL_LOW_THRESHOLD, VOL_HIGH_THRESHOLD, VOL_SPREAD_MULT,
@@ -69,7 +64,9 @@ from config import (
     CIRCUIT_BREAKER_CAUTION, CIRCUIT_BREAKER_HALT,
     ADAPTIVE_INTERVAL, ADAPTIVE_MIN_MULT, ADAPTIVE_MAX_MULT,
     ADAPTIVE_TARGET_FILLS,
-    ENABLE_LAYERED_QUOTES, LAYER2_SPREAD_MULT, LAYER2_SIZE_MULT,
+    ENABLE_LAYERED_QUOTES, NUM_LAYERS,
+    LAYER2_SPREAD_MULT, LAYER2_SIZE_MULT,
+    LAYER3_SPREAD_MULT, LAYER3_SIZE_MULT,
     ASYM_REDUCE_MAX, ASYM_INCREASE_MIN, ASYM_KICK_IN,
     API_BASE_URL, API_KEY,
 )
@@ -79,16 +76,13 @@ logger = logging.getLogger(__name__)
 
 BANNER = """
 ================================================================================
-  ALGO MARKET MAKING BOT V12 - AGGREGATE-LIMIT-AWARE REBATE HARVESTER
-  Strategy: WNTR/SMMR aggressive, ATMN/SPNG conservative, flatten before close
+  ALGO MARKET MAKING BOT V12.1 - AGGRESSIVE CAPACITY UTILIZATION
+  Target: 50-70% intraday utilization | 3-layer quotes | Flatten before close
+  Close-time limit: {close_lim:,} | Intraday limit: {intra_lim:,}
   {url} | Key: {key}
 ================================================================================
 """
 
-
-# ============================================================
-# VOLATILITY TRACKER
-# ============================================================
 
 class VolatilityTracker:
     def __init__(self, lookback: int = VOL_LOOKBACK):
@@ -117,21 +111,8 @@ class VolatilityTracker:
             return "HIGH"
         return "MEDIUM"
 
-    def get_recent_move(self, ticker: str, lookback: int = 5) -> float:
-        """Get the total price move over last N observations."""
-        hist = self._history.get(ticker)
-        if not hist or len(hist) < lookback + 1:
-            return 0.0
-        recent = list(hist)[-lookback:]
-        return recent[-1][1] - recent[0][1]
-
-
-# ============================================================
-# ORDER TRACKER
-# ============================================================
 
 class OrderTracker:
-    """Track our live orders per ticker per side per layer."""
     def __init__(self):
         self._orders: Dict[str, Dict[str, Optional[Dict]]] = {}
 
@@ -142,8 +123,8 @@ class OrderTracker:
                      price: float, size: int, layer: int = 1):
         if ticker not in self._orders:
             self._orders[ticker] = {}
-        key = self._key(side, layer)
-        self._orders[ticker][key] = {"id": order_id, "price": price, "size": size}
+        self._orders[ticker][self._key(side, layer)] = {
+            "id": order_id, "price": price, "size": size}
 
     def get_order(self, ticker: str, side: str, layer: int = 1) -> Optional[Dict]:
         return self._orders.get(ticker, {}).get(self._key(side, layer))
@@ -154,9 +135,6 @@ class OrderTracker:
     def clear_all(self):
         for t in list(self._orders.keys()):
             self._orders[t] = {}
-
-    def has_order(self, ticker: str, side: str, layer: int = 1) -> bool:
-        return self.get_order(ticker, side, layer) is not None
 
     def has_any_order(self, ticker: str) -> bool:
         orders = self._orders.get(ticker, {})
@@ -171,35 +149,31 @@ class OrderTracker:
         return abs(existing["price"] - target_price) <= tolerance
 
 
-# ============================================================
-# MARKET MAKER - V12 CORE
-# ============================================================
-
 class MarketMaker:
     def __init__(self, api: RITApi):
         self.api = api
         self.vol_tracker = VolatilityTracker()
         self.order_tracker = OrderTracker()
 
-        # State
         self.positions: Dict[str, int] = {t: 0 for t in TICKERS}
         self.mid_prices: Dict[str, float] = {}
         self.book_imbalance: Dict[str, float] = {t: 0.0 for t in TICKERS}
         self.market_spread: Dict[str, float] = {t: 0.10 for t in TICKERS}
 
-        # Limits - V12: properly separated
-        self.gross_limit = DEFAULT_GROSS_LIMIT
+        # V12.1: Two separate limits
+        self.gross_limit = DEFAULT_GROSS_LIMIT      # 50,000 intraday
+        self.close_limit = CLOSE_TIME_LIMIT          # 9,000 at close
         self.net_limit = DEFAULT_NET_LIMIT
-        self.aggregate_limit = DEFAULT_AGGREGATE_LIMIT  # This is the critical one
-        self.per_stock_limit: Dict[str, int] = {t: MIN_PER_STOCK_LIMIT for t in TICKERS}
+        self.per_stock_limit: Dict[str, int] = {}
+        self._compute_per_stock_limits()
 
-        # P&L tracking
+        # P&L
         self.start_nlv = 0.0
         self.current_pnl = 0.0
         self.circuit_breaker_active = False
         self.circuit_breaker_halt = False
 
-        # Adaptive spreads
+        # Adaptive
         self.adaptive_mult: Dict[str, float] = {t: 1.0 for t in TICKERS}
         self.fill_count: Dict[str, int] = {t: 0 for t in TICKERS}
         self.last_adaptive_tick = 0
@@ -209,41 +183,37 @@ class MarketMaker:
         self.orders_cancelled = 0
         self.total_volume_traded = 0
         self.market_orders_sent = 0
-        self.passive_fills_est = 0
 
-        # Position tracking for fill detection
-        self.last_known_positions: Dict[str, int] = {t: 0 for t in TICKERS}
-
-        # Pre-close price memory (for post-news analysis)
-        self.pre_close_prices: Dict[str, float] = {}
-
-        # Track if we're in lockdown
         self.in_lockdown = False
+
+    def _compute_per_stock_limits(self):
+        """Compute per-stock position limits weighted by rebate."""
+        total_rebate = sum(REBATES[t] for t in TICKERS)
+        for t in TICKERS:
+            weight = REBATES[t] / total_rebate
+            # Weight by rebate but cap
+            allocated = int(self.gross_limit * PER_STOCK_LIMIT_FRACTION * weight / 0.25)
+            allocated = max(MIN_PER_STOCK_LIMIT, min(allocated, MAX_PER_STOCK_LIMIT))
+            self.per_stock_limit[t] = allocated
 
     # ============================================================
     # STATE UPDATES
     # ============================================================
 
     def update_state(self, tick: int):
-        """Fetch current positions and prices from API."""
         securities = self.api.get_securities()
         if not securities:
             return
-
         for sec in securities:
             t = sec.get("ticker", "")
             if t not in TICKERS:
                 continue
-
             old_pos = self.positions.get(t, 0)
             self.positions[t] = sec.get("position", 0)
-
-            # Track fills
             pos_change = abs(self.positions[t] - old_pos)
             if pos_change > 0:
                 self.fill_count[t] = self.fill_count.get(t, 0) + 1
                 self.total_volume_traded += pos_change
-
             bid = sec.get("bid", 0) or 0
             ask = sec.get("ask", 0) or 0
             if bid > 0 and ask > 0:
@@ -253,55 +223,30 @@ class MarketMaker:
                 self.market_spread[t] = ask - bid
 
     def update_limits(self):
-        """Fetch and parse limits from API.
-
-        V12 CRITICAL: We need to identify both the gross/net limits AND the
-        aggregate position limit. The aggregate limit has the worst penalty
-        ($10/share vs $5/share) and is checked at market close.
-        """
         limits = self.api.get_limits()
         if not limits:
             return
-
         for lim in limits:
-            name = lim.get("name", "").lower()
-
-            # Try to identify aggregate limit
             gl = lim.get("gross_limit", 0)
             nl = lim.get("net_limit", 0)
-
             if gl and isinstance(gl, (int, float)) and gl > 0:
-                self.gross_limit = int(gl)
+                current_gl = int(gl)
+                # Detect if we're at close-time (limit drops to ~9k)
+                if current_gl < 20000:
+                    self.close_limit = current_gl  # Learn the actual close limit
+                else:
+                    self.gross_limit = current_gl
             if nl and isinstance(nl, (int, float)) and nl > 0:
                 self.net_limit = int(nl)
-
-            # The aggregate limit may be reported differently
-            # Try multiple field names
-            for field in ["gross_limit", "aggregate_limit", "position_limit"]:
-                val = lim.get(field, 0)
-                if val and isinstance(val, (int, float)) and val > 0:
-                    # Use the smaller of gross and what we find as aggregate
-                    if field == "gross_limit":
-                        self.aggregate_limit = int(val)
-
-        # Compute per-stock limits based on aggregate limit and rebate weighting
-        total_rebate = sum(REBATES[t] for t in TICKERS)
-        for t in TICKERS:
-            weight = REBATES[t] / total_rebate
-            allocated = int(self.aggregate_limit * PER_STOCK_LIMIT_FRACTION * weight / 0.25)
-            allocated = max(MIN_PER_STOCK_LIMIT, min(allocated,
-                            int(self.aggregate_limit * PER_STOCK_LIMIT_FRACTION)))
-            self.per_stock_limit[t] = allocated
+        self._compute_per_stock_limits()
 
     def update_pnl(self):
-        """Track P&L and trigger circuit breakers."""
         nlv = self.api.get_nlv()
         if nlv is not None and self.start_nlv > 0:
             self.current_pnl = nlv - self.start_nlv
-
         if self.current_pnl <= CIRCUIT_BREAKER_HALT:
             if not self.circuit_breaker_halt:
-                print(f"    [CB HALT] PnL=${self.current_pnl:,.2f} <= ${CIRCUIT_BREAKER_HALT:,}")
+                print(f"    [CB HALT] PnL=${self.current_pnl:,.2f}")
                 self.circuit_breaker_halt = True
                 self.api.cancel_all_orders()
                 self.order_tracker.clear_all()
@@ -311,26 +256,19 @@ class MarketMaker:
                 self.circuit_breaker_active = True
         else:
             if self.circuit_breaker_active:
-                print(f"    [CB CLEAR] PnL=${self.current_pnl:,.2f}")
                 self.circuit_breaker_active = False
 
     def update_adaptive_spreads(self, tick: int):
-        """Adjust spreads based on fill rate. V12: more conservative than V11."""
         if tick - self.last_adaptive_tick < ADAPTIVE_INTERVAL:
             return
-
         for ticker in TICKERS:
             fills = self.fill_count.get(ticker, 0)
-            if fills < 2:
-                # Not enough fills - tighten slightly
-                self.adaptive_mult[ticker] *= 0.95  # V12: gentler than V11's 0.92
+            if fills < 3:
+                self.adaptive_mult[ticker] *= 0.95
             elif fills > ADAPTIVE_TARGET_FILLS * 2:
-                # Too many fills - might be adverse selection, widen
                 self.adaptive_mult[ticker] *= 1.08
             elif fills > ADAPTIVE_TARGET_FILLS:
-                # Good fill rate, slight widen for safety
                 self.adaptive_mult[ticker] *= 1.02
-
             self.adaptive_mult[ticker] = max(
                 ADAPTIVE_MIN_MULT, min(ADAPTIVE_MAX_MULT, self.adaptive_mult[ticker]))
             self.fill_count[ticker] = 0
@@ -341,22 +279,14 @@ class MarketMaker:
     # ============================================================
 
     def compute_aggregate(self) -> int:
-        """Sum of absolute positions across all stocks.
-        This is what's checked at market close with $10/share penalty."""
         return sum(abs(p) for p in self.positions.values())
 
     def compute_utilization(self) -> float:
-        """Aggregate position as fraction of aggregate limit."""
-        if self.aggregate_limit <= 0:
+        if self.gross_limit <= 0:
             return 0.0
-        return self.compute_aggregate() / self.aggregate_limit
-
-    def compute_gross(self) -> int:
-        """Gross position (same as aggregate in this case)."""
-        return sum(abs(p) for p in self.positions.values())
+        return self.compute_aggregate() / self.gross_limit
 
     def compute_net(self) -> int:
-        """Net position across all stocks."""
         return abs(sum(self.positions.values()))
 
     def compute_book_imbalance(self, book: Dict) -> float:
@@ -374,69 +304,64 @@ class MarketMaker:
     # ============================================================
 
     def compute_spread(self, ticker: str, second_in_day: int, layer: int = 1) -> float:
-        """Compute spread for a given ticker, time, and layer."""
         base = BASE_SPREAD.get(ticker, 0.04)
 
-        # Layer 2 is wider
+        # Layer multipliers
         if layer == 2:
             base *= LAYER2_SPREAD_MULT
+        elif layer == 3:
+            base *= LAYER3_SPREAD_MULT
 
-        # Volatility regime
         regime = self.vol_tracker.get_regime(ticker)
         vol_mult = VOL_SPREAD_MULT.get(regime, 1.0)
-
-        # Adaptive (learned from fill rate)
         adaptive = self.adaptive_mult.get(ticker, 1.0)
 
-        # Time of day
         time_mult = 1.0
         if second_in_day < POST_CLOSE_RECOVERY_SEC:
             time_mult = POST_CLOSE_SPREAD_MULT
         elif second_in_day >= PRE_CLOSE_WIDEN_SEC:
             time_mult = PRE_CLOSE_SPREAD_MULT
 
-        # Circuit breaker: widen spreads when losing money
         cb_mult = 1.5 if self.circuit_breaker_active else 1.0
 
         spread = base * vol_mult * adaptive * time_mult * cb_mult
-
-        # Minimum spread: at least the rebate to ensure profitability
-        min_spread = max(0.02, REBATES.get(ticker, 0.02) * 0.5)
+        min_spread = max(0.02, REBATES.get(ticker, 0.02) * 0.4)
         return max(min_spread, round(spread, 4))
 
     # ============================================================
-    # ORDER SIZING - V12: AGGREGATE-AWARE
+    # ORDER SIZING - V12.1: AGGRESSIVE
     # ============================================================
 
     def compute_order_size(self, ticker: str, side: str, utilization: float,
                            second_in_day: int, layer: int = 1) -> int:
-        """V12: Conservative sizing that respects aggregate limit."""
-        base_size = ORDER_SIZE.get(ticker, 1000)
+        base_size = ORDER_SIZE.get(ticker, 2000)
         pos = self.positions.get(ticker, 0)
         per_stock_limit = self.per_stock_limit.get(ticker, MIN_PER_STOCK_LIMIT)
 
-        # Layer 2 is smaller
-        layer_mult = LAYER2_SIZE_MULT if layer == 2 else 1.0
+        # Layer sizing
+        if layer == 2:
+            layer_mult = LAYER2_SIZE_MULT
+        elif layer == 3:
+            layer_mult = LAYER3_SIZE_MULT
+        else:
+            layer_mult = 1.0
 
-        # ASYMMETRIC SIZING
+        # Asymmetric sizing
         asym_mult = 1.0
         asym_threshold = per_stock_limit * ASYM_KICK_IN
         if abs(pos) > asym_threshold:
             pos_frac = min(abs(pos) / per_stock_limit, 1.0)
             if (pos > 0 and side == "SELL") or (pos < 0 and side == "BUY"):
-                # REDUCING position: boost size
                 asym_mult = 1.0 + pos_frac * (ASYM_REDUCE_MAX - 1.0)
             elif (pos > 0 and side == "BUY") or (pos < 0 and side == "SELL"):
-                # INCREASING position: reduce size
                 asym_mult = max(ASYM_INCREASE_MIN, 1.0 - pos_frac * (1.0 - ASYM_INCREASE_MIN))
 
-        # Volatility
         regime = self.vol_tracker.get_regime(ticker)
         vol_mult = VOL_SIZE_MULT.get(regime, 1.0)
 
-        # Utilization-based reduction (V12: much more aggressive reduction)
+        # Utilization reduction (based on intraday 50k limit)
         if utilization > UTIL_PANIC:
-            util_mult = 0.0  # Don't place new orders at all
+            util_mult = 0.0
         elif utilization > UTIL_EMERGENCY:
             util_mult = 0.15
         elif utilization > UTIL_REDUCE:
@@ -446,34 +371,27 @@ class MarketMaker:
         else:
             util_mult = 1.0
 
-        # Time of day
         time_mult = 1.0
         if second_in_day < POST_CLOSE_RECOVERY_SEC:
             time_mult = POST_CLOSE_SIZE_MULT
         elif second_in_day >= PRE_CLOSE_WIDEN_SEC:
             time_mult = PRE_CLOSE_SIZE_MULT
 
-        # Circuit breaker
         cb_mult = 0.3 if self.circuit_breaker_active else 1.0
 
         size = int(base_size * layer_mult * asym_mult *
                    vol_mult * util_mult * time_mult * cb_mult)
 
-        # Hard cap: don't push past per-stock limit on increasing side
+        # Cap: don't exceed per-stock limit on increasing side
         if (pos > 0 and side == "BUY") or (pos < 0 and side == "SELL"):
             room = max(0, per_stock_limit - abs(pos))
             size = min(size, room)
 
         # Gross limit room
-        gross = self.compute_gross()
+        gross = self.compute_aggregate()
         gross_room = max(0, int(self.gross_limit * GROSS_LIMIT_BUFFER) - gross)
         if (pos > 0 and side == "BUY") or (pos < 0 and side == "SELL") or pos == 0:
-            size = min(size, gross_room)
-
-        # Aggregate limit room (even more conservative)
-        agg_room = max(0, int(self.aggregate_limit * UTIL_REDUCE) - gross)
-        if (pos > 0 and side == "BUY") or (pos < 0 and side == "SELL") or pos == 0:
-            size = min(size, agg_room)
+            size = min(size, gross_room // max(1, NUM_LAYERS))  # Share room across layers
 
         return max(0, min(size, MAX_ORDER_SIZE))
 
@@ -482,7 +400,6 @@ class MarketMaker:
     # ============================================================
 
     def compute_skew(self, ticker: str, utilization: float) -> float:
-        """Avellaneda-Stoikov style inventory skew."""
         pos = self.positions.get(ticker, 0)
         per_stock_limit = self.per_stock_limit.get(ticker, MIN_PER_STOCK_LIMIT)
         if per_stock_limit <= 0:
@@ -491,13 +408,11 @@ class MarketMaker:
         normalized = pos / per_stock_limit
         skew = -normalized * SKEW_FACTOR
 
-        # Increase skew when utilization is high
         if utilization > UTIL_REDUCE:
             skew *= 2.0
         elif utilization > UTIL_SKEW:
             skew *= 1.5
 
-        # Book imbalance (gentle)
         imbalance = self.book_imbalance.get(ticker, 0.0)
         if abs(imbalance) > IMBALANCE_THRESHOLD:
             skew += imbalance * IMBALANCE_SKEW_FACTOR
@@ -509,24 +424,19 @@ class MarketMaker:
     # ============================================================
 
     def should_quote_side(self, ticker: str, side: str, utilization: float) -> bool:
-        """Determine if we should quote a given side for a ticker."""
         pos = self.positions.get(ticker, 0)
         per_stock_limit = self.per_stock_limit.get(ticker, MIN_PER_STOCK_LIMIT)
 
-        if self.circuit_breaker_halt:
+        if self.circuit_breaker_halt or self.in_lockdown:
             return False
 
-        if self.in_lockdown:
+        # Block at 90% of per-stock limit for increasing side
+        if side == "BUY" and pos >= int(per_stock_limit * 0.90):
+            return False
+        if side == "SELL" and pos <= -int(per_stock_limit * 0.90):
             return False
 
-        # Block at 90% of per-stock limit for increasing side only
-        block_threshold = int(per_stock_limit * 0.90)
-        if side == "BUY" and pos >= block_threshold:
-            return False
-        if side == "SELL" and pos <= -block_threshold:
-            return False
-
-        # At high utilization, only allow reducing side
+        # At high utilization, only reducing side
         if utilization > UTIL_EMERGENCY:
             if (pos > 0 and side == "BUY") or (pos < 0 and side == "SELL"):
                 return False
@@ -534,18 +444,14 @@ class MarketMaker:
                 return False
 
         # Gross limit check
-        gross = self.compute_gross()
-        gross_max = int(self.gross_limit * GROSS_LIMIT_BUFFER)
-        if gross >= gross_max:
-            if (pos > 0 and side == "BUY") or (pos < 0 and side == "SELL"):
-                return False
-            if pos == 0:
+        gross = self.compute_aggregate()
+        if gross >= int(self.gross_limit * GROSS_LIMIT_BUFFER):
+            if (pos > 0 and side == "BUY") or (pos < 0 and side == "SELL") or pos == 0:
                 return False
 
         # Net limit check
         net = self.compute_net()
-        net_max = int(self.net_limit * NET_LIMIT_BUFFER)
-        if net >= net_max:
+        if net >= int(self.net_limit * NET_LIMIT_BUFFER):
             net_dir = sum(self.positions.values())
             if (net_dir > 0 and side == "BUY") or (net_dir < 0 and side == "SELL"):
                 return False
@@ -553,12 +459,11 @@ class MarketMaker:
         return True
 
     # ============================================================
-    # MAIN QUOTING ENGINE - V12 WITH LAYERED QUOTES
+    # MAIN QUOTING ENGINE - V12.1 WITH 3 LAYERS
     # ============================================================
 
     def quote_ticker(self, ticker: str, tick: int, second_in_day: int,
                      utilization: float):
-        """Place/update quotes for a single ticker."""
         mid = self.mid_prices.get(ticker, 25.0)
         if mid < MIN_PRICE or mid > MAX_PRICE:
             return
@@ -568,115 +473,98 @@ class MarketMaker:
         quote_sell = self.should_quote_side(ticker, "SELL", utilization)
 
         if not quote_buy and not quote_sell:
-            # Nothing to do, cancel existing
             if self.order_tracker.has_any_order(ticker):
                 self.api.cancel_ticker_orders(ticker)
                 self.order_tracker.clear_ticker(ticker)
             return
 
-        # Get market data
         book = self.api.get_book(ticker, limit=5)
         best_bid = self.api.get_best_bid(book)
         best_ask = self.api.get_best_ask(book)
         if best_bid > 0 and best_ask > 0:
             self.book_imbalance[ticker] = self.compute_book_imbalance(book)
             self.market_spread[ticker] = best_ask - best_bid
-            # Update mid from book if available
             mid = (best_bid + best_ask) / 2.0
 
-        # ---- LAYER 1: Primary quotes ----
-        spread1 = self.compute_spread(ticker, second_in_day, layer=1)
-        half1 = spread1 / 2.0
-        buy_size1 = self.compute_order_size(ticker, "BUY", utilization, second_in_day, layer=1) if quote_buy else 0
-        sell_size1 = self.compute_order_size(ticker, "SELL", utilization, second_in_day, layer=1) if quote_sell else 0
+        # Compute all 3 layers
+        layers = []
+        for layer_num in range(1, NUM_LAYERS + 1):
+            # Skip layer 3 during pre-close or post-close
+            if layer_num == 3 and (second_in_day < POST_CLOSE_RECOVERY_SEC or
+                                    second_in_day >= PRE_CLOSE_WIDEN_SEC):
+                continue
+            # Skip layer 2 during pre-close reduce
+            if layer_num == 2 and second_in_day >= PRE_CLOSE_REDUCE_SEC:
+                continue
 
-        bid1 = round(mid - half1 + skew, 2)
-        ask1 = round(mid + half1 + skew, 2)
+            spread = self.compute_spread(ticker, second_in_day, layer=layer_num)
+            half = spread / 2.0
+            buy_size = self.compute_order_size(ticker, "BUY", utilization, second_in_day, layer=layer_num) if quote_buy else 0
+            sell_size = self.compute_order_size(ticker, "SELL", utilization, second_in_day, layer=layer_num) if quote_sell else 0
 
-        # Safety: bid must be below ask
-        if bid1 >= ask1:
-            bid1 = round(mid - 0.02, 2)
-            ask1 = round(mid + 0.02, 2)
-        bid1 = max(MIN_PRICE, min(bid1, MAX_PRICE - 0.02))
-        ask1 = max(bid1 + 0.01, min(ask1, MAX_PRICE))
+            bid = round(mid - half + skew, 2)
+            ask = round(mid + half + skew, 2)
 
-        # ---- LAYER 2: Secondary quotes (wider, smaller) ----
-        bid2 = 0.0
-        ask2 = 0.0
-        buy_size2 = 0
-        sell_size2 = 0
+            # Safety
+            if bid >= ask:
+                bid = round(mid - 0.02, 2)
+                ask = round(mid + 0.02, 2)
+            bid = max(MIN_PRICE, min(bid, MAX_PRICE - 0.02))
+            ask = max(bid + 0.01, min(ask, MAX_PRICE))
 
-        if ENABLE_LAYERED_QUOTES and second_in_day >= POST_CLOSE_RECOVERY_SEC and second_in_day < PRE_CLOSE_WIDEN_SEC:
-            spread2 = self.compute_spread(ticker, second_in_day, layer=2)
-            half2 = spread2 / 2.0
-            buy_size2 = self.compute_order_size(ticker, "BUY", utilization, second_in_day, layer=2) if quote_buy else 0
-            sell_size2 = self.compute_order_size(ticker, "SELL", utilization, second_in_day, layer=2) if quote_sell else 0
+            # Ensure outer layers are outside inner layers
+            if layers:
+                inner_bid = layers[-1]['bid']
+                inner_ask = layers[-1]['ask']
+                if bid >= inner_bid:
+                    bid = round(inner_bid - 0.02, 2)
+                if ask <= inner_ask:
+                    ask = round(inner_ask + 0.02, 2)
+                bid = max(MIN_PRICE, bid)
+                ask = min(MAX_PRICE, ask)
 
-            bid2 = round(mid - half2 + skew, 2)
-            ask2 = round(mid + half2 + skew, 2)
+            layers.append({
+                'layer': layer_num, 'bid': bid, 'ask': ask,
+                'buy_size': buy_size, 'sell_size': sell_size, 'half': half
+            })
 
-            if bid2 >= bid1:
-                bid2 = round(bid1 - 0.02, 2)
-            if ask2 <= ask1:
-                ask2 = round(ask1 + 0.02, 2)
-
-            bid2 = max(MIN_PRICE, bid2)
-            ask2 = min(MAX_PRICE, ask2)
-
-        # ---- SMART CANCEL AND REPLACE ----
-        tolerance = half1 * REQUOTE_THRESHOLD
+        # Check if requoting needed
         need_cancel = False
-
-        for side, target, size in [("BUY", bid1, buy_size1), ("SELL", ask1, sell_size1)]:
-            if size >= 100:
-                if not self.order_tracker.order_is_close_enough(ticker, side, target, tolerance, layer=1):
-                    need_cancel = True
+        if layers:
+            tolerance = layers[0]['half'] * REQUOTE_THRESHOLD
+            for ldata in layers:
+                ln = ldata['layer']
+                tol = tolerance * ln  # Wider tolerance for outer layers
+                for side, target, size in [("BUY", ldata['bid'], ldata['buy_size']),
+                                            ("SELL", ldata['ask'], ldata['sell_size'])]:
+                    if size >= 100:
+                        if not self.order_tracker.order_is_close_enough(ticker, side, target, tol, layer=ln):
+                            need_cancel = True
+                            break
+                if need_cancel:
                     break
-            elif self.order_tracker.has_order(ticker, side, layer=1):
-                need_cancel = True
-                break
-
-        if not need_cancel and ENABLE_LAYERED_QUOTES:
-            for side, target, size in [("BUY", bid2, buy_size2), ("SELL", ask2, sell_size2)]:
-                if size >= 100:
-                    if not self.order_tracker.order_is_close_enough(ticker, side, target, tolerance * 2, layer=2):
-                        need_cancel = True
-                        break
 
         if need_cancel or not self.order_tracker.has_any_order(ticker):
             self.api.cancel_ticker_orders(ticker)
             self.order_tracker.clear_ticker(ticker)
             self.orders_cancelled += 1
 
-            # Place Layer 1
-            if quote_buy and buy_size1 >= 100:
-                result = self.api.submit_limit_order(ticker, buy_size1, "BUY", bid1)
-                if result and isinstance(result, dict):
-                    self.order_tracker.record_order(
-                        ticker, "BUY", result.get("order_id", 0), bid1, buy_size1, layer=1)
-                    self.orders_placed += 1
-
-            if quote_sell and sell_size1 >= 100:
-                result = self.api.submit_limit_order(ticker, sell_size1, "SELL", ask1)
-                if result and isinstance(result, dict):
-                    self.order_tracker.record_order(
-                        ticker, "SELL", result.get("order_id", 0), ask1, sell_size1, layer=1)
-                    self.orders_placed += 1
-
-            # Place Layer 2
-            if ENABLE_LAYERED_QUOTES and second_in_day >= POST_CLOSE_RECOVERY_SEC and second_in_day < PRE_CLOSE_WIDEN_SEC:
-                if quote_buy and buy_size2 >= 100:
-                    result = self.api.submit_limit_order(ticker, buy_size2, "BUY", bid2)
+            for ldata in layers:
+                ln = ldata['layer']
+                if quote_buy and ldata['buy_size'] >= 100:
+                    result = self.api.submit_limit_order(ticker, ldata['buy_size'], "BUY", ldata['bid'])
                     if result and isinstance(result, dict):
                         self.order_tracker.record_order(
-                            ticker, "BUY", result.get("order_id", 0), bid2, buy_size2, layer=2)
+                            ticker, "BUY", result.get("order_id", 0),
+                            ldata['bid'], ldata['buy_size'], layer=ln)
                         self.orders_placed += 1
 
-                if quote_sell and sell_size2 >= 100:
-                    result = self.api.submit_limit_order(ticker, sell_size2, "SELL", ask2)
+                if quote_sell and ldata['sell_size'] >= 100:
+                    result = self.api.submit_limit_order(ticker, ldata['sell_size'], "SELL", ldata['ask'])
                     if result and isinstance(result, dict):
                         self.order_tracker.record_order(
-                            ticker, "SELL", result.get("order_id", 0), ask2, sell_size2, layer=2)
+                            ticker, "SELL", result.get("order_id", 0),
+                            ldata['ask'], ldata['sell_size'], layer=ln)
                         self.orders_placed += 1
 
     # ============================================================
@@ -684,13 +572,10 @@ class MarketMaker:
     # ============================================================
 
     def reduce_large_positions(self, tick: int):
-        """Reduce positions approaching per-stock or aggregate limits.
-        V12: Uses passive orders when possible to earn rebates."""
         for ticker in TICKERS:
             pos = self.positions.get(ticker, 0)
             per_stock_limit = self.per_stock_limit.get(ticker, MIN_PER_STOCK_LIMIT)
             threshold = int(per_stock_limit * 0.70)
-
             if abs(pos) < threshold:
                 continue
 
@@ -698,15 +583,12 @@ class MarketMaker:
             excess = abs(pos) - threshold
 
             if abs(pos) > per_stock_limit * 0.90:
-                # Emergency: market order
                 mkt_size = min(excess, int(per_stock_limit * 0.20))
                 mkt_size = max(100, min(mkt_size, MAX_ORDER_SIZE))
                 side = "SELL" if pos > 0 else "BUY"
                 self.api.submit_market_order(ticker, mkt_size, side)
                 self.market_orders_sent += 1
-                print(f"    [REDUCE-MKT] {ticker}: {side} {mkt_size} (pos={pos})")
             else:
-                # Passive: aggressive limit order
                 reduce_size = min(excess, int(per_stock_limit * 0.20))
                 reduce_size = max(100, min(reduce_size, MAX_ORDER_SIZE))
                 if pos > 0:
@@ -717,119 +599,94 @@ class MarketMaker:
                     self.api.submit_limit_order(ticker, reduce_size, "BUY", price)
 
     # ============================================================
-    # MARKET CLOSE PROTOCOL - V12 CORE (CRITICAL)
+    # MARKET CLOSE PROTOCOL - V12.1 (AGGRESSIVE)
     # ============================================================
 
     def pre_close_handler(self, tick: int, second_in_day: int):
-        """The most important function in the algorithm.
-
-        The aggregate position limit is checked at each market close (every 60s).
-        Penalty is $10/share for EVERY share above the limit.
-        A 5,000 share overshoot = $50,000 penalty. This wipes hours of profit.
+        """V12.1: Earlier and more aggressive flattening.
 
         Timeline:
-        - Second 45-47: Widen spreads, reduce sizes (handled by spread/size functions)
-        - Second 48-51: Begin passive flattening (limit orders near mid)
-        - Second 52: CANCEL ALL ORDERS
-        - Second 53-60: Market-order flatten if aggregate > safe threshold
+        - Second 36-37: Widen spreads, reduce sizes (via spread/size functions)
+        - Second 38-41: Passive flattening (limit orders near mid)
+        - Second 42: CANCEL ALL ORDERS
+        - Second 43-59: Market-order flatten until agg < close_target
         """
-
         aggregate = self.compute_aggregate()
-        utilization = aggregate / self.aggregate_limit if self.aggregate_limit > 0 else 0
+        close_target = int(self.close_limit * CLOSE_TARGET_UTILIZATION)
 
         if second_in_day >= PRE_CLOSE_FLATTEN_SEC:
-            # Phase 3: AGGRESSIVE FLATTEN
-            # Target: get aggregate below 80% of limit (safer: 60%)
-            target_aggregate = int(self.aggregate_limit * 0.60)
-
-            if aggregate > target_aggregate:
-                # Sort by absolute position, flatten largest first
+            # Phase 3: AGGRESSIVE MARKET-ORDER FLATTEN
+            if aggregate > close_target:
                 sorted_positions = sorted(
                     [(t, self.positions[t]) for t in TICKERS if abs(self.positions[t]) > 0],
                     key=lambda x: abs(x[1]),
                     reverse=True
                 )
-
-                remaining = aggregate - target_aggregate
+                remaining = aggregate - close_target
                 for ticker, pos in sorted_positions:
                     if remaining <= 0:
                         break
-                    to_reduce = min(abs(pos), remaining)
-                    to_reduce = max(100, min(to_reduce, MAX_ORDER_SIZE))
+                    to_reduce = min(abs(pos), remaining, MAX_ORDER_SIZE)
+                    to_reduce = max(100, to_reduce)
                     side = "SELL" if pos > 0 else "BUY"
                     self.api.submit_market_order(ticker, to_reduce, side)
                     self.market_orders_sent += 1
                     remaining -= to_reduce
-                    print(f"    [PRE-CLOSE FLATTEN] {ticker}: MKT {side} {to_reduce} "
-                          f"(pos={pos}, agg={aggregate}, lim={self.aggregate_limit})")
+                    print(f"    [FLATTEN] {ticker}: MKT {side} {to_reduce} "
+                          f"(pos={pos}, agg={aggregate}, target={close_target})")
 
         elif second_in_day >= PRE_CLOSE_CANCEL_SEC:
-            # Phase 2: CANCEL ALL ORDERS
+            # Phase 2: CANCEL ALL
             if not self.in_lockdown:
                 self.api.cancel_all_orders()
                 self.order_tracker.clear_all()
                 self.in_lockdown = True
                 print(f"    [LOCKDOWN] T{tick} sec={second_in_day} "
-                      f"agg={aggregate}/{self.aggregate_limit} ({utilization:.0%})")
+                      f"agg={aggregate} close_lim={self.close_limit}")
 
         elif second_in_day >= PRE_CLOSE_REDUCE_SEC:
-            # Phase 1: PASSIVE FLATTEN - place aggressive limit orders to reduce
-            if utilization > 0.50:
-                for ticker in TICKERS:
-                    pos = self.positions.get(ticker, 0)
-                    if abs(pos) < 200:
-                        continue
-                    mid = self.mid_prices.get(ticker, 25.0)
-                    reduce_size = min(abs(pos), 3000)
-                    reduce_size = max(100, min(reduce_size, MAX_ORDER_SIZE))
-                    if pos > 0:
-                        # Sell at or slightly below mid for fast fill
-                        price = round(mid - 0.01, 2)
-                        self.api.submit_limit_order(ticker, reduce_size, "SELL", price)
-                    else:
-                        price = round(mid + 0.01, 2)
-                        self.api.submit_limit_order(ticker, reduce_size, "BUY", price)
-
-        # Save pre-close prices for post-news analysis
-        if second_in_day == PRE_CLOSE_CANCEL_SEC:
-            for t in TICKERS:
-                self.pre_close_prices[t] = self.mid_prices.get(t, 25.0)
+            # Phase 1: PASSIVE FLATTEN with aggressive limit orders
+            for ticker in TICKERS:
+                pos = self.positions.get(ticker, 0)
+                if abs(pos) < 200:
+                    continue
+                mid = self.mid_prices.get(ticker, 25.0)
+                reduce_size = min(abs(pos), 5000)
+                reduce_size = max(100, min(reduce_size, MAX_ORDER_SIZE))
+                if pos > 0:
+                    price = round(mid - 0.01, 2)  # Aggressive: sell below mid
+                    self.api.submit_limit_order(ticker, reduce_size, "SELL", price)
+                else:
+                    price = round(mid + 0.01, 2)
+                    self.api.submit_limit_order(ticker, reduce_size, "BUY", price)
 
     # ============================================================
     # EMERGENCY HANDLERS
     # ============================================================
 
     def emergency_flatten(self, target_util: float = 0.70):
-        """Emergency flatten when aggregate is too high during trading."""
         current = self.compute_aggregate()
-        target = int(self.aggregate_limit * target_util)
+        target = int(self.gross_limit * target_util)
         if current <= target:
             return
-
         self.api.cancel_all_orders()
         self.order_tracker.clear_all()
-
         excess = current - target
         sorted_positions = sorted(
             [(t, self.positions[t]) for t in TICKERS if abs(self.positions[t]) > 0],
-            key=lambda x: abs(x[1]),
-            reverse=True
-        )
-
+            key=lambda x: abs(x[1]), reverse=True)
         remaining = excess
         for ticker, pos in sorted_positions:
             if remaining <= 0:
                 break
-            to_reduce = min(abs(pos), remaining)
-            to_reduce = max(100, min(to_reduce, MAX_ORDER_SIZE))
+            to_reduce = min(abs(pos), remaining, MAX_ORDER_SIZE)
+            to_reduce = max(100, to_reduce)
             side = "SELL" if pos > 0 else "BUY"
             self.api.submit_market_order(ticker, to_reduce, side)
             self.market_orders_sent += 1
             remaining -= to_reduce
-            print(f"    [EMERGENCY FLATTEN] {ticker}: MKT {side} {to_reduce}")
 
     def panic_flatten(self):
-        """PANIC: flatten everything immediately."""
         self.api.cancel_all_orders()
         self.order_tracker.clear_all()
         for ticker in TICKERS:
@@ -839,19 +696,19 @@ class MarketMaker:
                 qty = min(abs(pos), MAX_ORDER_SIZE)
                 self.api.submit_market_order(ticker, qty, side)
                 self.market_orders_sent += 1
-                print(f"    [PANIC] {ticker}: MKT {side} {qty}")
 
     # ============================================================
-    # MAIN LOOP - V12
+    # MAIN LOOP
     # ============================================================
 
     def run(self):
-        print(BANNER.format(url=API_BASE_URL, key=API_KEY))
+        print(BANNER.format(
+            close_lim=self.close_limit, intra_lim=self.gross_limit,
+            url=API_BASE_URL, key=API_KEY))
 
-        # Initialize limits
         self.update_limits()
-        print(f"  Aggregate limit: {self.aggregate_limit:,}")
-        print(f"  Gross limit: {self.gross_limit:,}")
+        print(f"  Intraday gross limit: {self.gross_limit:,}")
+        print(f"  Close-time limit: {self.close_limit:,}")
         print(f"  Net limit: {self.net_limit:,}")
         for t in TICKERS:
             print(f"  {t}: per_stock={self.per_stock_limit[t]:,}, "
@@ -881,7 +738,7 @@ class MarketMaker:
                         print(f"  Final P&L: ${self.current_pnl:,.2f}")
                         print(f"  Orders: +{self.orders_placed}/-{self.orders_cancelled}")
                         print(f"  Market orders: {self.market_orders_sent}")
-                        print(f"  Est. volume traded: {self.total_volume_traded:,}")
+                        print(f"  Volume: {self.total_volume_traded:,}")
                         break
                     time.sleep(0.5)
                     continue
@@ -895,7 +752,6 @@ class MarketMaker:
                 second_in_day = tick % DAY_LENGTH
                 current_day = tick // DAY_LENGTH
 
-                # New day detected - reset lockdown
                 if current_day != last_day:
                     if last_day >= 0:
                         print(f"\n  === DAY {current_day + 1} (tick {tick}) ===")
@@ -906,7 +762,7 @@ class MarketMaker:
                     time.sleep(1.0)
                     continue
 
-                # UPDATE STATE
+                # State updates
                 self.update_state(tick)
                 if tick % 5 == 0:
                     self.update_limits()
@@ -918,30 +774,23 @@ class MarketMaker:
                 aggregate = self.compute_aggregate()
                 net = self.compute_net()
 
-                # ============================================
-                # PHASE-BASED TRADING LOGIC
-                # ============================================
-
-                # PHASE: PRE-CLOSE (second >= 45)
+                # PRE-CLOSE (second >= 36)
                 if second_in_day >= PRE_CLOSE_WIDEN_SEC:
                     self.pre_close_handler(tick, second_in_day)
                     time.sleep(CYCLE_SLEEP)
                     continue
 
-                # PHASE: POST-CLOSE RECOVERY (second < 5)
-                # Don't quote, just observe. Prices may be jumping from news.
+                # POST-CLOSE RECOVERY (second < 5)
                 if second_in_day < POST_CLOSE_RECOVERY_SEC:
-                    # Cancel any stale orders from before close
                     if self.order_tracker.has_any_order(TICKERS[0]):
                         self.api.cancel_all_orders()
                         self.order_tracker.clear_all()
                     time.sleep(CYCLE_SLEEP)
                     continue
 
-                # PHASE: ACTIVE TRADING (second 5-44)
+                # ACTIVE TRADING (second 5-35)
                 self.in_lockdown = False
 
-                # Emergency handling based on utilization
                 if utilization > UTIL_PANIC:
                     self.panic_flatten()
                     time.sleep(CYCLE_SLEEP)
@@ -949,27 +798,21 @@ class MarketMaker:
                 elif utilization > UTIL_EMERGENCY:
                     self.emergency_flatten(target_util=UTIL_REDUCE)
 
-                # Proactive position reduction
                 if tick % 3 == 0:
                     self.reduce_large_positions(tick)
 
-                # MAIN QUOTING: quote all 4 tickers
                 for ticker in TICKERS:
                     self.quote_ticker(ticker, tick, second_in_day, utilization)
 
-                # LOGGING
+                # Logging
                 if tick - last_log_tick >= LOG_INTERVAL_TICKS:
                     pos_str = " | ".join(
                         f"{t}:{int(self.positions.get(t,0)):+d}" for t in TICKERS)
                     pnl_str = f"${self.current_pnl:+,.0f}" if self.start_nlv > 0 else "N/A"
-                    regime_str = " ".join(
-                        f"{t[0]}:{self.vol_tracker.get_regime(t)[0]}" for t in TICKERS)
                     print(f"  T{tick:03d} d{second_in_day:02d} | "
                           f"pos=[{pos_str}] | "
-                          f"agg={aggregate:,}/{self.aggregate_limit:,}({utilization:.0%}) | "
-                          f"net={net:,} | "
-                          f"pnl={pnl_str} | vol={regime_str} | "
-                          f"ord+{self.orders_placed}/-{self.orders_cancelled} | "
+                          f"agg={aggregate:,}/{self.gross_limit:,}({utilization:.0%}) | "
+                          f"net={net:,} | pnl={pnl_str} | "
                           f"mkt={self.market_orders_sent} | "
                           f"tvol={self.total_volume_traded:,}")
                     last_log_tick = tick
@@ -984,10 +827,6 @@ class MarketMaker:
                 logger.exception(f"Error: {e}")
                 time.sleep(0.5)
 
-
-# ============================================================
-# STARTUP
-# ============================================================
 
 def wait_for_connection(api: RITApi):
     print("  Waiting for RIT connection...")
@@ -1025,7 +864,7 @@ def setup_logging():
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     log_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
     os.makedirs(log_dir, exist_ok=True)
-    fh = logging.FileHandler(os.path.join(log_dir, f"mm_v12_{ts}.log"))
+    fh = logging.FileHandler(os.path.join(log_dir, f"mm_v12_1_{ts}.log"))
     fh.setFormatter(logging.Formatter("%(asctime)s %(message)s"))
     _file_logger.addHandler(fh)
 
@@ -1041,7 +880,6 @@ def main():
             continue
 
         mm = MarketMaker(api)
-
         try:
             mm.run()
         except Exception as e:

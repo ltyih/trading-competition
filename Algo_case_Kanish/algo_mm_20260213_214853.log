@@ -1,0 +1,30 @@
+2026-02-13 21:48:53,838 [PRINT] Logging to: C:\Users\Kanish Khanna\OneDrive - UBC\Desktop\RITC\RITC-2026\Algo_case_Kanish\algo_mm_20260213_214853.log
+
+2026-02-13 21:48:53,838 [PRINT] Waiting for RIT connection...
+2026-02-13 21:48:53,877 [PRINT] Connected to RIT.
+2026-02-13 21:48:53,882 [PRINT] Trader: UBCT-4 | First:  | NLV: $-3.80
+2026-02-13 21:48:53,882 [PRINT] 
+Bot ready. Waiting for heats...
+
+2026-02-13 21:48:53,884 [PRINT] ----------------------------------------------------------------------
+2026-02-13 21:48:53,884 [PRINT] 
+============================================================
+2026-02-13 21:48:53,884 [PRINT]   HEAT 1 - V7 DEFENSE-FIRST EDITION
+2026-02-13 21:48:53,884 [PRINT]   Stocks: WNTR, SMMR, ATMN, SPNG
+2026-02-13 21:48:53,892 [PRINT]   Start NLV: $-3.80
+2026-02-13 21:48:53,892 [PRINT]   Spreads: WNTR=$0.10 | SMMR=$0.12 | ATMN=$0.14 | SPNG=$0.16
+2026-02-13 21:48:53,892 [PRINT]   Sizes: WNTR=500 | SMMR=400 | ATMN=350 | SPNG=300
+2026-02-13 21:48:53,893 [PRINT] ============================================================
+
+2026-02-13 21:48:53,894 [PRINT] 
+  Starting market-making loop V7...
+2026-02-13 21:48:53,894 [PRINT]   Start NLV: $-3.80
+2026-02-13 21:48:53,902 [PRINT]   Aggregate limit: 50000
+2026-02-13 21:48:53,903 [PRINT]   Gross limit: 50000, Net limit: 30000
+2026-02-13 21:48:58,223 [PRINT]   [T=255/300] D5 s15 | PnL=$     +0.00 | Agg=790/50000 (2%) | WNTR:+200 | SMMR:+300 | ATMN:+150 | SPNG:+140 | Vol:W:H S:H A:H S:H | Adapt:W:0.92 S:0.92 A:0.92 S:0.92 | Fills:2310 Ord:17
+2026-02-13 21:49:01,501 [PRINT] 
+
+Shutting down...
+2026-02-13 21:49:01,562 [PRINT] Cancelled all open orders.
+2026-02-13 21:49:01,564 [PRINT] Final NLV: $-195.60
+2026-02-13 21:49:01,564 [PRINT] Goodbye.

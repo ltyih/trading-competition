@@ -1,0 +1,49 @@
+2026-02-15 15:49:28,846   Waiting for RIT connection...
+2026-02-15 15:49:28,871   Connected!
+2026-02-15 15:49:28,872   Waiting for ACTIVE status...
+2026-02-15 15:49:28,879   Simulation is ACTIVE!
+2026-02-15 15:49:28,880 
+================================================================================
+  ALGO MARKET MAKING BOT V11 - FULL CAPACITY VOLUME MAXIMIZER
+  Target: 70-90% Gross Utilization | Layered Quotes | Rapid Turnover
+  http://localhost:10000/v1 | Key: AJDSYHVC
+================================================================================
+
+2026-02-15 15:49:28,889   Gross limit: 50,000
+2026-02-15 15:49:28,890   Net limit: 30,000
+2026-02-15 15:49:28,891   WNTR: per_stock=13,950, base_size=2500, rebate=$0.045, spread=0.02
+2026-02-15 15:49:28,892   SMMR: per_stock=12,400, base_size=2200, rebate=$0.04, spread=0.02
+2026-02-15 15:49:28,893   ATMN: per_stock=10,850, base_size=1800, rebate=$0.035, spread=0.03
+2026-02-15 15:49:28,893   SPNG: per_stock=9,300, base_size=1500, rebate=$0.03, spread=0.04
+2026-02-15 15:49:30,757   T062 d02 | pos=[WNTR:-1575 | SMMR:-970 | ATMN:+793 | SPNG:+661] | G=3,999.0/50,000(8%) | N=1,091.0 | pnl=$+0 | vol=W:M S:M A:M S:M | ord+16/-4 | tvol=3,999.0
+2026-02-15 15:49:32,814     [REDUCE-MKT] ATMN: SELL 1627 (pos=12000.0)
+2026-02-15 15:49:34,713   T067 d07 | pos=[WNTR:+6914 | SMMR:-970 | ATMN:-4366 | SPNG:-4716] | G=16,966.0/50,000(34%) | N=3,138.0 | pnl=$-1,652 | vol=W:H S:L A:H S:H | ord+58/-15 | tvol=70,246.0
+2026-02-15 15:49:35,947     [REDUCE-MKT] SMMR: SELL 1860 (pos=22790.0)
+2026-02-15 15:49:39,311   T072 d12 | pos=[WNTR:+4027 | SMMR:+9565 | ATMN:-561 | SPNG:+4973] | G=19,126.0/50,000(38%) | N=18,004.0 | pnl=$-5,765 | vol=W:H S:H A:H S:H | ord+108/-29 | tvol=196,812.0
+2026-02-15 15:49:41,594     [REDUCE-MKT] SMMR: BUY 1860 (pos=-18988.0)
+2026-02-15 15:49:44,248     [REDUCE-MKT] SPNG: SELL 1395 (pos=12628.0)
+2026-02-15 15:49:45,488   T078 d18 | pos=[WNTR:+5917 | SMMR:+479 | ATMN:+6883 | SPNG:+12628] | G=25,907.0/50,000(52%) | N=25,907.0 | pnl=$-11,885 | vol=W:H S:H A:H S:H | ord+174/-49 | tvol=349,205.0
+2026-02-15 15:49:50,806   T083 d23 | pos=[WNTR:+10092 | SMMR:-1882 | ATMN:+9440 | SPNG:-487] | G=21,901.0/50,000(44%) | N=17,163.0 | pnl=$-10,705 | vol=W:H S:H A:H S:H | ord+230/-64 | tvol=470,173.0
+2026-02-15 15:49:53,603     [REDUCE-MKT] SPNG: BUY 1395 (pos=-9011.0)
+2026-02-15 15:49:55,819   T088 d28 | pos=[WNTR:-2494 | SMMR:+7375 | ATMN:-10708 | SPNG:+1687] | G=22,264.0/50,000(45%) | N=4,140.0 | pnl=$-9,272 | vol=W:M S:H A:H S:H | ord+286/-79 | tvol=574,858.0
+2026-02-15 15:49:57,311     [REDUCE-MKT] WNTR: SELL 2092 (pos=13080.0)
+2026-02-15 15:49:57,368     [REDUCE-MKT] SMMR: BUY 1860 (pos=-12942.0)
+2026-02-15 15:50:00,013     [REDUCE-MKT] SMMR: SELL 1860 (pos=15900.0)
+2026-02-15 15:50:00,866   T093 d33 | pos=[WNTR:+302 | SMMR:+15900 | ATMN:-6891 | SPNG:+3727] | G=26,820.0/50,000(54%) | N=13,038.0 | pnl=$-3,912 | vol=W:M S:H A:H S:H | ord+338/-94 | tvol=721,294.0
+2026-02-15 15:50:05,857   T098 d38 | pos=[WNTR:-1252 | SMMR:+7110 | ATMN:+5632 | SPNG:-9180] | G=23,174.0/50,000(46%) | N=2,310.0 | pnl=$-3,921 | vol=W:H S:H A:H S:M | ord+392/-109 | tvol=841,234.0
+2026-02-15 15:50:08,679     [REDUCE-MKT] SMMR: BUY 1860 (pos=-20647.0)
+2026-02-15 15:50:10,718   T103 d43 | pos=[WNTR:-4496 | SMMR:-4927 | ATMN:-2249 | SPNG:-4465] | G=16,137.0/50,000(32%) | N=16,137.0 | pnl=$-7,053 | vol=W:H S:M A:H S:H | ord+444/-123 | tvol=974,651.0
+2026-02-15 15:50:11,681     [CB CAUTION] PnL=$-91,859.66
+2026-02-15 15:50:11,738     [REDUCE-MKT] ATMN: BUY 1627 (pos=-11589.0)
+2026-02-15 15:50:11,803     [REDUCE-MKT] SPNG: BUY 1395 (pos=-11722.0)
+2026-02-15 15:50:15,263   T108 d48 | pos=[WNTR:-1150 | SMMR:+3701 | ATMN:-3382 | SPNG:-820] | G=9,053.0/50,000(18%) | N=1,651.0 | pnl=$-89,653 | vol=W:M S:H A:H S:H | ord+490/-138 | tvol=1,049,035.0
+2026-02-15 15:50:21,647   T113 d53 | pos=[WNTR:+6143 | SMMR:-118 | ATMN:-5278 | SPNG:+1247] | G=12,786.0/50,000(26%) | N=1,994.0 | pnl=$-90,084 | vol=W:H S:H A:H S:H | ord+562/-156 | tvol=1,097,780.0
+2026-02-15 15:50:27,254   T120 d00 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | G=0.0/9,000(0%) | N=0.0 | pnl=$-91,598 | vol=W:M S:H A:H S:H | ord+570/-160 | tvol=1,120,836.0
+2026-02-15 15:50:29,740     [REDUCE-MKT] WNTR: SELL 376 (pos=2428.0)
+2026-02-15 15:50:32,940   T125 d05 | pos=[WNTR:-1847 | SMMR:-1617 | ATMN:+82 | SPNG:+237] | G=3,783.0/50,000(8%) | N=3,145.0 | pnl=$-93,501 | vol=W:H S:H A:H S:H | ord+632/-178 | tvol=1,137,559.0
+2026-02-15 15:50:35,836 
+  [INTERRUPTED]
+2026-02-15 15:50:35,841 
+  Waiting for next simulation...
+
+2026-02-15 15:50:38,843   Waiting for ACTIVE status...
