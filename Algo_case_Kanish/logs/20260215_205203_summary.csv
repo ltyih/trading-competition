@@ -1,0 +1,6 @@
+day,end_tick,WNTR_end_pos,SMMR_end_pos,ATMN_end_pos,SPNG_end_pos,aggregate_at_close,aggregate_limit,over_limit_shares,estimated_penalty,nlv,pnl_from_start
+1,59,-1638.0,-1583.0,-1705.0,0,4926.0,10000,0,0.00,7944.34,
+2,119,0,0,0,0,0,10000,0,0.00,16707.03,
+3,179,579.0,0,0,0,579.0,10000,0,0.00,23278.58,
+4,239,0,4945.0,0,0,4945.0,10000,0,0.00,30582.79,
+5,299,4783.0,0,0,-511.0,5294.0,10000,0,0.00,31867.67,

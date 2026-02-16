@@ -1,0 +1,50 @@
+{
+  "sessions": [
+    {
+      "session_id": "RITC_2026_Merger_Arbitrage_Case_-_practice_period1_20260206_093041",
+      "collector_id": "Kanish_Kanish_Khanna_a58d17da",
+      "collector_name": null,
+      "db_path": "C:\\Users\\Kanish Khanna\\OneDrive - UBC\\Desktop\\RITC\\RITC-2026\\Merger_Arbitrage_case\\data\\sessions\\RITC_2026_Merger_Arbitrage_Case_-_practice_period1_20260206_093041.db",
+      "start_time": "2026-02-06T09:30:41.015230",
+      "case_name": "RITC 2026 Merger Arbitrage Case - practice",
+      "period": 1
+    },
+    {
+      "session_id": "RITC_2026_Merger_Arbitrage_Case_-_practice_period1_20260206_093522",
+      "collector_id": "Kanish_Kanish_Khanna_4185b7ee",
+      "collector_name": null,
+      "db_path": "C:\\Users\\Kanish Khanna\\OneDrive - UBC\\Desktop\\RITC\\RITC-2026\\Merger_Arbitrage_case\\data\\sessions\\RITC_2026_Merger_Arbitrage_Case_-_practice_period1_20260206_093522.db",
+      "start_time": "2026-02-06T09:35:22.828642",
+      "case_name": "RITC 2026 Merger Arbitrage Case - practice",
+      "period": 1
+    },
+    {
+      "session_id": "RITC_2026_Merger_Arbitrage_Case_-_practice_period1_20260206_094100",
+      "collector_id": "Kanish_Kanish_Khanna_1bafb8e5",
+      "collector_name": null,
+      "db_path": "C:\\Users\\Kanish Khanna\\OneDrive - UBC\\Desktop\\RITC\\RITC-2026\\Merger_Arbitrage_case\\data\\sessions\\RITC_2026_Merger_Arbitrage_Case_-_practice_period1_20260206_094100.db",
+      "start_time": "2026-02-06T09:41:00.119399",
+      "case_name": "RITC 2026 Merger Arbitrage Case - practice",
+      "period": 1,
+      "end_time": "2026-02-06T10:15:00.558571"
+    },
+    {
+      "session_id": "RITC2026_GBE_Energy_Electricity_Trading_case_-_practice_period1_20260206_101500",
+      "collector_id": "Kanish_Kanish_Khanna_1bafb8e5",
+      "collector_name": null,
+      "db_path": "C:\\Users\\Kanish Khanna\\OneDrive - UBC\\Desktop\\RITC\\RITC-2026\\Merger_Arbitrage_case\\data\\sessions\\RITC2026_GBE_Energy_Electricity_Trading_case_-_practice_period1_20260206_101500.db",
+      "start_time": "2026-02-06T10:15:00.575109",
+      "case_name": "RITC2026 GBE Energy Electricity Trading case - practice",
+      "period": 1
+    },
+    {
+      "session_id": "RITC_2026_Merger_Arbitrage_Case_-_practice_period1_20260207_171238",
+      "collector_id": "Kanish_Kanish_Khanna_099757ff",
+      "collector_name": null,
+      "db_path": "C:\\Users\\Kanish Khanna\\OneDrive - UBC\\Desktop\\RITC\\RITC-2026\\Merger_Arbitrage_case\\data\\sessions\\RITC_2026_Merger_Arbitrage_Case_-_practice_period1_20260207_171238.db",
+      "start_time": "2026-02-07T17:12:38.639166",
+      "case_name": "RITC 2026 Merger Arbitrage Case - practice",
+      "period": 1
+    }
+  ]
+}

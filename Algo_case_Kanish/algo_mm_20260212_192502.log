@@ -1,0 +1,1 @@
+2026-02-12 19:34:24,769 [WARNING] api: POST /commands/cancel returned 401: {"code":"UNAUTHORIZED","message":"Simulation must be running."}

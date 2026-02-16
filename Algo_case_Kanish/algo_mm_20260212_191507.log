@@ -1,0 +1,7 @@
+2026-02-12 19:15:14,434 [WARNING] api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order could not be submitted because the price must be greater than 10 and less than 40."}
+2026-02-12 19:15:14,508 [WARNING] api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order could not be submitted because the price must be greater than 10 and less than 40."}
+2026-02-12 19:15:15,662 [WARNING] api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order could not be submitted because the price must be greater than 10 and less than 40."}
+2026-02-12 19:15:15,740 [WARNING] api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order could not be submitted because the price must be greater than 10 and less than 40."}
+2026-02-12 19:15:16,575 [WARNING] api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order could not be submitted because the price must be greater than 10 and less than 40."}
+2026-02-12 19:15:18,413 [WARNING] api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order could not be submitted because the price must be greater than 10 and less than 40."}
+2026-02-12 19:15:18,471 [WARNING] api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order could not be submitted because the price must be greater than 10 and less than 40."}
