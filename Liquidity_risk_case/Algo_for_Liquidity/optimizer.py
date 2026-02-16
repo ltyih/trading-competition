@@ -18,7 +18,7 @@ from statistics import pstdev
 from config import (
     AC_TAU, AC_MIN_HORIZON, AC_FALLBACK_TWAP,
     AC_GRADIENT_MED_VOL, VOL_TO_GRADIENT,
-    EPS,
+    STATIC_VOLATILITY, EPS,
 )
 
 
@@ -49,7 +49,16 @@ class AlmgrenChriss:
             del hist[:-max_history]
 
     def estimate_volatility(self, ticker: str) -> float:
-        """Estimate realized volatility from mid-price history."""
+        """Estimate realized volatility from mid-price history.
+        
+        First checks for pre-calculated static volatility in config.
+        If not available, calculates dynamically from mid-price history.
+        """
+        # Use static volatility if available
+        if ticker in STATIC_VOLATILITY and STATIC_VOLATILITY[ticker] is not None:
+            return max(0.0001, STATIC_VOLATILITY[ticker])
+        
+        # Fall back to dynamic calculation
         mids = self._mid_history.get(ticker, [])
         if len(mids) < 5:
             return 0.001  # Default moderate vol
