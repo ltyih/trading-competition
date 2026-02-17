@@ -14,7 +14,7 @@ Key changes from V14.1:
 
 # ========== API Connection ==========
 API_HOST = "localhost"
-API_PORT = 10000
+API_PORT = 9999
 API_BASE_URL = f"http://{API_HOST}:{API_PORT}/v1"
 API_KEY = "AJDSYHVC"
 
