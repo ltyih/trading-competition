@@ -11,14 +11,14 @@
     "severity": "small"
   },
   "ACTIVIST HEDGE FUND OPPOSES DEAL": {
-    "avg_prob_change": -0.006151034460014115,
-    "avg_target_move": -0.40400000000000064,
+    "avg_prob_change": -0.005412346064551922,
+    "avg_target_move": -0.25,
     "category": "SHR",
     "confidence": 1.0,
     "deal_pattern": "D3",
     "direction": "positive",
     "headline_example": "Activist Hedge Fund Opposes Deal",
-    "observed_count": 5,
+    "observed_count": 6,
     "severity": "medium"
   },
   "ALL FINANCING CONDITIONS MET": {
@@ -121,14 +121,14 @@
     "severity": "small"
   },
   "BANK SYNDICATE EXPANDS": {
-    "avg_prob_change": 0.016359121842740285,
-    "avg_target_move": 0.308333333333333,
+    "avg_prob_change": 0.015000032777067743,
+    "avg_target_move": 0.32384615384615334,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D3",
     "direction": "positive",
     "headline_example": "Bank Syndicate Expands",
-    "observed_count": 12,
+    "observed_count": 13,
     "severity": "small"
   },
   "BANKS PROPOSE ENHANCED CRA PLAN": {
@@ -198,14 +198,14 @@
     "severity": "medium"
   },
   "BRANCH MANAGER RETENTION PROGRAM": {
-    "avg_prob_change": 0.03364763144028807,
-    "avg_target_move": 0.41250000000000053,
+    "avg_prob_change": 0.030311789362756737,
+    "avg_target_move": 0.382,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D2",
     "direction": "negative",
     "headline_example": "Branch Manager Retention Program",
-    "observed_count": 4,
+    "observed_count": 5,
     "severity": "small"
   },
   "BREACH OF TRANSACTION COVENANT ALLEGED": {
@@ -231,25 +231,25 @@
     "severity": "small"
   },
   "BRIDGE FINANCING COMMITMENT SIGNED": {
-    "avg_prob_change": -0.0005419098290958546,
-    "avg_target_move": 0.6850000000000023,
+    "avg_prob_change": 0.001254376710122888,
+    "avg_target_move": 0.5533333333333369,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D2",
     "direction": "positive",
     "headline_example": "Bridge Financing Commitment Signed",
-    "observed_count": 2,
+    "observed_count": 3,
     "severity": "small"
   },
   "BRIDGE LOAN REPLACED WITH TERM FACILITY": {
-    "avg_prob_change": 0.008590706789226849,
-    "avg_target_move": 0.40199999999999925,
+    "avg_prob_change": 0.01367039242545444,
+    "avg_target_move": 0.5699999999999993,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "negative",
     "headline_example": "Bridge Loan Replaced with Term Facility",
-    "observed_count": 10,
+    "observed_count": 11,
     "severity": "small"
   },
   "BROAD MARKET SELL-OFF AS RISK SENTIMENT DETERIORATES": {
@@ -275,14 +275,14 @@
     "severity": "medium"
   },
   "CAPITAL PLAN APPROVED BY FED": {
-    "avg_prob_change": -0.007816258965913543,
-    "avg_target_move": -0.07555555555555632,
+    "avg_prob_change": -0.008907407931481265,
+    "avg_target_move": -0.09600000000000079,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D2",
     "direction": "positive",
     "headline_example": "Capital Plan Approved by Fed",
-    "observed_count": 9,
+    "observed_count": 10,
     "severity": "small"
   },
   "CENTRAL BANK ANNOUNCES ENHANCED LIQUIDITY FACILITIES": {
@@ -319,25 +319,25 @@
     "severity": "medium"
   },
   "CLASS ACTION FILED IN DELAWARE": {
-    "avg_prob_change": 0.001117847857257126,
-    "avg_target_move": 0.010000000000000142,
+    "avg_prob_change": 0.001137340730098561,
+    "avg_target_move": -0.040000000000000924,
     "category": "REG",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "positive",
     "headline_example": "Class Action Filed in Delaware",
-    "observed_count": 5,
+    "observed_count": 6,
     "severity": "small"
   },
   "CLOSED-DOOR MEETING BETWEEN TRANSACTION PRINCIPALS REPORTED": {
-    "avg_prob_change": 0.006890242402895324,
-    "avg_target_move": 0.21516129032258,
+    "avg_prob_change": 0.00663401495246101,
+    "avg_target_move": 0.2243749999999993,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D2",
     "direction": "positive",
     "headline_example": "Closed-Door Meeting Between Transaction Principals Reported",
-    "observed_count": 31,
+    "observed_count": 32,
     "severity": "small"
   },
   "CLOSING CONDITIONS STATUS": {
@@ -363,14 +363,14 @@
     "severity": "small"
   },
   "CLOSING CONDITIONS TRACKER UPDATED": {
-    "avg_prob_change": -0.017730097108098163,
-    "avg_target_move": -0.25642857142857167,
+    "avg_prob_change": -0.01675324642705966,
+    "avg_target_move": -0.2080000000000003,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D1",
     "direction": "negative",
     "headline_example": "Closing Conditions Tracker Updated",
-    "observed_count": 14,
+    "observed_count": 15,
     "severity": "medium"
   },
   "CLOSING TIMELINE EXTENDED": {
@@ -385,14 +385,14 @@
     "severity": "small"
   },
   "COLLAR MECHANISM SPECULATION": {
-    "avg_prob_change": 0.0023891091410489598,
-    "avg_target_move": 0.4383333333333332,
+    "avg_prob_change": 0.0014034492870262213,
+    "avg_target_move": 0.4385714285714281,
     "category": "SHR",
     "confidence": 1.0,
     "deal_pattern": "D3",
     "direction": "positive",
     "headline_example": "Collar Mechanism Speculation",
-    "observed_count": 6,
+    "observed_count": 7,
     "severity": "medium"
   },
   "COMMODITY PRICE HEDGE PROGRAM": {
@@ -473,14 +473,14 @@
     "severity": "small"
   },
   "COMPANY ENGAGES ADVISORS FOR STRATEGIC REVIEW": {
-    "avg_prob_change": -0.0005630980301597875,
-    "avg_target_move": 0.030399999999999636,
+    "avg_prob_change": -0.001216437661023302,
+    "avg_target_move": 0.027407407407407217,
     "category": "REG",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "negative",
     "headline_example": "SolarPeak Engages Advisors for Strategic Review",
-    "observed_count": 25,
+    "observed_count": 27,
     "severity": "small"
   },
   "COMPANY INCREASES OFFER PRICE": {
@@ -517,14 +517,14 @@
     "severity": "small"
   },
   "COMPANY REPORTS STRONG QUARTERLY EARNINGS": {
-    "avg_prob_change": 0.07515322941577117,
-    "avg_target_move": 0.2881818181818164,
+    "avg_prob_change": 0.06785712696445691,
+    "avg_target_move": 0.24833333333333155,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D1",
     "direction": "positive",
     "headline_example": "Pharmaco Reports Strong Quarterly Earnings",
-    "observed_count": 11,
+    "observed_count": 12,
     "severity": "large"
   },
   "COMPANY REPORTS STRONG REVENUE GROWTH": {
@@ -539,25 +539,25 @@
     "severity": "small"
   },
   "COMPANY SCHEDULES SHAREHOLDER MEETING": {
-    "avg_prob_change": 0.0021224801909193102,
-    "avg_target_move": -0.004285714285713433,
+    "avg_prob_change": 0.01025536151569497,
+    "avg_target_move": 0.2375000000000007,
     "category": "SHR",
     "confidence": 1.0,
     "deal_pattern": "D2",
     "direction": "positive",
     "headline_example": "SolarPeak Schedules Shareholder Meeting",
-    "observed_count": 7,
+    "observed_count": 8,
     "severity": "small"
   },
   "COMPANY SCHEDULES SHAREHOLDER VOTE": {
-    "avg_prob_change": 0.03597825683976277,
-    "avg_target_move": 0.7030000000000001,
+    "avg_prob_change": 0.03313912371399107,
+    "avg_target_move": 0.624545454545455,
     "category": "SHR",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "positive",
     "headline_example": "GreenGrid Schedules Shareholder Vote",
-    "observed_count": 10,
+    "observed_count": 11,
     "severity": "medium"
   },
   "COMPANY SETS MEETING FOR SHAREHOLDER VOTE": {
@@ -572,14 +572,14 @@
     "severity": "small"
   },
   "COMPANY SETS SHAREHOLDER MEETING DATE": {
-    "avg_prob_change": 0.0024438944375157127,
-    "avg_target_move": -0.010909090909091968,
+    "avg_prob_change": 0.0023245490789907492,
+    "avg_target_move": 0.029166666666666192,
     "category": "SHR",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "positive",
     "headline_example": "ByteLayer Sets Shareholder Meeting Date",
-    "observed_count": 11,
+    "observed_count": 12,
     "severity": "large"
   },
   "COMPANY SHARE PRICE VOLATILITY": {
@@ -638,14 +638,14 @@
     "severity": "small"
   },
   "COMPANY SHAREHOLDER QUESTIONS DEAL LOGIC": {
-    "avg_prob_change": -0.01519570853776204,
-    "avg_target_move": -0.20857142857142869,
+    "avg_prob_change": -0.014271949866901182,
+    "avg_target_move": -0.24125000000000085,
     "category": "SHR",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "positive",
     "headline_example": "CloudSys Shareholder Questions Deal Logic",
-    "observed_count": 7,
+    "observed_count": 8,
     "severity": "small"
   },
   "COMPANY STOCK PRICE DECLINE": {
@@ -748,14 +748,14 @@
     "severity": "small"
   },
   "CONGRESSIONAL BANKING COMMITTEE INQUIRY": {
-    "avg_prob_change": -0.021173473163343073,
-    "avg_target_move": -0.18444444444444327,
+    "avg_prob_change": -0.019469178878988275,
+    "avg_target_move": -0.18799999999999883,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D2",
     "direction": "negative",
     "headline_example": "Congressional Banking Committee Inquiry",
-    "observed_count": 9,
+    "observed_count": 10,
     "severity": "small"
   },
   "CONGRESSIONAL HEARING ANNOUNCED": {
@@ -836,14 +836,14 @@
     "severity": "small"
   },
   "CREDIT FACILITY AMENDMENT NEGOTIATED": {
-    "avg_prob_change": 0.0025606339685173177,
-    "avg_target_move": 0.23384615384615268,
+    "avg_prob_change": 0.002651367177818018,
+    "avg_target_move": 0.2385714285714273,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "positive",
     "headline_example": "Credit Facility Amendment Negotiated",
-    "observed_count": 13,
+    "observed_count": 14,
     "severity": "small"
   },
   "CREDIT MARKETS FLASH WARNING SIGNS AS SPREADS WIDEN": {
@@ -869,25 +869,25 @@
     "severity": "small"
   },
   "CREDIT RATING DOWNGRADE": {
-    "avg_prob_change": -0.002654651518351925,
-    "avg_target_move": 0.14285714285714185,
+    "avg_prob_change": -0.002200666777797726,
+    "avg_target_move": 0.06624999999999925,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "positive",
     "headline_example": "Credit Rating Downgrade",
-    "observed_count": 7,
+    "observed_count": 8,
     "severity": "small"
   },
   "DEBT FINANCING COMMITMENTS SECURED": {
-    "avg_prob_change": 0.0006381122450515524,
-    "avg_target_move": 0.03333333333333539,
+    "avg_prob_change": 0.0006231434945005998,
+    "avg_target_move": 0.05200000000000173,
     "category": "FIN",
     "confidence": 0.8,
     "deal_pattern": "D3",
     "direction": "negative",
     "headline_example": "Debt Financing Commitments Secured",
-    "observed_count": 9,
+    "observed_count": 10,
     "severity": "small"
   },
   "DEBT FINANCING FULLY COMMITTED": {
@@ -990,14 +990,14 @@
     "severity": "small"
   },
   "DOJ ANTITRUST DIVISION SIGNALS STRICTER MERGER ENFORCEMENT": {
-    "avg_prob_change": 0.050394901361593636,
-    "avg_target_move": 0.7349999999999985,
+    "avg_prob_change": 0.04807593918581547,
+    "avg_target_move": 0.779999999999999,
     "category": "REG",
     "confidence": 1.0,
     "deal_pattern": "D2",
     "direction": "positive",
     "headline_example": "DOJ Antitrust Division Signals Stricter Merger Enforcement",
-    "observed_count": 4,
+    "observed_count": 5,
     "severity": "small"
   },
   "DOJ PROVIDES CONDITIONAL CLEARANCE": {
@@ -1012,14 +1012,14 @@
     "severity": "small"
   },
   "DOJ REQUESTS EXTENDED REVIEW": {
-    "avg_prob_change": -0.006457787435115381,
-    "avg_target_move": -0.10600000000000165,
+    "avg_prob_change": -0.005726033964273976,
+    "avg_target_move": -0.03833333333333518,
     "category": "REG",
     "confidence": 1.0,
     "deal_pattern": "D2",
     "direction": "negative",
     "headline_example": "DOJ Requests Extended Review",
-    "observed_count": 5,
+    "observed_count": 6,
     "severity": "small"
   },
   "EARLY INDICATIONS POINT TO STRONG SHAREHOLDER SUPPORT": {
@@ -1056,14 +1056,14 @@
     "severity": "small"
   },
   "EMPLOYEE RETENTION PACKAGES OFFERED": {
-    "avg_prob_change": -0.014831005145324079,
-    "avg_target_move": -0.05928571428571416,
+    "avg_prob_change": -0.013793830869431045,
+    "avg_target_move": -0.032666666666666316,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D2",
     "direction": "negative",
     "headline_example": "Employee Retention Packages Offered",
-    "observed_count": 14,
+    "observed_count": 15,
     "severity": "small"
   },
   "ENERGY SECTOR CREDIT SPREAD WIDENING": {
@@ -1089,14 +1089,14 @@
     "severity": "small"
   },
   "ENVIRONMENTAL GROUPS EXPRESS SUPPORT": {
-    "avg_prob_change": 0.01288816551150454,
-    "avg_target_move": 0.11833333333333347,
+    "avg_prob_change": -0.021947041090020467,
+    "avg_target_move": -0.9785714285714278,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "negative",
     "headline_example": "Environmental Groups Express Support",
-    "observed_count": 6,
+    "observed_count": 7,
     "severity": "small"
   },
   "EPA ISSUES SUPPORTIVE STATEMENT": {
@@ -1122,14 +1122,14 @@
     "severity": "small"
   },
   "EQUITY MARKETS RALLY ON IMPROVED RISK APPETITE": {
-    "avg_prob_change": -0.014790778228082935,
-    "avg_target_move": -0.2480000000000004,
+    "avg_prob_change": -0.01988659920741573,
+    "avg_target_move": -0.4083333333333338,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D2",
     "direction": "negative",
     "headline_example": "Equity Markets Rally on Improved Risk Appetite",
-    "observed_count": 5,
+    "observed_count": 6,
     "severity": "small"
   },
   "EQUITY RESEARCH DOWNGRADES COMPANY": {
@@ -1144,14 +1144,14 @@
     "severity": "small"
   },
   "ESCALATING GEOPOLITICAL TENSIONS RATTLE GLOBAL MARKETS": {
-    "avg_prob_change": -0.0019987066508390106,
-    "avg_target_move": -0.13250000000000206,
+    "avg_prob_change": 0.004937408375612917,
+    "avg_target_move": 0.08199999999999932,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "positive",
     "headline_example": "Escalating Geopolitical Tensions Rattle Global Markets",
-    "observed_count": 4,
+    "observed_count": 5,
     "severity": "small"
   },
   "ESG-FOCUSED FUND OPPOSES TERMS": {
@@ -1276,14 +1276,14 @@
     "severity": "small"
   },
   "FEDERAL RESERVE ANNOUNCES RATE DECISION": {
-    "avg_prob_change": 0.014425507297537036,
-    "avg_target_move": 0.8683333333333335,
+    "avg_prob_change": 0.018904828815125833,
+    "avg_target_move": 0.808571428571429,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "positive",
     "headline_example": "Federal Reserve Announces Rate Decision",
-    "observed_count": 6,
+    "observed_count": 7,
     "severity": "small"
   },
   "FEDERAL RESERVE APPROVES TRANSACTION": {
@@ -1386,14 +1386,14 @@
     "severity": "small"
   },
   "FERC STAFF HOLDS TECHNICAL WORKING SESSION": {
-    "avg_prob_change": 0.009279656653499769,
-    "avg_target_move": 0.27705882352941075,
+    "avg_prob_change": 0.008168525820790461,
+    "avg_target_move": 0.22666666666666557,
     "category": "REG",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "positive",
     "headline_example": "FERC Staff Holds Technical Working Session",
-    "observed_count": 17,
+    "observed_count": 18,
     "severity": "small"
   },
   "FINAL CLOSING CONDITIONS CHECKLIST PUBLISHED": {
@@ -1452,14 +1452,14 @@
     "severity": "large"
   },
   "FTC OPENS PRELIMINARY REVIEW OF TECH MERGER": {
-    "avg_prob_change": 0.003229189678299882,
-    "avg_target_move": -0.19799999999999898,
+    "avg_prob_change": 0.0044370231446150266,
+    "avg_target_move": -0.1283333333333315,
     "category": "REG",
     "confidence": 1.0,
     "deal_pattern": "D3",
     "direction": "positive",
     "headline_example": "FTC Opens Preliminary Review of Tech Merger",
-    "observed_count": 5,
+    "observed_count": 6,
     "severity": "small"
   },
   "FTC REQUESTS ADDITIONAL INFORMATION": {
@@ -1507,14 +1507,14 @@
     "severity": "small"
   },
   "HART-SCOTT-RODINO FILING SUBMITTED": {
-    "avg_prob_change": 0.004781977961924168,
-    "avg_target_move": -0.050000000000000204,
+    "avg_prob_change": 0.003978969785677806,
+    "avg_target_move": -0.15625,
     "category": "REG",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "positive",
     "headline_example": "Hart-Scott-Rodino Filing Submitted",
-    "observed_count": 7,
+    "observed_count": 8,
     "severity": "small"
   },
   "HEDGE FUND ACTIVIST OPPOSES DEAL": {
@@ -1551,14 +1551,14 @@
     "severity": "small"
   },
   "INDEPENDENT FAIRNESS REVIEW GENERATES BOARD DISCUSSION": {
-    "avg_prob_change": -0.002006803312215781,
-    "avg_target_move": -0.1676190476190476,
+    "avg_prob_change": -0.0018855893263823081,
+    "avg_target_move": -0.19954545454545441,
     "category": "REG",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "negative",
     "headline_example": "Independent Fairness Review Generates Board Discussion",
-    "observed_count": 21,
+    "observed_count": 22,
     "severity": "small"
   },
   "INDEX REBALANCING IMPLICATIONS": {
@@ -1573,14 +1573,14 @@
     "severity": "medium"
   },
   "INDUSTRY CONFERENCE GENERATES TRANSACTION SPECULATION": {
-    "avg_prob_change": 0.027675324535271315,
-    "avg_target_move": 0.4539215686274514,
+    "avg_prob_change": 0.025901142390806136,
+    "avg_target_move": 0.4150000000000004,
     "category": "SHR",
     "confidence": 1.0,
     "deal_pattern": "D4",
     "direction": "positive",
     "headline_example": "Industry Conference Generates Transaction Speculation",
-    "observed_count": 51,
+    "observed_count": 54,
     "severity": "small"
   },
   "INDUSTRY LOBBYISTS SUPPORT TRANSACTION": {
@@ -1595,25 +1595,25 @@
     "severity": "small"
   },
   "INFRASTRUCTURE FUND OPPOSES TERMS": {
-    "avg_prob_change": 0.013035514859279387,
-    "avg_target_move": -0.11000000000000044,
+    "avg_prob_change": 0.01272784572440578,
+    "avg_target_move": -0.056250000000000355,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "negative",
     "headline_example": "Infrastructure Fund Opposes Terms",
-    "observed_count": 7,
+    "observed_count": 8,
     "severity": "small"
   },
   "INFRASTRUCTURE MODERNIZATION REQUIREMENTS": {
-    "avg_prob_change": -0.002805717686660695,
-    "avg_target_move": -0.24666666666666495,
+    "avg_prob_change": -0.010143246738942307,
+    "avg_target_move": -0.3299999999999993,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "positive",
     "headline_example": "Infrastructure Modernization Requirements",
-    "observed_count": 6,
+    "observed_count": 7,
     "severity": "small"
   },
   "INSTITUTIONAL INVESTORS SIGNAL SUPPORT": {
@@ -1672,14 +1672,14 @@
     "severity": "medium"
   },
   "INTEGRATION TEAMS APPOINTED": {
-    "avg_prob_change": -0.00024059910812815728,
-    "avg_target_move": 0.23214285714285715,
+    "avg_prob_change": -0.0006363989078206345,
+    "avg_target_move": 0.16066666666666643,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D2",
     "direction": "negative",
     "headline_example": "Integration Teams Appointed",
-    "observed_count": 14,
+    "observed_count": 15,
     "severity": "small"
   },
   "INTEGRATION TEAMS FORMED": {
@@ -1694,25 +1694,25 @@
     "severity": "medium"
   },
   "INTERCONNECTION RIGHTS CONFIRMED": {
-    "avg_prob_change": -0.005146838843965032,
-    "avg_target_move": -0.3876923076923081,
+    "avg_prob_change": -0.0061169038280811565,
+    "avg_target_move": -0.38000000000000045,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D2",
     "direction": "positive",
     "headline_example": "Interconnection Rights Confirmed",
-    "observed_count": 13,
+    "observed_count": 14,
     "severity": "small"
   },
   "INTEREST RATE HEDGE EXECUTED": {
-    "avg_prob_change": -0.007546352208476674,
-    "avg_target_move": -0.26428571428571346,
+    "avg_prob_change": -0.007223939212666161,
+    "avg_target_move": -0.26374999999999904,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D2",
     "direction": "negative",
     "headline_example": "Interest Rate Hedge Executed",
-    "observed_count": 7,
+    "observed_count": 8,
     "severity": "small"
   },
   "INVESTMENT BANKING ACTIVITY ACCELERATES ACROSS SECTORS": {
@@ -1727,14 +1727,14 @@
     "severity": "small"
   },
   "INVESTMENT GRADE BOND OFFERING COMPLETED": {
-    "avg_prob_change": 0.0306653192668679,
-    "avg_target_move": 0.34272727272727205,
+    "avg_prob_change": 0.028191311528469046,
+    "avg_target_move": 0.27499999999999947,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "positive",
     "headline_example": "Investment Grade Bond Offering Completed",
-    "observed_count": 11,
+    "observed_count": 12,
     "severity": "large"
   },
   "INVESTMENT GRADE RATING AFFIRMED": {
@@ -1793,14 +1793,14 @@
     "severity": "small"
   },
   "KEY ENGINEER RETENTION PLAN ANNOUNCED": {
-    "avg_prob_change": -0.019889023202420576,
-    "avg_target_move": -0.13899999999999862,
+    "avg_prob_change": -0.017352244604082346,
+    "avg_target_move": -0.08272727272727112,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D1",
     "direction": "negative",
     "headline_example": "Key Engineer Retention Plan Announced",
-    "observed_count": 10,
+    "observed_count": 11,
     "severity": "medium"
   },
   "LEGAL CHALLENGE DISMISSED": {
@@ -1903,25 +1903,25 @@
     "severity": "small"
   },
   "MERGER AGREEMENT SIGNED AND ANNOUNCED": {
-    "avg_prob_change": -0.005812082669598532,
-    "avg_target_move": -0.24733333333333316,
+    "avg_prob_change": -0.0032722393083806263,
+    "avg_target_move": -0.1712499999999999,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D4",
     "direction": "negative",
     "headline_example": "Merger Agreement Signed and Announced",
-    "observed_count": 15,
+    "observed_count": 16,
     "severity": "small"
   },
   "MINORITY SHAREHOLDER LITIGATION": {
-    "avg_prob_change": -0.022146461742958114,
-    "avg_target_move": -0.605714285714285,
+    "avg_prob_change": -0.019486545457377026,
+    "avg_target_move": -0.5549999999999997,
     "category": "SHR",
     "confidence": 1.0,
     "deal_pattern": "D3",
     "direction": "positive",
     "headline_example": "Minority Shareholder Litigation",
-    "observed_count": 7,
+    "observed_count": 8,
     "severity": "small"
   },
   "MIXED ECONOMIC DATA CREATES CROSS-CURRENTS FOR DEAL MARKETS": {
@@ -1991,14 +1991,14 @@
     "severity": "small"
   },
   "OUTSIDE DATE EXTENDED TO YEAR-END": {
-    "avg_prob_change": -0.0741618122204839,
-    "avg_target_move": 0.19153846153846224,
+    "avg_prob_change": -0.061937712608882936,
+    "avg_target_move": 0.41357142857142903,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D2",
     "direction": "positive",
     "headline_example": "Outside Date Extended to Year-End",
-    "observed_count": 13,
+    "observed_count": 14,
     "severity": "small"
   },
   "PERMANENT FINANCING SYNDICATION SUCCESSFUL": {
@@ -2112,14 +2112,14 @@
     "severity": "small"
   },
   "PROJECT FINANCE COMMITMENT SECURED": {
-    "avg_prob_change": 0.022341378722538083,
-    "avg_target_move": 0.31000000000000133,
+    "avg_prob_change": 0.02111364270532524,
+    "avg_target_move": 0.33166666666666794,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D2",
     "direction": "negative",
     "headline_example": "Project Finance Commitment Secured",
-    "observed_count": 11,
+    "observed_count": 12,
     "severity": "small"
   },
   "PROXY ADVISORY FIRM ISS RECOMMENDS APPROVAL": {
@@ -2178,25 +2178,25 @@
     "severity": "small"
   },
   "REGULATORY FILINGS SUBMITTED": {
-    "avg_prob_change": 0.0009316414510265078,
-    "avg_target_move": 0.11555555555555547,
+    "avg_prob_change": 0.004448281848516977,
+    "avg_target_move": 0.2009999999999998,
     "category": "REG",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "negative",
     "headline_example": "Regulatory Filings Submitted",
-    "observed_count": 9,
+    "observed_count": 10,
     "severity": "small"
   },
   "REGULATORY TIMELINE EXTENDED": {
-    "avg_prob_change": -0.023209714673257702,
-    "avg_target_move": -0.7566666666666677,
+    "avg_prob_change": -0.005962096524778623,
+    "avg_target_move": -0.45500000000000007,
     "category": "REG",
     "confidence": 1.0,
     "deal_pattern": "D2",
     "direction": "negative",
     "headline_example": "Regulatory Timeline Extended",
-    "observed_count": 3,
+    "observed_count": 4,
     "severity": "small"
   },
   "REGULATORY TIMELINE SLIPPAGE": {
@@ -2288,14 +2288,14 @@
     "severity": "small"
   },
   "SELL-SIDE ANALYSTS ISSUE DIVERGENT VALUATION ASSESSMENTS": {
-    "avg_prob_change": 0.0006699685394257556,
-    "avg_target_move": -0.007857142857143071,
+    "avg_prob_change": 0.0007028141137574097,
+    "avg_target_move": -0.005348837209302502,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "positive",
     "headline_example": "Sell-Side Analysts Issue Divergent Valuation Assessments",
-    "observed_count": 42,
+    "observed_count": 43,
     "severity": "small"
   },
   "SENATE COMMITTEE LAUNCHES INQUIRY INTO INDUSTRY CONSOLIDATION": {
@@ -2442,25 +2442,25 @@
     "severity": "small"
   },
   "STATE UTILITY COMMISSIONS REQUEST HEARINGS": {
-    "avg_prob_change": 0.04277076750417021,
-    "avg_target_move": 0.6524999999999999,
+    "avg_prob_change": 0.03265548616916113,
+    "avg_target_move": 0.4279999999999987,
     "category": "REG",
     "confidence": 1.0,
     "deal_pattern": "D2",
     "direction": "negative",
     "headline_example": "State Utility Commissions Request Hearings",
-    "observed_count": 4,
+    "observed_count": 5,
     "severity": "small"
   },
   "STOCK MARKET VOLATILITY AFFECTS EXCHANGE RATIO": {
-    "avg_prob_change": 0.010008375519722685,
-    "avg_target_move": 0.23818181818181924,
+    "avg_prob_change": -0.010005178766283237,
+    "avg_target_move": -0.41499999999999915,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "negative",
     "headline_example": "Stock Market Volatility Affects Exchange Ratio",
-    "observed_count": 11,
+    "observed_count": 12,
     "severity": "small"
   },
   "STOCK PRICE CONDITIONS CONFIRMED MET": {
@@ -2508,14 +2508,14 @@
     "severity": "small"
   },
   "STRESS TEST REQUIREMENTS IMPOSED": {
-    "avg_prob_change": -0.033200390257824126,
-    "avg_target_move": -0.9400000000000013,
+    "avg_prob_change": -0.029291501440072466,
+    "avg_target_move": -0.811000000000001,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D4",
     "direction": "positive",
     "headline_example": "Stress Test Requirements Imposed",
-    "observed_count": 9,
+    "observed_count": 10,
     "severity": "small"
   },
   "STRONG EARLY VOTING RESULTS": {
@@ -2541,14 +2541,14 @@
     "severity": "small"
   },
   "STRONG QUARTERLY RESULTS REPORTED": {
-    "avg_prob_change": -0.013480651248780796,
-    "avg_target_move": -0.35333333333333283,
+    "avg_prob_change": -0.012506109631413237,
+    "avg_target_move": -0.2984999999999995,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D3",
     "direction": "positive",
     "headline_example": "Strong Quarterly Results Reported",
-    "observed_count": 9,
+    "observed_count": 10,
     "severity": "medium"
   },
   "SUCCESSFUL BOND OFFERING": {
@@ -2629,25 +2629,25 @@
     "severity": "small"
   },
   "TERMINATION FEE STRUCTURE DISCLOSED": {
-    "avg_prob_change": 0.035138692532479546,
-    "avg_target_move": 0.8679999999999979,
+    "avg_prob_change": -0.009567568599919299,
+    "avg_target_move": -0.5083333333333341,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D1",
     "direction": "positive",
     "headline_example": "Termination Fee Structure Disclosed",
-    "observed_count": 5,
+    "observed_count": 6,
     "severity": "medium"
   },
   "THIRD-PARTY REGULATORY ANALYSIS PUBLISHED": {
-    "avg_prob_change": 0.0007957473029264629,
-    "avg_target_move": 0.004999999999999671,
+    "avg_prob_change": 0.00370300937445526,
+    "avg_target_move": 0.0941176470588234,
     "category": "REG",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "positive",
     "headline_example": "Third-Party Regulatory Analysis Published",
-    "observed_count": 32,
+    "observed_count": 34,
     "severity": "small"
   },
   "TICKER RECEIVES UNSOLICITED INQUIRY": {
@@ -2684,14 +2684,14 @@
     "severity": "small"
   },
   "TLAC REQUIREMENTS CLARIFIED": {
-    "avg_prob_change": 0.014551250213100109,
-    "avg_target_move": 0.5483333333333332,
+    "avg_prob_change": 0.01056773827789532,
+    "avg_target_move": 0.4299999999999997,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D5",
     "direction": "positive",
     "headline_example": "TLAC Requirements Clarified",
-    "observed_count": 6,
+    "observed_count": 7,
     "severity": "small"
   },
   "TRADE POLICY REVISIONS ANNOUNCED WITH CROSS-SECTOR IMPACT": {
@@ -2706,14 +2706,14 @@
     "severity": "small"
   },
   "TRANSMISSION ACCESS QUESTIONS RAISED": {
-    "avg_prob_change": 0.013190347380200085,
-    "avg_target_move": -0.0649999999999995,
+    "avg_prob_change": 0.011866624007140992,
+    "avg_target_move": 0.045999999999999375,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D3",
     "direction": "positive",
     "headline_example": "Transmission Access Questions Raised",
-    "observed_count": 4,
+    "observed_count": 5,
     "severity": "medium"
   },
   "UK CMA PHASE I REVIEW COMPLETED": {
@@ -2805,14 +2805,14 @@
     "severity": "small"
   },
   "WELCOME TO THE RITC 2026 MERGER ARBITRAGE CASE - PRACTICE SERVER": {
-    "avg_prob_change": -0.00038813056492176875,
-    "avg_target_move": 0.06583333333333306,
+    "avg_prob_change": -0.00044579263682336474,
+    "avg_target_move": 0.053783783783783456,
     "category": "FIN",
     "confidence": 1.0,
     "deal_pattern": "D2",
     "direction": "positive",
     "headline_example": "Welcome to the RITC 2026 Merger Arbitrage Case - practice server",
-    "observed_count": 36,
+    "observed_count": 37,
     "severity": "small"
   }
 }

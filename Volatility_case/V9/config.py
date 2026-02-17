@@ -11,13 +11,13 @@ delta-hedged straddles per week.
 # =============================================================================
 # RIT Server (for GUI login - not used by algo directly)
 RIT_SERVER = "flserver.rotman.utoronto.ca"
-RIT_SERVER_PORT = 16520
+RIT_SERVER_PORT = 14950
 USERNAME = "UBCT-4"
 PASSWORD = "target"
 
 # Local RIT Client REST API (our algo connects here)
 API_HOST = "localhost"
-API_PORT = 9999       # Default RIT Client API port - check your RIT Client settings
+API_PORT = 10000      # Default RIT Client API port - check your RIT Client settings
 API_BASE_URL = f"http://{API_HOST}:{API_PORT}/v1"
 API_KEY = "AJDSYHVC"     # Confirmed working
 

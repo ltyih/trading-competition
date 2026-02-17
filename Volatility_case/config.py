@@ -47,19 +47,19 @@ COLLECTOR_NAME = os.environ.get("RIT_COLLECTOR_NAME", None)
 # RIT SERVER CONFIGURATION
 # =============================================================================
 RIT_SERVER = "flserver.rotman.utoronto.ca"
-RIT_PORT = 16520
+RIT_PORT = 14950
 
 # RIT Client REST API Configuration
 API_HOST = "localhost"
-API_PORT = 9998
+API_PORT = 10000
 API_BASE_URL = f"http://{API_HOST}:{API_PORT}/v1"
 
 # Login Credentials
-USERNAME = "UBCT-2"
+USERNAME = "UBCT-4"
 PASSWORD = "target"
 
 # API Key
-API_KEY = "AJDSYHVCES"
+API_KEY = "AJDSYHVC"
 
 # =============================================================================
 # DATA COLLECTION SETTINGS
