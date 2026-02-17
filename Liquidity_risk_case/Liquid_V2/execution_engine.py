@@ -154,6 +154,13 @@ class ExecutionEngine:
             if wait > 0:
                 sleep(wait)
             resp = self.session.post(f'{BASE_URL}/orders', params=payload)
+        
+        # Debug logging for failed orders
+        if not resp.ok:
+            print(f"[ORDER_ERROR] Payload: {payload}")
+            print(f"[ORDER_ERROR] Status: {resp.status_code}")
+            print(f"[ORDER_ERROR] Response: {resp.text[:500]}")
+        
         return resp.ok
 
     def send_market_order(self, ticker: str, action: str,

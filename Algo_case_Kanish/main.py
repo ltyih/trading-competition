@@ -1,23 +1,20 @@
 # -*- coding: utf-8 -*-
 """
-ALGO MARKET MAKING BOT - V12.1 AGGRESSIVE CAPACITY UTILIZATION
-===============================================================
-V12 result: +$20,073 (sim max: $63,786)
-V12.1 target: $40,000-60,000
+ALGO MARKET MAKING BOT - V13 TREND-FOLLOWING MARKET MAKER
+===========================================================
 
-WHAT CHANGED FROM V12 → V12.1:
-1. ORDER SIZES 3x BIGGER: WNTR 5000, SMMR 4500, ATMN 3000, SPNG 2000
-2. 3 LAYERS of quotes (was 2): capture 3x more passive fills
-3. EARLIER FLATTENING: start at second 36 (was 45), cancel at 42 (was 52)
-4. SEPARATE CLOSE-TIME LIMIT: 9,000 (logged from API) vs 50k intraday
-5. HIGHER PER-STOCK LIMITS: 12,500 per stock (was ~3,500)
-6. FASTER CYCLE: 40ms (was 50ms)
+THREE PILLARS OF V13:
+1. TREND CAPTURE: EMA crossover detects price direction → skew quotes to
+   accumulate inventory in the profitable direction
+2. MOMENTUM TRADING: detect inter-day price jumps → ride momentum
+3. TIGHT INVENTORY: ±5k per stock cap + 25x stronger skew → kills adverse selection
 
-KEY DATA INSIGHT:
-- Intraday gross limit = 50,000 → V12 only used 12% average
-- Close-time limit = 9,000 → need to flatten from ~30k to <7k
-- Flattening cost: ~25k × $0.02/share = $500/day
-- Extra volume revenue: potentially $20k-40k more profit
+DATA-DRIVEN INSIGHTS:
+- Your ±23k positions caused -$142k adverse selection (80% of losses)
+- SPNG earned most ($7,817) despite lowest rebate (widest spreads, $2.85 range)
+- WNTR LOST money ($-1,456) despite highest rebate (too narrow, high adverse sel.)
+- Market spreads are 1-2 cents; intraday ranges are $0.50-$2.85
+- Stocks are negatively correlated (diversification benefit)
 """
 
 import sys
@@ -44,8 +41,12 @@ def print(*args, **kwargs):
 from config import (
     TICKERS, REBATES, MARKET_ORDER_FEE,
     BASE_SPREAD, ORDER_SIZE, MAX_ORDER_SIZE,
-    VOL_SIZE_MULT,
+    VOL_SIZE_MULT, SPREAD_MARKET_FACTOR, SPREAD_MIN_ABSOLUTE, SPREAD_MAX_ABSOLUTE,
     SKEW_FACTOR,
+    TREND_FAST_ALPHA, TREND_SLOW_ALPHA, TREND_SKEW_FACTOR, TREND_MIN_SIGNAL,
+    MOMENTUM_THRESHOLD, MOMENTUM_SKEW_FACTOR, MOMENTUM_DECAY,
+    MOMENTUM_DURATION_SEC, MOMENTUM_SIZE_BOOST,
+    RECENT_MOVE_LOOKBACK, RECENT_MOVE_WIDEN_THRESHOLD, RECENT_MOVE_WIDEN_MULT,
     UTIL_NORMAL, UTIL_SKEW, UTIL_REDUCE, UTIL_EMERGENCY, UTIL_PANIC,
     DEFAULT_GROSS_LIMIT, DEFAULT_NET_LIMIT, CLOSE_TIME_LIMIT,
     GROSS_LIMIT_BUFFER, NET_LIMIT_BUFFER,
@@ -76,13 +77,163 @@ logger = logging.getLogger(__name__)
 
 BANNER = """
 ================================================================================
-  ALGO MARKET MAKING BOT V12.1 - AGGRESSIVE CAPACITY UTILIZATION
-  Target: 50-70% intraday utilization | 3-layer quotes | Flatten before close
-  Close-time limit: {close_lim:,} | Intraday limit: {intra_lim:,}
+  ALGO MARKET MAKING BOT V14 - VOLUME + REBATE MACHINE
+  Tight spreads | Big sizes | Pending-aware limits | Simple spread calc
+  Per-stock limit: {psl:,} | Gross: {gl:,} | Close: {cl:,}
+  Cycle: {cycle}ms | Layers: {layers} | Skew: {skew}
   {url} | Key: {key}
 ================================================================================
 """
 
+
+# ============================================================
+# TREND TRACKER - EMA CROSSOVER + DAY-OPEN MOMENTUM
+# ============================================================
+
+class TrendTracker:
+    """Detects intraday trends and inter-day momentum.
+
+    Uses dual EMA crossover for trend direction and tracks
+    price jumps at day boundaries for momentum signals.
+    """
+
+    def __init__(self):
+        # EMA state per ticker
+        self.fast_ema: Dict[str, float] = {}
+        self.slow_ema: Dict[str, float] = {}
+
+        # Price history for recent-move detection
+        self.price_history: Dict[str, deque] = {}
+
+        # Day-open momentum
+        self.prev_day_close: Dict[str, float] = {}
+        self.day_open_price: Dict[str, float] = {}
+        self.momentum: Dict[str, float] = {}
+
+        # State
+        self.last_day: int = -1
+        self.initialized: Dict[str, bool] = {}
+
+    def on_new_day(self, day: int, current_prices: Dict[str, float]):
+        """Called when a new trading day starts. Stores closes, resets EMAs."""
+        if day > 0:
+            # Store previous day closes and compute momentum
+            for ticker in TICKERS:
+                prev_close = self.prev_day_close.get(ticker, 0)
+                new_price = current_prices.get(ticker, 0)
+
+                if prev_close > 0 and new_price > 0:
+                    jump = new_price - prev_close
+                    jump_frac = jump / prev_close
+
+                    # Convert to momentum signal: clamp to [-1, +1]
+                    if abs(jump_frac) > MOMENTUM_THRESHOLD:
+                        self.momentum[ticker] = max(-1.0, min(1.0, jump_frac * 20))
+                    else:
+                        self.momentum[ticker] = 0.0
+                else:
+                    self.momentum[ticker] = 0.0
+
+        # Reset EMAs for new day (fresh start, no stale signal from old day)
+        for ticker in TICKERS:
+            mid = current_prices.get(ticker, 0)
+            if mid > 0:
+                self.fast_ema[ticker] = mid
+                self.slow_ema[ticker] = mid
+                self.initialized[ticker] = False
+                self.day_open_price[ticker] = mid
+
+        self.last_day = day
+
+    def on_day_end(self, current_prices: Dict[str, float]):
+        """Called before day transition. Store closing prices."""
+        for ticker in TICKERS:
+            mid = current_prices.get(ticker, 0)
+            if mid > 0:
+                self.prev_day_close[ticker] = mid
+
+    def update(self, ticker: str, mid: float):
+        """Update EMAs with latest price."""
+        if mid <= 0:
+            return
+
+        # Price history for recent-move detection
+        if ticker not in self.price_history:
+            self.price_history[ticker] = deque(maxlen=30)
+        self.price_history[ticker].append(mid)
+
+        # Initialize EMAs on first valid price
+        if ticker not in self.fast_ema or self.fast_ema[ticker] <= 0:
+            self.fast_ema[ticker] = mid
+            self.slow_ema[ticker] = mid
+            self.initialized[ticker] = False
+            return
+
+        # Update EMAs
+        self.fast_ema[ticker] = (TREND_FAST_ALPHA * mid +
+                                  (1 - TREND_FAST_ALPHA) * self.fast_ema[ticker])
+        self.slow_ema[ticker] = (TREND_SLOW_ALPHA * mid +
+                                  (1 - TREND_SLOW_ALPHA) * self.slow_ema[ticker])
+
+        # Mark as initialized after a few updates
+        if not self.initialized.get(ticker, False):
+            hist = self.price_history.get(ticker, deque())
+            if len(hist) >= 5:
+                self.initialized[ticker] = True
+
+    def get_trend(self, ticker: str) -> float:
+        """Get trend signal: -1 (bearish) to +1 (bullish).
+
+        Based on EMA crossover: (fast - slow) / slow, scaled.
+        Returns 0 if not enough data or signal below noise threshold.
+        """
+        if not self.initialized.get(ticker, False):
+            return 0.0
+
+        fast = self.fast_ema.get(ticker, 0)
+        slow = self.slow_ema.get(ticker, 0)
+        if slow <= 0:
+            return 0.0
+
+        raw_signal = (fast - slow) / slow * 10  # Scale ×10 for nuanced range
+
+        if abs(raw_signal) < TREND_MIN_SIGNAL:
+            return 0.0
+
+        return max(-1.0, min(1.0, raw_signal))
+
+    def get_momentum(self, ticker: str) -> float:
+        """Get day-open momentum signal: -1 to +1."""
+        return self.momentum.get(ticker, 0.0)
+
+    def decay_momentum(self):
+        """Decay momentum signals each tick."""
+        for t in list(self.momentum.keys()):
+            self.momentum[t] *= MOMENTUM_DECAY
+            if abs(self.momentum[t]) < 0.01:
+                self.momentum[t] = 0.0
+
+    def get_recent_move(self, ticker: str) -> float:
+        """Get absolute price move over recent ticks (for volatility-based widening)."""
+        hist = self.price_history.get(ticker, deque())
+        if len(hist) < RECENT_MOVE_LOOKBACK + 1:
+            return 0.0
+        recent = list(hist)
+        return abs(recent[-1] - recent[-RECENT_MOVE_LOOKBACK - 1])
+
+    def get_trend_direction_aligned(self, ticker: str, side: str) -> bool:
+        """Check if a trade side aligns with the current trend."""
+        trend = self.get_trend(ticker)
+        if trend > TREND_MIN_SIGNAL and side == "BUY":
+            return True
+        if trend < -TREND_MIN_SIGNAL and side == "SELL":
+            return True
+        return False
+
+
+# ============================================================
+# VOLATILITY TRACKER (kept from V12.1)
+# ============================================================
 
 class VolatilityTracker:
     def __init__(self, lookback: int = VOL_LOOKBACK):
@@ -103,7 +254,7 @@ class VolatilityTracker:
         recent = list(hist)[-self.lookback:]
         if len(recent) < 2:
             return "MEDIUM"
-        changes = [abs(recent[i][1] - recent[i-1][1]) for i in range(1, len(recent))]
+        changes = [abs(recent[i][1] - recent[i - 1][1]) for i in range(1, len(recent))]
         avg_change = sum(changes) / len(changes) if changes else 0
         if avg_change < VOL_LOW_THRESHOLD:
             return "LOW"
@@ -111,6 +262,10 @@ class VolatilityTracker:
             return "HIGH"
         return "MEDIUM"
 
+
+# ============================================================
+# ORDER TRACKER (kept from V12.1)
+# ============================================================
 
 class OrderTracker:
     def __init__(self):
@@ -136,6 +291,15 @@ class OrderTracker:
         for t in list(self._orders.keys()):
             self._orders[t] = {}
 
+    def pending_exposure(self, ticker: str, side: str) -> int:
+        """Sum of all pending order sizes for this ticker+side across layers."""
+        total = 0
+        orders = self._orders.get(ticker, {})
+        for key, order in orders.items():
+            if order and side in key:
+                total += order.get("size", 0)
+        return total
+
     def has_any_order(self, ticker: str) -> bool:
         orders = self._orders.get(ticker, {})
         return any(v is not None for v in orders.values())
@@ -149,9 +313,14 @@ class OrderTracker:
         return abs(existing["price"] - target_price) <= tolerance
 
 
+# ============================================================
+# MARKET MAKER V13
+# ============================================================
+
 class MarketMaker:
     def __init__(self, api: RITApi):
         self.api = api
+        self.trend_tracker = TrendTracker()
         self.vol_tracker = VolatilityTracker()
         self.order_tracker = OrderTracker()
 
@@ -160,9 +329,9 @@ class MarketMaker:
         self.book_imbalance: Dict[str, float] = {t: 0.0 for t in TICKERS}
         self.market_spread: Dict[str, float] = {t: 0.10 for t in TICKERS}
 
-        # V12.1: Two separate limits
-        self.gross_limit = DEFAULT_GROSS_LIMIT      # 50,000 intraday
-        self.close_limit = CLOSE_TIME_LIMIT          # 9,000 at close
+        # Limits
+        self.gross_limit = DEFAULT_GROSS_LIMIT
+        self.close_limit = CLOSE_TIME_LIMIT
         self.net_limit = DEFAULT_NET_LIMIT
         self.per_stock_limit: Dict[str, int] = {}
         self._compute_per_stock_limits()
@@ -187,12 +356,19 @@ class MarketMaker:
         self.in_lockdown = False
 
     def _compute_per_stock_limits(self):
-        """Compute per-stock position limits weighted by rebate."""
-        total_rebate = sum(REBATES[t] for t in TICKERS)
+        """Compute per-stock limits. V13: opportunity-weighted, capped at 5k."""
+        # Weight by a blend of rebate and spread opportunity
+        # Higher spread = more opportunity
+        weights = {
+            "WNTR": 1.0,   # Narrow spreads
+            "SMMR": 1.0,   # Narrow spreads
+            "ATMN": 1.2,   # Medium spreads, good range
+            "SPNG": 1.4,   # Widest spreads, biggest range
+        }
+        total_w = sum(weights[t] for t in TICKERS)
         for t in TICKERS:
-            weight = REBATES[t] / total_rebate
-            # Weight by rebate but cap
-            allocated = int(self.gross_limit * PER_STOCK_LIMIT_FRACTION * weight / 0.25)
+            fraction = weights[t] / total_w
+            allocated = int(self.gross_limit * PER_STOCK_LIMIT_FRACTION * fraction / 0.25)
             allocated = max(MIN_PER_STOCK_LIMIT, min(allocated, MAX_PER_STOCK_LIMIT))
             self.per_stock_limit[t] = allocated
 
@@ -220,6 +396,7 @@ class MarketMaker:
                 mid = (bid + ask) / 2.0
                 self.mid_prices[t] = mid
                 self.vol_tracker.update(t, tick, mid)
+                self.trend_tracker.update(t, mid)
                 self.market_spread[t] = ask - bid
 
     def update_limits(self):
@@ -231,9 +408,8 @@ class MarketMaker:
             nl = lim.get("net_limit", 0)
             if gl and isinstance(gl, (int, float)) and gl > 0:
                 current_gl = int(gl)
-                # Detect if we're at close-time (limit drops to ~9k)
                 if current_gl < 20000:
-                    self.close_limit = current_gl  # Learn the actual close limit
+                    self.close_limit = current_gl
                 else:
                     self.gross_limit = current_gl
             if nl and isinstance(nl, (int, float)) and nl > 0:
@@ -254,15 +430,14 @@ class MarketMaker:
             if not self.circuit_breaker_active:
                 print(f"    [CB CAUTION] PnL=${self.current_pnl:,.2f}")
                 self.circuit_breaker_active = True
-            # RECOVER from halt if P&L improved above halt threshold
             if self.circuit_breaker_halt:
-                print(f"    [CB HALT→CAUTION] PnL recovered to ${self.current_pnl:,.2f}")
+                print(f"    [CB HALT->CAUTION] PnL recovered to ${self.current_pnl:,.2f}")
                 self.circuit_breaker_halt = False
         else:
             if self.circuit_breaker_active:
                 self.circuit_breaker_active = False
             if self.circuit_breaker_halt:
-                print(f"    [CB HALT→CLEAR] PnL recovered to ${self.current_pnl:,.2f}")
+                print(f"    [CB HALT->CLEAR] PnL recovered to ${self.current_pnl:,.2f}")
                 self.circuit_breaker_halt = False
 
     def update_adaptive_spreads(self, tick: int):
@@ -299,49 +474,57 @@ class MarketMaker:
     def compute_book_imbalance(self, book: Dict) -> float:
         bids = book.get("bids", book.get("bid", []))
         asks = book.get("asks", book.get("ask", []))
-        bid_vol = sum(o.get("quantity", 0) - o.get("quantity_filled", 0) for o in (bids or [])[:5])
-        ask_vol = sum(o.get("quantity", 0) - o.get("quantity_filled", 0) for o in (asks or [])[:5])
+        bid_vol = sum(o.get("quantity", 0) - o.get("quantity_filled", 0)
+                      for o in (bids or [])[:5])
+        ask_vol = sum(o.get("quantity", 0) - o.get("quantity_filled", 0)
+                      for o in (asks or [])[:5])
         total = bid_vol + ask_vol
         if total < 100:
             return 0.0
         return (bid_vol - ask_vol) / total
 
     # ============================================================
-    # SPREAD COMPUTATION
+    # SPREAD COMPUTATION - V13: MARKET-ADAPTIVE + VOLATILITY-AWARE
     # ============================================================
 
     def compute_spread(self, ticker: str, second_in_day: int, layer: int = 1) -> float:
-        base = BASE_SPREAD.get(ticker, 0.04)
+        """Compute spread: simple, competitive, no compounding.
+
+        V14: max(base, market*factor) × vol_mult × time_mult only.
+        Removed 5 multiplicative factors that compounded to 3-5x wider than intended.
+        """
+        mkt_spread = self.market_spread.get(ticker, 0.05)
+        base = BASE_SPREAD.get(ticker, 0.01)
+
+        # Core spread: competitive with market
+        spread = max(base, mkt_spread * SPREAD_MARKET_FACTOR)
 
         # Layer multipliers
         if layer == 2:
-            base *= LAYER2_SPREAD_MULT
+            spread *= LAYER2_SPREAD_MULT
         elif layer == 3:
-            base *= LAYER3_SPREAD_MULT
+            spread *= LAYER3_SPREAD_MULT
 
+        # Only two modifiers: volatility regime and time
         regime = self.vol_tracker.get_regime(ticker)
         vol_mult = VOL_SPREAD_MULT.get(regime, 1.0)
-        adaptive = self.adaptive_mult.get(ticker, 1.0)
+        spread *= vol_mult
 
-        time_mult = 1.0
+        # Time: widen near close, post-recovery
         if second_in_day < POST_CLOSE_RECOVERY_SEC:
-            time_mult = POST_CLOSE_SPREAD_MULT
+            spread *= POST_CLOSE_SPREAD_MULT
         elif second_in_day >= PRE_CLOSE_WIDEN_SEC:
-            time_mult = PRE_CLOSE_SPREAD_MULT
+            spread *= PRE_CLOSE_SPREAD_MULT
 
-        cb_mult = 1.5 if self.circuit_breaker_active else 1.0
-
-        spread = base * vol_mult * adaptive * time_mult * cb_mult
-        min_spread = max(0.02, REBATES.get(ticker, 0.02) * 0.4)
-        return max(min_spread, round(spread, 4))
+        return max(SPREAD_MIN_ABSOLUTE, min(SPREAD_MAX_ABSOLUTE, round(spread, 4)))
 
     # ============================================================
-    # ORDER SIZING - V12.1: AGGRESSIVE
+    # ORDER SIZING - V13: TREND-AWARE + MOMENTUM BOOST
     # ============================================================
 
     def compute_order_size(self, ticker: str, side: str, utilization: float,
                            second_in_day: int, layer: int = 1) -> int:
-        base_size = ORDER_SIZE.get(ticker, 2000)
+        base_size = ORDER_SIZE.get(ticker, 2500)
         pos = self.positions.get(ticker, 0)
         per_stock_limit = self.per_stock_limit.get(ticker, MIN_PER_STOCK_LIMIT)
 
@@ -353,20 +536,44 @@ class MarketMaker:
         else:
             layer_mult = 1.0
 
-        # Asymmetric sizing
+        # ============================================================
+        # ASYMMETRIC SIZING (V13: trend + inventory combined)
+        # ============================================================
         asym_mult = 1.0
         asym_threshold = per_stock_limit * ASYM_KICK_IN
+
+        # Inventory-based asymmetry (reduce toward flat)
         if abs(pos) > asym_threshold:
             pos_frac = min(abs(pos) / per_stock_limit, 1.0)
             if (pos > 0 and side == "SELL") or (pos < 0 and side == "BUY"):
+                # Reducing side: boost
                 asym_mult = 1.0 + pos_frac * (ASYM_REDUCE_MAX - 1.0)
             elif (pos > 0 and side == "BUY") or (pos < 0 and side == "SELL"):
+                # Increasing side: restrict
                 asym_mult = max(ASYM_INCREASE_MIN, 1.0 - pos_frac * (1.0 - ASYM_INCREASE_MIN))
 
+        # Trend-based sizing: boost orders aligned with trend
+        trend = self.trend_tracker.get_trend(ticker)
+        if abs(trend) > TREND_MIN_SIGNAL:
+            if self.trend_tracker.get_trend_direction_aligned(ticker, side):
+                # Trend-aligned: mild boost (let skew do the positioning)
+                asym_mult *= (1.0 + abs(trend) * 0.3)
+            else:
+                # Counter-trend: reduce size
+                asym_mult *= max(0.4, 1.0 - abs(trend) * 0.4)
+
+        # Momentum boost in first MOMENTUM_DURATION_SEC seconds
+        momentum = abs(self.trend_tracker.get_momentum(ticker))
+        if momentum > 0.1 and second_in_day < MOMENTUM_DURATION_SEC:
+            mom_signal = self.trend_tracker.get_momentum(ticker)
+            if (mom_signal > 0 and side == "BUY") or (mom_signal < 0 and side == "SELL"):
+                asym_mult *= MOMENTUM_SIZE_BOOST
+
+        # Volatility regime
         regime = self.vol_tracker.get_regime(ticker)
         vol_mult = VOL_SIZE_MULT.get(regime, 1.0)
 
-        # Utilization reduction (based on intraday 50k limit)
+        # Utilization reduction
         if utilization > UTIL_PANIC:
             util_mult = 0.0
         elif utilization > UTIL_EMERGENCY:
@@ -378,6 +585,7 @@ class MarketMaker:
         else:
             util_mult = 1.0
 
+        # Time-based
         time_mult = 1.0
         if second_in_day < POST_CLOSE_RECOVERY_SEC:
             time_mult = POST_CLOSE_SIZE_MULT
@@ -389,42 +597,93 @@ class MarketMaker:
         size = int(base_size * layer_mult * asym_mult *
                    vol_mult * util_mult * time_mult * cb_mult)
 
-        # Cap: don't exceed per-stock limit on increasing side
+        # ============================================================
+        # HARD CAPS: enforce per-stock limit strictly (including pending orders)
+        # ============================================================
+        pending = self.order_tracker.pending_exposure(ticker, side)
         if (pos > 0 and side == "BUY") or (pos < 0 and side == "SELL"):
-            room = max(0, per_stock_limit - abs(pos))
+            room = max(0, per_stock_limit - abs(pos) - pending)
+            size = min(size, room)
+        elif pos == 0:
+            room = max(0, per_stock_limit - pending)
             size = min(size, room)
 
         # Gross limit room
         gross = self.compute_aggregate()
         gross_room = max(0, int(self.gross_limit * GROSS_LIMIT_BUFFER) - gross)
         if (pos > 0 and side == "BUY") or (pos < 0 and side == "SELL") or pos == 0:
-            size = min(size, gross_room // max(1, NUM_LAYERS))  # Share room across layers
+            size = min(size, gross_room // max(1, NUM_LAYERS))
 
         return max(0, min(size, MAX_ORDER_SIZE))
 
     # ============================================================
-    # INVENTORY SKEW
+    # INVENTORY SKEW - V13: THREE COMPONENTS
     # ============================================================
 
-    def compute_skew(self, ticker: str, utilization: float) -> float:
+    def compute_skew(self, ticker: str, utilization: float,
+                     second_in_day: int) -> float:
+        """Compute total quote skew from 3 independent signals.
+
+        Component 1: INVENTORY SKEW - push quotes away from position to flatten
+        Component 2: TREND SKEW - push quotes toward detected trend
+        Component 3: MOMENTUM SKEW - push toward day-open price jump direction
+
+        The skew shifts the effective mid price, causing one side's orders
+        to be more aggressive (closer to true mid) and the other less aggressive.
+        """
         pos = self.positions.get(ticker, 0)
         per_stock_limit = self.per_stock_limit.get(ticker, MIN_PER_STOCK_LIMIT)
-        if per_stock_limit <= 0:
-            return 0.0
 
-        normalized = pos / per_stock_limit
-        skew = -normalized * SKEW_FACTOR
+        # ---- Component 1: Inventory Skew (always active) ----
+        # Negative position → negative skew → lower effective mid → sell less aggressive
+        if per_stock_limit > 0:
+            normalized_pos = pos / per_stock_limit  # -1 to +1
+        else:
+            normalized_pos = 0.0
+        inv_skew = -normalized_pos * SKEW_FACTOR
 
+        # Scale up at high utilization
         if utilization > UTIL_REDUCE:
-            skew *= 2.0
+            inv_skew *= 2.5
         elif utilization > UTIL_SKEW:
-            skew *= 1.5
+            inv_skew *= 1.5
 
+        # ---- Component 2: Trend Skew ----
+        trend = self.trend_tracker.get_trend(ticker)
+        trend_skew = 0.0
+        if abs(trend) > TREND_MIN_SIGNAL:
+            # Positive trend → positive skew → raise effective mid →
+            # bid is higher (more aggressive buy), ask is higher (less aggressive sell)
+            # → accumulate longs in uptrend
+            trend_skew = trend * TREND_SKEW_FACTOR
+
+            # Reduce trend skew if already loaded in trend direction
+            if (trend > 0 and pos > per_stock_limit * 0.5) or \
+               (trend < 0 and pos < -per_stock_limit * 0.5):
+                trend_skew *= 0.3  # Don't pile on if already heavily positioned
+
+        # ---- Component 3: Momentum Skew (day-open only) ----
+        mom_skew = 0.0
+        if second_in_day < MOMENTUM_DURATION_SEC:
+            momentum = self.trend_tracker.get_momentum(ticker)
+            if abs(momentum) > 0.05:
+                mom_skew = momentum * MOMENTUM_SKEW_FACTOR
+
+                # Reduce if already positioned in momentum direction
+                if (momentum > 0 and pos > per_stock_limit * 0.4) or \
+                   (momentum < 0 and pos < -per_stock_limit * 0.4):
+                    mom_skew *= 0.2
+
+        # ---- Component 4: Book Imbalance ----
         imbalance = self.book_imbalance.get(ticker, 0.0)
+        imb_skew = 0.0
         if abs(imbalance) > IMBALANCE_THRESHOLD:
-            skew += imbalance * IMBALANCE_SKEW_FACTOR
+            imb_skew = imbalance * IMBALANCE_SKEW_FACTOR
 
-        return round(skew, 4)
+        # ---- Combine ----
+        total_skew = inv_skew + trend_skew + mom_skew + imb_skew
+
+        return round(total_skew, 4)
 
     # ============================================================
     # QUOTING DECISIONS
@@ -437,10 +696,10 @@ class MarketMaker:
         if self.circuit_breaker_halt or self.in_lockdown:
             return False
 
-        # Block at 90% of per-stock limit for increasing side
-        if side == "BUY" and pos >= int(per_stock_limit * 0.90):
+        # V13: STRICT per-stock limit enforcement
+        if side == "BUY" and pos >= per_stock_limit:
             return False
-        if side == "SELL" and pos <= -int(per_stock_limit * 0.90):
+        if side == "SELL" and pos <= -per_stock_limit:
             return False
 
         # At high utilization, only reducing side
@@ -466,7 +725,7 @@ class MarketMaker:
         return True
 
     # ============================================================
-    # MAIN QUOTING ENGINE - V12.1 WITH 3 LAYERS
+    # MAIN QUOTING ENGINE - V13 WITH 3 LAYERS + TREND AWARENESS
     # ============================================================
 
     def quote_ticker(self, ticker: str, tick: int, second_in_day: int,
@@ -475,7 +734,7 @@ class MarketMaker:
         if mid < MIN_PRICE or mid > MAX_PRICE:
             return
 
-        skew = self.compute_skew(ticker, utilization)
+        skew = self.compute_skew(ticker, utilization, second_in_day)
         quote_buy = self.should_quote_side(ticker, "BUY", utilization)
         quote_sell = self.should_quote_side(ticker, "SELL", utilization)
 
@@ -485,6 +744,7 @@ class MarketMaker:
                 self.order_tracker.clear_ticker(ticker)
             return
 
+        # Get fresh book data
         book = self.api.get_book(ticker, limit=5)
         best_bid = self.api.get_best_bid(book)
         best_ask = self.api.get_best_ask(book)
@@ -493,26 +753,28 @@ class MarketMaker:
             self.market_spread[ticker] = best_ask - best_bid
             mid = (best_bid + best_ask) / 2.0
 
-        # Compute all 3 layers
+        # Compute all layers
         layers = []
         for layer_num in range(1, NUM_LAYERS + 1):
-            # Skip layer 3 during pre-close or post-close
             if layer_num == 3 and (second_in_day < POST_CLOSE_RECOVERY_SEC or
                                     second_in_day >= PRE_CLOSE_WIDEN_SEC):
                 continue
-            # Skip layer 2 during pre-close reduce
             if layer_num == 2 and second_in_day >= PRE_CLOSE_REDUCE_SEC:
                 continue
 
             spread = self.compute_spread(ticker, second_in_day, layer=layer_num)
             half = spread / 2.0
-            buy_size = self.compute_order_size(ticker, "BUY", utilization, second_in_day, layer=layer_num) if quote_buy else 0
-            sell_size = self.compute_order_size(ticker, "SELL", utilization, second_in_day, layer=layer_num) if quote_sell else 0
+            buy_size = self.compute_order_size(
+                ticker, "BUY", utilization, second_in_day, layer=layer_num) if quote_buy else 0
+            sell_size = self.compute_order_size(
+                ticker, "SELL", utilization, second_in_day, layer=layer_num) if quote_sell else 0
 
-            bid = round(mid - half + skew, 2)
-            ask = round(mid + half + skew, 2)
+            # Apply skew to effective mid
+            effective_mid = mid + skew
+            bid = round(effective_mid - half, 2)
+            ask = round(effective_mid + half, 2)
 
-            # Safety
+            # Safety: bid must be below ask
             if bid >= ask:
                 bid = round(mid - 0.02, 2)
                 ask = round(mid + 0.02, 2)
@@ -541,11 +803,12 @@ class MarketMaker:
             tolerance = layers[0]['half'] * REQUOTE_THRESHOLD
             for ldata in layers:
                 ln = ldata['layer']
-                tol = tolerance * ln  # Wider tolerance for outer layers
+                tol = tolerance * ln
                 for side, target, size in [("BUY", ldata['bid'], ldata['buy_size']),
                                             ("SELL", ldata['ask'], ldata['sell_size'])]:
                     if size >= 100:
-                        if not self.order_tracker.order_is_close_enough(ticker, side, target, tol, layer=ln):
+                        if not self.order_tracker.order_is_close_enough(
+                                ticker, side, target, tol, layer=ln):
                             need_cancel = True
                             break
                 if need_cancel:
@@ -559,7 +822,8 @@ class MarketMaker:
             for ldata in layers:
                 ln = ldata['layer']
                 if quote_buy and ldata['buy_size'] >= 100:
-                    result = self.api.submit_limit_order(ticker, ldata['buy_size'], "BUY", ldata['bid'])
+                    result = self.api.submit_limit_order(
+                        ticker, ldata['buy_size'], "BUY", ldata['bid'])
                     if result and isinstance(result, dict):
                         self.order_tracker.record_order(
                             ticker, "BUY", result.get("order_id", 0),
@@ -567,7 +831,8 @@ class MarketMaker:
                         self.orders_placed += 1
 
                 if quote_sell and ldata['sell_size'] >= 100:
-                    result = self.api.submit_limit_order(ticker, ldata['sell_size'], "SELL", ldata['ask'])
+                    result = self.api.submit_limit_order(
+                        ticker, ldata['sell_size'], "SELL", ldata['ask'])
                     if result and isinstance(result, dict):
                         self.order_tracker.record_order(
                             ticker, "SELL", result.get("order_id", 0),
@@ -575,60 +840,51 @@ class MarketMaker:
                         self.orders_placed += 1
 
     # ============================================================
-    # PROACTIVE POSITION REDUCTION
+    # PROACTIVE POSITION REDUCTION - V13: MORE AGGRESSIVE
     # ============================================================
 
     def reduce_large_positions(self, tick: int):
         for ticker in TICKERS:
             pos = self.positions.get(ticker, 0)
             per_stock_limit = self.per_stock_limit.get(ticker, MIN_PER_STOCK_LIMIT)
-            threshold = int(per_stock_limit * 0.70)
+            threshold = int(per_stock_limit * 0.60)  # V13: start earlier (was 0.70)
             if abs(pos) < threshold:
                 continue
 
             mid = self.mid_prices.get(ticker, 25.0)
             excess = abs(pos) - threshold
 
-            if abs(pos) > per_stock_limit * 0.90:
-                mkt_size = min(excess, int(per_stock_limit * 0.20))
+            if abs(pos) > per_stock_limit * 0.85:
+                # Very close to limit: use market orders
+                mkt_size = min(excess, int(per_stock_limit * 0.25))
                 mkt_size = max(100, min(mkt_size, MAX_ORDER_SIZE))
                 side = "SELL" if pos > 0 else "BUY"
                 self.api.submit_market_order(ticker, mkt_size, side)
                 self.market_orders_sent += 1
             else:
-                reduce_size = min(excess, int(per_stock_limit * 0.20))
+                # Aggressive limit order near mid
+                reduce_size = min(excess, int(per_stock_limit * 0.25))
                 reduce_size = max(100, min(reduce_size, MAX_ORDER_SIZE))
                 if pos > 0:
-                    price = round(mid + 0.01, 2)
+                    price = round(mid - 0.01, 2)  # Sell aggressively
                     self.api.submit_limit_order(ticker, reduce_size, "SELL", price)
                 else:
-                    price = round(mid - 0.01, 2)
+                    price = round(mid + 0.01, 2)
                     self.api.submit_limit_order(ticker, reduce_size, "BUY", price)
 
     # ============================================================
-    # MARKET CLOSE PROTOCOL - V12.1 (AGGRESSIVE)
+    # MARKET CLOSE PROTOCOL (kept from V12.1)
     # ============================================================
 
     def pre_close_handler(self, tick: int, second_in_day: int):
-        """V12.1: Earlier and more aggressive flattening.
-
-        Timeline:
-        - Second 36-37: Widen spreads, reduce sizes (via spread/size functions)
-        - Second 38-41: Passive flattening (limit orders near mid)
-        - Second 42: CANCEL ALL ORDERS
-        - Second 43-59: Market-order flatten until agg < close_target
-        """
         aggregate = self.compute_aggregate()
         close_target = int(self.close_limit * CLOSE_TARGET_UTILIZATION)
 
         if second_in_day >= PRE_CLOSE_FLATTEN_SEC:
-            # Phase 3: AGGRESSIVE MARKET-ORDER FLATTEN
             if aggregate > close_target:
                 sorted_positions = sorted(
                     [(t, self.positions[t]) for t in TICKERS if abs(self.positions[t]) > 0],
-                    key=lambda x: abs(x[1]),
-                    reverse=True
-                )
+                    key=lambda x: abs(x[1]), reverse=True)
                 remaining = aggregate - close_target
                 for ticker, pos in sorted_positions:
                     if remaining <= 0:
@@ -643,7 +899,6 @@ class MarketMaker:
                           f"(pos={pos}, agg={aggregate}, target={close_target})")
 
         elif second_in_day >= PRE_CLOSE_CANCEL_SEC:
-            # Phase 2: CANCEL ALL
             if not self.in_lockdown:
                 self.api.cancel_all_orders()
                 self.order_tracker.clear_all()
@@ -652,7 +907,6 @@ class MarketMaker:
                       f"agg={aggregate} close_lim={self.close_limit}")
 
         elif second_in_day >= PRE_CLOSE_REDUCE_SEC:
-            # Phase 1: PASSIVE FLATTEN with aggressive limit orders
             for ticker in TICKERS:
                 pos = self.positions.get(ticker, 0)
                 if abs(pos) < 200:
@@ -661,7 +915,7 @@ class MarketMaker:
                 reduce_size = min(abs(pos), 5000)
                 reduce_size = max(100, min(reduce_size, MAX_ORDER_SIZE))
                 if pos > 0:
-                    price = round(mid - 0.01, 2)  # Aggressive: sell below mid
+                    price = round(mid - 0.01, 2)
                     self.api.submit_limit_order(ticker, reduce_size, "SELL", price)
                 else:
                     price = round(mid + 0.01, 2)
@@ -705,13 +959,14 @@ class MarketMaker:
                 self.market_orders_sent += 1
 
     # ============================================================
-    # MAIN LOOP
+    # MAIN LOOP - V13: WITH DAY BOUNDARY HANDLING
     # ============================================================
 
     def run(self):
         print(BANNER.format(
-            close_lim=self.close_limit, intra_lim=self.gross_limit,
-            url=API_BASE_URL, key=API_KEY))
+            psl=MAX_PER_STOCK_LIMIT, gl=self.gross_limit, cl=self.close_limit,
+            cycle=int(CYCLE_SLEEP * 1000), layers=NUM_LAYERS,
+            skew=SKEW_FACTOR, url=API_BASE_URL, key=API_KEY))
 
         self.update_limits()
         print(f"  Intraday gross limit: {self.gross_limit:,}")
@@ -742,10 +997,14 @@ class MarketMaker:
                     if status == "STOPPED":
                         print("\n  [SIMULATION ENDED]")
                         self.update_pnl()
+                        agg = self.compute_aggregate()
                         print(f"  Final P&L: ${self.current_pnl:,.2f}")
                         print(f"  Orders: +{self.orders_placed}/-{self.orders_cancelled}")
                         print(f"  Market orders: {self.market_orders_sent}")
                         print(f"  Volume: {self.total_volume_traded:,}")
+                        print(f"  Final aggregate: {agg:,}")
+                        for t in TICKERS:
+                            print(f"    {t}: {self.positions.get(t, 0):+,}")
                         break
                     time.sleep(0.5)
                     continue
@@ -759,18 +1018,41 @@ class MarketMaker:
                 second_in_day = tick % DAY_LENGTH
                 current_day = tick // DAY_LENGTH
 
+                # ============================================================
+                # DAY BOUNDARY HANDLING - V13 KEY FEATURE
+                # ============================================================
                 if current_day != last_day:
                     if last_day >= 0:
+                        # Store closes from previous day
+                        self.trend_tracker.on_day_end(self.mid_prices.copy())
                         print(f"\n  === DAY {current_day + 1} (tick {tick}) ===")
+
+                    # Get fresh prices for new day
+                    self.update_state(tick)
+
+                    # Initialize trend tracker for new day with momentum detection
+                    self.trend_tracker.on_new_day(current_day, self.mid_prices.copy())
+
+                    # Log momentum signals
+                    for t in TICKERS:
+                        mom = self.trend_tracker.get_momentum(t)
+                        if abs(mom) > 0.05:
+                            direction = "UP" if mom > 0 else "DOWN"
+                            print(f"    [MOMENTUM] {t}: {direction} "
+                                  f"(signal={mom:+.3f})")
+
                     self.in_lockdown = False
                     last_day = current_day
 
+                # Circuit breaker halt: re-check P&L periodically
                 if self.circuit_breaker_halt:
-                    self.update_pnl()  # Re-check so recovery can trigger
+                    self.update_pnl()
                     time.sleep(0.5)
                     continue
 
-                # State updates
+                # ============================================================
+                # STATE UPDATES (every tick)
+                # ============================================================
                 self.update_state(tick)
                 if tick % 5 == 0:
                     self.update_limits()
@@ -778,17 +1060,24 @@ class MarketMaker:
                     self.update_pnl()
                 self.update_adaptive_spreads(tick)
 
+                # Decay momentum signal
+                self.trend_tracker.decay_momentum()
+
                 utilization = self.compute_utilization()
                 aggregate = self.compute_aggregate()
                 net = self.compute_net()
 
-                # PRE-CLOSE (second >= 36)
+                # ============================================================
+                # PRE-CLOSE PHASE
+                # ============================================================
                 if second_in_day >= PRE_CLOSE_WIDEN_SEC:
                     self.pre_close_handler(tick, second_in_day)
                     time.sleep(CYCLE_SLEEP)
                     continue
 
-                # POST-CLOSE RECOVERY (second < 5)
+                # ============================================================
+                # POST-CLOSE RECOVERY (just 1 second)
+                # ============================================================
                 if second_in_day < POST_CLOSE_RECOVERY_SEC:
                     if self.order_tracker.has_any_order(TICKERS[0]):
                         self.api.cancel_all_orders()
@@ -796,9 +1085,12 @@ class MarketMaker:
                     time.sleep(CYCLE_SLEEP)
                     continue
 
-                # ACTIVE TRADING (second 5-35)
+                # ============================================================
+                # ACTIVE TRADING
+                # ============================================================
                 self.in_lockdown = False
 
+                # Emergency position management
                 if utilization > UTIL_PANIC:
                     self.panic_flatten()
                     time.sleep(CYCLE_SLEEP)
@@ -806,21 +1098,32 @@ class MarketMaker:
                 elif utilization > UTIL_EMERGENCY:
                     self.emergency_flatten(target_util=UTIL_REDUCE)
 
-                if tick % 3 == 0:
+                # Proactive position reduction (every other tick for speed)
+                if tick % 2 == 0:
                     self.reduce_large_positions(tick)
 
+                # Quote all tickers
                 for ticker in TICKERS:
                     self.quote_ticker(ticker, tick, second_in_day, utilization)
 
-                # Logging
+                # ============================================================
+                # LOGGING
+                # ============================================================
                 if tick - last_log_tick >= LOG_INTERVAL_TICKS:
                     pos_str = " | ".join(
-                        f"{t}:{int(self.positions.get(t,0)):+d}" for t in TICKERS)
+                        f"{t}:{int(self.positions.get(t, 0)):+d}" for t in TICKERS)
                     pnl_str = f"${self.current_pnl:+,.0f}" if self.start_nlv > 0 else "N/A"
+
+                    # V13: show trend signals
+                    trend_str = " ".join(
+                        f"{t}:{self.trend_tracker.get_trend(t):+.2f}"
+                        for t in TICKERS)
+
                     print(f"  T{tick:03d} d{second_in_day:02d} | "
                           f"pos=[{pos_str}] | "
                           f"agg={aggregate:,}/{self.gross_limit:,}({utilization:.0%}) | "
-                          f"net={net:,} | pnl={pnl_str} | "
+                          f"pnl={pnl_str} | "
+                          f"trend=[{trend_str}] | "
                           f"mkt={self.market_orders_sent} | "
                           f"tvol={self.total_volume_traded:,}")
                     last_log_tick = tick
@@ -835,6 +1138,10 @@ class MarketMaker:
                 logger.exception(f"Error: {e}")
                 time.sleep(0.5)
 
+
+# ============================================================
+# STARTUP
+# ============================================================
 
 def wait_for_connection(api: RITApi):
     print("  Waiting for RIT connection...")
@@ -872,7 +1179,7 @@ def setup_logging():
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     log_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
     os.makedirs(log_dir, exist_ok=True)
-    fh = logging.FileHandler(os.path.join(log_dir, f"mm_v12_1_{ts}.log"))
+    fh = logging.FileHandler(os.path.join(log_dir, f"mm_v13_{ts}.log"))
     fh.setFormatter(logging.Formatter("%(asctime)s %(message)s"))
     _file_logger.addHandler(fh)
 

@@ -1,6 +1,6 @@
 # CUMULATIVE templates from ALL practice sessions
 # Total templates: 256
-# Last updated: 2026-02-15T08:19:19.368548
+# Last updated: 2026-02-16T12:35:38.931361
 # Copy into NEWS_TEMPLATES in merger_arb_trader.py
 
 NEW_TEMPLATES = {
@@ -10,7 +10,7 @@ NEW_TEMPLATES = {
     },
     'ACTIVIST HEDGE FUND OPPOSES DEAL': {
         'direction': 'positive', 'severity': 'medium', 'category': 'SHR', 'confidence': 1.0,
-        # seen 5x across all sessions, avg move=$-0.404, avg dp=-0.0062
+        # seen 6x across all sessions, avg move=$-0.250, avg dp=-0.0054
     },
     'ALL FINANCING CONDITIONS MET': {
         'direction': 'positive', 'severity': 'large', 'category': 'FIN', 'confidence': 1.0,
@@ -50,7 +50,7 @@ NEW_TEMPLATES = {
     },
     'BANK SYNDICATE EXPANDS': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 12x across all sessions, avg move=$+0.308, avg dp=+0.0164
+        # seen 13x across all sessions, avg move=$+0.324, avg dp=+0.0150
     },
     'BANKS PROPOSE ENHANCED CRA PLAN': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
@@ -78,7 +78,7 @@ NEW_TEMPLATES = {
     },
     'BRANCH MANAGER RETENTION PROGRAM': {
         'direction': 'negative', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 4x across all sessions, avg move=$+0.413, avg dp=+0.0336
+        # seen 5x across all sessions, avg move=$+0.382, avg dp=+0.0303
     },
     'BREACH OF TRANSACTION COVENANT ALLEGED': {
         'direction': 'positive', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
@@ -90,11 +90,11 @@ NEW_TEMPLATES = {
     },
     'BRIDGE FINANCING COMMITMENT SIGNED': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 2x across all sessions, avg move=$+0.685, avg dp=-0.0005
+        # seen 3x across all sessions, avg move=$+0.553, avg dp=+0.0013
     },
     'BRIDGE LOAN REPLACED WITH TERM FACILITY': {
         'direction': 'negative', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 10x across all sessions, avg move=$+0.402, avg dp=+0.0086
+        # seen 11x across all sessions, avg move=$+0.570, avg dp=+0.0137
     },
     'BROAD MARKET SELL-OFF AS RISK SENTIMENT DETERIORATES': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
@@ -106,7 +106,7 @@ NEW_TEMPLATES = {
     },
     'CAPITAL PLAN APPROVED BY FED': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 9x across all sessions, avg move=$-0.076, avg dp=-0.0078
+        # seen 10x across all sessions, avg move=$-0.096, avg dp=-0.0089
     },
     'CENTRAL BANK ANNOUNCES ENHANCED LIQUIDITY FACILITIES': {
         'direction': 'positive', 'severity': 'large', 'category': 'FIN', 'confidence': 1.0,
@@ -122,11 +122,11 @@ NEW_TEMPLATES = {
     },
     'CLASS ACTION FILED IN DELAWARE': {
         'direction': 'positive', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
-        # seen 5x across all sessions, avg move=$+0.010, avg dp=+0.0011
+        # seen 6x across all sessions, avg move=$-0.040, avg dp=+0.0011
     },
     'CLOSED-DOOR MEETING BETWEEN TRANSACTION PRINCIPALS REPORTED': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 31x across all sessions, avg move=$+0.215, avg dp=+0.0069
+        # seen 32x across all sessions, avg move=$+0.224, avg dp=+0.0066
     },
     'CLOSING CONDITIONS STATUS': {
         'direction': 'negative', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
@@ -138,7 +138,7 @@ NEW_TEMPLATES = {
     },
     'CLOSING CONDITIONS TRACKER UPDATED': {
         'direction': 'negative', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
-        # seen 14x across all sessions, avg move=$-0.256, avg dp=-0.0177
+        # seen 15x across all sessions, avg move=$-0.208, avg dp=-0.0168
     },
     'CLOSING TIMELINE EXTENDED': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
@@ -146,7 +146,7 @@ NEW_TEMPLATES = {
     },
     'COLLAR MECHANISM SPECULATION': {
         'direction': 'positive', 'severity': 'medium', 'category': 'SHR', 'confidence': 1.0,
-        # seen 6x across all sessions, avg move=$+0.438, avg dp=+0.0024
+        # seen 7x across all sessions, avg move=$+0.439, avg dp=+0.0014
     },
     'COMMODITY PRICE HEDGE PROGRAM': {
         'direction': 'positive', 'severity': 'small', 'category': 'PRC', 'confidence': 1.0,
@@ -178,7 +178,7 @@ NEW_TEMPLATES = {
     },
     'COMPANY ENGAGES ADVISORS FOR STRATEGIC REVIEW': {
         'direction': 'negative', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
-        # seen 25x across all sessions, avg move=$+0.030, avg dp=-0.0006
+        # seen 27x across all sessions, avg move=$+0.027, avg dp=-0.0012
     },
     'COMPANY INCREASES OFFER PRICE': {
         'direction': 'positive', 'severity': 'large', 'category': 'PRC', 'confidence': 1.0,
@@ -194,7 +194,7 @@ NEW_TEMPLATES = {
     },
     'COMPANY REPORTS STRONG QUARTERLY EARNINGS': {
         'direction': 'positive', 'severity': 'large', 'category': 'FIN', 'confidence': 1.0,
-        # seen 11x across all sessions, avg move=$+0.288, avg dp=+0.0752
+        # seen 12x across all sessions, avg move=$+0.248, avg dp=+0.0679
     },
     'COMPANY REPORTS STRONG REVENUE GROWTH': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
@@ -202,11 +202,11 @@ NEW_TEMPLATES = {
     },
     'COMPANY SCHEDULES SHAREHOLDER MEETING': {
         'direction': 'positive', 'severity': 'small', 'category': 'SHR', 'confidence': 1.0,
-        # seen 7x across all sessions, avg move=$-0.004, avg dp=+0.0021
+        # seen 8x across all sessions, avg move=$+0.238, avg dp=+0.0103
     },
     'COMPANY SCHEDULES SHAREHOLDER VOTE': {
         'direction': 'positive', 'severity': 'medium', 'category': 'SHR', 'confidence': 1.0,
-        # seen 10x across all sessions, avg move=$+0.703, avg dp=+0.0360
+        # seen 11x across all sessions, avg move=$+0.625, avg dp=+0.0331
     },
     'COMPANY SETS MEETING FOR SHAREHOLDER VOTE': {
         'direction': 'negative', 'severity': 'small', 'category': 'SHR', 'confidence': 1.0,
@@ -214,7 +214,7 @@ NEW_TEMPLATES = {
     },
     'COMPANY SETS SHAREHOLDER MEETING DATE': {
         'direction': 'positive', 'severity': 'large', 'category': 'SHR', 'confidence': 1.0,
-        # seen 11x across all sessions, avg move=$-0.011, avg dp=+0.0024
+        # seen 12x across all sessions, avg move=$+0.029, avg dp=+0.0023
     },
     'COMPANY SHARE PRICE VOLATILITY': {
         'direction': 'positive', 'severity': 'large', 'category': 'PRC', 'confidence': 1.0,
@@ -238,7 +238,7 @@ NEW_TEMPLATES = {
     },
     'COMPANY SHAREHOLDER QUESTIONS DEAL LOGIC': {
         'direction': 'positive', 'severity': 'small', 'category': 'SHR', 'confidence': 1.0,
-        # seen 7x across all sessions, avg move=$-0.209, avg dp=-0.0152
+        # seen 8x across all sessions, avg move=$-0.241, avg dp=-0.0143
     },
     'COMPANY STOCK PRICE DECLINE': {
         'direction': 'negative', 'severity': 'small', 'category': 'PRC', 'confidence': 1.0,
@@ -278,7 +278,7 @@ NEW_TEMPLATES = {
     },
     'CONGRESSIONAL BANKING COMMITTEE INQUIRY': {
         'direction': 'negative', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 9x across all sessions, avg move=$-0.184, avg dp=-0.0212
+        # seen 10x across all sessions, avg move=$-0.188, avg dp=-0.0195
     },
     'CONGRESSIONAL HEARING ANNOUNCED': {
         'direction': 'positive', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
@@ -310,7 +310,7 @@ NEW_TEMPLATES = {
     },
     'CREDIT FACILITY AMENDMENT NEGOTIATED': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 13x across all sessions, avg move=$+0.234, avg dp=+0.0026
+        # seen 14x across all sessions, avg move=$+0.239, avg dp=+0.0027
     },
     'CREDIT MARKETS FLASH WARNING SIGNS AS SPREADS WIDEN': {
         'direction': 'positive', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
@@ -322,11 +322,11 @@ NEW_TEMPLATES = {
     },
     'CREDIT RATING DOWNGRADE': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 7x across all sessions, avg move=$+0.143, avg dp=-0.0027
+        # seen 8x across all sessions, avg move=$+0.066, avg dp=-0.0022
     },
     'DEBT FINANCING COMMITMENTS SECURED': {
         'direction': 'negative', 'severity': 'small', 'category': 'FIN', 'confidence': 0.8,
-        # seen 9x across all sessions, avg move=$+0.033, avg dp=+0.0006
+        # seen 10x across all sessions, avg move=$+0.052, avg dp=+0.0006
     },
     'DEBT FINANCING FULLY COMMITTED': {
         'direction': 'negative', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
@@ -366,7 +366,7 @@ NEW_TEMPLATES = {
     },
     'DOJ ANTITRUST DIVISION SIGNALS STRICTER MERGER ENFORCEMENT': {
         'direction': 'positive', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
-        # seen 4x across all sessions, avg move=$+0.735, avg dp=+0.0504
+        # seen 5x across all sessions, avg move=$+0.780, avg dp=+0.0481
     },
     'DOJ PROVIDES CONDITIONAL CLEARANCE': {
         'direction': 'negative', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
@@ -374,7 +374,7 @@ NEW_TEMPLATES = {
     },
     'DOJ REQUESTS EXTENDED REVIEW': {
         'direction': 'negative', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
-        # seen 5x across all sessions, avg move=$-0.106, avg dp=-0.0065
+        # seen 6x across all sessions, avg move=$-0.038, avg dp=-0.0057
     },
     'EARLY INDICATIONS POINT TO STRONG SHAREHOLDER SUPPORT': {
         'direction': 'negative', 'severity': 'medium', 'category': 'SHR', 'confidence': 1.0,
@@ -390,7 +390,7 @@ NEW_TEMPLATES = {
     },
     'EMPLOYEE RETENTION PACKAGES OFFERED': {
         'direction': 'negative', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 14x across all sessions, avg move=$-0.059, avg dp=-0.0148
+        # seen 15x across all sessions, avg move=$-0.033, avg dp=-0.0138
     },
     'ENERGY SECTOR CREDIT SPREAD WIDENING': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
@@ -402,7 +402,7 @@ NEW_TEMPLATES = {
     },
     'ENVIRONMENTAL GROUPS EXPRESS SUPPORT': {
         'direction': 'negative', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 6x across all sessions, avg move=$+0.118, avg dp=+0.0129
+        # seen 7x across all sessions, avg move=$-0.979, avg dp=-0.0219
     },
     'EPA ISSUES SUPPORTIVE STATEMENT': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
@@ -414,7 +414,7 @@ NEW_TEMPLATES = {
     },
     'EQUITY MARKETS RALLY ON IMPROVED RISK APPETITE': {
         'direction': 'negative', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 5x across all sessions, avg move=$-0.248, avg dp=-0.0148
+        # seen 6x across all sessions, avg move=$-0.408, avg dp=-0.0199
     },
     'EQUITY RESEARCH DOWNGRADES COMPANY': {
         'direction': 'negative', 'severity': 'small', 'category': 'FIN', 'confidence': 0.8,
@@ -422,7 +422,7 @@ NEW_TEMPLATES = {
     },
     'ESCALATING GEOPOLITICAL TENSIONS RATTLE GLOBAL MARKETS': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 4x across all sessions, avg move=$-0.133, avg dp=-0.0020
+        # seen 5x across all sessions, avg move=$+0.082, avg dp=+0.0049
     },
     'ESG-FOCUSED FUND OPPOSES TERMS': {
         'direction': 'negative', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
@@ -470,7 +470,7 @@ NEW_TEMPLATES = {
     },
     'FEDERAL RESERVE ANNOUNCES RATE DECISION': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 6x across all sessions, avg move=$+0.868, avg dp=+0.0144
+        # seen 7x across all sessions, avg move=$+0.809, avg dp=+0.0189
     },
     'FEDERAL RESERVE APPROVES TRANSACTION': {
         'direction': 'negative', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
@@ -510,7 +510,7 @@ NEW_TEMPLATES = {
     },
     'FERC STAFF HOLDS TECHNICAL WORKING SESSION': {
         'direction': 'positive', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
-        # seen 17x across all sessions, avg move=$+0.277, avg dp=+0.0093
+        # seen 18x across all sessions, avg move=$+0.227, avg dp=+0.0082
     },
     'FINAL CLOSING CONDITIONS CHECKLIST PUBLISHED': {
         'direction': 'negative', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
@@ -534,7 +534,7 @@ NEW_TEMPLATES = {
     },
     'FTC OPENS PRELIMINARY REVIEW OF TECH MERGER': {
         'direction': 'positive', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
-        # seen 5x across all sessions, avg move=$-0.198, avg dp=+0.0032
+        # seen 6x across all sessions, avg move=$-0.128, avg dp=+0.0044
     },
     'FTC REQUESTS ADDITIONAL INFORMATION': {
         'direction': 'positive', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
@@ -554,7 +554,7 @@ NEW_TEMPLATES = {
     },
     'HART-SCOTT-RODINO FILING SUBMITTED': {
         'direction': 'positive', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
-        # seen 7x across all sessions, avg move=$-0.050, avg dp=+0.0048
+        # seen 8x across all sessions, avg move=$-0.156, avg dp=+0.0040
     },
     'HEDGE FUND ACTIVIST OPPOSES DEAL': {
         'direction': 'negative', 'severity': 'small', 'category': 'SHR', 'confidence': 1.0,
@@ -570,7 +570,7 @@ NEW_TEMPLATES = {
     },
     'INDEPENDENT FAIRNESS REVIEW GENERATES BOARD DISCUSSION': {
         'direction': 'negative', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
-        # seen 21x across all sessions, avg move=$-0.168, avg dp=-0.0020
+        # seen 22x across all sessions, avg move=$-0.200, avg dp=-0.0019
     },
     'INDEX REBALANCING IMPLICATIONS': {
         'direction': 'positive', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
@@ -578,7 +578,7 @@ NEW_TEMPLATES = {
     },
     'INDUSTRY CONFERENCE GENERATES TRANSACTION SPECULATION': {
         'direction': 'positive', 'severity': 'small', 'category': 'SHR', 'confidence': 1.0,
-        # seen 51x across all sessions, avg move=$+0.454, avg dp=+0.0277
+        # seen 54x across all sessions, avg move=$+0.415, avg dp=+0.0259
     },
     'INDUSTRY LOBBYISTS SUPPORT TRANSACTION': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
@@ -586,11 +586,11 @@ NEW_TEMPLATES = {
     },
     'INFRASTRUCTURE FUND OPPOSES TERMS': {
         'direction': 'negative', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 7x across all sessions, avg move=$-0.110, avg dp=+0.0130
+        # seen 8x across all sessions, avg move=$-0.056, avg dp=+0.0127
     },
     'INFRASTRUCTURE MODERNIZATION REQUIREMENTS': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 6x across all sessions, avg move=$-0.247, avg dp=-0.0028
+        # seen 7x across all sessions, avg move=$-0.330, avg dp=-0.0101
     },
     'INSTITUTIONAL INVESTORS SIGNAL SUPPORT': {
         'direction': 'positive', 'severity': 'small', 'category': 'SHR', 'confidence': 1.0,
@@ -614,7 +614,7 @@ NEW_TEMPLATES = {
     },
     'INTEGRATION TEAMS APPOINTED': {
         'direction': 'negative', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 14x across all sessions, avg move=$+0.232, avg dp=-0.0002
+        # seen 15x across all sessions, avg move=$+0.161, avg dp=-0.0006
     },
     'INTEGRATION TEAMS FORMED': {
         'direction': 'positive', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
@@ -622,11 +622,11 @@ NEW_TEMPLATES = {
     },
     'INTERCONNECTION RIGHTS CONFIRMED': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 13x across all sessions, avg move=$-0.388, avg dp=-0.0051
+        # seen 14x across all sessions, avg move=$-0.380, avg dp=-0.0061
     },
     'INTEREST RATE HEDGE EXECUTED': {
         'direction': 'negative', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 7x across all sessions, avg move=$-0.264, avg dp=-0.0075
+        # seen 8x across all sessions, avg move=$-0.264, avg dp=-0.0072
     },
     'INVESTMENT BANKING ACTIVITY ACCELERATES ACROSS SECTORS': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
@@ -634,7 +634,7 @@ NEW_TEMPLATES = {
     },
     'INVESTMENT GRADE BOND OFFERING COMPLETED': {
         'direction': 'positive', 'severity': 'large', 'category': 'FIN', 'confidence': 1.0,
-        # seen 11x across all sessions, avg move=$+0.343, avg dp=+0.0307
+        # seen 12x across all sessions, avg move=$+0.275, avg dp=+0.0282
     },
     'INVESTMENT GRADE RATING AFFIRMED': {
         'direction': 'negative', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
@@ -658,7 +658,7 @@ NEW_TEMPLATES = {
     },
     'KEY ENGINEER RETENTION PLAN ANNOUNCED': {
         'direction': 'negative', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
-        # seen 10x across all sessions, avg move=$-0.139, avg dp=-0.0199
+        # seen 11x across all sessions, avg move=$-0.083, avg dp=-0.0174
     },
     'LEGAL CHALLENGE DISMISSED': {
         'direction': 'positive', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
@@ -698,11 +698,11 @@ NEW_TEMPLATES = {
     },
     'MERGER AGREEMENT SIGNED AND ANNOUNCED': {
         'direction': 'negative', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 15x across all sessions, avg move=$-0.247, avg dp=-0.0058
+        # seen 16x across all sessions, avg move=$-0.171, avg dp=-0.0033
     },
     'MINORITY SHAREHOLDER LITIGATION': {
         'direction': 'positive', 'severity': 'small', 'category': 'SHR', 'confidence': 1.0,
-        # seen 7x across all sessions, avg move=$-0.606, avg dp=-0.0221
+        # seen 8x across all sessions, avg move=$-0.555, avg dp=-0.0195
     },
     'MIXED ECONOMIC DATA CREATES CROSS-CURRENTS FOR DEAL MARKETS': {
         'direction': 'negative', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
@@ -730,7 +730,7 @@ NEW_TEMPLATES = {
     },
     'OUTSIDE DATE EXTENDED TO YEAR-END': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 13x across all sessions, avg move=$+0.192, avg dp=-0.0742
+        # seen 14x across all sessions, avg move=$+0.414, avg dp=-0.0619
     },
     'PERMANENT FINANCING SYNDICATION SUCCESSFUL': {
         'direction': 'negative', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
@@ -774,7 +774,7 @@ NEW_TEMPLATES = {
     },
     'PROJECT FINANCE COMMITMENT SECURED': {
         'direction': 'negative', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 11x across all sessions, avg move=$+0.310, avg dp=+0.0223
+        # seen 12x across all sessions, avg move=$+0.332, avg dp=+0.0211
     },
     'PROXY ADVISORY FIRM ISS RECOMMENDS APPROVAL': {
         'direction': 'negative', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
@@ -798,11 +798,11 @@ NEW_TEMPLATES = {
     },
     'REGULATORY FILINGS SUBMITTED': {
         'direction': 'negative', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
-        # seen 9x across all sessions, avg move=$+0.116, avg dp=+0.0009
+        # seen 10x across all sessions, avg move=$+0.201, avg dp=+0.0044
     },
     'REGULATORY TIMELINE EXTENDED': {
         'direction': 'negative', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
-        # seen 3x across all sessions, avg move=$-0.757, avg dp=-0.0232
+        # seen 4x across all sessions, avg move=$-0.455, avg dp=-0.0060
     },
     'REGULATORY TIMELINE SLIPPAGE': {
         'direction': 'negative', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
@@ -838,7 +838,7 @@ NEW_TEMPLATES = {
     },
     'SELL-SIDE ANALYSTS ISSUE DIVERGENT VALUATION ASSESSMENTS': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 42x across all sessions, avg move=$-0.008, avg dp=+0.0007
+        # seen 43x across all sessions, avg move=$-0.005, avg dp=+0.0007
     },
     'SENATE COMMITTEE LAUNCHES INQUIRY INTO INDUSTRY CONSOLIDATION': {
         'direction': 'positive', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
@@ -894,11 +894,11 @@ NEW_TEMPLATES = {
     },
     'STATE UTILITY COMMISSIONS REQUEST HEARINGS': {
         'direction': 'negative', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
-        # seen 4x across all sessions, avg move=$+0.652, avg dp=+0.0428
+        # seen 5x across all sessions, avg move=$+0.428, avg dp=+0.0327
     },
     'STOCK MARKET VOLATILITY AFFECTS EXCHANGE RATIO': {
         'direction': 'negative', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 11x across all sessions, avg move=$+0.238, avg dp=+0.0100
+        # seen 12x across all sessions, avg move=$-0.415, avg dp=-0.0100
     },
     'STOCK PRICE CONDITIONS CONFIRMED MET': {
         'direction': 'negative', 'severity': 'small', 'category': 'PRC', 'confidence': 1.0,
@@ -918,7 +918,7 @@ NEW_TEMPLATES = {
     },
     'STRESS TEST REQUIREMENTS IMPOSED': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 9x across all sessions, avg move=$-0.940, avg dp=-0.0332
+        # seen 10x across all sessions, avg move=$-0.811, avg dp=-0.0293
     },
     'STRONG EARLY VOTING RESULTS': {
         'direction': 'negative', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
@@ -930,7 +930,7 @@ NEW_TEMPLATES = {
     },
     'STRONG QUARTERLY RESULTS REPORTED': {
         'direction': 'positive', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
-        # seen 9x across all sessions, avg move=$-0.353, avg dp=-0.0135
+        # seen 10x across all sessions, avg move=$-0.298, avg dp=-0.0125
     },
     'SUCCESSFUL BOND OFFERING': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
@@ -962,11 +962,11 @@ NEW_TEMPLATES = {
     },
     'TERMINATION FEE STRUCTURE DISCLOSED': {
         'direction': 'positive', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
-        # seen 5x across all sessions, avg move=$+0.868, avg dp=+0.0351
+        # seen 6x across all sessions, avg move=$-0.508, avg dp=-0.0096
     },
     'THIRD-PARTY REGULATORY ANALYSIS PUBLISHED': {
         'direction': 'positive', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
-        # seen 32x across all sessions, avg move=$+0.005, avg dp=+0.0008
+        # seen 34x across all sessions, avg move=$+0.094, avg dp=+0.0037
     },
     'TICKER RECEIVES UNSOLICITED INQUIRY': {
         'direction': 'positive', 'severity': 'small', 'category': 'ALT', 'confidence': 1.0,
@@ -982,7 +982,7 @@ NEW_TEMPLATES = {
     },
     'TLAC REQUIREMENTS CLARIFIED': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 6x across all sessions, avg move=$+0.548, avg dp=+0.0146
+        # seen 7x across all sessions, avg move=$+0.430, avg dp=+0.0106
     },
     'TRADE POLICY REVISIONS ANNOUNCED WITH CROSS-SECTOR IMPACT': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
@@ -990,7 +990,7 @@ NEW_TEMPLATES = {
     },
     'TRANSMISSION ACCESS QUESTIONS RAISED': {
         'direction': 'positive', 'severity': 'medium', 'category': 'FIN', 'confidence': 1.0,
-        # seen 4x across all sessions, avg move=$-0.065, avg dp=+0.0132
+        # seen 5x across all sessions, avg move=$+0.046, avg dp=+0.0119
     },
     'UK CMA PHASE I REVIEW COMPLETED': {
         'direction': 'positive', 'severity': 'small', 'category': 'REG', 'confidence': 1.0,
@@ -1026,6 +1026,6 @@ NEW_TEMPLATES = {
     },
     'WELCOME TO THE RITC 2026 MERGER ARBITRAGE CASE - PRACTICE SERVER': {
         'direction': 'positive', 'severity': 'small', 'category': 'FIN', 'confidence': 1.0,
-        # seen 36x across all sessions, avg move=$+0.066, avg dp=-0.0004
+        # seen 37x across all sessions, avg move=$+0.054, avg dp=-0.0004
     },
 }

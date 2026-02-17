@@ -5,8 +5,8 @@ import requests
 import time
 import sys
 
-API_KEY = {'X-API-Key': 'AJDSYHVCES'}
-BASE = 'http://localhost:9998/v1'
+API_KEY = {'X-API-Key': 'AJDSYHVC'}
+BASE = 'http://localhost:10000/v1'
 
 DEALS = {
     'D1': {'target': 'TGX', 'acquirer': 'PHR', 'structure': 'ALL_CASH', 'cash': 50.00, 'ratio': 0.0, 'p0': 0.70, 't_start': 43.70, 'a_start': 47.50, 'deal_mult': 1.00},
