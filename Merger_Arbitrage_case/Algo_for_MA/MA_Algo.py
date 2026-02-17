@@ -25,7 +25,7 @@ from typing import Dict, List, Any
 
 # ========== Configuration ==========
 API_KEY = {'X-API-Key': 'JFDNCO6I'}
-BASE_URL = 'http://localhost:9999/v1'
+BASE_URL = 'http://localhost:65535/v1'
 shutdown = False
 
 # Deal structures from case description

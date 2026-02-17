@@ -6,9 +6,9 @@ Uses same API connection pattern as the working volatility algo.
 
 # ========== API Connection (matching volatility algo pattern) ==========
 API_HOST = "localhost"
-API_PORT = 9999
+API_PORT = 10000
 API_BASE_URL = f"http://{API_HOST}:{API_PORT}/v1"
-API_KEY = "LPJEV4YS"
+API_KEY = "AJDSYHVC"
 
 # ========== Position Limits ==========
 NET_LIMIT = 150_000       # Buffer below 150K hard limit

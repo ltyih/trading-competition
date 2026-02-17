@@ -5,8 +5,8 @@ Centralised constants and parameters. All other modules import from here.
 """
 
 # ========== API Connection ==========
-API_KEY = {'X-API-Key': 'LPJEV4YS'}
-BASE_URL = 'http://localhost:9999/v1'
+API_KEY = {'X-API-Key': 'AJDSYHVC'}
+BASE_URL = 'http://localhost:10000/v1'
 
 # ========== Watchlist ==========
 WATCHLIST = {'RITC', 'COMP'}
