@@ -1,25 +1,44 @@
 # -*- coding: utf-8 -*-
 """
-ALGO MARKET MAKING BOT - V13 TREND-FOLLOWING MARKET MAKER
-===========================================================
+ALGO MARKET MAKING BOT - V15 AVELLANEDA-STOIKOV MARKET MAKER
+==============================================================
 
-THREE PILLARS OF V13:
-1. TREND CAPTURE: EMA crossover detects price direction → skew quotes to
-   accumulate inventory in the profitable direction
-2. MOMENTUM TRADING: detect inter-day price jumps → ride momentum
-3. TIGHT INVENTORY: ±5k per stock cap + 25x stronger skew → kills adverse selection
+CORE IDEA: Use the Avellaneda-Stoikov (2008) optimal market making framework
+to set mathematically optimal quotes instead of ad-hoc parameters.
 
-DATA-DRIVEN INSIGHTS:
-- Your ±23k positions caused -$142k adverse selection (80% of losses)
-- SPNG earned most ($7,817) despite lowest rebate (widest spreads, $2.85 range)
-- WNTR LOST money ($-1,456) despite highest rebate (too narrow, high adverse sel.)
-- Market spreads are 1-2 cents; intraday ranges are $0.50-$2.85
-- Stocks are negatively correlated (diversification benefit)
+THE AS MODEL IN BRIEF:
+  - Reservation price: r = s - q * gamma * sigma^2 * (T - t)
+    → Shifts your "fair value" based on inventory (q), risk aversion (gamma),
+      volatility (sigma), and time remaining (T-t)
+    → If you're long, your reservation price is BELOW mid → you sell more aggressively
+
+  - Optimal spread: delta* = gamma * sigma^2 * (T-t) + (2/gamma) * ln(1 + gamma/k)
+    → First term: risk premium (increases with vol and time remaining)
+    → Second term: market power (depends on order arrival intensity k)
+
+  - Fill intensity: Lambda(delta) = A * exp(-k * delta)
+    → Probability of fill decreases exponentially with distance from mid
+
+KEY ADAPTATIONS FOR THIS COMPETITION:
+  1. gamma is time-varying: low during active trading (more volume), high near close
+  2. sigma is estimated in real-time from recent price moves
+  3. T-t resets each "day" (60 seconds) since close penalty is per-day
+  4. Jump detection: widen spreads on news-driven price jumps
+  5. Aggressive volume: top teams profit from spread × volume + rebates × volume
+
+WHERE DOES $240k COME FROM?
+  - Assume avg spread capture of ~2c/share on both sides = 1c/share net
+  - Need ~24M shares over 300 seconds = 80k shares/second across 4 stocks
+  - That's 20k shares/sec per stock, or filling a 5000-share order every 0.25 sec
+  - Plus rebates: 24M × $0.018 avg = $432k from rebates alone
+  - Minus adverse selection and penalties
+  - Net: $200-300k is achievable with high-volume MM + low adverse selection
 """
 
 import sys
 import os
 import time
+import math
 import logging
 from datetime import datetime
 from collections import deque
@@ -40,35 +59,30 @@ def print(*args, **kwargs):
 
 from config import (
     TICKERS, REBATES, MARKET_ORDER_FEE,
-    BASE_SPREAD, ORDER_SIZE, MAX_ORDER_SIZE,
-    VOL_SIZE_MULT, SPREAD_MARKET_FACTOR, SPREAD_MIN_ABSOLUTE, SPREAD_MAX_ABSOLUTE,
-    SKEW_FACTOR,
-    TREND_FAST_ALPHA, TREND_SLOW_ALPHA, TREND_SKEW_FACTOR, TREND_MIN_SIGNAL,
-    MOMENTUM_THRESHOLD, MOMENTUM_SKEW_FACTOR, MOMENTUM_DECAY,
-    MOMENTUM_DURATION_SEC, MOMENTUM_SIZE_BOOST,
-    RECENT_MOVE_LOOKBACK, RECENT_MOVE_WIDEN_THRESHOLD, RECENT_MOVE_WIDEN_MULT,
+    SPREAD_MIN_PER_TICKER, SPREAD_MIN_ABSOLUTE, SPREAD_MAX_ABSOLUTE,
+    SPREAD_INSIDE_FACTOR,
+    BASE_ORDER_SIZE, MAX_ORDER_SIZE,
+    VOL_SIZE_MULT,
+    AS_GAMMA_NORMAL, AS_GAMMA_HIGH_INV, AS_GAMMA_PRE_CLOSE,
+    AS_K_PARAMETER, AS_VOL_WINDOW, AS_VOL_DEFAULT,
+    JUMP_THRESHOLD, JUMP_WIDEN_MULT, JUMP_DECAY_RATE, JUMP_MIN_SIGNAL,
     UTIL_NORMAL, UTIL_SKEW, UTIL_REDUCE, UTIL_EMERGENCY, UTIL_PANIC,
     DEFAULT_GROSS_LIMIT, DEFAULT_NET_LIMIT, CLOSE_TIME_LIMIT,
     GROSS_LIMIT_BUFFER, NET_LIMIT_BUFFER,
-    PER_STOCK_LIMIT_FRACTION, MIN_PER_STOCK_LIMIT, MAX_PER_STOCK_LIMIT,
+    PER_STOCK_TRADING_LIMIT, PER_STOCK_CLOSE_LIMIT,
     CYCLE_SLEEP, HEAT_DURATION, DAY_LENGTH,
-    PRE_CLOSE_WIDEN_SEC, PRE_CLOSE_REDUCE_SEC,
-    PRE_CLOSE_CANCEL_SEC, PRE_CLOSE_FLATTEN_SEC,
+    PRE_CLOSE_WIDEN_SEC, PRE_CLOSE_CANCEL_SEC, PRE_CLOSE_FLATTEN_SEC,
     CLOSE_TARGET_UTILIZATION,
     POST_CLOSE_RECOVERY_SEC, POST_CLOSE_SPREAD_MULT, POST_CLOSE_SIZE_MULT,
-    PRE_CLOSE_SPREAD_MULT, PRE_CLOSE_SIZE_MULT,
     VOL_LOOKBACK, VOL_LOW_THRESHOLD, VOL_HIGH_THRESHOLD, VOL_SPREAD_MULT,
     MIN_PRICE, MAX_PRICE,
     LOG_INTERVAL_TICKS, REQUOTE_THRESHOLD,
     IMBALANCE_THRESHOLD, IMBALANCE_SKEW_FACTOR,
-    PENNY_IMPROVE,
     CIRCUIT_BREAKER_CAUTION, CIRCUIT_BREAKER_HALT,
     ADAPTIVE_INTERVAL, ADAPTIVE_MIN_MULT, ADAPTIVE_MAX_MULT,
     ADAPTIVE_TARGET_FILLS,
-    ENABLE_LAYERED_QUOTES, NUM_LAYERS,
-    LAYER2_SPREAD_MULT, LAYER2_SIZE_MULT,
-    LAYER3_SPREAD_MULT, LAYER3_SIZE_MULT,
-    ASYM_REDUCE_MAX, ASYM_INCREASE_MIN, ASYM_KICK_IN,
+    ENABLE_LAYERED_QUOTES, NUM_LAYERS, LAYER_CONFIG,
+    ASYM_REDUCE_BOOST, ASYM_INCREASE_FLOOR, ASYM_KICK_IN_FRAC,
     API_BASE_URL, API_KEY,
 )
 from api import RITApi
@@ -77,194 +91,140 @@ logger = logging.getLogger(__name__)
 
 BANNER = """
 ================================================================================
-  ALGO MARKET MAKING BOT V14 - VOLUME + REBATE MACHINE
-  Tight spreads | Big sizes | Pending-aware limits | Simple spread calc
-  Per-stock limit: {psl:,} | Gross: {gl:,} | Close: {cl:,}
-  Cycle: {cycle}ms | Layers: {layers} | Skew: {skew}
+  ALGO MARKET MAKING BOT V15 - AVELLANEDA-STOIKOV ENGINE
+  Optimal quotes | High volume | AS skew | Jump detection
+  Gross: {gl:,} | Close: {cl:,} | Per-stock: {psl:,}
+  Cycle: {cycle}ms | Layers: {layers} | gamma={gamma}
   {url} | Key: {key}
 ================================================================================
 """
 
 
 # ============================================================
-# TREND TRACKER - EMA CROSSOVER + DAY-OPEN MOMENTUM
+# VOLATILITY ESTIMATOR - Real-time sigma^2 for AS formula
 # ============================================================
 
-class TrendTracker:
-    """Detects intraday trends and inter-day momentum.
+class VolatilityEstimator:
+    """Estimates per-tick volatility (sigma) for each ticker.
 
-    Uses dual EMA crossover for trend direction and tracks
-    price jumps at day boundaries for momentum signals.
+    Uses rolling window of mid-price returns to compute sigma.
+    This feeds directly into the AS optimal spread and skew formulas.
+    """
+
+    def __init__(self, window: int = AS_VOL_WINDOW):
+        self.window = window
+        self._prices: Dict[str, deque] = {}
+        self._vol_cache: Dict[str, float] = {}
+        self._regime_cache: Dict[str, str] = {}
+
+    def update(self, ticker: str, mid: float):
+        if mid <= 0:
+            return
+        if ticker not in self._prices:
+            self._prices[ticker] = deque(maxlen=200)
+        self._prices[ticker].append(mid)
+        self._recompute(ticker)
+
+    def _recompute(self, ticker: str):
+        prices = self._prices.get(ticker, deque())
+        if len(prices) < 3:
+            self._vol_cache[ticker] = AS_VOL_DEFAULT
+            self._regime_cache[ticker] = "MEDIUM"
+            return
+
+        recent = list(prices)[-self.window:]
+        if len(recent) < 2:
+            self._vol_cache[ticker] = AS_VOL_DEFAULT
+            return
+
+        # Compute absolute returns
+        returns = [abs(recent[i] - recent[i-1]) for i in range(1, len(recent))]
+        avg_return = sum(returns) / len(returns) if returns else AS_VOL_DEFAULT
+
+        # sigma per tick (standard deviation of price changes)
+        if len(returns) >= 2:
+            mean_r = sum(returns) / len(returns)
+            variance = sum((r - mean_r)**2 for r in returns) / len(returns)
+            sigma = math.sqrt(variance) if variance > 0 else avg_return
+        else:
+            sigma = avg_return
+
+        # Floor and cap
+        sigma = max(0.005, min(0.20, sigma))
+        self._vol_cache[ticker] = sigma
+
+        # Regime classification
+        if avg_return < VOL_LOW_THRESHOLD:
+            self._regime_cache[ticker] = "LOW"
+        elif avg_return > VOL_HIGH_THRESHOLD:
+            self._regime_cache[ticker] = "HIGH"
+        else:
+            self._regime_cache[ticker] = "MEDIUM"
+
+    def get_sigma(self, ticker: str) -> float:
+        """Get sigma (per-tick volatility) for the AS formula."""
+        return self._vol_cache.get(ticker, AS_VOL_DEFAULT)
+
+    def get_sigma_squared(self, ticker: str) -> float:
+        """Get sigma^2 for direct use in AS formulas."""
+        s = self.get_sigma(ticker)
+        return s * s
+
+    def get_regime(self, ticker: str) -> str:
+        return self._regime_cache.get(ticker, "MEDIUM")
+
+
+# ============================================================
+# JUMP DETECTOR - Detect news-driven price jumps
+# ============================================================
+
+class JumpDetector:
+    """Detects sudden price jumps (likely from news between days).
+
+    When a jump is detected, we temporarily widen spreads to avoid
+    adverse selection, then gradually decay back to normal.
     """
 
     def __init__(self):
-        # EMA state per ticker
-        self.fast_ema: Dict[str, float] = {}
-        self.slow_ema: Dict[str, float] = {}
-
-        # Price history for recent-move detection
-        self.price_history: Dict[str, deque] = {}
-
-        # Day-open momentum
-        self.prev_day_close: Dict[str, float] = {}
-        self.day_open_price: Dict[str, float] = {}
-        self.momentum: Dict[str, float] = {}
-
-        # State
-        self.last_day: int = -1
-        self.initialized: Dict[str, bool] = {}
-
-    def on_new_day(self, day: int, current_prices: Dict[str, float]):
-        """Called when a new trading day starts. Stores closes, resets EMAs."""
-        if day > 0:
-            # Store previous day closes and compute momentum
-            for ticker in TICKERS:
-                prev_close = self.prev_day_close.get(ticker, 0)
-                new_price = current_prices.get(ticker, 0)
-
-                if prev_close > 0 and new_price > 0:
-                    jump = new_price - prev_close
-                    jump_frac = jump / prev_close
-
-                    # Convert to momentum signal: clamp to [-1, +1]
-                    if abs(jump_frac) > MOMENTUM_THRESHOLD:
-                        self.momentum[ticker] = max(-1.0, min(1.0, jump_frac * 20))
-                    else:
-                        self.momentum[ticker] = 0.0
-                else:
-                    self.momentum[ticker] = 0.0
-
-        # Reset EMAs for new day (fresh start, no stale signal from old day)
-        for ticker in TICKERS:
-            mid = current_prices.get(ticker, 0)
-            if mid > 0:
-                self.fast_ema[ticker] = mid
-                self.slow_ema[ticker] = mid
-                self.initialized[ticker] = False
-                self.day_open_price[ticker] = mid
-
-        self.last_day = day
-
-    def on_day_end(self, current_prices: Dict[str, float]):
-        """Called before day transition. Store closing prices."""
-        for ticker in TICKERS:
-            mid = current_prices.get(ticker, 0)
-            if mid > 0:
-                self.prev_day_close[ticker] = mid
+        self._last_price: Dict[str, float] = {}
+        self._jump_signal: Dict[str, float] = {}  # Current widening multiplier
 
     def update(self, ticker: str, mid: float):
-        """Update EMAs with latest price."""
         if mid <= 0:
             return
 
-        # Price history for recent-move detection
-        if ticker not in self.price_history:
-            self.price_history[ticker] = deque(maxlen=30)
-        self.price_history[ticker].append(mid)
+        last = self._last_price.get(ticker, 0)
+        if last > 0:
+            jump = abs(mid - last)
+            if jump > JUMP_THRESHOLD:
+                # Big jump detected! Set widening signal
+                signal = min(JUMP_WIDEN_MULT, 1.0 + (jump / JUMP_THRESHOLD))
+                self._jump_signal[ticker] = max(
+                    self._jump_signal.get(ticker, 1.0), signal)
 
-        # Initialize EMAs on first valid price
-        if ticker not in self.fast_ema or self.fast_ema[ticker] <= 0:
-            self.fast_ema[ticker] = mid
-            self.slow_ema[ticker] = mid
-            self.initialized[ticker] = False
-            return
+        self._last_price[ticker] = mid
 
-        # Update EMAs
-        self.fast_ema[ticker] = (TREND_FAST_ALPHA * mid +
-                                  (1 - TREND_FAST_ALPHA) * self.fast_ema[ticker])
-        self.slow_ema[ticker] = (TREND_SLOW_ALPHA * mid +
-                                  (1 - TREND_SLOW_ALPHA) * self.slow_ema[ticker])
+    def decay(self):
+        """Decay jump signals each tick."""
+        for t in list(self._jump_signal.keys()):
+            self._jump_signal[t] *= JUMP_DECAY_RATE
+            if self._jump_signal[t] < 1.0 + JUMP_MIN_SIGNAL:
+                self._jump_signal[t] = 1.0
 
-        # Mark as initialized after a few updates
-        if not self.initialized.get(ticker, False):
-            hist = self.price_history.get(ticker, deque())
-            if len(hist) >= 5:
-                self.initialized[ticker] = True
+    def get_widen_mult(self, ticker: str) -> float:
+        """Get spread widening multiplier (1.0 = no widening)."""
+        return self._jump_signal.get(ticker, 1.0)
 
-    def get_trend(self, ticker: str) -> float:
-        """Get trend signal: -1 (bearish) to +1 (bullish).
+    def is_jumping(self, ticker: str) -> bool:
+        return self._jump_signal.get(ticker, 1.0) > 1.1
 
-        Based on EMA crossover: (fast - slow) / slow, scaled.
-        Returns 0 if not enough data or signal below noise threshold.
-        """
-        if not self.initialized.get(ticker, False):
-            return 0.0
-
-        fast = self.fast_ema.get(ticker, 0)
-        slow = self.slow_ema.get(ticker, 0)
-        if slow <= 0:
-            return 0.0
-
-        raw_signal = (fast - slow) / slow * 10  # Scale ×10 for nuanced range
-
-        if abs(raw_signal) < TREND_MIN_SIGNAL:
-            return 0.0
-
-        return max(-1.0, min(1.0, raw_signal))
-
-    def get_momentum(self, ticker: str) -> float:
-        """Get day-open momentum signal: -1 to +1."""
-        return self.momentum.get(ticker, 0.0)
-
-    def decay_momentum(self):
-        """Decay momentum signals each tick."""
-        for t in list(self.momentum.keys()):
-            self.momentum[t] *= MOMENTUM_DECAY
-            if abs(self.momentum[t]) < 0.01:
-                self.momentum[t] = 0.0
-
-    def get_recent_move(self, ticker: str) -> float:
-        """Get absolute price move over recent ticks (for volatility-based widening)."""
-        hist = self.price_history.get(ticker, deque())
-        if len(hist) < RECENT_MOVE_LOOKBACK + 1:
-            return 0.0
-        recent = list(hist)
-        return abs(recent[-1] - recent[-RECENT_MOVE_LOOKBACK - 1])
-
-    def get_trend_direction_aligned(self, ticker: str, side: str) -> bool:
-        """Check if a trade side aligns with the current trend."""
-        trend = self.get_trend(ticker)
-        if trend > TREND_MIN_SIGNAL and side == "BUY":
-            return True
-        if trend < -TREND_MIN_SIGNAL and side == "SELL":
-            return True
-        return False
+    def reset_day(self):
+        """Reset at day boundary - expect jumps on new day."""
+        # Don't reset: keep decay natural
 
 
 # ============================================================
-# VOLATILITY TRACKER (kept from V12.1)
-# ============================================================
-
-class VolatilityTracker:
-    def __init__(self, lookback: int = VOL_LOOKBACK):
-        self.lookback = lookback
-        self._history: Dict[str, deque] = {}
-
-    def update(self, ticker: str, tick: int, mid_price: float):
-        if mid_price <= 0:
-            return
-        if ticker not in self._history:
-            self._history[ticker] = deque(maxlen=200)
-        self._history[ticker].append((tick, mid_price))
-
-    def get_regime(self, ticker: str) -> str:
-        hist = self._history.get(ticker)
-        if not hist or len(hist) < 3:
-            return "MEDIUM"
-        recent = list(hist)[-self.lookback:]
-        if len(recent) < 2:
-            return "MEDIUM"
-        changes = [abs(recent[i][1] - recent[i - 1][1]) for i in range(1, len(recent))]
-        avg_change = sum(changes) / len(changes) if changes else 0
-        if avg_change < VOL_LOW_THRESHOLD:
-            return "LOW"
-        elif avg_change > VOL_HIGH_THRESHOLD:
-            return "HIGH"
-        return "MEDIUM"
-
-
-# ============================================================
-# ORDER TRACKER (kept from V12.1)
+# ORDER TRACKER
 # ============================================================
 
 class OrderTracker:
@@ -292,7 +252,6 @@ class OrderTracker:
             self._orders[t] = {}
 
     def pending_exposure(self, ticker: str, side: str) -> int:
-        """Sum of all pending order sizes for this ticker+side across layers."""
         total = 0
         orders = self._orders.get(ticker, {})
         for key, order in orders.items():
@@ -314,14 +273,28 @@ class OrderTracker:
 
 
 # ============================================================
-# MARKET MAKER V13
+# AVELLANEDA-STOIKOV MARKET MAKER
 # ============================================================
 
-class MarketMaker:
+class ASMarketMaker:
+    """Market maker using the Avellaneda-Stoikov optimal quoting framework.
+
+    The AS model provides:
+    1. Reservation price: r = s - q * gamma * sigma^2 * tau
+       (where tau = time remaining in current day)
+    2. Optimal spread: delta* = gamma * sigma^2 * tau + (2/gamma) * ln(1 + gamma/k)
+
+    We adapt this by:
+    - Varying gamma based on inventory level and time-of-day
+    - Using real-time sigma estimates
+    - Adding jump detection for news events
+    - Enforcing competition-specific position limits
+    """
+
     def __init__(self, api: RITApi):
         self.api = api
-        self.trend_tracker = TrendTracker()
-        self.vol_tracker = VolatilityTracker()
+        self.vol_estimator = VolatilityEstimator()
+        self.jump_detector = JumpDetector()
         self.order_tracker = OrderTracker()
 
         self.positions: Dict[str, int] = {t: 0 for t in TICKERS}
@@ -333,8 +306,6 @@ class MarketMaker:
         self.gross_limit = DEFAULT_GROSS_LIMIT
         self.close_limit = CLOSE_TIME_LIMIT
         self.net_limit = DEFAULT_NET_LIMIT
-        self.per_stock_limit: Dict[str, int] = {}
-        self._compute_per_stock_limits()
 
         # P&L
         self.start_nlv = 0.0
@@ -342,7 +313,7 @@ class MarketMaker:
         self.circuit_breaker_active = False
         self.circuit_breaker_halt = False
 
-        # Adaptive
+        # Adaptive spread multiplier (learned from fill rates)
         self.adaptive_mult: Dict[str, float] = {t: 1.0 for t in TICKERS}
         self.fill_count: Dict[str, int] = {t: 0 for t in TICKERS}
         self.last_adaptive_tick = 0
@@ -352,25 +323,140 @@ class MarketMaker:
         self.orders_cancelled = 0
         self.total_volume_traded = 0
         self.market_orders_sent = 0
+        self.rebate_earned_est = 0.0
 
         self.in_lockdown = False
 
-    def _compute_per_stock_limits(self):
-        """Compute per-stock limits. V13: opportunity-weighted, capped at 5k."""
-        # Weight by a blend of rebate and spread opportunity
-        # Higher spread = more opportunity
-        weights = {
-            "WNTR": 1.0,   # Narrow spreads
-            "SMMR": 1.0,   # Narrow spreads
-            "ATMN": 1.2,   # Medium spreads, good range
-            "SPNG": 1.4,   # Widest spreads, biggest range
-        }
-        total_w = sum(weights[t] for t in TICKERS)
-        for t in TICKERS:
-            fraction = weights[t] / total_w
-            allocated = int(self.gross_limit * PER_STOCK_LIMIT_FRACTION * fraction / 0.25)
-            allocated = max(MIN_PER_STOCK_LIMIT, min(allocated, MAX_PER_STOCK_LIMIT))
-            self.per_stock_limit[t] = allocated
+    # ============================================================
+    # AVELLANEDA-STOIKOV CORE FORMULAS
+    # ============================================================
+
+    def as_gamma(self, ticker: str, second_in_day: int) -> float:
+        """Compute time-varying risk aversion parameter gamma.
+
+        - Low gamma during active trading = tighter spreads, more volume
+        - High gamma when inventory is large = wider spreads, stronger skew
+        - Very high gamma near close = forces inventory reduction
+        """
+        pos = self.positions.get(ticker, 0)
+        per_stock_limit = PER_STOCK_TRADING_LIMIT
+
+        # Base gamma
+        gamma = AS_GAMMA_NORMAL
+
+        # Increase gamma with inventory (quadratic scaling)
+        if per_stock_limit > 0:
+            inv_frac = abs(pos) / per_stock_limit
+            if inv_frac > 0.5:
+                # Smoothly ramp up gamma as inventory grows
+                gamma += (AS_GAMMA_HIGH_INV - AS_GAMMA_NORMAL) * (inv_frac - 0.5) * 2
+            if inv_frac > 0.8:
+                gamma *= 2.0  # Double risk aversion when very loaded
+
+        # Time-based: increase gamma as close approaches
+        time_remaining = max(1, DAY_LENGTH - second_in_day)
+        if time_remaining < 15:
+            # Last 15 seconds: ramp up gamma significantly
+            close_urgency = (15 - time_remaining) / 15.0
+            gamma += (AS_GAMMA_PRE_CLOSE - gamma) * close_urgency
+
+        return max(0.01, gamma)
+
+    def as_reservation_price(self, ticker: str, second_in_day: int) -> float:
+        """Compute the AS reservation price (risk-adjusted fair value).
+
+        r = s - q * gamma * sigma^2 * tau
+
+        This shifts "fair value" based on inventory:
+        - If long (q > 0): reservation price < mid → sell more aggressively
+        - If short (q < 0): reservation price > mid → buy more aggressively
+        """
+        s = self.mid_prices.get(ticker, 25.0)
+        pos = self.positions.get(ticker, 0)
+        per_stock_limit = PER_STOCK_TRADING_LIMIT
+
+        # Normalize position to [-1, +1] range
+        if per_stock_limit > 0:
+            q_normalized = pos / per_stock_limit
+        else:
+            q_normalized = 0.0
+
+        gamma = self.as_gamma(ticker, second_in_day)
+        sigma_sq = self.vol_estimator.get_sigma_squared(ticker)
+
+        # tau = time remaining (in ticks/seconds)
+        tau = max(1, DAY_LENGTH - second_in_day)
+
+        # AS reservation price formula
+        # Scale tau to make the skew reasonable (tau in seconds, sigma^2 in price units)
+        skew = q_normalized * gamma * sigma_sq * tau
+
+        # Additional skew from book imbalance
+        imbalance = self.book_imbalance.get(ticker, 0.0)
+        imb_skew = 0.0
+        if abs(imbalance) > IMBALANCE_THRESHOLD:
+            imb_skew = imbalance * IMBALANCE_SKEW_FACTOR
+
+        reservation = s - skew + imb_skew
+
+        return reservation
+
+    def as_optimal_spread(self, ticker: str, second_in_day: int,
+                          layer: int = 1) -> float:
+        """Compute the AS optimal spread.
+
+        delta* = gamma * sigma^2 * tau + (2/gamma) * ln(1 + gamma/k)
+
+        First term: risk premium (wider when volatile, more time remaining)
+        Second term: market power / arrival intensity term
+        """
+        gamma = self.as_gamma(ticker, second_in_day)
+        sigma_sq = self.vol_estimator.get_sigma_squared(ticker)
+        k = AS_K_PARAMETER
+        tau = max(1, DAY_LENGTH - second_in_day)
+
+        # AS formula
+        risk_premium = gamma * sigma_sq * tau
+        market_power = (2.0 / gamma) * math.log(1.0 + gamma / k)
+
+        as_spread = risk_premium + market_power
+
+        # Also consider market spread (don't quote wider than necessary)
+        mkt_spread = self.market_spread.get(ticker, 0.05)
+        inside_spread = mkt_spread * SPREAD_INSIDE_FACTOR
+
+        # Use the better of AS and inside-market spread
+        spread = max(as_spread, inside_spread)
+
+        # Apply floor from config
+        floor = SPREAD_MIN_PER_TICKER.get(ticker, SPREAD_MIN_ABSOLUTE)
+        spread = max(spread, floor)
+
+        # Layer multiplier
+        layer_cfg = LAYER_CONFIG.get(layer, {"spread_mult": 1.0})
+        spread *= layer_cfg["spread_mult"]
+
+        # Jump detection: widen on news
+        jump_mult = self.jump_detector.get_widen_mult(ticker)
+        spread *= jump_mult
+
+        # Volatility regime adjustment
+        regime = self.vol_estimator.get_regime(ticker)
+        vol_mult = VOL_SPREAD_MULT.get(regime, 1.0)
+        spread *= vol_mult
+
+        # Adaptive multiplier (learned from fill rates)
+        spread *= self.adaptive_mult.get(ticker, 1.0)
+
+        # Time-based overrides
+        if second_in_day < POST_CLOSE_RECOVERY_SEC:
+            spread *= POST_CLOSE_SPREAD_MULT
+        elif second_in_day >= PRE_CLOSE_WIDEN_SEC:
+            # Near close: AS formula already handles this via high gamma
+            # Just add a small safety multiplier
+            spread *= 1.3
+
+        return max(SPREAD_MIN_ABSOLUTE, min(SPREAD_MAX_ABSOLUTE, round(spread, 4)))
 
     # ============================================================
     # STATE UPDATES
@@ -390,13 +476,15 @@ class MarketMaker:
             if pos_change > 0:
                 self.fill_count[t] = self.fill_count.get(t, 0) + 1
                 self.total_volume_traded += pos_change
+                # Estimate rebate earned
+                self.rebate_earned_est += pos_change * REBATES.get(t, 0.01)
             bid = sec.get("bid", 0) or 0
             ask = sec.get("ask", 0) or 0
             if bid > 0 and ask > 0:
                 mid = (bid + ask) / 2.0
                 self.mid_prices[t] = mid
-                self.vol_tracker.update(t, tick, mid)
-                self.trend_tracker.update(t, mid)
+                self.vol_estimator.update(t, mid)
+                self.jump_detector.update(t, mid)
                 self.market_spread[t] = ask - bid
 
     def update_limits(self):
@@ -414,7 +502,6 @@ class MarketMaker:
                     self.gross_limit = current_gl
             if nl and isinstance(nl, (int, float)) and nl > 0:
                 self.net_limit = int(nl)
-        self._compute_per_stock_limits()
 
     def update_pnl(self):
         nlv = self.api.get_nlv()
@@ -431,24 +518,22 @@ class MarketMaker:
                 print(f"    [CB CAUTION] PnL=${self.current_pnl:,.2f}")
                 self.circuit_breaker_active = True
             if self.circuit_breaker_halt:
-                print(f"    [CB HALT->CAUTION] PnL recovered to ${self.current_pnl:,.2f}")
                 self.circuit_breaker_halt = False
         else:
-            if self.circuit_breaker_active:
-                self.circuit_breaker_active = False
-            if self.circuit_breaker_halt:
-                print(f"    [CB HALT->CLEAR] PnL recovered to ${self.current_pnl:,.2f}")
-                self.circuit_breaker_halt = False
+            self.circuit_breaker_active = False
+            self.circuit_breaker_halt = False
 
     def update_adaptive_spreads(self, tick: int):
         if tick - self.last_adaptive_tick < ADAPTIVE_INTERVAL:
             return
         for ticker in TICKERS:
             fills = self.fill_count.get(ticker, 0)
-            if fills < 3:
-                self.adaptive_mult[ticker] *= 0.95
+            if fills < 5:
+                # Not enough fills → tighten spread to attract more
+                self.adaptive_mult[ticker] *= 0.93
             elif fills > ADAPTIVE_TARGET_FILLS * 2:
-                self.adaptive_mult[ticker] *= 1.08
+                # Too many fills → can afford wider spread
+                self.adaptive_mult[ticker] *= 1.06
             elif fills > ADAPTIVE_TARGET_FILLS:
                 self.adaptive_mult[ticker] *= 1.02
             self.adaptive_mult[ticker] = max(
@@ -484,93 +569,36 @@ class MarketMaker:
         return (bid_vol - ask_vol) / total
 
     # ============================================================
-    # SPREAD COMPUTATION - V13: MARKET-ADAPTIVE + VOLATILITY-AWARE
-    # ============================================================
-
-    def compute_spread(self, ticker: str, second_in_day: int, layer: int = 1) -> float:
-        """Compute spread: simple, competitive, no compounding.
-
-        V14: max(base, market*factor) × vol_mult × time_mult only.
-        Removed 5 multiplicative factors that compounded to 3-5x wider than intended.
-        """
-        mkt_spread = self.market_spread.get(ticker, 0.05)
-        base = BASE_SPREAD.get(ticker, 0.01)
-
-        # Core spread: competitive with market
-        spread = max(base, mkt_spread * SPREAD_MARKET_FACTOR)
-
-        # Layer multipliers
-        if layer == 2:
-            spread *= LAYER2_SPREAD_MULT
-        elif layer == 3:
-            spread *= LAYER3_SPREAD_MULT
-
-        # Only two modifiers: volatility regime and time
-        regime = self.vol_tracker.get_regime(ticker)
-        vol_mult = VOL_SPREAD_MULT.get(regime, 1.0)
-        spread *= vol_mult
-
-        # Time: widen near close, post-recovery
-        if second_in_day < POST_CLOSE_RECOVERY_SEC:
-            spread *= POST_CLOSE_SPREAD_MULT
-        elif second_in_day >= PRE_CLOSE_WIDEN_SEC:
-            spread *= PRE_CLOSE_SPREAD_MULT
-
-        return max(SPREAD_MIN_ABSOLUTE, min(SPREAD_MAX_ABSOLUTE, round(spread, 4)))
-
-    # ============================================================
-    # ORDER SIZING - V13: TREND-AWARE + MOMENTUM BOOST
+    # ORDER SIZING - Volume-maximizing with AS risk control
     # ============================================================
 
     def compute_order_size(self, ticker: str, side: str, utilization: float,
                            second_in_day: int, layer: int = 1) -> int:
-        base_size = ORDER_SIZE.get(ticker, 2500)
+        base_size = BASE_ORDER_SIZE.get(ticker, 3000)
         pos = self.positions.get(ticker, 0)
-        per_stock_limit = self.per_stock_limit.get(ticker, MIN_PER_STOCK_LIMIT)
+        per_stock_limit = PER_STOCK_TRADING_LIMIT
 
         # Layer sizing
-        if layer == 2:
-            layer_mult = LAYER2_SIZE_MULT
-        elif layer == 3:
-            layer_mult = LAYER3_SIZE_MULT
-        else:
-            layer_mult = 1.0
+        layer_cfg = LAYER_CONFIG.get(layer, {"size_mult": 1.0})
+        layer_mult = layer_cfg["size_mult"]
 
         # ============================================================
-        # ASYMMETRIC SIZING (V13: trend + inventory combined)
+        # ASYMMETRIC SIZING (inventory-aware)
         # ============================================================
         asym_mult = 1.0
-        asym_threshold = per_stock_limit * ASYM_KICK_IN
+        asym_threshold = per_stock_limit * ASYM_KICK_IN_FRAC
 
-        # Inventory-based asymmetry (reduce toward flat)
         if abs(pos) > asym_threshold:
             pos_frac = min(abs(pos) / per_stock_limit, 1.0)
             if (pos > 0 and side == "SELL") or (pos < 0 and side == "BUY"):
-                # Reducing side: boost
-                asym_mult = 1.0 + pos_frac * (ASYM_REDUCE_MAX - 1.0)
+                # Reducing side: boost size (want to flatten faster)
+                asym_mult = 1.0 + pos_frac * (ASYM_REDUCE_BOOST - 1.0)
             elif (pos > 0 and side == "BUY") or (pos < 0 and side == "SELL"):
                 # Increasing side: restrict
-                asym_mult = max(ASYM_INCREASE_MIN, 1.0 - pos_frac * (1.0 - ASYM_INCREASE_MIN))
-
-        # Trend-based sizing: boost orders aligned with trend
-        trend = self.trend_tracker.get_trend(ticker)
-        if abs(trend) > TREND_MIN_SIGNAL:
-            if self.trend_tracker.get_trend_direction_aligned(ticker, side):
-                # Trend-aligned: mild boost (let skew do the positioning)
-                asym_mult *= (1.0 + abs(trend) * 0.3)
-            else:
-                # Counter-trend: reduce size
-                asym_mult *= max(0.4, 1.0 - abs(trend) * 0.4)
-
-        # Momentum boost in first MOMENTUM_DURATION_SEC seconds
-        momentum = abs(self.trend_tracker.get_momentum(ticker))
-        if momentum > 0.1 and second_in_day < MOMENTUM_DURATION_SEC:
-            mom_signal = self.trend_tracker.get_momentum(ticker)
-            if (mom_signal > 0 and side == "BUY") or (mom_signal < 0 and side == "SELL"):
-                asym_mult *= MOMENTUM_SIZE_BOOST
+                asym_mult = max(ASYM_INCREASE_FLOOR, 1.0 - pos_frac * 0.8)
 
         # Volatility regime
-        regime = self.vol_tracker.get_regime(ticker)
+        regime = self.vol_estimator.get_regime(ticker)
         vol_mult = VOL_SIZE_MULT.get(regime, 1.0)
 
         # Utilization reduction
@@ -581,7 +609,7 @@ class MarketMaker:
         elif utilization > UTIL_REDUCE:
             util_mult = 0.4
         elif utilization > UTIL_SKEW:
-            util_mult = 0.7
+            util_mult = 0.65
         else:
             util_mult = 1.0
 
@@ -590,17 +618,24 @@ class MarketMaker:
         if second_in_day < POST_CLOSE_RECOVERY_SEC:
             time_mult = POST_CLOSE_SIZE_MULT
         elif second_in_day >= PRE_CLOSE_WIDEN_SEC:
-            time_mult = PRE_CLOSE_SIZE_MULT
+            time_mult = 0.3
+
+        # Jump detection: reduce size during jumps (avoid adverse selection)
+        jump_mult = 1.0
+        if self.jump_detector.is_jumping(ticker):
+            jump_mult = 0.4
 
         cb_mult = 0.3 if self.circuit_breaker_active else 1.0
 
         size = int(base_size * layer_mult * asym_mult *
-                   vol_mult * util_mult * time_mult * cb_mult)
+                   vol_mult * util_mult * time_mult * jump_mult * cb_mult)
 
         # ============================================================
-        # HARD CAPS: enforce per-stock limit strictly (including pending orders)
+        # HARD CAPS
         # ============================================================
         pending = self.order_tracker.pending_exposure(ticker, side)
+
+        # Per-stock limit
         if (pos > 0 and side == "BUY") or (pos < 0 and side == "SELL"):
             room = max(0, per_stock_limit - abs(pos) - pending)
             size = min(size, room)
@@ -617,105 +652,32 @@ class MarketMaker:
         return max(0, min(size, MAX_ORDER_SIZE))
 
     # ============================================================
-    # INVENTORY SKEW - V13: THREE COMPONENTS
-    # ============================================================
-
-    def compute_skew(self, ticker: str, utilization: float,
-                     second_in_day: int) -> float:
-        """Compute total quote skew from 3 independent signals.
-
-        Component 1: INVENTORY SKEW - push quotes away from position to flatten
-        Component 2: TREND SKEW - push quotes toward detected trend
-        Component 3: MOMENTUM SKEW - push toward day-open price jump direction
-
-        The skew shifts the effective mid price, causing one side's orders
-        to be more aggressive (closer to true mid) and the other less aggressive.
-        """
-        pos = self.positions.get(ticker, 0)
-        per_stock_limit = self.per_stock_limit.get(ticker, MIN_PER_STOCK_LIMIT)
-
-        # ---- Component 1: Inventory Skew (always active) ----
-        # Negative position → negative skew → lower effective mid → sell less aggressive
-        if per_stock_limit > 0:
-            normalized_pos = pos / per_stock_limit  # -1 to +1
-        else:
-            normalized_pos = 0.0
-        inv_skew = -normalized_pos * SKEW_FACTOR
-
-        # Scale up at high utilization
-        if utilization > UTIL_REDUCE:
-            inv_skew *= 2.5
-        elif utilization > UTIL_SKEW:
-            inv_skew *= 1.5
-
-        # ---- Component 2: Trend Skew ----
-        trend = self.trend_tracker.get_trend(ticker)
-        trend_skew = 0.0
-        if abs(trend) > TREND_MIN_SIGNAL:
-            # Positive trend → positive skew → raise effective mid →
-            # bid is higher (more aggressive buy), ask is higher (less aggressive sell)
-            # → accumulate longs in uptrend
-            trend_skew = trend * TREND_SKEW_FACTOR
-
-            # Reduce trend skew if already loaded in trend direction
-            if (trend > 0 and pos > per_stock_limit * 0.5) or \
-               (trend < 0 and pos < -per_stock_limit * 0.5):
-                trend_skew *= 0.3  # Don't pile on if already heavily positioned
-
-        # ---- Component 3: Momentum Skew (day-open only) ----
-        mom_skew = 0.0
-        if second_in_day < MOMENTUM_DURATION_SEC:
-            momentum = self.trend_tracker.get_momentum(ticker)
-            if abs(momentum) > 0.05:
-                mom_skew = momentum * MOMENTUM_SKEW_FACTOR
-
-                # Reduce if already positioned in momentum direction
-                if (momentum > 0 and pos > per_stock_limit * 0.4) or \
-                   (momentum < 0 and pos < -per_stock_limit * 0.4):
-                    mom_skew *= 0.2
-
-        # ---- Component 4: Book Imbalance ----
-        imbalance = self.book_imbalance.get(ticker, 0.0)
-        imb_skew = 0.0
-        if abs(imbalance) > IMBALANCE_THRESHOLD:
-            imb_skew = imbalance * IMBALANCE_SKEW_FACTOR
-
-        # ---- Combine ----
-        total_skew = inv_skew + trend_skew + mom_skew + imb_skew
-
-        return round(total_skew, 4)
-
-    # ============================================================
     # QUOTING DECISIONS
     # ============================================================
 
     def should_quote_side(self, ticker: str, side: str, utilization: float) -> bool:
         pos = self.positions.get(ticker, 0)
-        per_stock_limit = self.per_stock_limit.get(ticker, MIN_PER_STOCK_LIMIT)
+        per_stock_limit = PER_STOCK_TRADING_LIMIT
 
         if self.circuit_breaker_halt or self.in_lockdown:
             return False
 
-        # V13: STRICT per-stock limit enforcement
         if side == "BUY" and pos >= per_stock_limit:
             return False
         if side == "SELL" and pos <= -per_stock_limit:
             return False
 
-        # At high utilization, only reducing side
         if utilization > UTIL_EMERGENCY:
             if (pos > 0 and side == "BUY") or (pos < 0 and side == "SELL"):
                 return False
             if pos == 0:
                 return False
 
-        # Gross limit check
         gross = self.compute_aggregate()
         if gross >= int(self.gross_limit * GROSS_LIMIT_BUFFER):
             if (pos > 0 and side == "BUY") or (pos < 0 and side == "SELL") or pos == 0:
                 return False
 
-        # Net limit check
         net = self.compute_net()
         if net >= int(self.net_limit * NET_LIMIT_BUFFER):
             net_dir = sum(self.positions.values())
@@ -725,7 +687,7 @@ class MarketMaker:
         return True
 
     # ============================================================
-    # MAIN QUOTING ENGINE - V13 WITH 3 LAYERS + TREND AWARENESS
+    # MAIN QUOTING ENGINE - AS-OPTIMAL
     # ============================================================
 
     def quote_ticker(self, ticker: str, tick: int, second_in_day: int,
@@ -734,7 +696,9 @@ class MarketMaker:
         if mid < MIN_PRICE or mid > MAX_PRICE:
             return
 
-        skew = self.compute_skew(ticker, utilization, second_in_day)
+        # AS reservation price (risk-adjusted fair value)
+        reservation = self.as_reservation_price(ticker, second_in_day)
+
         quote_buy = self.should_quote_side(ticker, "BUY", utilization)
         quote_sell = self.should_quote_side(ticker, "SELL", utilization)
 
@@ -752,36 +716,41 @@ class MarketMaker:
             self.book_imbalance[ticker] = self.compute_book_imbalance(book)
             self.market_spread[ticker] = best_ask - best_bid
             mid = (best_bid + best_ask) / 2.0
+            # Update reservation with fresh mid
+            reservation = self.as_reservation_price(ticker, second_in_day)
 
         # Compute all layers
         layers = []
         for layer_num in range(1, NUM_LAYERS + 1):
+            # Skip outer layers near close/open
             if layer_num == 3 and (second_in_day < POST_CLOSE_RECOVERY_SEC or
                                     second_in_day >= PRE_CLOSE_WIDEN_SEC):
                 continue
-            if layer_num == 2 and second_in_day >= PRE_CLOSE_REDUCE_SEC:
+            if layer_num == 2 and second_in_day >= PRE_CLOSE_CANCEL_SEC:
                 continue
 
-            spread = self.compute_spread(ticker, second_in_day, layer=layer_num)
+            # AS optimal spread for this layer
+            spread = self.as_optimal_spread(ticker, second_in_day, layer=layer_num)
             half = spread / 2.0
+
             buy_size = self.compute_order_size(
                 ticker, "BUY", utilization, second_in_day, layer=layer_num) if quote_buy else 0
             sell_size = self.compute_order_size(
                 ticker, "SELL", utilization, second_in_day, layer=layer_num) if quote_sell else 0
 
-            # Apply skew to effective mid
-            effective_mid = mid + skew
-            bid = round(effective_mid - half, 2)
-            ask = round(effective_mid + half, 2)
+            # Quote around RESERVATION PRICE (not mid!)
+            # This is the key AS insight: shift quotes based on inventory
+            bid = round(reservation - half, 2)
+            ask = round(reservation + half, 2)
 
-            # Safety: bid must be below ask
+            # Safety checks
             if bid >= ask:
                 bid = round(mid - 0.02, 2)
                 ask = round(mid + 0.02, 2)
             bid = max(MIN_PRICE, min(bid, MAX_PRICE - 0.02))
             ask = max(bid + 0.01, min(ask, MAX_PRICE))
 
-            # Ensure outer layers are outside inner layers
+            # Outer layers must be outside inner layers
             if layers:
                 inner_bid = layers[-1]['bid']
                 inner_ask = layers[-1]['ask']
@@ -840,40 +809,40 @@ class MarketMaker:
                         self.orders_placed += 1
 
     # ============================================================
-    # PROACTIVE POSITION REDUCTION - V13: MORE AGGRESSIVE
+    # PROACTIVE POSITION REDUCTION
     # ============================================================
 
     def reduce_large_positions(self, tick: int):
         for ticker in TICKERS:
             pos = self.positions.get(ticker, 0)
-            per_stock_limit = self.per_stock_limit.get(ticker, MIN_PER_STOCK_LIMIT)
-            threshold = int(per_stock_limit * 0.60)  # V13: start earlier (was 0.70)
+            per_stock_limit = PER_STOCK_TRADING_LIMIT
+            threshold = int(per_stock_limit * 0.70)
             if abs(pos) < threshold:
                 continue
 
             mid = self.mid_prices.get(ticker, 25.0)
             excess = abs(pos) - threshold
 
-            if abs(pos) > per_stock_limit * 0.85:
-                # Very close to limit: use market orders
-                mkt_size = min(excess, int(per_stock_limit * 0.25))
+            if abs(pos) > per_stock_limit * 0.90:
+                # Near limit: use market orders
+                mkt_size = min(excess, int(per_stock_limit * 0.20))
                 mkt_size = max(100, min(mkt_size, MAX_ORDER_SIZE))
                 side = "SELL" if pos > 0 else "BUY"
                 self.api.submit_market_order(ticker, mkt_size, side)
                 self.market_orders_sent += 1
             else:
-                # Aggressive limit order near mid
+                # Aggressive limit near mid
                 reduce_size = min(excess, int(per_stock_limit * 0.25))
                 reduce_size = max(100, min(reduce_size, MAX_ORDER_SIZE))
                 if pos > 0:
-                    price = round(mid - 0.01, 2)  # Sell aggressively
+                    price = round(mid - 0.01, 2)
                     self.api.submit_limit_order(ticker, reduce_size, "SELL", price)
                 else:
                     price = round(mid + 0.01, 2)
                     self.api.submit_limit_order(ticker, reduce_size, "BUY", price)
 
     # ============================================================
-    # MARKET CLOSE PROTOCOL (kept from V12.1)
+    # MARKET CLOSE PROTOCOL - TIGHT AND FAST
     # ============================================================
 
     def pre_close_handler(self, tick: int, second_in_day: int):
@@ -881,24 +850,7 @@ class MarketMaker:
         close_target = int(self.close_limit * CLOSE_TARGET_UTILIZATION)
 
         if second_in_day >= PRE_CLOSE_FLATTEN_SEC:
-            if aggregate > close_target:
-                sorted_positions = sorted(
-                    [(t, self.positions[t]) for t in TICKERS if abs(self.positions[t]) > 0],
-                    key=lambda x: abs(x[1]), reverse=True)
-                remaining = aggregate - close_target
-                for ticker, pos in sorted_positions:
-                    if remaining <= 0:
-                        break
-                    to_reduce = min(abs(pos), remaining, MAX_ORDER_SIZE)
-                    to_reduce = max(100, to_reduce)
-                    side = "SELL" if pos > 0 else "BUY"
-                    self.api.submit_market_order(ticker, to_reduce, side)
-                    self.market_orders_sent += 1
-                    remaining -= to_reduce
-                    print(f"    [FLATTEN] {ticker}: MKT {side} {to_reduce} "
-                          f"(pos={pos}, agg={aggregate}, target={close_target})")
-
-        elif second_in_day >= PRE_CLOSE_CANCEL_SEC:
+            # Cancel everything and flatten aggressively
             if not self.in_lockdown:
                 self.api.cancel_all_orders()
                 self.order_tracker.clear_all()
@@ -906,7 +858,25 @@ class MarketMaker:
                 print(f"    [LOCKDOWN] T{tick} sec={second_in_day} "
                       f"agg={aggregate} close_lim={self.close_limit}")
 
-        elif second_in_day >= PRE_CLOSE_REDUCE_SEC:
+            if aggregate > close_target:
+                sorted_positions = sorted(
+                    [(t, self.positions[t]) for t in TICKERS if abs(self.positions[t]) > 0],
+                    key=lambda x: abs(x[1]), reverse=True)
+                remaining = aggregate - close_target
+                for t, pos in sorted_positions:
+                    if remaining <= 0:
+                        break
+                    to_reduce = min(abs(pos), remaining, MAX_ORDER_SIZE)
+                    to_reduce = max(100, to_reduce)
+                    side = "SELL" if pos > 0 else "BUY"
+                    self.api.submit_market_order(t, to_reduce, side)
+                    self.market_orders_sent += 1
+                    remaining -= to_reduce
+                    print(f"    [FLATTEN] {t}: MKT {side} {to_reduce} "
+                          f"(pos={pos}, agg={aggregate}, target={close_target})")
+
+        elif second_in_day >= PRE_CLOSE_WIDEN_SEC:
+            # Widen phase: still quote but with wider spreads + reduce
             for ticker in TICKERS:
                 pos = self.positions.get(ticker, 0)
                 if abs(pos) < 200:
@@ -959,28 +929,56 @@ class MarketMaker:
                 self.market_orders_sent += 1
 
     # ============================================================
-    # MAIN LOOP - V13: WITH DAY BOUNDARY HANDLING
+    # NEWS/LIMIT DETECTION FROM API
+    # ============================================================
+
+    def check_news_for_limits(self):
+        """Check news feed for aggregate limit announcements."""
+        news = self.api.get_news()
+        if not news:
+            return
+        for item in news:
+            body = str(item.get("body", "")).lower()
+            # Try to parse aggregate limit from news
+            if "aggregate" in body or "limit" in body or "position" in body:
+                # Extract number
+                import re
+                numbers = re.findall(r'[\d,]+', body)
+                for num_str in numbers:
+                    try:
+                        num = int(num_str.replace(",", ""))
+                        if 1000 <= num <= 50000:
+                            if num != self.close_limit:
+                                print(f"    [NEWS] Aggregate limit updated: {num:,}")
+                                self.close_limit = num
+                    except ValueError:
+                        pass
+
+    # ============================================================
+    # MAIN LOOP
     # ============================================================
 
     def run(self):
         print(BANNER.format(
-            psl=MAX_PER_STOCK_LIMIT, gl=self.gross_limit, cl=self.close_limit,
+            psl=PER_STOCK_TRADING_LIMIT, gl=self.gross_limit, cl=self.close_limit,
             cycle=int(CYCLE_SLEEP * 1000), layers=NUM_LAYERS,
-            skew=SKEW_FACTOR, url=API_BASE_URL, key=API_KEY))
+            gamma=AS_GAMMA_NORMAL, url=API_BASE_URL, key=API_KEY))
 
         self.update_limits()
         print(f"  Intraday gross limit: {self.gross_limit:,}")
         print(f"  Close-time limit: {self.close_limit:,}")
         print(f"  Net limit: {self.net_limit:,}")
         for t in TICKERS:
-            print(f"  {t}: per_stock={self.per_stock_limit[t]:,}, "
-                  f"base_size={ORDER_SIZE[t]}, rebate=${REBATES[t]}, "
-                  f"spread={BASE_SPREAD[t]}")
+            print(f"  {t}: per_stock={PER_STOCK_TRADING_LIMIT:,}, "
+                  f"base_size={BASE_ORDER_SIZE[t]}, rebate=${REBATES[t]}")
 
         nlv = self.api.get_nlv()
         if nlv is not None:
             self.start_nlv = nlv
             print(f"  Starting NLV: ${nlv:,.2f}")
+
+        # Check news on first tick for aggregate limit
+        self.check_news_for_limits()
 
         last_tick = -1
         last_log_tick = -999
@@ -1002,6 +1000,7 @@ class MarketMaker:
                         print(f"  Orders: +{self.orders_placed}/-{self.orders_cancelled}")
                         print(f"  Market orders: {self.market_orders_sent}")
                         print(f"  Volume: {self.total_volume_traded:,}")
+                        print(f"  Est. rebates: ${self.rebate_earned_est:,.2f}")
                         print(f"  Final aggregate: {agg:,}")
                         for t in TICKERS:
                             print(f"    {t}: {self.positions.get(t, 0):+,}")
@@ -1019,64 +1018,57 @@ class MarketMaker:
                 current_day = tick // DAY_LENGTH
 
                 # ============================================================
-                # DAY BOUNDARY HANDLING - V13 KEY FEATURE
+                # DAY BOUNDARY HANDLING
                 # ============================================================
                 if current_day != last_day:
                     if last_day >= 0:
-                        # Store closes from previous day
-                        self.trend_tracker.on_day_end(self.mid_prices.copy())
                         print(f"\n  === DAY {current_day + 1} (tick {tick}) ===")
 
-                    # Get fresh prices for new day
                     self.update_state(tick)
 
-                    # Initialize trend tracker for new day with momentum detection
-                    self.trend_tracker.on_new_day(current_day, self.mid_prices.copy())
-
-                    # Log momentum signals
-                    for t in TICKERS:
-                        mom = self.trend_tracker.get_momentum(t)
-                        if abs(mom) > 0.05:
-                            direction = "UP" if mom > 0 else "DOWN"
-                            print(f"    [MOMENTUM] {t}: {direction} "
-                                  f"(signal={mom:+.3f})")
+                    # Check news for aggregate limit on day 1
+                    if current_day == 0 or tick <= 5:
+                        self.check_news_for_limits()
+                        print(f"    Close limit: {self.close_limit:,}")
 
                     self.in_lockdown = False
                     last_day = current_day
 
-                # Circuit breaker halt: re-check P&L periodically
+                # Circuit breaker halt
                 if self.circuit_breaker_halt:
                     self.update_pnl()
                     time.sleep(0.5)
                     continue
 
                 # ============================================================
-                # STATE UPDATES (every tick)
+                # STATE UPDATES
                 # ============================================================
                 self.update_state(tick)
                 if tick % 5 == 0:
                     self.update_limits()
                 if tick % 3 == 0:
                     self.update_pnl()
+                if tick % 2 == 0:
+                    self.check_news_for_limits()
                 self.update_adaptive_spreads(tick)
-
-                # Decay momentum signal
-                self.trend_tracker.decay_momentum()
+                self.jump_detector.decay()
 
                 utilization = self.compute_utilization()
                 aggregate = self.compute_aggregate()
-                net = self.compute_net()
 
                 # ============================================================
                 # PRE-CLOSE PHASE
                 # ============================================================
                 if second_in_day >= PRE_CLOSE_WIDEN_SEC:
                     self.pre_close_handler(tick, second_in_day)
-                    time.sleep(CYCLE_SLEEP)
-                    continue
+                    if second_in_day >= PRE_CLOSE_CANCEL_SEC:
+                        time.sleep(CYCLE_SLEEP)
+                        continue
+                    # Still do normal quoting with wide spreads during PRE_CLOSE_WIDEN phase
+                    # (AS formula handles widening via high gamma)
 
                 # ============================================================
-                # POST-CLOSE RECOVERY (just 1 second)
+                # POST-CLOSE RECOVERY
                 # ============================================================
                 if second_in_day < POST_CLOSE_RECOVERY_SEC:
                     if self.order_tracker.has_any_order(TICKERS[0]):
@@ -1090,7 +1082,6 @@ class MarketMaker:
                 # ============================================================
                 self.in_lockdown = False
 
-                # Emergency position management
                 if utilization > UTIL_PANIC:
                     self.panic_flatten()
                     time.sleep(CYCLE_SLEEP)
@@ -1098,7 +1089,7 @@ class MarketMaker:
                 elif utilization > UTIL_EMERGENCY:
                     self.emergency_flatten(target_util=UTIL_REDUCE)
 
-                # Proactive position reduction (every other tick for speed)
+                # Proactive position reduction (every other tick)
                 if tick % 2 == 0:
                     self.reduce_large_positions(tick)
 
@@ -1114,16 +1105,16 @@ class MarketMaker:
                         f"{t}:{int(self.positions.get(t, 0)):+d}" for t in TICKERS)
                     pnl_str = f"${self.current_pnl:+,.0f}" if self.start_nlv > 0 else "N/A"
 
-                    # V13: show trend signals
-                    trend_str = " ".join(
-                        f"{t}:{self.trend_tracker.get_trend(t):+.2f}"
+                    # Show AS parameters
+                    sigma_str = " ".join(
+                        f"{t}:{self.vol_estimator.get_sigma(t):.3f}"
                         for t in TICKERS)
 
                     print(f"  T{tick:03d} d{second_in_day:02d} | "
                           f"pos=[{pos_str}] | "
                           f"agg={aggregate:,}/{self.gross_limit:,}({utilization:.0%}) | "
                           f"pnl={pnl_str} | "
-                          f"trend=[{trend_str}] | "
+                          f"sigma=[{sigma_str}] | "
                           f"mkt={self.market_orders_sent} | "
                           f"tvol={self.total_volume_traded:,}")
                     last_log_tick = tick
@@ -1179,7 +1170,7 @@ def setup_logging():
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     log_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
     os.makedirs(log_dir, exist_ok=True)
-    fh = logging.FileHandler(os.path.join(log_dir, f"mm_v13_{ts}.log"))
+    fh = logging.FileHandler(os.path.join(log_dir, f"mm_v15_AS_{ts}.log"))
     fh.setFormatter(logging.Formatter("%(asctime)s %(message)s"))
     _file_logger.addHandler(fh)
 
@@ -1194,7 +1185,7 @@ def main():
             time.sleep(2)
             continue
 
-        mm = MarketMaker(api)
+        mm = ASMarketMaker(api)
         try:
             mm.run()
         except Exception as e:
