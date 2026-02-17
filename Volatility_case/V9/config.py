@@ -63,11 +63,11 @@ RISK_FREE_RATE = 0.0
 # Hedge when |delta| exceeds this fraction of delta_limit.
 # Paper says "only hedge when reaching delta limit."
 # We trigger at 88% to avoid actually breaching (penalty).
-HEDGE_TRIGGER_PCT = 0.88
+HEDGE_TRIGGER_PCT = 0.7
 
 # Target absolute delta after hedge as a fraction of delta limit (0.0 to 1.0).
 # Examples: 0.0 -> flat delta, 0.5 -> hedge back to 50% of delta limit.
-HEDGE_TARGET_DELTA = 0.0
+HEDGE_TARGET_DELTA = 0.3
 
 # Minimum shares to bother hedging
 MIN_HEDGE_SIZE = 0
@@ -87,5 +87,10 @@ LOOP_INTERVAL_SEC = 0.10
 # Minimum option price to trade (avoid penny options)
 MIN_OPTION_PRICE = 0.01
 
+# Iron butterfly wing distance from ATM strike for net-relief overlays.
+# If ATM strike is X, wings are at X + width (call) and X - width (put).
+IRON_FLY_WING_WIDTH = 3
+
 # Maximum straddles per position (leave headroom: 400*2=800 < 1000 net limit)
 MAX_STRADDLES = 1250
+

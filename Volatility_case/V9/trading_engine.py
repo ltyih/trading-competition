@@ -24,7 +24,7 @@ from config import (
     MAX_ORDERS_PER_CYCLE, OPTIONS_MAX_TRADE_SIZE,
     RTM_MAX_TRADE_SIZE, RTM_GROSS_LIMIT, RTM_NET_LIMIT,
     OPTIONS_GROSS_LIMIT, OPTIONS_NET_LIMIT,
-    MIN_OPTION_PRICE, HEDGE_TRIGGER_PCT, HEDGE_TARGET_DELTA,
+    MIN_OPTION_PRICE, IRON_FLY_WING_WIDTH, HEDGE_TRIGGER_PCT, HEDGE_TARGET_DELTA,
     MIN_HEDGE_SIZE, HEDGE_COOLDOWN_TICKS, POSITION_TICKS,
     WEEKLY_CLOSE_START_TICKS, WEEKLY_CLOSE_DEADLINE_TICKS,
     MAX_STRADDLES,
@@ -506,67 +506,139 @@ class StraddleEngine:
 
         return orders, filled, g, n
 
+    def _submit_paired_orders(self, call_ticker: str, put_ticker: str,
+                              qty_total: int, action: str,
+                              running_gross: int, running_net: int,
+                              label: str) -> tuple:
+        """Submit matched call/put legs. Returns (orders, paired, calls, puts, gross, net)."""
+        orders = 0
+        calls = 0
+        puts = 0
+        g = running_gross
+        n = running_net
+        remaining = qty_total
+        batch_size = OPTIONS_MAX_TRADE_SIZE
+
+        while remaining > 0 and orders < MAX_ORDERS_PER_CYCLE:
+            qty = min(remaining, batch_size)
+
+            c_ord, c_fill, g, n = self._submit_leg_orders(
+                call_ticker, qty, action, g, n)
+            orders += c_ord
+            calls += c_fill
+
+            if c_fill == 0:
+                break
+
+            p_ord, p_fill, g, n = self._submit_leg_orders(
+                put_ticker, c_fill, action, g, n)
+            orders += p_ord
+            puts += p_fill
+
+            if p_fill < c_fill:
+                unmatched = c_fill - p_fill
+                reverse = "SELL" if action == "BUY" else "BUY"
+                logger.warning("%s put leg short by %d, closing unmatched calls",
+                               label, unmatched)
+                r_ord, r_fill, g, n = self._submit_leg_orders(
+                    call_ticker, unmatched, reverse, g, n)
+                orders += r_ord
+                calls -= r_fill
+                if r_fill < unmatched:
+                    logger.warning("%s unmatched-call close incomplete: %d/%d",
+                                   label, r_fill, unmatched)
+                break
+
+            remaining -= c_fill
+
+        paired = min(calls, puts)
+        return orders, paired, calls, puts, g, n
+
     def take_straddle_position(self, n: int, direction: int,
                                strike: float, state: MarketState) -> int:
-        """
-        Execute n straddles at strike with interleaved call/put batches.
-        direction: +1 = buy (long), -1 = sell (short)
-        Submits in small interleaved batches (100C, 100P, 100C, 100P...)
-        to ensure balanced legs. If one leg fails, closes the unmatched leg.
-        """
+        """Build ATM straddles, then add opposite OTM wings beyond net-cap capacity."""
         if n <= 0 or direction == 0:
             return 0
 
-        # Cap at MAX_STRADDLES
         n = min(n, MAX_STRADDLES)
-
         action = "BUY" if direction > 0 else "SELL"
+        opposite_action = "SELL" if action == "BUY" else "BUY"
+
         call_ticker = f"RTM1C{int(strike)}"
         put_ticker = f"RTM1P{int(strike)}"
 
-        # Track running limits
         g = state.options_gross
         net = state.options_net
         total_orders = 0
         total_calls = 0
         total_puts = 0
-        remaining = n
-        batch_size = OPTIONS_MAX_TRADE_SIZE  # 100
+        total_wing_calls = 0
+        total_wing_puts = 0
 
-        while remaining > 0:
-            qty = min(remaining, batch_size)
+        # Base capacity under net limit: each straddle contributes 2 option net.
+        base_capacity = OPTIONS_NET_LIMIT // 2
+        base_target = min(n, base_capacity)
+        extra_target = max(0, n - base_target)
 
-            # Submit call batch
-            c_ord, c_fill, g, net = self._submit_leg_orders(
-                call_ticker, qty, action, g, net)
-            total_orders += c_ord
-            total_calls += c_fill
+        ords, base_paired, c_fill, p_fill, g, net = self._submit_paired_orders(
+            call_ticker, put_ticker, base_target, action, g, net, "ATM")
+        total_orders += ords
+        total_calls += c_fill
+        total_puts += p_fill
 
-            if c_fill == 0:
-                logger.warning("Call leg failed, stopping straddle build")
-                break
+        if extra_target > 0:
+            wing_width = max(int(round(IRON_FLY_WING_WIDTH)), 1)
+            call_wing_strike = strike + wing_width
+            put_wing_strike = strike - wing_width
 
-            # Submit matching put batch
-            p_ord, p_fill, g, net = self._submit_leg_orders(
-                put_ticker, c_fill, action, g, net)
-            total_orders += p_ord
-            total_puts += p_fill
+            if call_wing_strike not in STRIKE_PRICES or put_wing_strike not in STRIKE_PRICES:
+                logger.warning("Cannot add iron-fly overlay at K=%.0f with x=%d (wings out of range)",
+                               strike, wing_width)
+            else:
+                call_wing_ticker = f"RTM1C{int(call_wing_strike)}"
+                put_wing_ticker = f"RTM1P{int(put_wing_strike)}"
 
-            if p_fill < c_fill:
-                # Put leg failed to match calls - close the unmatched calls
-                unmatched = c_fill - p_fill
-                reverse = "SELL" if action == "BUY" else "BUY"
-                logger.warning("Put leg short by %d, closing unmatched calls", unmatched)
-                self._submit_leg_orders(call_ticker, unmatched, reverse, g, net)
-                total_calls -= unmatched
-                break
+                remaining_extra = extra_target
+                while remaining_extra > 0:
+                    qty = min(remaining_extra, OPTIONS_MAX_TRADE_SIZE)
 
-            remaining -= c_fill
+                    # 1) Build opposite OTM wing pair to free net capacity.
+                    w_ords, w_paired, w_c, w_p, g, net = self._submit_paired_orders(
+                        call_wing_ticker, put_wing_ticker, qty,
+                        opposite_action, g, net, "WING")
+                    total_orders += w_ords
+                    total_wing_calls += w_c
+                    total_wing_puts += w_p
+
+                    if w_paired == 0:
+                        break
+
+                    # 2) Add the matching ATM straddle quantity.
+                    a_ords, a_paired, a_c, a_p, g, net = self._submit_paired_orders(
+                        call_ticker, put_ticker, w_paired,
+                        action, g, net, "ATM-EXTRA")
+                    total_orders += a_ords
+                    total_calls += a_c
+                    total_puts += a_p
+
+                    if a_paired < w_paired:
+                        unmatched = w_paired - a_paired
+                        logger.warning("ATM extra short by %d, unwinding unmatched wings", unmatched)
+                        u_ords, _, u_c, u_p, g, net = self._submit_paired_orders(
+                            call_wing_ticker, put_wing_ticker, unmatched,
+                            action, g, net, "WING-UNWIND")
+                        total_orders += u_ords
+                        total_wing_calls -= u_c
+                        total_wing_puts -= u_p
+                        break
+
+                    remaining_extra -= a_paired
 
         straddles_filled = min(total_calls, total_puts)
-        logger.info("STRADDLE %s %d/%d @ K=%.0f: %d orders (%dC+%dP filled)",
-                    action, straddles_filled, n, strike,
-                    total_orders, total_calls, total_puts)
+        logger.info(
+            "STRADDLE %s %d/%d @ K=%.0f: %d orders | ATM %dC+%dP | WINGS %dC+%dP",
+            action, straddles_filled, n, strike,
+            total_orders, total_calls, total_puts, total_wing_calls, total_wing_puts)
         return total_orders
 
     def _run_positioning_step(self, state: MarketState, tick: int, result: Dict) -> Dict:
@@ -903,3 +975,6 @@ class StraddleEngine:
         print(f"  Total delta:  {state.total_delta:>+8.0f}")
         print(f"  Total gamma:  {state.total_gamma:>+8.1f}")
         print(f"  Options gross/net: {state.options_gross}/{state.options_net}")
+
+
+

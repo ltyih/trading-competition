@@ -28,15 +28,15 @@ from time import sleep, time
 from typing import Dict, List, Any
 
 # ========== Configuration ==========
-API_KEY = {'X-API-Key': 'ZXA2ZHL2'}
+API_KEY = {'X-API-Key': 'AJDSYHVC'}
 BASE_URL = 'http://localhost:9999/v1'
 shutdown = False
 
-WATCHLIST = {'CRZY', 'TAME'}
+WATCHLIST = {'WDY', 'BZZ', 'BNN'}
 
 # Trading parameters (LT3)
 COMMISSION_PER_SHARE = 0.02
-MAX_ORDER_SIZE = {'CRZY': 25000, 'TAME': 10000}
+MAX_ORDER_SIZE = {'WDY': 25000, 'BZZ': 15000, 'BNN': 15000}
 POSITION_LIMITS = {'net': 100000, 'gross': 250000}
 TENDER_DECISION_TIME = 30  # seconds (not used for throttling decisions anymore; evaluation runs continuously)
 
