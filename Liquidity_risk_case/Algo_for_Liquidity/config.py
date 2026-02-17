@@ -24,15 +24,15 @@ ENDGAME_MAX_SLICES = 5    # Max order slices per tick in endgame
 BOOK_DEPTH = 100          # Order book depth to fetch
 
 # ========== Tender Acceptance (AGGRESSIVE) ==========
-MIN_PROFIT_PER_SHARE = 0.01   # Accept almost any profitable tender
-MAX_DEPTH_RATIO = 0.75         # Accept even if liquidity is thin
-MIN_CONFIDENCE = 0..075          # Very low confidence threshold
-AUCTION_AGGRESSION = 0.005     # Tight margin on auction bids to WIN
+MIN_PROFIT_PER_SHARE = 0.005   # Accept almost any profitable tender
+MAX_DEPTH_RATIO = 0.8         # Accept even if liquidity is thin
+MIN_CONFIDENCE = 0.005          # Very low confidence threshold
+AUCTION_AGGRESSION = 0.001     # Tight margin on auction bids to WIN
 
 # ========== Almgren-Chriss Parameters ==========
-AC_GRADIENT_LOW_VOL = 0.5     # Less front-loaded for calm markets
-AC_GRADIENT_MED_VOL = 0.85      # Balanced
-AC_GRADIENT_HIGH_VOL = 0.9     # More front-loaded for volatile markets
+AC_GRADIENT_LOW_VOL = 0.4     # Less front-loaded for calm markets
+AC_GRADIENT_MED_VOL = 0.5      # Balanced
+AC_GRADIENT_HIGH_VOL = 0.6     # More front-loaded for volatile markets
 AC_TAU = 1                     # Trade every tick
 AC_MIN_HORIZON = 5             # Minimum ticks for AC schedule
 AC_FALLBACK_TWAP = True        # Fall back to TWAP if AC fails
@@ -94,12 +94,12 @@ VOL_TO_GRADIENT = {
 }
 
 EXECUTION_PROFILES = {
-    ('LOW', 'HIGH'):    {'participation': 0.25, 'limit_eps': 0.005, 'be_slack': 0.01},
-    ('LOW', 'MEDIUM'):  {'participation': 0.18, 'limit_eps': 0.005, 'be_slack': 0.01},
-    ('LOW', 'LOW'):     {'participation': 0.12, 'limit_eps': 0.003, 'be_slack': 0.005},
+    ('LOW', 'HIGH'):    {'participation': 0.25, 'limit_eps': 0.01, 'be_slack': 0.01},
+    ('LOW', 'MEDIUM'):  {'participation': 0.18, 'limit_eps': 0.01, 'be_slack': 0.01},
+    ('LOW', 'LOW'):     {'participation': 0.12, 'limit_eps': 0.01, 'be_slack': 0.005},
     ('MEDIUM', 'HIGH'): {'participation': 0.28, 'limit_eps': 0.01,  'be_slack': 0.02},
     ('MEDIUM', 'MEDIUM'):{'participation': 0.20, 'limit_eps': 0.01, 'be_slack': 0.015},
-    ('MEDIUM', 'LOW'):  {'participation': 0.14, 'limit_eps': 0.008, 'be_slack': 0.01},
+    ('MEDIUM', 'LOW'):  {'participation': 0.14, 'limit_eps': 0.01, 'be_slack': 0.01},
     ('HIGH', 'HIGH'):   {'participation': 0.30, 'limit_eps': 0.02,  'be_slack': 0.03},
     ('HIGH', 'MEDIUM'): {'participation': 0.22, 'limit_eps': 0.015, 'be_slack': 0.025},
     ('HIGH', 'LOW'):    {'participation': 0.15, 'limit_eps': 0.01,  'be_slack': 0.02},
