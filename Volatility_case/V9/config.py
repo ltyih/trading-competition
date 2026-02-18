@@ -17,7 +17,7 @@ PASSWORD = "target"
 
 # Local RIT Client REST API (our algo connects here)
 API_HOST = "localhost"
-API_PORT = 10000      # Default RIT Client API port - check your RIT Client settings
+API_PORT = 9999      # Default RIT Client API port - check your RIT Client settings
 API_BASE_URL = f"http://{API_HOST}:{API_PORT}/v1"
 API_KEY = "AJDSYHVC"     # Confirmed working
 
@@ -42,7 +42,7 @@ POSITION_TICKS = [2, 75, 150, 225]
 # Scheduled gradual close windows for weeks 1-4.
 # Close starts at each start tick and must be complete by the deadline tick.
 WEEKLY_CLOSE_START_TICKS = [35, 111, 186, 255]
-WEEKLY_CLOSE_DEADLINE_TICKS = [74, 149, 224, 299]
+WEEKLY_CLOSE_DEADLINE_TICKS = [40, 116, 191, 260]
 
 # =============================================================================
 # TRADING LIMITS (case rules - do not change)

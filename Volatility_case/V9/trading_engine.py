@@ -154,18 +154,11 @@ class StraddleEngine:
 
     def is_position_tick(self, tick: int) -> bool:
         """Should we take a new position at this tick?
-        Week 1: allow anytime from first position tick to 70 (vol news can arrive late).
-        Other weeks: 5-tick window after each position tick."""
+        Strict schedule: only on exact ticks configured in POSITION_TICKS."""
         week = self.get_current_week(tick)
         if week in self.weeks_positioned:
             return False
-        # Week 1: wide window so we don't miss it
-        if week == 1 and POSITION_TICKS[0] <= tick <= 70:
-            return True
-        for pt in POSITION_TICKS:
-            if pt <= tick <= pt + 5:
-                return True
-        return False
+        return tick in POSITION_TICKS
 
     def get_weekly_close_window(self, tick: int) -> Optional[Tuple[int, int, int]]:
         """Return (week, start_tick, deadline_tick) for scheduled close windows."""
@@ -861,9 +854,8 @@ class StraddleEngine:
         if self.phase == Phase.CLOSING:
             self.close_ticks += 1
             if self.is_flat(state):
-                logger.info("Position flat. Ready to reposition.")
-                self.phase = Phase.POSITIONING
-                self.position_ticks = 0
+                logger.info("Position flat. Waiting for next scheduled positioning tick.")
+                self.phase = Phase.IDLE
                 self.current_n = 0
                 self.current_direction = 0
                 self.current_strike = None
@@ -885,6 +877,11 @@ class StraddleEngine:
 
         # ===== Phase: POSITIONING (building new straddle) =====
         if self.phase == Phase.POSITIONING:
+            if not self.is_position_tick(tick):
+                logger.info("Deferring positioning at tick %d (not in POSITION_TICKS)", tick)
+                self.phase = Phase.IDLE
+                result["phase"] = self.phase
+                return result
             return self._run_positioning_step(state, tick, result)
 
         # ===== Check if it's a positioning tick =====
