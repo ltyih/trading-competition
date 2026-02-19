@@ -6,9 +6,9 @@ Uses same API connection pattern as the working volatility algo.
 
 # ========== API Connection (matching volatility algo pattern) ==========
 API_HOST = "localhost"
-API_PORT = 10000
+API_PORT = 9999
 API_BASE_URL = f"http://{API_HOST}:{API_PORT}/v1"
-API_KEY = "AJDSYHVC"
+API_KEY = "LPJEV4YS"
 
 # ========== Position Limits ==========
 NET_LIMIT = 150_000       # Buffer below 150K hard limit
@@ -30,9 +30,9 @@ MIN_CONFIDENCE = 0.005          # Very low confidence threshold
 AUCTION_AGGRESSION = 0.001     # Tight margin on auction bids to WIN
 
 # ========== Almgren-Chriss Parameters ==========
-AC_GRADIENT_LOW_VOL = 0.4     # Less front-loaded for calm markets
+AC_GRADIENT_LOW_VOL = 0.35     # Less front-loaded for calm markets
 AC_GRADIENT_MED_VOL = 0.5      # Balanced
-AC_GRADIENT_HIGH_VOL = 0.6     # More front-loaded for volatile markets
+AC_GRADIENT_HIGH_VOL = 0.7     # More front-loaded for volatile markets
 AC_TAU = 1                     # Trade every tick
 AC_MIN_HORIZON = 5             # Minimum ticks for AC schedule
 AC_FALLBACK_TWAP = True        # Fall back to TWAP if AC fails
@@ -42,6 +42,7 @@ MARKETABLE_LIMIT_EPS = 0.01    # Offset for pseudo-marketable limits
 NORMAL_MAX_PARTICIPATION = 0.30  # Max fraction of visible depth per order
 MIN_BATCH_SIZE = 500           # Don't send tiny orders
 IMMEDIATE_UNWIND_THRESHOLD = 2000  # Positions this small: market order
+PROFIT_MARGIN = 0.02           # Minimum profit above breakeven for limit orders (e.g., 0.02 = $0.02/share profit)
 
 # ========== Sub-Heat Configurations ==========
 SUBHEAT_CONFIG = {

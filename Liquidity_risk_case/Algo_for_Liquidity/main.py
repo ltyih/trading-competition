@@ -41,7 +41,7 @@ from config import (
     ENDGAME_TICKS, FINAL_SPRINT_TICKS, ENDGAME_MAX_SLICES,
     MIN_PROFIT_PER_SHARE, MAX_DEPTH_RATIO,
     MIN_CONFIDENCE, AUCTION_AGGRESSION,
-    MIN_BATCH_SIZE,
+    MIN_BATCH_SIZE, PROFIT_MARGIN,
     SUBHEAT_CONFIG, EXECUTION_PROFILES, VOL_TO_GRADIENT, EPS,
     AC_MIN_HORIZON,
 )
@@ -420,9 +420,20 @@ class ExecutionEngine:
             if order_type == 'LIMIT' and best_px > 0:
                 profile = cfg.execution_profile
                 if task.close_action == 'SELL':
-                    lim_px = round(max(0.01, best_px - profile['limit_eps']), 2)
+                    # Marketable price (for quick fills)
+                    marketable_px = best_px - profile['limit_eps']
+                    # Profitable price (breakeven + profit margin)
+                    profitable_px = task.breakeven_price + PROFIT_MARGIN if task.breakeven_price > 0 else marketable_px
+                    # Use the higher of the two to ensure profit while staying marketable if possible
+                    lim_px = round(max(0.01, max(marketable_px, profitable_px)), 2)
                 else:
-                    lim_px = round(best_px + profile['limit_eps'], 2)
+                    # For BUY orders (covering shorts), use marketable price
+                    # Marketable price (for quick fills)
+                    marketable_px = best_px + profile['limit_eps']
+                    # Profitable price (breakeven - profit margin)
+                    profitable_px = task.breakeven_price - PROFIT_MARGIN if task.breakeven_price > 0 else marketable_px
+                    # Use the lower of the two to ensure profit while staying marketable if possible
+                    lim_px = round(max(0.01, min(marketable_px, profitable_px)), 2)
                 ok = self.api.submit_limit_order(
                     task.ticker, clip, task.close_action, lim_px)
             else:
