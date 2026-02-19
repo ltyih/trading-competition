@@ -66,7 +66,7 @@ HEDGE_TARGET_DELTA = 0.0
 
 # Re-hedge evaluation interval in ticks.
 # 1 means evaluate/hedge every tick.
-HEDGE_INTERVAL_TICKS = 1
+HEDGE_INTERVAL_TICKS = 0.5
 
 # Maximum RTM shares to trade per hedge action.
 HEDGE_MAX_SHARES_PER_HEDGE = 10000

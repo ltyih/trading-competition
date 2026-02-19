@@ -28,7 +28,7 @@ from library import (
 )
 
 max_exposure=5000
-API_KEY = {"X-API-Key": "ZXCVB"}
+API_KEY = {"X-API-Key": "AJDSYHVC"}
 shutdown = False
 clear_positions_flag = False
 restart_flag = False

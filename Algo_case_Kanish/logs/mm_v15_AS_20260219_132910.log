@@ -1,0 +1,58 @@
+2026-02-19 13:29:10,648   Waiting for RIT connection...
+2026-02-19 13:29:10,664   Connected!
+2026-02-19 13:29:10,665   Waiting for ACTIVE status...
+2026-02-19 13:29:10,669   Simulation is ACTIVE!
+2026-02-19 13:29:10,670 
+================================================================================
+  ALGO MARKET MAKING BOT V15 - AVELLANEDA-STOIKOV ENGINE
+  Optimal quotes | High volume | AS skew | Jump detection
+  Gross: 50,000 | Close: 9,000 | Per-stock: 15,000
+  Cycle: 25ms | Layers: 3 | gamma=0.05
+  http://localhost:9999/v1 | Key: AJDSYHVC
+================================================================================
+
+2026-02-19 13:29:10,675   Intraday gross limit: 100,000
+2026-02-19 13:29:10,675   Close-time limit: 9,000
+2026-02-19 13:29:10,676   Net limit: 50,000
+2026-02-19 13:29:10,676   WNTR: per_stock=15,000, base_size=6000, rebate=$0.025
+2026-02-19 13:29:10,677   SMMR: per_stock=15,000, base_size=5000, rebate=$0.02
+2026-02-19 13:29:10,677   ATMN: per_stock=15,000, base_size=4000, rebate=$0.015
+2026-02-19 13:29:10,677   SPNG: per_stock=15,000, base_size=3000, rebate=$0.01
+2026-02-19 13:29:10,682   Starting NLV: $0.00
+2026-02-19 13:29:10,797   T558 d18 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 13:29:15,303   T563 d23 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 13:29:17,033 
+  [INTERRUPTED]
+2026-02-19 13:29:17,069 
+  Waiting for next simulation...
+
+2026-02-19 13:29:20,070   Waiting for ACTIVE status...
+2026-02-19 13:29:20,076   Simulation is ACTIVE!
+2026-02-19 13:29:20,076 
+================================================================================
+  ALGO MARKET MAKING BOT V15 - AVELLANEDA-STOIKOV ENGINE
+  Optimal quotes | High volume | AS skew | Jump detection
+  Gross: 50,000 | Close: 9,000 | Per-stock: 15,000
+  Cycle: 25ms | Layers: 3 | gamma=0.05
+  http://localhost:9999/v1 | Key: AJDSYHVC
+================================================================================
+
+2026-02-19 13:29:20,081   Intraday gross limit: 100,000
+2026-02-19 13:29:20,082   Close-time limit: 9,000
+2026-02-19 13:29:20,082   Net limit: 50,000
+2026-02-19 13:29:20,083   WNTR: per_stock=15,000, base_size=6000, rebate=$0.025
+2026-02-19 13:29:20,084   SMMR: per_stock=15,000, base_size=5000, rebate=$0.02
+2026-02-19 13:29:20,084   ATMN: per_stock=15,000, base_size=4000, rebate=$0.015
+2026-02-19 13:29:20,084   SPNG: per_stock=15,000, base_size=3000, rebate=$0.01
+2026-02-19 13:29:20,088   Starting NLV: $0.00
+2026-02-19 13:29:20,209   T567 d27 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 13:29:24,415   T572 d32 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 13:29:29,315   T577 d37 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 13:29:34,431   T582 d42 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 13:29:39,456   T587 d47 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 13:29:44,348   T592 d52 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 13:29:45,693 
+  [INTERRUPTED]
+2026-02-19 13:29:45,726 
+  Waiting for next simulation...
+
