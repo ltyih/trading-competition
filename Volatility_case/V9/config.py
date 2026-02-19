@@ -37,7 +37,7 @@ TRADING_DAYS_PER_YEAR = 240
 TRADING_DAYS_PER_MONTH = 20
 
 # Ticks at which to take new straddle positions (start of each week)
-POSITION_TICKS = [2, 75, 150, 225]
+POSITION_TICKS = [1, 74, 149, 224]
 
 # Scheduled gradual close windows for weeks 1-4.
 # Close starts at each start tick and must be complete by the deadline tick.
@@ -60,20 +60,19 @@ RISK_FREE_RATE = 0.0
 # =============================================================================
 # DELTA HEDGING
 # =============================================================================
-# Hedge when |delta| exceeds this fraction of delta_limit.
-# Paper says "only hedge when reaching delta limit."
-# We trigger at 88% to avoid actually breaching (penalty).
-HEDGE_TRIGGER_PCT = 0.7
-
 # Target absolute delta after hedge as a fraction of delta limit (0.0 to 1.0).
 # Examples: 0.0 -> flat delta, 0.5 -> hedge back to 50% of delta limit.
-HEDGE_TARGET_DELTA = 0.3
+HEDGE_TARGET_DELTA = 0.0
+
+# Re-hedge evaluation interval in ticks.
+# 1 means evaluate/hedge every tick.
+HEDGE_INTERVAL_TICKS = 1
+
+# Maximum RTM shares to trade per hedge action.
+HEDGE_MAX_SHARES_PER_HEDGE = 10000
 
 # Minimum shares to bother hedging
 MIN_HEDGE_SIZE = 0
-
-# Cooldown between hedge trades (ticks) to prevent oscillation
-HEDGE_COOLDOWN_TICKS = 5
 
 # =============================================================================
 # EXECUTION

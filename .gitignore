@@ -3,6 +3,4 @@
 __pycache__/
 *.pyc
 Algo_case_Kanish/config.py
-Volatility_case/V9/config.py
-Volatility_case/V9/trading_engine.py
 Algo_case_Kanish/logs/mm_v12_1_20260217_091421.log
