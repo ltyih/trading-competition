@@ -91,5 +91,9 @@ MIN_OPTION_PRICE = 0.01
 IRON_FLY_WING_WIDTH = 3
 
 # Maximum straddles per position (leave headroom: 400*2=800 < 1000 net limit)
-MAX_STRADDLES = 1250
+MAX_STRADDLES = 875
+
+# Force max position when absolute IV-RV gap exceeds this threshold (decimal).
+# Example: 0.03 = 3 vol points.
+FORCED_N_VOL_GAP_THRESHOLD = 0.03
 

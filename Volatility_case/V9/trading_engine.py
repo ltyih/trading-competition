@@ -27,7 +27,7 @@ from config import (
     MIN_OPTION_PRICE, HEDGE_TARGET_DELTA,
     HEDGE_INTERVAL_TICKS, HEDGE_MAX_SHARES_PER_HEDGE, MIN_HEDGE_SIZE, POSITION_TICKS,
     WEEKLY_CLOSE_START_TICKS, WEEKLY_CLOSE_DEADLINE_TICKS,
-    MAX_STRADDLES,
+    MAX_STRADDLES, FORCED_N_VOL_GAP_THRESHOLD,
 )
 from black_scholes import bs_gamma, bs_delta, bs_vega, bs_price, implied_volatility
 from news_parser import VolatilityState
@@ -348,6 +348,21 @@ class StraddleEngine:
         if sigma_hat <= 0:
             logger.info("No implied vol data, cannot optimize")
             return 0, 0, 0.0, X
+
+        # Conservative-override guard: force max sizing for large IV-RV dislocations.
+        vol_gap = abs(sigma_hat - sigma)
+        if vol_gap > FORCED_N_VOL_GAP_THRESHOLD:
+            forced_n = MAX_STRADDLES
+            forced_direction = 1 if sigma > sigma_hat else -1
+            logger.info(
+                "FORCED SIZE: |IV-RV|=%.2f%% > %.2f%% => n=%d %s @ K=%.0f",
+                vol_gap * 100.0,
+                FORCED_N_VOL_GAP_THRESHOLD * 100.0,
+                forced_n,
+                "LONG" if forced_direction > 0 else "SHORT",
+                X,
+            )
+            return forced_n, forced_direction, 0.0, X
 
         # Market spreads
         Bo = self.get_straddle_spread(state, X)
