@@ -6,10 +6,10 @@ Each week:
   1. Close old position
   2. Run optimizer to find n* straddles at ATM strike
   3. Execute position
-  4. Delta hedge ONLY when approaching delta limit
+  4. Delta hedge on a fixed tick interval
   5. Repeat at next week boundary
 
-Delta hedging: hedge to zero delta when |delta| hits ~88% of limit.
+Delta hedging: periodic re-hedging on configurable tick cadence.
 """
 
 import logging
@@ -24,10 +24,10 @@ from config import (
     MAX_ORDERS_PER_CYCLE, OPTIONS_MAX_TRADE_SIZE,
     RTM_MAX_TRADE_SIZE, RTM_GROSS_LIMIT, RTM_NET_LIMIT,
     OPTIONS_GROSS_LIMIT, OPTIONS_NET_LIMIT,
-    MIN_OPTION_PRICE, IRON_FLY_WING_WIDTH, HEDGE_TRIGGER_PCT, HEDGE_TARGET_DELTA,
-    MIN_HEDGE_SIZE, HEDGE_COOLDOWN_TICKS, POSITION_TICKS,
+    MIN_OPTION_PRICE, HEDGE_TARGET_DELTA,
+    HEDGE_INTERVAL_TICKS, HEDGE_MAX_SHARES_PER_HEDGE, MIN_HEDGE_SIZE, POSITION_TICKS,
     WEEKLY_CLOSE_START_TICKS, WEEKLY_CLOSE_DEADLINE_TICKS,
-    MAX_STRADDLES,
+    MAX_STRADDLES, FORCED_N_VOL_GAP_THRESHOLD,
 )
 from black_scholes import bs_gamma, bs_delta, bs_vega, bs_price, implied_volatility
 from news_parser import VolatilityState
@@ -154,17 +154,20 @@ class StraddleEngine:
 
     def is_position_tick(self, tick: int) -> bool:
         """Should we take a new position at this tick?
-        Week 1: allow anytime from first position tick to 70 (vol news can arrive late).
-        Other weeks: 5-tick window after each position tick."""
+        Strict schedule on POSITION_TICKS, with week-1 catch-up if tick 1 was missed."""
         week = self.get_current_week(tick)
         if week in self.weeks_positioned:
             return False
-        # Week 1: wide window so we don't miss it
-        if week == 1 and POSITION_TICKS[0] <= tick <= 70:
+        if tick in POSITION_TICKS:
             return True
-        for pt in POSITION_TICKS:
-            if pt <= tick <= pt + 5:
-                return True
+
+        # Catch-up: if algo starts after tick 1, allow week-1 positioning on
+        # subsequent ticks until week 2 boundary.
+        first_tick = POSITION_TICKS[0]
+        next_week_tick = POSITION_TICKS[1] if len(POSITION_TICKS) > 1 else (TICKS_PER_SUBHEAT + 1)
+        if week == 1 and first_tick < tick < next_week_tick:
+            return True
+
         return False
 
     def get_weekly_close_window(self, tick: int) -> Optional[Tuple[int, int, int]]:
@@ -225,9 +228,18 @@ class StraddleEngine:
                     bid=bid, ask=ask, mid=mid, position=position,
                 )
 
-                # Compute IV from market mid price
-                if mid > 0 and state.spot > 0 and T_exp > 0:
-                    opt.iv = implied_volatility(mid, state.spot, strike,
+                # Compute IV from best available market price.
+                iv_price = mid
+                if iv_price <= 0:
+                    last = sec.get("last", 0) or 0
+                    if last > 0:
+                        iv_price = last
+                    elif ask > 0:
+                        iv_price = ask
+                    elif bid > 0:
+                        iv_price = bid
+                if iv_price > 0 and state.spot > 0 and T_exp > 0:
+                    opt.iv = implied_volatility(iv_price, state.spot, strike,
                                                 T_exp, RISK_FREE_RATE, option_type)
 
                 # Accumulate Greeks from positions
@@ -284,6 +296,13 @@ class StraddleEngine:
             return sum(ivs) / len(ivs)
         return 0.0
 
+    def has_any_implied_vol(self, state: MarketState) -> bool:
+        """Whether current snapshot has at least one usable implied volatility value."""
+        for opt in state.options:
+            if opt.iv > 0:
+                return True
+        return False
+
     # ========================================================================
     # Run optimizer
     # ========================================================================
@@ -330,6 +349,21 @@ class StraddleEngine:
             logger.info("No implied vol data, cannot optimize")
             return 0, 0, 0.0, X
 
+        # Conservative-override guard: force max sizing for large IV-RV dislocations.
+        vol_gap = abs(sigma_hat - sigma)
+        if vol_gap > FORCED_N_VOL_GAP_THRESHOLD:
+            forced_n = MAX_STRADDLES
+            forced_direction = 1 if sigma > sigma_hat else -1
+            logger.info(
+                "FORCED SIZE: |IV-RV|=%.2f%% > %.2f%% => n=%d %s @ K=%.0f",
+                vol_gap * 100.0,
+                FORCED_N_VOL_GAP_THRESHOLD * 100.0,
+                forced_n,
+                "LONG" if forced_direction > 0 else "SHORT",
+                X,
+            )
+            return forced_n, forced_direction, 0.0, X
+
         # Market spreads
         Bo = self.get_straddle_spread(state, X)
         Bs = (state.spot_ask - state.spot_bid) if state.spot_ask > state.spot_bid else 0.02
@@ -353,8 +387,7 @@ class StraddleEngine:
 
     def close_all_positions(self, state: MarketState) -> int:
         """Flatten all options and stock with market orders.
-        Uses cancel-then-close phasing to prevent oscillation.
-        Ignores tiny residual option positions (<=2 options)."""
+        Uses cancel-then-close phasing to prevent oscillation."""
         orders = 0
         option_qty_closed = 0
         stock_qty_closed = 0
@@ -372,10 +405,9 @@ class StraddleEngine:
         reserve_stock_slot = stock_remaining > 0
         option_order_cap = MAX_ORDERS_PER_CYCLE - (1 if reserve_stock_slot else 0)
 
-        # Close options first (ignore tiny residuals <= 2), while reserving
-        # one stock order slot when stock exists.
+        # Close options first, while reserving one stock order slot when stock exists.
         for opt in state.options:
-            if abs(opt.position) <= 2:
+            if abs(opt.position) == 0:
                 continue
             action = "SELL" if opt.position > 0 else "BUY"
             remaining = abs(opt.position)
@@ -427,7 +459,7 @@ class StraddleEngine:
         # Close options first.
         for opt in state.options:
             pos = int(opt.position)
-            if abs(pos) <= 2:
+            if abs(pos) == 0:
                 continue
             if force_full_close:
                 qty_target = abs(pos)
@@ -473,7 +505,8 @@ class StraddleEngine:
         return orders
 
     def _submit_leg_orders(self, ticker: str, qty_total: int, action: str,
-                           running_gross: int, running_net: int) -> tuple:
+                           running_gross: int, running_net: int,
+                           running_positions: Dict[str, int]) -> tuple:
         """Submit orders for one leg (call or put). Returns (orders_sent, qty_filled, gross, net)."""
         orders = 0
         filled = 0
@@ -484,8 +517,10 @@ class StraddleEngine:
         while remaining > 0 and orders < MAX_ORDERS_PER_CYCLE:
             qty = min(remaining, OPTIONS_MAX_TRADE_SIZE)
 
-            # Pre-flight limit check
-            new_gross = g + qty
+            # Pre-flight limit check using per-ticker position impact.
+            current_pos = int(running_positions.get(ticker, 0))
+            new_pos = current_pos + qty if action == "BUY" else current_pos - qty
+            new_gross = g + (abs(new_pos) - abs(current_pos))
             new_net = n + qty if action == "BUY" else n - qty
             if new_gross > OPTIONS_GROSS_LIMIT:
                 logger.warning("Gross limit approaching (%d), stopping", new_gross)
@@ -501,6 +536,7 @@ class StraddleEngine:
                 remaining -= qty
                 g = new_gross
                 n = new_net
+                running_positions[ticker] = new_pos
             else:
                 break
 
@@ -509,6 +545,7 @@ class StraddleEngine:
     def _submit_paired_orders(self, call_ticker: str, put_ticker: str,
                               qty_total: int, action: str,
                               running_gross: int, running_net: int,
+                              running_positions: Dict[str, int],
                               label: str) -> tuple:
         """Submit matched call/put legs. Returns (orders, paired, calls, puts, gross, net)."""
         orders = 0
@@ -523,7 +560,7 @@ class StraddleEngine:
             qty = min(remaining, batch_size)
 
             c_ord, c_fill, g, n = self._submit_leg_orders(
-                call_ticker, qty, action, g, n)
+                call_ticker, qty, action, g, n, running_positions)
             orders += c_ord
             calls += c_fill
 
@@ -531,7 +568,7 @@ class StraddleEngine:
                 break
 
             p_ord, p_fill, g, n = self._submit_leg_orders(
-                put_ticker, c_fill, action, g, n)
+                put_ticker, c_fill, action, g, n, running_positions)
             orders += p_ord
             puts += p_fill
 
@@ -541,7 +578,7 @@ class StraddleEngine:
                 logger.warning("%s put leg short by %d, closing unmatched calls",
                                label, unmatched)
                 r_ord, r_fill, g, n = self._submit_leg_orders(
-                    call_ticker, unmatched, reverse, g, n)
+                    call_ticker, unmatched, reverse, g, n, running_positions)
                 orders += r_ord
                 calls -= r_fill
                 if r_fill < unmatched:
@@ -556,7 +593,7 @@ class StraddleEngine:
 
     def take_straddle_position(self, n: int, direction: int,
                                strike: float, state: MarketState) -> int:
-        """Build ATM straddles, then add opposite OTM wings beyond net-cap capacity."""
+        """Build ATM straddles, then hedge extra ATM with opposite extreme OTM legs."""
         if n <= 0 or direction == 0:
             return 0
 
@@ -572,8 +609,9 @@ class StraddleEngine:
         total_orders = 0
         total_calls = 0
         total_puts = 0
-        total_wing_calls = 0
-        total_wing_puts = 0
+        total_extreme_calls = 0
+        total_extreme_puts = 0
+        option_positions = {opt.ticker: int(opt.position) for opt in state.options}
 
         # Base capacity under net limit: each straddle contributes 2 option net.
         base_capacity = OPTIONS_NET_LIMIT // 2
@@ -581,34 +619,35 @@ class StraddleEngine:
         extra_target = max(0, n - base_target)
 
         ords, base_paired, c_fill, p_fill, g, net = self._submit_paired_orders(
-            call_ticker, put_ticker, base_target, action, g, net, "ATM")
+            call_ticker, put_ticker, base_target, action, g, net, option_positions, "ATM")
         total_orders += ords
         total_calls += c_fill
         total_puts += p_fill
 
         if extra_target > 0:
-            wing_width = max(int(round(IRON_FLY_WING_WIDTH)), 1)
-            call_wing_strike = strike + wing_width
-            put_wing_strike = strike - wing_width
+            extreme_put_strike = 45
+            extreme_call_strike = 54
 
-            if call_wing_strike not in STRIKE_PRICES or put_wing_strike not in STRIKE_PRICES:
-                logger.warning("Cannot add iron-fly overlay at K=%.0f with x=%d (wings out of range)",
-                               strike, wing_width)
+            if extreme_call_strike not in STRIKE_PRICES or extreme_put_strike not in STRIKE_PRICES:
+                logger.warning(
+                    "Cannot add extreme overlay (P%d/C%d out of strike range)",
+                    extreme_put_strike, extreme_call_strike
+                )
             else:
-                call_wing_ticker = f"RTM1C{int(call_wing_strike)}"
-                put_wing_ticker = f"RTM1P{int(put_wing_strike)}"
+                extreme_call_ticker = f"RTM1C{int(extreme_call_strike)}"
+                extreme_put_ticker = f"RTM1P{int(extreme_put_strike)}"
 
                 remaining_extra = extra_target
                 while remaining_extra > 0:
                     qty = min(remaining_extra, OPTIONS_MAX_TRADE_SIZE)
 
-                    # 1) Build opposite OTM wing pair to free net capacity.
+                    # 1) Build opposite extreme OTM pair first to free net capacity.
                     w_ords, w_paired, w_c, w_p, g, net = self._submit_paired_orders(
-                        call_wing_ticker, put_wing_ticker, qty,
-                        opposite_action, g, net, "WING")
+                        extreme_call_ticker, extreme_put_ticker, qty,
+                        opposite_action, g, net, option_positions, "EXTREME")
                     total_orders += w_ords
-                    total_wing_calls += w_c
-                    total_wing_puts += w_p
+                    total_extreme_calls += w_c
+                    total_extreme_puts += w_p
 
                     if w_paired == 0:
                         break
@@ -616,51 +655,60 @@ class StraddleEngine:
                     # 2) Add the matching ATM straddle quantity.
                     a_ords, a_paired, a_c, a_p, g, net = self._submit_paired_orders(
                         call_ticker, put_ticker, w_paired,
-                        action, g, net, "ATM-EXTRA")
+                        action, g, net, option_positions, "ATM-EXTRA")
                     total_orders += a_ords
                     total_calls += a_c
                     total_puts += a_p
 
                     if a_paired < w_paired:
                         unmatched = w_paired - a_paired
-                        logger.warning("ATM extra short by %d, unwinding unmatched wings", unmatched)
+                        logger.warning("ATM extra short by %d, unwinding unmatched extreme legs", unmatched)
                         u_ords, _, u_c, u_p, g, net = self._submit_paired_orders(
-                            call_wing_ticker, put_wing_ticker, unmatched,
-                            action, g, net, "WING-UNWIND")
+                            extreme_call_ticker, extreme_put_ticker, unmatched,
+                            action, g, net, option_positions, "EXTREME-UNWIND")
                         total_orders += u_ords
-                        total_wing_calls -= u_c
-                        total_wing_puts -= u_p
+                        total_extreme_calls -= u_c
+                        total_extreme_puts -= u_p
                         break
 
                     remaining_extra -= a_paired
 
         straddles_filled = min(total_calls, total_puts)
         logger.info(
-            "STRADDLE %s %d/%d @ K=%.0f: %d orders | ATM %dC+%dP | WINGS %dC+%dP",
+            "STRADDLE %s %d/%d @ K=%.0f: %d orders | ATM %dC+%dP | EXTREME C54 %d + P45 %d",
             action, straddles_filled, n, strike,
-            total_orders, total_calls, total_puts, total_wing_calls, total_wing_puts)
+            total_orders, total_calls, total_puts, total_extreme_calls, total_extreme_puts)
         return total_orders
 
     def _run_positioning_step(self, state: MarketState, tick: int, result: Dict) -> Dict:
         """Run one positioning step (optimizer + optional entry)."""
         self.position_ticks += 1
         if self.current_n == 0:
-            # Use saved optimizer result if available (from before close phase)
-            if self.pending_n > 0 and self.pending_direction != 0:
-                n_star = self.pending_n
-                direction = self.pending_direction
-                f_star = self.pending_profit
-                strike = self.pending_strike
-                logger.info("Using saved optimizer result: n=%d %s @ K=%.0f",
-                            n_star, "LONG" if direction > 0 else "SHORT", strike)
-                # Clear pending
-                self.pending_n = 0
-                self.pending_direction = 0
-                self.pending_strike = None
-                self.pending_profit = 0.0
-            else:
-                # Fresh optimizer run (first position of sub-heat, or from IDLE)
-                n_star, direction, f_star, strike = self.run_optimizer(state, tick)
+            # Always refresh news immediately before optimizing/entry so
+            # positioning uses the latest realized-vol / delta-limit inputs.
+            self.update_news()
+            vol_now = self.vol_state.best_vol_estimate
+            result["vol"] = (vol_now * 100) if vol_now else None
+            result["delta_limit"] = self.vol_state.delta_limit
+            if not vol_now or vol_now <= 0:
+                logger.info("No realized vol available at positioning tick %d; skipping entry this tick", tick)
+                self.phase = Phase.IDLE
+                result["phase"] = self.phase
+                return result
+
+            # Refresh market snapshot right before entry and require IV data.
+            pre_trade_state = self.get_market_state(tick)
+            if pre_trade_state is None:
+                result["phase"] = self.phase
+                return result
+            if not self.has_any_implied_vol(pre_trade_state):
+                logger.info("No implied vol data at positioning tick %d; skipping entry this tick", tick)
+                self.phase = Phase.IDLE
+                result["phase"] = self.phase
+                return result
+
+            # Fresh optimizer run at entry time (do not rely on cached sizing).
+            n_star, direction, f_star, strike = self.run_optimizer(pre_trade_state, tick)
 
             if n_star > 0 and direction != 0:
                 self.current_n = n_star
@@ -673,7 +721,7 @@ class StraddleEngine:
                 result["expected_pnl"] = f_star
 
                 # Execute the straddle position
-                trades = self.take_straddle_position(n_star, direction, strike, state)
+                trades = self.take_straddle_position(n_star, direction, strike, pre_trade_state)
                 result["option_trades"] = trades
                 self.phase = Phase.HOLDING
                 week = self.get_current_week(tick)
@@ -697,10 +745,14 @@ class StraddleEngine:
 
     def delta_hedge(self, state: MarketState, tick: int) -> int:
         """
-        Hedge when |delta| approaches delta limit.
+        Periodic delta hedge based on configured tick interval.
         Hedge back to target fraction of delta limit.
         """
         if self.phase == Phase.CLOSING:
+            return 0
+
+        interval = max(int(HEDGE_INTERVAL_TICKS), 1)
+        if tick % interval != 0:
             return 0
 
         L = self.vol_state.delta_limit
@@ -709,16 +761,6 @@ class StraddleEngine:
 
         current_delta = state.total_delta
         abs_delta = abs(current_delta)
-
-        # Only hedge when approaching the limit
-        trigger = L * HEDGE_TRIGGER_PCT
-        if abs_delta < trigger:
-            return 0
-
-        # Cooldown check - ABSOLUTE, no bypass (prevents oscillation death spiral)
-        ticks_since = tick - self.last_hedge_tick
-        if ticks_since < HEDGE_COOLDOWN_TICKS:
-            return 0
 
         # Cancel pending stock orders to prevent accumulation
         self.api.cancel_orders_for_ticker(UNDERLYING_TICKER)
@@ -754,7 +796,12 @@ class StraddleEngine:
             return 0
 
         # Submit ONE hedge order per cycle (prevents overshoot from stale position)
-        hedge_qty = min(hedge_total, RTM_MAX_TRADE_SIZE)
+        hedge_cap = max(int(HEDGE_MAX_SHARES_PER_HEDGE), 0)
+        hedge_qty = min(hedge_total, RTM_MAX_TRADE_SIZE, hedge_cap)
+        if hedge_qty < MIN_HEDGE_SIZE:
+            return 0
+        if hedge_qty < hedge_total:
+            logger.info("Hedge qty capped: requested %d, capped %d", hedge_total, hedge_qty)
         result = self.api.submit_market_order(UNDERLYING_TICKER, hedge_qty, action)
         orders_sent = 0
         if result:
@@ -765,11 +812,11 @@ class StraddleEngine:
             self.last_hedge_tick = tick
             logger.info(
                         "HEDGE %s %d RTM | delta %.0f -> ~%.0f | target %.0f (%.0f%% of limit %.0f) "
-                        "| trigger %.0f%%",
+                        "| interval %dt",
                         action, hedge_qty, current_delta,
                         current_delta + (hedge_qty if action == "BUY" else -hedge_qty),
                         target_delta, target_pct * 100, L,
-                        HEDGE_TRIGGER_PCT * 100)
+                        interval)
         return orders_sent
 
     # ========================================================================
@@ -778,10 +825,10 @@ class StraddleEngine:
 
     def is_flat(self, state: MarketState) -> bool:
         """Are all positions closed?"""
-        if abs(state.stock_position) > 100:
+        if int(state.stock_position) != 0:
             return False
         for opt in state.options:
-            if abs(opt.position) > 2:
+            if int(opt.position) != 0:
                 return False
         return True
 
@@ -861,9 +908,8 @@ class StraddleEngine:
         if self.phase == Phase.CLOSING:
             self.close_ticks += 1
             if self.is_flat(state):
-                logger.info("Position flat. Ready to reposition.")
-                self.phase = Phase.POSITIONING
-                self.position_ticks = 0
+                logger.info("Position flat. Waiting for next scheduled positioning tick.")
+                self.phase = Phase.IDLE
                 self.current_n = 0
                 self.current_direction = 0
                 self.current_strike = None
@@ -885,10 +931,15 @@ class StraddleEngine:
 
         # ===== Phase: POSITIONING (building new straddle) =====
         if self.phase == Phase.POSITIONING:
+            if not self.is_position_tick(tick):
+                logger.info("Deferring positioning at tick %d (not in POSITION_TICKS)", tick)
+                self.phase = Phase.IDLE
+                result["phase"] = self.phase
+                return result
             return self._run_positioning_step(state, tick, result)
 
         # ===== Check if it's a positioning tick =====
-        if self.is_position_tick(tick) and vol:
+        if self.is_position_tick(tick):
             week = self.get_current_week(tick)
             logger.info("WEEK %d positioning tick %d", week, tick)
 
