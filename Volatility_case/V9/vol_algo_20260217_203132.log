@@ -343,3 +343,96 @@
 2026-02-17 20:37:51,372 [INFO] trading_engine: SCHEDULED CLOSE tick 260: options_closed=233 stock_closed=1516 orders=5
 2026-02-17 20:37:51,372 [INFO] trading_engine: Scheduled close week 4 tick 260 (window 255-260), trades=5
 2026-02-17 20:37:52,021 [INFO] trading_engine: Position flat. Waiting for next scheduled positioning tick.
+2026-02-17 20:40:38,596 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:38,598 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:39,101 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:39,605 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:40,109 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:40,611 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:41,114 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:41,617 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:42,121 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:42,623 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:43,126 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:43,629 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:44,133 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:44,636 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:45,139 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:45,641 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:46,144 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:46,647 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:47,150 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:47,652 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:52,967 [WARNING] rit_api: GET /news returned 401
+2026-02-17 20:40:52,969 [WARNING] rit_api: GET /securities returned 401
+2026-02-17 20:40:53,071 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:53,574 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:54,077 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:54,580 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:55,084 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:55,587 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:56,090 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:56,593 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:57,096 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:57,599 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:58,102 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:58,605 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:59,109 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:40:59,611 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:41:00,114 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:41:00,619 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:41:01,121 [WARNING] rit_api: GET /case returned 401
+2026-02-17 20:43:47,090 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-17 20:43:52,105 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-17 20:43:57,622 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-17 20:44:03,129 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-17 20:44:08,640 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-17 20:45:45,811 [INFO] trading_engine: Scheduled close complete week 1 by tick 35
+2026-02-17 20:45:46,791 [INFO] trading_engine: Scheduled close complete week 1 by tick 36
+2026-02-17 20:45:47,810 [INFO] trading_engine: Scheduled close complete week 1 by tick 37
+2026-02-17 20:45:48,824 [INFO] trading_engine: Scheduled close complete week 1 by tick 38
+2026-02-17 20:45:49,830 [INFO] trading_engine: Scheduled close complete week 1 by tick 39
+2026-02-17 20:45:50,841 [INFO] trading_engine: Scheduled close complete week 1 by tick 40
+2026-02-17 20:47:02,266 [INFO] trading_engine: Scheduled close complete week 2 by tick 111
+2026-02-17 20:47:03,266 [INFO] trading_engine: Scheduled close complete week 2 by tick 112
+2026-02-17 20:47:04,273 [INFO] trading_engine: Scheduled close complete week 2 by tick 113
+2026-02-17 20:47:05,288 [INFO] trading_engine: Scheduled close complete week 2 by tick 114
+2026-02-17 20:47:06,296 [INFO] trading_engine: Scheduled close complete week 2 by tick 115
+2026-02-17 20:47:07,307 [INFO] trading_engine: Scheduled close complete week 2 by tick 116
+2026-02-17 20:48:17,696 [INFO] trading_engine: Scheduled close complete week 3 by tick 186
+2026-02-17 20:48:18,654 [INFO] trading_engine: Scheduled close complete week 3 by tick 187
+2026-02-17 20:48:19,673 [INFO] trading_engine: Scheduled close complete week 3 by tick 188
+2026-02-17 20:48:20,724 [INFO] trading_engine: Scheduled close complete week 3 by tick 189
+2026-02-17 20:48:21,678 [INFO] trading_engine: Scheduled close complete week 3 by tick 190
+2026-02-17 20:48:22,687 [INFO] trading_engine: Scheduled close complete week 3 by tick 191
+2026-02-17 20:49:27,032 [INFO] trading_engine: Scheduled close complete week 4 by tick 255
+2026-02-17 20:49:27,989 [INFO] trading_engine: Scheduled close complete week 4 by tick 256
+2026-02-17 20:49:29,090 [INFO] trading_engine: Scheduled close complete week 4 by tick 257
+2026-02-17 20:49:30,066 [INFO] trading_engine: Scheduled close complete week 4 by tick 258
+2026-02-17 20:49:31,063 [INFO] trading_engine: Scheduled close complete week 4 by tick 259
+2026-02-17 20:49:32,064 [INFO] trading_engine: Scheduled close complete week 4 by tick 260
+2026-02-17 20:57:24,864 [INFO] trading_engine: Scheduled close complete week 1 by tick 35
+2026-02-17 20:57:25,877 [INFO] trading_engine: Scheduled close complete week 1 by tick 36
+2026-02-17 20:57:26,884 [INFO] trading_engine: Scheduled close complete week 1 by tick 37
+2026-02-17 20:57:27,895 [INFO] trading_engine: Scheduled close complete week 1 by tick 38
+2026-02-17 20:57:29,067 [INFO] trading_engine: Scheduled close complete week 1 by tick 39
+2026-02-17 20:57:29,919 [INFO] trading_engine: Scheduled close complete week 1 by tick 40
+2026-02-17 20:58:41,354 [INFO] trading_engine: Scheduled close complete week 2 by tick 111
+2026-02-17 20:58:42,359 [INFO] trading_engine: Scheduled close complete week 2 by tick 112
+2026-02-17 20:58:43,357 [INFO] trading_engine: Scheduled close complete week 2 by tick 113
+2026-02-17 20:58:44,355 [INFO] trading_engine: Scheduled close complete week 2 by tick 114
+2026-02-17 20:58:45,360 [INFO] trading_engine: Scheduled close complete week 2 by tick 115
+2026-02-17 20:58:46,374 [INFO] trading_engine: Scheduled close complete week 2 by tick 116
+2026-02-17 20:59:56,789 [INFO] trading_engine: Scheduled close complete week 3 by tick 186
+2026-02-17 20:59:57,794 [INFO] trading_engine: Scheduled close complete week 3 by tick 187
+2026-02-17 20:59:58,806 [INFO] trading_engine: Scheduled close complete week 3 by tick 188
+2026-02-17 20:59:59,809 [INFO] trading_engine: Scheduled close complete week 3 by tick 189
+2026-02-17 21:00:00,815 [INFO] trading_engine: Scheduled close complete week 3 by tick 190
+2026-02-17 21:00:01,821 [INFO] trading_engine: Scheduled close complete week 3 by tick 191
+2026-02-17 21:01:06,195 [INFO] trading_engine: Scheduled close complete week 4 by tick 255
+2026-02-17 21:01:07,184 [INFO] trading_engine: Scheduled close complete week 4 by tick 256
+2026-02-17 21:01:08,403 [INFO] trading_engine: Scheduled close complete week 4 by tick 257
+2026-02-17 21:01:09,147 [INFO] trading_engine: Scheduled close complete week 4 by tick 258
+2026-02-17 21:01:10,161 [INFO] trading_engine: Scheduled close complete week 4 by tick 259
+2026-02-17 21:01:11,160 [INFO] trading_engine: Scheduled close complete week 4 by tick 260
+2026-02-17 21:08:01,537 [WARNING] rit_api: POST /commands/cancel returned 401: {"code":"UNAUTHORIZED","message":"Simulation must be running."}
