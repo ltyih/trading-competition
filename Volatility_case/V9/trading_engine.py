@@ -745,14 +745,11 @@ class StraddleEngine:
 
     def delta_hedge(self, state: MarketState, tick: int) -> int:
         """
-        Periodic delta hedge based on configured tick interval.
-        Hedge back to target fraction of delta limit.
+        Delta hedging policy:
+        - Long position: periodic hedging based on HEDGE_INTERVAL_TICKS.
+        - Short position: minimal hedging, only when delta limit is breached.
         """
         if self.phase == Phase.CLOSING:
-            return 0
-
-        interval = max(int(HEDGE_INTERVAL_TICKS), 1)
-        if tick % interval != 0:
             return 0
 
         L = self.vol_state.delta_limit
@@ -761,6 +758,19 @@ class StraddleEngine:
 
         current_delta = state.total_delta
         abs_delta = abs(current_delta)
+
+        short_mode = (self.current_direction < 0 and self.current_n > 0)
+        interval = max(int(HEDGE_INTERVAL_TICKS), 1)
+        if short_mode:
+            # Minimize hedging for short option books: only act on limit breach.
+            if abs_delta < L:
+                return 0
+            hedge_mode = "limit"
+        else:
+            # Keep existing periodic behavior for long option books.
+            if tick % interval != 0:
+                return 0
+            hedge_mode = f"interval {interval}t"
 
         # Cancel pending stock orders to prevent accumulation
         self.api.cancel_orders_for_ticker(UNDERLYING_TICKER)
@@ -812,11 +822,11 @@ class StraddleEngine:
             self.last_hedge_tick = tick
             logger.info(
                         "HEDGE %s %d RTM | delta %.0f -> ~%.0f | target %.0f (%.0f%% of limit %.0f) "
-                        "| interval %dt",
+                        "| mode %s",
                         action, hedge_qty, current_delta,
                         current_delta + (hedge_qty if action == "BUY" else -hedge_qty),
                         target_delta, target_pct * 100, L,
-                        interval)
+                        hedge_mode)
         return orders_sent
 
     # ========================================================================
