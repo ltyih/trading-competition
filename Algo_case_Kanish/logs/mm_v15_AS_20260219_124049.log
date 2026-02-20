@@ -1,0 +1,223 @@
+2026-02-19 12:40:49,866   Waiting for RIT connection...
+2026-02-19 12:40:50,275   Connected!
+2026-02-19 12:40:50,276   Waiting for ACTIVE status...
+2026-02-19 12:40:50,281   Simulation is ACTIVE!
+2026-02-19 12:40:50,281 
+================================================================================
+  ALGO MARKET MAKING BOT V15 - AVELLANEDA-STOIKOV ENGINE
+  Optimal quotes | High volume | AS skew | Jump detection
+  Gross: 50,000 | Close: 9,000 | Per-stock: 15,000
+  Cycle: 25ms | Layers: 3 | gamma=0.05
+  http://localhost:9999/v1 | Key: AJDSYHVC
+================================================================================
+
+2026-02-19 12:40:50,316   Intraday gross limit: 100,000
+2026-02-19 12:40:50,317   Close-time limit: 9,000
+2026-02-19 12:40:50,317   Net limit: 50,000
+2026-02-19 12:40:50,318   WNTR: per_stock=15,000, base_size=6000, rebate=$0.025
+2026-02-19 12:40:50,318   SMMR: per_stock=15,000, base_size=5000, rebate=$0.02
+2026-02-19 12:40:50,318   ATMN: per_stock=15,000, base_size=4000, rebate=$0.015
+2026-02-19 12:40:50,318   SPNG: per_stock=15,000, base_size=3000, rebate=$0.01
+2026-02-19 12:40:50,327   Starting NLV: $0.00
+2026-02-19 12:40:50,611   T457 d37 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:40:55,190   T462 d42 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:41:00,097   T467 d47 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:41:05,277   T472 d52 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:41:08,163     [LOCKDOWN] T475 sec=55 agg=0 close_lim=9000
+2026-02-19 12:41:13,168 
+  === DAY 9 (tick 480) ===
+2026-02-19 12:41:15,276   T482 d02 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:41:20,252   T487 d07 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:41:25,239   T492 d12 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:41:30,395   T497 d17 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:41:35,352   T502 d22 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:41:40,337   T507 d27 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:41:45,442   T512 d32 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:41:50,464   T517 d37 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:41:55,497   T522 d42 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:42:00,446   T527 d47 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:42:05,462   T532 d52 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:42:08,514     [LOCKDOWN] T535 sec=55 agg=0 close_lim=9000
+2026-02-19 12:42:13,486 
+  === DAY 10 (tick 540) ===
+2026-02-19 12:42:15,646   T542 d02 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:42:20,787   T547 d07 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:42:25,698   T552 d12 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:42:30,618   T557 d17 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:42:35,742   T562 d22 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:42:40,758   T567 d27 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:42:45,791   T572 d32 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:42:50,735   T577 d37 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:42:55,814   T582 d42 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:43:00,771   T587 d47 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:43:05,783   T592 d52 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:43:08,754     [LOCKDOWN] T595 sec=55 agg=0 close_lim=9000
+2026-02-19 12:43:13,922 
+  === DAY 11 (tick 600) ===
+2026-02-19 12:43:14,311 
+  [SIMULATION ENDED]
+2026-02-19 12:43:14,321   Final P&L: $0.00
+2026-02-19 12:43:14,322   Orders: +0/-496
+2026-02-19 12:43:14,323   Market orders: 0
+2026-02-19 12:43:14,323   Volume: 0
+2026-02-19 12:43:14,323   Est. rebates: $0.00
+2026-02-19 12:43:14,324   Final aggregate: 0
+2026-02-19 12:43:14,324     WNTR: +0
+2026-02-19 12:43:14,324     SMMR: +0
+2026-02-19 12:43:14,325     ATMN: +0
+2026-02-19 12:43:14,325     SPNG: +0
+2026-02-19 12:43:14,328 
+  Waiting for next simulation...
+
+2026-02-19 12:43:17,330   Waiting for ACTIVE status...
+2026-02-19 12:43:17,338   Simulation STOPPED.
+2026-02-19 12:43:19,341   Waiting for ACTIVE status...
+2026-02-19 12:43:19,345   Simulation STOPPED.
+2026-02-19 12:43:21,347   Waiting for ACTIVE status...
+2026-02-19 12:43:21,354   Simulation STOPPED.
+2026-02-19 12:43:23,355   Waiting for ACTIVE status...
+2026-02-19 12:43:23,362   Simulation STOPPED.
+2026-02-19 12:43:25,364   Waiting for ACTIVE status...
+2026-02-19 12:43:25,371   Simulation STOPPED.
+2026-02-19 12:43:27,373   Waiting for ACTIVE status...
+2026-02-19 12:43:27,378   Simulation STOPPED.
+2026-02-19 12:43:29,382   Waiting for ACTIVE status...
+2026-02-19 12:43:29,390   Simulation STOPPED.
+2026-02-19 12:43:31,391   Waiting for ACTIVE status...
+2026-02-19 12:43:31,398   Simulation STOPPED.
+2026-02-19 12:43:33,401   Waiting for ACTIVE status...
+2026-02-19 12:43:33,411   Simulation STOPPED.
+2026-02-19 12:43:35,412   Waiting for ACTIVE status...
+2026-02-19 12:43:35,416   Simulation STOPPED.
+2026-02-19 12:43:37,417   Waiting for ACTIVE status...
+2026-02-19 12:43:37,422   Simulation STOPPED.
+2026-02-19 12:43:39,424   Waiting for ACTIVE status...
+2026-02-19 12:43:39,432   Simulation STOPPED.
+2026-02-19 12:43:41,433   Waiting for ACTIVE status...
+2026-02-19 12:43:41,440   Simulation STOPPED.
+2026-02-19 12:43:43,442   Waiting for ACTIVE status...
+2026-02-19 12:43:43,449   Simulation STOPPED.
+2026-02-19 12:43:45,451   Waiting for ACTIVE status...
+2026-02-19 12:43:45,458   Simulation STOPPED.
+2026-02-19 12:43:47,460   Waiting for ACTIVE status...
+2026-02-19 12:43:47,466   Simulation STOPPED.
+2026-02-19 12:43:49,468   Waiting for ACTIVE status...
+2026-02-19 12:43:49,471   Simulation STOPPED.
+2026-02-19 12:43:51,474   Waiting for ACTIVE status...
+2026-02-19 12:43:51,480   Simulation STOPPED.
+2026-02-19 12:43:53,482   Waiting for ACTIVE status...
+2026-02-19 12:43:53,490   Simulation STOPPED.
+2026-02-19 12:43:55,492   Waiting for ACTIVE status...
+2026-02-19 12:43:55,499   Simulation STOPPED.
+2026-02-19 12:43:57,500   Waiting for ACTIVE status...
+2026-02-19 12:43:57,505   Simulation STOPPED.
+2026-02-19 12:43:59,506   Waiting for ACTIVE status...
+2026-02-19 12:43:59,512   Simulation STOPPED.
+2026-02-19 12:44:01,514   Waiting for ACTIVE status...
+2026-02-19 12:44:01,519   Simulation STOPPED.
+2026-02-19 12:44:03,521   Waiting for ACTIVE status...
+2026-02-19 12:44:03,525   Simulation STOPPED.
+2026-02-19 12:44:05,526   Waiting for ACTIVE status...
+2026-02-19 12:44:05,532   Simulation STOPPED.
+2026-02-19 12:44:07,533   Waiting for ACTIVE status...
+2026-02-19 12:44:07,540   Simulation STOPPED.
+2026-02-19 12:44:09,541   Waiting for ACTIVE status...
+2026-02-19 12:44:09,546   Simulation STOPPED.
+2026-02-19 12:44:11,549   Waiting for ACTIVE status...
+2026-02-19 12:44:11,555   Simulation STOPPED.
+2026-02-19 12:44:13,556   Waiting for ACTIVE status...
+2026-02-19 12:44:13,562   Simulation STOPPED.
+2026-02-19 12:44:15,563   Waiting for ACTIVE status...
+2026-02-19 12:44:15,570   Simulation STOPPED.
+2026-02-19 12:44:17,571   Waiting for ACTIVE status...
+2026-02-19 12:44:17,576   Simulation STOPPED.
+2026-02-19 12:44:19,578   Waiting for ACTIVE status...
+2026-02-19 12:44:19,583   Simulation STOPPED.
+2026-02-19 12:44:21,585   Waiting for ACTIVE status...
+2026-02-19 12:44:21,591   Simulation STOPPED.
+2026-02-19 12:44:23,592   Waiting for ACTIVE status...
+2026-02-19 12:44:23,599   Simulation STOPPED.
+2026-02-19 12:44:25,601   Waiting for ACTIVE status...
+2026-02-19 12:44:25,608   Simulation STOPPED.
+2026-02-19 12:44:27,611   Waiting for ACTIVE status...
+2026-02-19 12:44:27,620   Simulation STOPPED.
+2026-02-19 12:44:29,621   Waiting for ACTIVE status...
+2026-02-19 12:44:29,628   Simulation STOPPED.
+2026-02-19 12:44:31,630   Waiting for ACTIVE status...
+2026-02-19 12:44:31,635   Simulation STOPPED.
+2026-02-19 12:44:33,638   Waiting for ACTIVE status...
+2026-02-19 12:44:33,653   Simulation STOPPED.
+2026-02-19 12:44:35,655   Waiting for ACTIVE status...
+2026-02-19 12:44:35,662   Simulation STOPPED.
+2026-02-19 12:44:37,662   Waiting for ACTIVE status...
+2026-02-19 12:44:37,668   Simulation STOPPED.
+2026-02-19 12:44:39,670   Waiting for ACTIVE status...
+2026-02-19 12:44:39,675   Simulation STOPPED.
+2026-02-19 12:44:41,677   Waiting for ACTIVE status...
+2026-02-19 12:44:41,683   Simulation STOPPED.
+2026-02-19 12:44:43,685   Waiting for ACTIVE status...
+2026-02-19 12:44:43,691   Simulation STOPPED.
+2026-02-19 12:44:45,692   Waiting for ACTIVE status...
+2026-02-19 12:44:45,697   Simulation STOPPED.
+2026-02-19 12:44:47,700   Waiting for ACTIVE status...
+2026-02-19 12:44:47,706   Simulation STOPPED.
+2026-02-19 12:44:49,708   Waiting for ACTIVE status...
+2026-02-19 12:44:49,715   Simulation STOPPED.
+2026-02-19 12:44:51,716   Waiting for ACTIVE status...
+2026-02-19 12:44:51,721   Simulation STOPPED.
+2026-02-19 12:44:53,721   Waiting for ACTIVE status...
+2026-02-19 12:44:53,725   Simulation is ACTIVE!
+2026-02-19 12:44:53,725 
+================================================================================
+  ALGO MARKET MAKING BOT V15 - AVELLANEDA-STOIKOV ENGINE
+  Optimal quotes | High volume | AS skew | Jump detection
+  Gross: 50,000 | Close: 9,000 | Per-stock: 15,000
+  Cycle: 25ms | Layers: 3 | gamma=0.05
+  http://localhost:9999/v1 | Key: AJDSYHVC
+================================================================================
+
+2026-02-19 12:44:53,729   Intraday gross limit: 100,000
+2026-02-19 12:44:53,730   Close-time limit: 9,000
+2026-02-19 12:44:53,730   Net limit: 50,000
+2026-02-19 12:44:53,730   WNTR: per_stock=15,000, base_size=6000, rebate=$0.025
+2026-02-19 12:44:53,730   SMMR: per_stock=15,000, base_size=5000, rebate=$0.02
+2026-02-19 12:44:53,731   ATMN: per_stock=15,000, base_size=4000, rebate=$0.015
+2026-02-19 12:44:53,731   SPNG: per_stock=15,000, base_size=3000, rebate=$0.01
+2026-02-19 12:44:53,734   Starting NLV: $0.00
+2026-02-19 12:44:53,746     Close limit: 9,000
+2026-02-19 12:44:54,801   T002 d02 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:44:59,810   T007 d07 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:45:04,828   T012 d12 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:45:09,078 
+  [INTERRUPTED]
+2026-02-19 12:45:09,092 
+  Waiting for next simulation...
+
+2026-02-19 12:45:12,093   Waiting for ACTIVE status...
+2026-02-19 12:45:12,100   Simulation is ACTIVE!
+2026-02-19 12:45:12,104 
+================================================================================
+  ALGO MARKET MAKING BOT V15 - AVELLANEDA-STOIKOV ENGINE
+  Optimal quotes | High volume | AS skew | Jump detection
+  Gross: 50,000 | Close: 9,000 | Per-stock: 15,000
+  Cycle: 25ms | Layers: 3 | gamma=0.05
+  http://localhost:9999/v1 | Key: AJDSYHVC
+================================================================================
+
+2026-02-19 12:45:12,110   Intraday gross limit: 100,000
+2026-02-19 12:45:12,111   Close-time limit: 9,000
+2026-02-19 12:45:12,111   Net limit: 50,000
+2026-02-19 12:45:12,112   WNTR: per_stock=15,000, base_size=6000, rebate=$0.025
+2026-02-19 12:45:12,113   SMMR: per_stock=15,000, base_size=5000, rebate=$0.02
+2026-02-19 12:45:12,113   ATMN: per_stock=15,000, base_size=4000, rebate=$0.015
+2026-02-19 12:45:12,113   SPNG: per_stock=15,000, base_size=3000, rebate=$0.01
+2026-02-19 12:45:12,120   Starting NLV: $0.00
+2026-02-19 12:45:12,138     Close limit: 9,000
+2026-02-19 12:45:12,253   T019 d19 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:45:16,828   T024 d24 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:45:21,845   T029 d29 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:45:23,418 
+  [INTERRUPTED]
+2026-02-19 12:45:23,438 
+  Waiting for next simulation...
+

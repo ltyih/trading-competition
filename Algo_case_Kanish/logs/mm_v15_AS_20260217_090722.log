@@ -1,0 +1,407 @@
+2026-02-17 09:07:22,689   Waiting for RIT connection...
+2026-02-17 09:07:22,700   Connected!
+2026-02-17 09:07:22,700   Waiting for ACTIVE status...
+2026-02-17 09:07:22,702   Simulation STOPPED.
+2026-02-17 09:07:24,705   Waiting for ACTIVE status...
+2026-02-17 09:07:24,710   Simulation STOPPED.
+2026-02-17 09:07:26,712   Waiting for ACTIVE status...
+2026-02-17 09:07:26,715   Simulation STOPPED.
+2026-02-17 09:07:28,716   Waiting for ACTIVE status...
+2026-02-17 09:07:28,719   Simulation STOPPED.
+2026-02-17 09:07:30,721   Waiting for ACTIVE status...
+2026-02-17 09:07:30,724   Simulation STOPPED.
+2026-02-17 09:07:32,725   Waiting for ACTIVE status...
+2026-02-17 09:07:32,729   Simulation STOPPED.
+2026-02-17 09:07:34,730   Waiting for ACTIVE status...
+2026-02-17 09:07:34,735   Simulation is ACTIVE!
+2026-02-17 09:07:34,736 
+================================================================================
+  ALGO MARKET MAKING BOT V15 - AVELLANEDA-STOIKOV ENGINE
+  Optimal quotes | High volume | AS skew | Jump detection
+  Gross: 50,000 | Close: 9,000 | Per-stock: 15,000
+  Cycle: 25ms | Layers: 3 | gamma=0.05
+  http://localhost:9999/v1 | Key: LPJEV4YS
+================================================================================
+
+2026-02-17 09:07:34,746   Intraday gross limit: 50,000
+2026-02-17 09:07:34,746   Close-time limit: 9,000
+2026-02-17 09:07:34,748   Net limit: 30,000
+2026-02-17 09:07:34,749   WNTR: per_stock=15,000, base_size=6000, rebate=$0.025
+2026-02-17 09:07:34,749   SMMR: per_stock=15,000, base_size=5000, rebate=$0.02
+2026-02-17 09:07:34,750   ATMN: per_stock=15,000, base_size=4000, rebate=$0.015
+2026-02-17 09:07:34,750   SPNG: per_stock=15,000, base_size=3000, rebate=$0.01
+2026-02-17 09:07:34,756   Starting NLV: $0.00
+2026-02-17 09:07:34,763     [NEWS] Aggregate limit updated: 10,000
+2026-02-17 09:07:34,776     Close limit: 10,000
+2026-02-17 09:07:37,203   T003 d03 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0.0/50,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-17 09:07:41,198   T008 d08 | pos=[WNTR:+0 | SMMR:-999 | ATMN:+7200 | SPNG:+0] | agg=8,199.0/50,000(16%) | pnl=N/A | sigma=[WNTR:0.038 SMMR:0.074 ATMN:0.046 SPNG:0.017] | mkt=0 | tvol=18,199.0
+2026-02-17 09:07:48,500   T014 d14 | pos=[WNTR:+0 | SMMR:+2301 | ATMN:-1128 | SPNG:-2400] | agg=5,829.0/50,000(12%) | pnl=N/A | sigma=[WNTR:0.036 SMMR:0.063 ATMN:0.060 SPNG:0.014] | mkt=0 | tvol=32,227.0
+2026-02-17 09:07:52,581   T019 d19 | pos=[WNTR:-3770 | SMMR:-1696 | ATMN:-288 | SPNG:-70] | agg=5,824.0/50,000(12%) | pnl=N/A | sigma=[WNTR:0.035 SMMR:0.064 ATMN:0.053 SPNG:0.014] | mkt=0 | tvol=45,548.0
+2026-02-17 09:07:57,320   T024 d24 | pos=[WNTR:-3770 | SMMR:-1696 | ATMN:-288 | SPNG:+2535] | agg=8,289.0/50,000(17%) | pnl=N/A | sigma=[WNTR:0.035 SMMR:0.060 ATMN:0.048 SPNG:0.066] | mkt=0 | tvol=58,953.0
+2026-02-17 09:08:02,619   T029 d29 | pos=[WNTR:-3770 | SMMR:-1696 | ATMN:+4112 | SPNG:+3218] | agg=12,796.0/50,000(26%) | pnl=N/A | sigma=[WNTR:0.032 SMMR:0.054 ATMN:0.043 SPNG:0.079] | mkt=0 | tvol=64,534.0
+2026-02-17 09:08:06,401   T034 d34 | pos=[WNTR:-3770 | SMMR:-2633 | ATMN:-474 | SPNG:+813] | agg=7,690.0/50,000(15%) | pnl=N/A | sigma=[WNTR:0.018 SMMR:0.046 ATMN:0.023 SPNG:0.074] | mkt=0 | tvol=75,034.0
+2026-02-17 09:08:11,886   T039 d39 | pos=[WNTR:-3770 | SMMR:-4196 | ATMN:-3474 | SPNG:-1887] | agg=13,327.0/50,000(27%) | pnl=N/A | sigma=[WNTR:0.018 SMMR:0.027 ATMN:0.022 SPNG:0.079] | mkt=0 | tvol=82,297.0
+2026-02-17 09:08:18,302   T046 d46 | pos=[WNTR:-3770 | SMMR:-3828 | ATMN:+3915 | SPNG:-2629] | agg=14,142.0/50,000(28%) | pnl=N/A | sigma=[WNTR:0.017 SMMR:0.025 ATMN:0.019 SPNG:0.055] | mkt=0 | tvol=107,212.0
+2026-02-17 09:08:23,210   T051 d51 | pos=[WNTR:-3770 | SMMR:-3828 | ATMN:-1129 | SPNG:-3396] | agg=12,123.0/50,000(24%) | pnl=N/A | sigma=[WNTR:0.015 SMMR:0.025 ATMN:0.020 SPNG:0.050] | mkt=0 | tvol=116,889.0
+2026-02-17 09:08:26,735     [LOCKDOWN] T55 sec=55 agg=0.0 close_lim=10000
+2026-02-17 09:08:31,671 
+  === DAY 2 (tick 60) ===
+2026-02-17 09:08:36,106   T062 d02 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0.0/50,000(0%) | pnl=N/A | sigma=[WNTR:0.091 SMMR:0.100 ATMN:0.152 SPNG:0.182] | mkt=0 | tvol=130,772.0
+2026-02-17 09:08:41,067   T068 d08 | pos=[WNTR:+1200 | SMMR:+800 | ATMN:-1440 | SPNG:+900] | agg=4,340.0/50,000(9%) | pnl=N/A | sigma=[WNTR:0.092 SMMR:0.096 ATMN:0.150 SPNG:0.186] | mkt=0 | tvol=142,632.0
+2026-02-17 09:08:45,389   T073 d13 | pos=[WNTR:+3000 | SMMR:+2300 | ATMN:+240 | SPNG:+3240] | agg=8,780.0/50,000(18%) | pnl=N/A | sigma=[WNTR:0.092 SMMR:0.096 ATMN:0.148 SPNG:0.188] | mkt=0 | tvol=154,352.0
+2026-02-17 09:08:52,080   T079 d19 | pos=[WNTR:+3000 | SMMR:+1161 | ATMN:+1200 | SPNG:-759] | agg=6,120.0/50,000(12%) | pnl=N/A | sigma=[WNTR:0.065 SMMR:0.068 ATMN:0.057 SPNG:0.124] | mkt=0 | tvol=170,984.0
+2026-02-17 09:08:55,938   T084 d24 | pos=[WNTR:+3000 | SMMR:-339 | ATMN:+0 | SPNG:-759] | agg=4,098.0/50,000(8%) | pnl=N/A | sigma=[WNTR:0.041 SMMR:0.069 ATMN:0.043 SPNG:0.118] | mkt=0 | tvol=175,844.0
+2026-02-17 09:09:02,961   T089 d29 | pos=[WNTR:+3000 | SMMR:+3661 | ATMN:+3332 | SPNG:-759] | agg=10,752.0/50,000(22%) | pnl=N/A | sigma=[WNTR:0.019 SMMR:0.067 ATMN:0.044 SPNG:0.119] | mkt=0 | tvol=183,176.0
+2026-02-17 09:09:08,394   T094 d34 | pos=[WNTR:+3000 | SMMR:-1004 | ATMN:+416 | SPNG:-759] | agg=5,179.0/50,000(10%) | pnl=N/A | sigma=[WNTR:0.016 SMMR:0.055 ATMN:0.047 SPNG:0.097] | mkt=0 | tvol=206,855.0
+2026-02-17 09:09:11,825   T099 d39 | pos=[WNTR:+3000 | SMMR:-3504 | ATMN:+1834 | SPNG:-9] | agg=8,347.0/50,000(17%) | pnl=N/A | sigma=[WNTR:0.013 SMMR:0.036 ATMN:0.089 SPNG:0.041] | mkt=0 | tvol=216,847.0
+2026-02-17 09:09:18,044   T104 d44 | pos=[WNTR:+3000 | SMMR:+1122 | ATMN:+102 | SPNG:-3992] | agg=8,216.0/50,000(16%) | pnl=N/A | sigma=[WNTR:0.023 SMMR:0.037 ATMN:0.092 SPNG:0.039] | mkt=0 | tvol=227,188.0
+2026-02-17 09:09:22,045   T109 d49 | pos=[WNTR:+3000 | SMMR:+2185 | ATMN:-3498 | SPNG:-1600] | agg=10,283.0/50,000(21%) | pnl=N/A | sigma=[WNTR:0.032 SMMR:0.038 ATMN:0.092 SPNG:0.040] | mkt=0 | tvol=241,117.0
+2026-02-17 09:09:28,156   T114 d54 | pos=[WNTR:+0 | SMMR:-888 | ATMN:+0 | SPNG:+0] | agg=888.0/50,000(2%) | pnl=N/A | sigma=[WNTR:0.037 SMMR:0.042 ATMN:0.031 SPNG:0.032] | mkt=0 | tvol=261,232.0
+2026-02-17 09:09:28,285     [LOCKDOWN] T115 sec=55 agg=2218.0 close_lim=10000
+2026-02-17 09:09:32,269 
+  === DAY 3 (tick 120) ===
+2026-02-17 09:09:37,108   T122 d02 | pos=[WNTR:+0 | SMMR:+888 | ATMN:+600 | SPNG:-505] | agg=1,993.0/50,000(4%) | pnl=N/A | sigma=[WNTR:0.200 SMMR:0.200 ATMN:0.163 SPNG:0.110] | mkt=0 | tvol=264,563.0
+2026-02-17 09:09:42,585   T128 d08 | pos=[WNTR:-360 | SMMR:+888 | ATMN:+1880 | SPNG:+2555] | agg=5,683.0/50,000(11%) | pnl=N/A | sigma=[WNTR:0.200 SMMR:0.200 ATMN:0.162 SPNG:0.197] | mkt=0 | tvol=274,463.0
+2026-02-17 09:09:47,269   T133 d13 | pos=[WNTR:-360 | SMMR:+888 | ATMN:+4840 | SPNG:+3112] | agg=9,200.0/50,000(18%) | pnl=N/A | sigma=[WNTR:0.200 SMMR:0.200 ATMN:0.162 SPNG:0.200] | mkt=0 | tvol=283,570.0
+2026-02-17 09:09:52,298   T139 d19 | pos=[WNTR:-360 | SMMR:-1612 | ATMN:-4727 | SPNG:+2584] | agg=9,283.0/50,000(19%) | pnl=N/A | sigma=[WNTR:0.200 SMMR:0.200 ATMN:0.160 SPNG:0.200] | mkt=0 | tvol=298,205.0
+2026-02-17 09:09:57,623   T144 d24 | pos=[WNTR:-360 | SMMR:-2862 | ATMN:-2714 | SPNG:+450] | agg=6,386.0/50,000(13%) | pnl=N/A | sigma=[WNTR:0.047 SMMR:0.037 ATMN:0.068 SPNG:0.200] | mkt=0 | tvol=308,082.0
+2026-02-17 09:10:03,621   T149 d29 | pos=[WNTR:-360 | SMMR:+115 | ATMN:-5614 | SPNG:+3150] | agg=9,239.0/50,000(18%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.037 ATMN:0.073 SPNG:0.067] | mkt=0 | tvol=316,659.0
+2026-02-17 09:10:09,409   T154 d34 | pos=[WNTR:-4860 | SMMR:+115 | ATMN:-2866 | SPNG:+1438] | agg=9,279.0/50,000(19%) | pnl=N/A | sigma=[WNTR:0.033 SMMR:0.039 ATMN:0.073 SPNG:0.121] | mkt=0 | tvol=326,985.0
+2026-02-17 09:10:11,592   T159 d39 | pos=[WNTR:-4860 | SMMR:+115 | ATMN:-2866 | SPNG:+1618] | agg=9,459.0/50,000(19%) | pnl=N/A | sigma=[WNTR:0.034 SMMR:0.037 ATMN:0.075 SPNG:0.123] | mkt=0 | tvol=327,165.0
+2026-02-17 09:10:17,333   T164 d44 | pos=[WNTR:-4860 | SMMR:+115 | ATMN:+7171 | SPNG:+2218] | agg=14,364.0/50,000(29%) | pnl=N/A | sigma=[WNTR:0.031 SMMR:0.030 ATMN:0.049 SPNG:0.122] | mkt=0 | tvol=337,802.0
+2026-02-17 09:10:23,092   T169 d49 | pos=[WNTR:-7082 | SMMR:+115 | ATMN:+7171 | SPNG:+1798] | agg=16,166.0/50,000(32%) | pnl=N/A | sigma=[WNTR:0.021 SMMR:0.024 ATMN:0.039 SPNG:0.037] | mkt=0 | tvol=341,404.0
+2026-02-17 09:10:28,327   T174 d54 | pos=[WNTR:+0 | SMMR:-1952 | ATMN:+0 | SPNG:+180] | agg=2,132.0/50,000(4%) | pnl=N/A | sigma=[WNTR:0.034 SMMR:0.035 ATMN:0.047 SPNG:0.070] | mkt=0 | tvol=372,008.0
+2026-02-17 09:10:28,451     [LOCKDOWN] T175 sec=55 agg=4427.0 close_lim=10000
+2026-02-17 09:10:32,809 
+  === DAY 4 (tick 180) ===
+2026-02-17 09:10:37,283   T182 d02 | pos=[WNTR:+900 | SMMR:+3347 | ATMN:+0 | SPNG:+180] | agg=4,427.0/50,000(9%) | pnl=N/A | sigma=[WNTR:0.089 SMMR:0.044 ATMN:0.099 SPNG:0.200] | mkt=0 | tvol=378,207.0
+2026-02-17 09:10:45,215   T189 d09 | pos=[WNTR:+6465 | SMMR:+9180 | ATMN:+4098 | SPNG:-1080] | agg=20,823.0/50,000(42%) | pnl=N/A | sigma=[WNTR:0.200 SMMR:0.200 ATMN:0.200 SPNG:0.200] | mkt=0 | tvol=396,403.0
+2026-02-17 09:10:49,149   T194 d14 | pos=[WNTR:+7644 | SMMR:+10098 | ATMN:+1346 | SPNG:-1500] | agg=20,588.0/50,000(41%) | pnl=N/A | sigma=[WNTR:0.200 SMMR:0.200 ATMN:0.200 SPNG:0.200] | mkt=0 | tvol=402,632.0
+2026-02-17 09:10:52,566   T199 d19 | pos=[WNTR:+7644 | SMMR:+6864 | ATMN:+1364 | SPNG:-1774] | agg=17,646.0/50,000(35%) | pnl=N/A | sigma=[WNTR:0.200 SMMR:0.200 ATMN:0.200 SPNG:0.200] | mkt=0 | tvol=411,574.0
+2026-02-17 09:10:57,943   T204 d24 | pos=[WNTR:+3116 | SMMR:+5616 | ATMN:+1964 | SPNG:-2074] | agg=12,770.0/50,000(26%) | pnl=N/A | sigma=[WNTR:0.200 SMMR:0.200 ATMN:0.200 SPNG:0.200] | mkt=0 | tvol=428,750.0
+2026-02-17 09:11:03,793   T209 d29 | pos=[WNTR:+3116 | SMMR:+7367 | ATMN:+5564 | SPNG:-124] | agg=16,171.0/50,000(32%) | pnl=N/A | sigma=[WNTR:0.022 SMMR:0.022 ATMN:0.055 SPNG:0.055] | mkt=0 | tvol=440,551.0
+2026-02-17 09:11:10,048   T215 d35 | pos=[WNTR:+3116 | SMMR:+8242 | ATMN:+3591 | SPNG:+1138] | agg=16,087.0/50,000(32%) | pnl=N/A | sigma=[WNTR:0.024 SMMR:0.022 ATMN:0.061 SPNG:0.049] | mkt=0 | tvol=452,747.0
+2026-02-17 09:11:13,099   T220 d40 | pos=[WNTR:+3116 | SMMR:+8242 | ATMN:-869 | SPNG:+605] | agg=12,832.0/50,000(26%) | pnl=N/A | sigma=[WNTR:0.021 SMMR:0.013 ATMN:0.059 SPNG:0.054] | mkt=0 | tvol=459,540.0
+2026-02-17 09:11:19,460   T226 d46 | pos=[WNTR:+3116 | SMMR:+1638 | ATMN:+668 | SPNG:+155] | agg=5,577.0/50,000(11%) | pnl=N/A | sigma=[WNTR:0.022 SMMR:0.036 ATMN:0.045 SPNG:0.055] | mkt=0 | tvol=481,061.0
+2026-02-17 09:11:26,785   T232 d52 | pos=[WNTR:+1494 | SMMR:+1638 | ATMN:-2986 | SPNG:-3341] | agg=9,459.0/50,000(19%) | pnl=N/A | sigma=[WNTR:0.039 SMMR:0.032 ATMN:0.072 SPNG:0.054] | mkt=0 | tvol=500,061.0
+2026-02-17 09:11:28,676     [LOCKDOWN] T235 sec=55 agg=180.0 close_lim=10000
+2026-02-17 09:11:33,241 
+  === DAY 5 (tick 240) ===
+2026-02-17 09:11:37,591   T242 d02 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:-180] | agg=180.0/50,000(0%) | pnl=N/A | sigma=[WNTR:0.200 SMMR:0.127 ATMN:0.159 SPNG:0.086] | mkt=0 | tvol=517,236.0
+2026-02-17 09:11:43,743   T247 d07 | pos=[WNTR:+0 | SMMR:-300 | ATMN:-1200 | SPNG:-360] | agg=1,860.0/50,000(4%) | pnl=N/A | sigma=[WNTR:0.200 SMMR:0.132 ATMN:0.200 SPNG:0.124] | mkt=0 | tvol=526,596.0
+2026-02-17 09:11:47,767   T252 d12 | pos=[WNTR:+0 | SMMR:+1000 | ATMN:-1927 | SPNG:-780] | agg=3,707.0/50,000(7%) | pnl=N/A | sigma=[WNTR:0.200 SMMR:0.132 ATMN:0.200 SPNG:0.120] | mkt=0 | tvol=531,309.0
+2026-02-17 09:11:52,904   T257 d17 | pos=[WNTR:-5400 | SMMR:+1500 | ATMN:-487 | SPNG:+540] | agg=7,927.0/50,000(16%) | pnl=N/A | sigma=[WNTR:0.200 SMMR:0.131 ATMN:0.200 SPNG:0.121] | mkt=0 | tvol=540,929.0
+2026-02-17 09:11:56,661   T262 d22 | pos=[WNTR:-5400 | SMMR:+700 | ATMN:-727 | SPNG:+720] | agg=7,547.0/50,000(15%) | pnl=N/A | sigma=[WNTR:0.200 SMMR:0.132 ATMN:0.200 SPNG:0.123] | mkt=0 | tvol=544,149.0
+2026-02-17 09:12:01,102   T267 d27 | pos=[WNTR:-5400 | SMMR:-1800 | ATMN:+5073 | SPNG:-1860] | agg=14,133.0/50,000(28%) | pnl=N/A | sigma=[WNTR:0.029 SMMR:0.052 ATMN:0.074 SPNG:0.060] | mkt=0 | tvol=556,629.0
+2026-02-17 09:12:07,472   T272 d32 | pos=[WNTR:-9244 | SMMR:-3050 | ATMN:+497 | SPNG:-4560] | agg=17,351.0/50,000(35%) | pnl=N/A | sigma=[WNTR:0.041 SMMR:0.028 ATMN:0.044 SPNG:0.030] | mkt=0 | tvol=568,999.0
+2026-02-17 09:12:11,827   T277 d37 | pos=[WNTR:-6336 | SMMR:-4200 | ATMN:+2844 | SPNG:-7088] | agg=20,468.0/50,000(41%) | pnl=N/A | sigma=[WNTR:0.035 SMMR:0.058 ATMN:0.047 SPNG:0.031] | mkt=0 | tvol=583,166.0
+2026-02-17 09:12:15,534   T282 d42 | pos=[WNTR:-9910 | SMMR:-4976 | ATMN:+3313 | SPNG:-8809] | agg=27,008.0/50,000(54%) | pnl=N/A | sigma=[WNTR:0.046 SMMR:0.059 ATMN:0.015 SPNG:0.019] | mkt=0 | tvol=591,244.0
+2026-02-17 09:12:23,346   T288 d48 | pos=[WNTR:-10500 | SMMR:-9831 | ATMN:+3313 | SPNG:-3544] | agg=27,188.0/50,000(54%) | pnl=N/A | sigma=[WNTR:0.041 SMMR:0.057 ATMN:0.036 SPNG:0.025] | mkt=0 | tvol=607,442.0
+2026-02-17 09:12:27,843   T293 d53 | pos=[WNTR:-5400 | SMMR:-6450 | ATMN:+0 | SPNG:+164] | agg=12,014.0/50,000(24%) | pnl=N/A | sigma=[WNTR:0.042 SMMR:0.023 ATMN:0.061 SPNG:0.026] | mkt=0 | tvol=635,232.0
+2026-02-17 09:12:28,631     [LOCKDOWN] T295 sec=55 agg=164.0 close_lim=10000
+2026-02-17 09:12:33,581 
+  === DAY 6 (tick 300) ===
+2026-02-17 09:12:33,778 
+  [SIMULATION ENDED]
+2026-02-17 09:12:33,781   Final P&L: $0.00
+2026-02-17 09:12:33,782   Orders: +1991/-342
+2026-02-17 09:12:33,782   Market orders: 0
+2026-02-17 09:12:33,782   Volume: 650,192.0
+2026-02-17 09:12:33,783   Est. rebates: $10,731.67
+2026-02-17 09:12:33,783   Final aggregate: 0.0
+2026-02-17 09:12:33,783     WNTR: +0.0
+2026-02-17 09:12:33,783     SMMR: +0.0
+2026-02-17 09:12:33,784     ATMN: +0.0
+2026-02-17 09:12:33,784     SPNG: +0.0
+2026-02-17 09:12:33,785 
+  Waiting for next simulation...
+
+2026-02-17 09:12:36,786   Waiting for ACTIVE status...
+2026-02-17 09:12:36,788   Simulation STOPPED.
+2026-02-17 09:12:38,790   Waiting for ACTIVE status...
+2026-02-17 09:12:38,794   Simulation STOPPED.
+2026-02-17 09:12:40,795   Waiting for ACTIVE status...
+2026-02-17 09:12:40,801   Simulation STOPPED.
+2026-02-17 09:12:42,802   Waiting for ACTIVE status...
+2026-02-17 09:12:42,805   Simulation STOPPED.
+2026-02-17 09:12:44,807   Waiting for ACTIVE status...
+2026-02-17 09:12:44,812   Simulation STOPPED.
+2026-02-17 09:12:46,814   Waiting for ACTIVE status...
+2026-02-17 09:12:46,817   Simulation STOPPED.
+2026-02-17 09:12:48,818   Waiting for ACTIVE status...
+2026-02-17 09:12:48,822   Simulation STOPPED.
+2026-02-17 09:12:50,823   Waiting for ACTIVE status...
+2026-02-17 09:12:50,830   Simulation STOPPED.
+2026-02-17 09:12:52,831   Waiting for ACTIVE status...
+2026-02-17 09:12:52,847   Simulation STOPPED.
+2026-02-17 09:12:54,849   Waiting for ACTIVE status...
+2026-02-17 09:12:54,851   Simulation STOPPED.
+2026-02-17 09:12:56,852   Waiting for ACTIVE status...
+2026-02-17 09:12:56,857   Simulation STOPPED.
+2026-02-17 09:12:58,857   Waiting for ACTIVE status...
+2026-02-17 09:12:58,862   Simulation STOPPED.
+2026-02-17 09:13:00,864   Waiting for ACTIVE status...
+2026-02-17 09:13:00,869   Simulation STOPPED.
+2026-02-17 09:13:02,869   Waiting for ACTIVE status...
+2026-02-17 09:13:02,872   Simulation STOPPED.
+2026-02-17 09:13:04,873   Waiting for ACTIVE status...
+2026-02-17 09:13:04,876   Simulation STOPPED.
+2026-02-17 09:13:06,878   Waiting for ACTIVE status...
+2026-02-17 09:13:06,882   Simulation STOPPED.
+2026-02-17 09:13:08,882   Waiting for ACTIVE status...
+2026-02-17 09:13:08,888   Simulation STOPPED.
+2026-02-17 09:13:10,889   Waiting for ACTIVE status...
+2026-02-17 09:13:10,893   Simulation STOPPED.
+2026-02-17 09:13:12,894   Waiting for ACTIVE status...
+2026-02-17 09:13:12,900   Simulation STOPPED.
+2026-02-17 09:13:14,902   Waiting for ACTIVE status...
+2026-02-17 09:13:14,907   Simulation STOPPED.
+2026-02-17 09:13:16,908   Waiting for ACTIVE status...
+2026-02-17 09:13:16,912   Simulation STOPPED.
+2026-02-17 09:13:18,913   Waiting for ACTIVE status...
+2026-02-17 09:13:18,917   Simulation STOPPED.
+2026-02-17 09:13:20,919   Waiting for ACTIVE status...
+2026-02-17 09:13:20,921   Simulation STOPPED.
+2026-02-17 09:13:22,923   Waiting for ACTIVE status...
+2026-02-17 09:13:22,926   Simulation STOPPED.
+2026-02-17 09:13:24,928   Waiting for ACTIVE status...
+2026-02-17 09:13:24,931   Simulation STOPPED.
+2026-02-17 09:13:26,933   Waiting for ACTIVE status...
+2026-02-17 09:13:26,936   Simulation STOPPED.
+2026-02-17 09:13:28,937   Waiting for ACTIVE status...
+2026-02-17 09:13:28,941   Simulation STOPPED.
+2026-02-17 09:13:30,944   Waiting for ACTIVE status...
+2026-02-17 09:13:30,947   Simulation STOPPED.
+2026-02-17 09:13:32,949   Waiting for ACTIVE status...
+2026-02-17 09:13:32,952   Simulation STOPPED.
+2026-02-17 09:13:34,953   Waiting for ACTIVE status...
+2026-02-17 09:13:34,957   Simulation STOPPED.
+2026-02-17 09:13:36,958   Waiting for ACTIVE status...
+2026-02-17 09:13:36,963   Simulation STOPPED.
+2026-02-17 09:13:38,964   Waiting for ACTIVE status...
+2026-02-17 09:13:38,968   Simulation STOPPED.
+2026-02-17 09:13:40,969   Waiting for ACTIVE status...
+2026-02-17 09:13:40,974   Simulation STOPPED.
+2026-02-17 09:13:42,976   Waiting for ACTIVE status...
+2026-02-17 09:13:42,981   Simulation STOPPED.
+2026-02-17 09:13:44,982   Waiting for ACTIVE status...
+2026-02-17 09:13:44,987   Simulation STOPPED.
+2026-02-17 09:13:46,988   Waiting for ACTIVE status...
+2026-02-17 09:13:46,992   Simulation STOPPED.
+2026-02-17 09:13:48,994   Waiting for ACTIVE status...
+2026-02-17 09:13:48,998   Simulation STOPPED.
+2026-02-17 09:13:50,999   Waiting for ACTIVE status...
+2026-02-17 09:13:51,003   Simulation STOPPED.
+2026-02-17 09:13:53,004   Waiting for ACTIVE status...
+2026-02-17 09:13:53,008   Simulation STOPPED.
+2026-02-17 09:13:55,010   Waiting for ACTIVE status...
+2026-02-17 09:13:55,012   Simulation STOPPED.
+2026-02-17 09:13:57,014   Waiting for ACTIVE status...
+2026-02-17 09:13:57,019   Simulation STOPPED.
+2026-02-17 09:13:59,020   Waiting for ACTIVE status...
+2026-02-17 09:13:59,026   Simulation STOPPED.
+2026-02-17 09:14:01,027   Waiting for ACTIVE status...
+2026-02-17 09:14:01,031   Simulation STOPPED.
+2026-02-17 09:14:03,034   Waiting for ACTIVE status...
+2026-02-17 09:14:03,040   Simulation STOPPED.
+2026-02-17 09:14:05,042   Waiting for ACTIVE status...
+2026-02-17 09:14:05,046   Simulation STOPPED.
+2026-02-17 09:14:07,047   Waiting for ACTIVE status...
+2026-02-17 09:14:07,051   Simulation STOPPED.
+2026-02-17 09:14:09,053   Waiting for ACTIVE status...
+2026-02-17 09:14:09,057   Simulation STOPPED.
+2026-02-17 09:14:11,058   Waiting for ACTIVE status...
+2026-02-17 09:14:11,064   Simulation STOPPED.
+2026-02-17 09:14:13,064   Waiting for ACTIVE status...
+2026-02-17 09:14:13,069   Simulation STOPPED.
+2026-02-17 09:14:15,071   Waiting for ACTIVE status...
+2026-02-17 09:14:15,075   Simulation STOPPED.
+2026-02-17 09:14:17,076   Waiting for ACTIVE status...
+2026-02-17 09:14:17,080   Simulation STOPPED.
+2026-02-17 09:14:19,081   Waiting for ACTIVE status...
+2026-02-17 09:14:19,087   Simulation STOPPED.
+2026-02-17 09:14:21,088   Waiting for ACTIVE status...
+2026-02-17 09:14:21,092   Simulation STOPPED.
+2026-02-17 09:14:23,093   Waiting for ACTIVE status...
+2026-02-17 09:14:23,097   Simulation STOPPED.
+2026-02-17 09:14:25,099   Waiting for ACTIVE status...
+2026-02-17 09:14:25,102   Simulation STOPPED.
+2026-02-17 09:14:27,104   Waiting for ACTIVE status...
+2026-02-17 09:14:27,108   Simulation STOPPED.
+2026-02-17 09:14:29,109   Waiting for ACTIVE status...
+2026-02-17 09:14:29,114   Simulation STOPPED.
+2026-02-17 09:14:31,115   Waiting for ACTIVE status...
+2026-02-17 09:14:31,123   Simulation is ACTIVE!
+2026-02-17 09:14:31,124 
+================================================================================
+  ALGO MARKET MAKING BOT V15 - AVELLANEDA-STOIKOV ENGINE
+  Optimal quotes | High volume | AS skew | Jump detection
+  Gross: 50,000 | Close: 9,000 | Per-stock: 15,000
+  Cycle: 25ms | Layers: 3 | gamma=0.05
+  http://localhost:9999/v1 | Key: LPJEV4YS
+================================================================================
+
+2026-02-17 09:14:31,132   Intraday gross limit: 50,000
+2026-02-17 09:14:31,133   Close-time limit: 9,000
+2026-02-17 09:14:31,134   Net limit: 30,000
+2026-02-17 09:14:31,134   WNTR: per_stock=15,000, base_size=6000, rebate=$0.025
+2026-02-17 09:14:31,134   SMMR: per_stock=15,000, base_size=5000, rebate=$0.02
+2026-02-17 09:14:31,135   ATMN: per_stock=15,000, base_size=4000, rebate=$0.015
+2026-02-17 09:14:31,135   SPNG: per_stock=15,000, base_size=3000, rebate=$0.01
+2026-02-17 09:14:31,142   Starting NLV: $0.00
+2026-02-17 09:14:31,146     [NEWS] Aggregate limit updated: 11,000
+2026-02-17 09:14:31,157     Close limit: 11,000
+2026-02-17 09:14:33,564   T003 d03 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0.0/50,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-17 09:14:36,995   T008 d08 | pos=[WNTR:+0 | SMMR:-5000 | ATMN:+3600 | SPNG:+0] | agg=8,600.0/50,000(17%) | pnl=N/A | sigma=[WNTR:0.029 SMMR:0.034 ATMN:0.067 SPNG:0.020] | mkt=0 | tvol=8,600.0
+2026-02-17 09:14:41,025   T013 d13 | pos=[WNTR:+0 | SMMR:-5000 | ATMN:+1655 | SPNG:+1500] | agg=8,155.0/50,000(16%) | pnl=N/A | sigma=[WNTR:0.022 SMMR:0.029 ATMN:0.062 SPNG:0.017] | mkt=0 | tvol=20,125.0
+2026-02-17 09:14:47,515   T018 d18 | pos=[WNTR:+0 | SMMR:+4999 | ATMN:+5255 | SPNG:-900] | agg=11,154.0/50,000(22%) | pnl=N/A | sigma=[WNTR:0.020 SMMR:0.025 ATMN:0.057 SPNG:0.017] | mkt=0 | tvol=36,124.0
+2026-02-17 09:14:51,699   T023 d23 | pos=[WNTR:+0 | SMMR:-999 | ATMN:+10832 | SPNG:-3600] | agg=15,431.0/50,000(31%) | pnl=N/A | sigma=[WNTR:0.014 SMMR:0.038 ATMN:0.044 SPNG:0.046] | mkt=0 | tvol=56,399.0
+2026-02-17 09:14:57,619   T028 d28 | pos=[WNTR:+0 | SMMR:-999 | ATMN:+10709 | SPNG:-3703] | agg=15,411.0/50,000(31%) | pnl=N/A | sigma=[WNTR:0.020 SMMR:0.036 ATMN:0.032 SPNG:0.049] | mkt=0 | tvol=57,043.0
+2026-02-17 09:15:02,247   T033 d33 | pos=[WNTR:+0 | SMMR:-999 | ATMN:+5438 | SPNG:-5418] | agg=11,855.0/50,000(24%) | pnl=N/A | sigma=[WNTR:0.019 SMMR:0.038 ATMN:0.051 SPNG:0.047] | mkt=0 | tvol=66,241.0
+2026-02-17 09:15:07,935   T038 d38 | pos=[WNTR:+0 | SMMR:-999 | ATMN:+4127 | SPNG:-4754] | agg=9,880.0/50,000(20%) | pnl=N/A | sigma=[WNTR:0.023 SMMR:0.020 ATMN:0.057 SPNG:0.039] | mkt=0 | tvol=77,918.0
+2026-02-17 09:15:11,619   T043 d43 | pos=[WNTR:+0 | SMMR:-999 | ATMN:+4647 | SPNG:-7644] | agg=13,290.0/50,000(27%) | pnl=N/A | sigma=[WNTR:0.024 SMMR:0.020 ATMN:0.059 SPNG:0.041] | mkt=0 | tvol=81,328.0
+2026-02-17 09:15:17,630   T048 d48 | pos=[WNTR:+0 | SMMR:-999 | ATMN:+9176 | SPNG:-5433] | agg=15,608.0/50,000(31%) | pnl=N/A | sigma=[WNTR:0.023 SMMR:0.020 ATMN:0.053 SPNG:0.046] | mkt=0 | tvol=91,796.0
+2026-02-17 09:15:21,178   T053 d53 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0.0/50,000(0%) | pnl=N/A | sigma=[WNTR:0.018 SMMR:0.020 ATMN:0.035 SPNG:0.058] | mkt=0 | tvol=107,404.0
+2026-02-17 09:15:23,225     [LOCKDOWN] T55 sec=55 agg=900.0 close_lim=11000
+2026-02-17 09:15:28,214 
+  === DAY 2 (tick 60) ===
+2026-02-17 09:15:32,599   T062 d02 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+900] | agg=900.0/50,000(2%) | pnl=N/A | sigma=[WNTR:0.035 SMMR:0.030 ATMN:0.081 SPNG:0.200] | mkt=0 | tvol=110,464.0
+2026-02-17 09:15:37,615   T068 d08 | pos=[WNTR:+10500 | SMMR:+0 | ATMN:+1940 | SPNG:+0] | agg=12,440.0/50,000(25%) | pnl=N/A | sigma=[WNTR:0.111 SMMR:0.036 ATMN:0.177 SPNG:0.200] | mkt=0 | tvol=129,864.0
+2026-02-17 09:15:43,357   T073 d13 | pos=[WNTR:+4369 | SMMR:-4500 | ATMN:+5757 | SPNG:-1080] | agg=15,706.0/50,000(31%) | pnl=N/A | sigma=[WNTR:0.110 SMMR:0.037 ATMN:0.177 SPNG:0.200] | mkt=0 | tvol=146,332.0
+2026-02-17 09:15:49,223   T078 d18 | pos=[WNTR:+5921 | SMMR:-4500 | ATMN:+1166 | SPNG:+0] | agg=11,587.0/50,000(23%) | pnl=N/A | sigma=[WNTR:0.114 SMMR:0.034 ATMN:0.173 SPNG:0.200] | mkt=0 | tvol=165,013.0
+2026-02-17 09:15:53,243   T084 d24 | pos=[WNTR:+3923 | SMMR:-4000 | ATMN:+1166 | SPNG:+4200] | agg=13,289.0/50,000(27%) | pnl=N/A | sigma=[WNTR:0.081 SMMR:0.035 ATMN:0.039 SPNG:0.200] | mkt=0 | tvol=173,737.0
+2026-02-17 09:15:57,858   T089 d29 | pos=[WNTR:+3923 | SMMR:-6949 | ATMN:+1166 | SPNG:+4375] | agg=16,413.0/50,000(33%) | pnl=N/A | sigma=[WNTR:0.070 SMMR:0.030 ATMN:0.039 SPNG:0.024] | mkt=0 | tvol=180,701.0
+2026-02-17 09:16:03,809   T094 d34 | pos=[WNTR:+3923 | SMMR:+367 | ATMN:-2434 | SPNG:+2119] | agg=8,843.0/50,000(18%) | pnl=N/A | sigma=[WNTR:0.050 SMMR:0.029 ATMN:0.027 SPNG:0.031] | mkt=0 | tvol=196,273.0
+2026-02-17 09:16:10,065   T099 d39 | pos=[WNTR:+3923 | SMMR:+367 | ATMN:-2434 | SPNG:+954] | agg=7,678.0/50,000(15%) | pnl=N/A | sigma=[WNTR:0.017 SMMR:0.029 ATMN:0.027 SPNG:0.065] | mkt=0 | tvol=202,838.0
+2026-02-17 09:16:15,728   T105 d45 | pos=[WNTR:+3923 | SMMR:-1092 | ATMN:-2218 | SPNG:-66] | agg=7,299.0/50,000(15%) | pnl=N/A | sigma=[WNTR:0.022 SMMR:0.035 ATMN:0.026 SPNG:0.067] | mkt=0 | tvol=221,913.0
+2026-02-17 09:16:19,337   T110 d50 | pos=[WNTR:+3923 | SMMR:+5453 | ATMN:-3418 | SPNG:-3966] | agg=16,760.0/50,000(34%) | pnl=N/A | sigma=[WNTR:0.023 SMMR:0.036 ATMN:0.047 SPNG:0.058] | mkt=0 | tvol=233,558.0
+2026-02-17 09:16:24,702     [LOCKDOWN] T115 sec=55 agg=1271.0 close_lim=11000
+2026-02-17 09:16:28,853 
+  === DAY 3 (tick 120) ===
+2026-02-17 09:16:33,806   T122 d02 | pos=[WNTR:-424 | SMMR:+0 | ATMN:+600 | SPNG:-922] | agg=1,946.0/50,000(4%) | pnl=N/A | sigma=[WNTR:0.200 SMMR:0.121 ATMN:0.200 SPNG:0.200] | mkt=0 | tvol=291,592.0
+2026-02-17 09:16:38,145   T127 d07 | pos=[WNTR:-424 | SMMR:+3600 | ATMN:+600 | SPNG:-22] | agg=4,646.0/50,000(9%) | pnl=N/A | sigma=[WNTR:0.200 SMMR:0.146 ATMN:0.200 SPNG:0.200] | mkt=0 | tvol=300,772.0
+2026-02-17 09:16:43,809   T133 d13 | pos=[WNTR:-424 | SMMR:+6149 | ATMN:+40 | SPNG:+158] | agg=6,771.0/50,000(14%) | pnl=N/A | sigma=[WNTR:0.200 SMMR:0.147 ATMN:0.200 SPNG:0.200] | mkt=0 | tvol=310,061.0
+2026-02-17 09:16:48,116   T138 d18 | pos=[WNTR:-424 | SMMR:+7358 | ATMN:-1400 | SPNG:+1073] | agg=10,255.0/50,000(21%) | pnl=N/A | sigma=[WNTR:0.200 SMMR:0.142 ATMN:0.200 SPNG:0.200] | mkt=0 | tvol=316,115.0
+2026-02-17 09:16:54,169   T143 d23 | pos=[WNTR:-1624 | SMMR:+5647 | ATMN:+1600 | SPNG:-7] | agg=8,878.0/50,000(18%) | pnl=N/A | sigma=[WNTR:0.015 SMMR:0.109 ATMN:0.193 SPNG:0.200] | mkt=0 | tvol=327,136.0
+2026-02-17 09:16:59,041   T148 d28 | pos=[WNTR:-1624 | SMMR:+486 | ATMN:+5200 | SPNG:+2552] | agg=9,862.0/50,000(20%) | pnl=N/A | sigma=[WNTR:0.014 SMMR:0.043 ATMN:0.060 SPNG:0.162] | mkt=0 | tvol=344,780.0
+2026-02-17 09:17:04,783   T153 d33 | pos=[WNTR:-6776 | SMMR:+486 | ATMN:+6067 | SPNG:+5991] | agg=19,320.0/50,000(39%) | pnl=N/A | sigma=[WNTR:0.019 SMMR:0.031 ATMN:0.048 SPNG:0.093] | mkt=0 | tvol=354,238.0
+2026-02-17 09:17:09,729   T158 d38 | pos=[WNTR:-6776 | SMMR:+486 | ATMN:+6067 | SPNG:-934] | agg=14,263.0/50,000(29%) | pnl=N/A | sigma=[WNTR:0.026 SMMR:0.030 ATMN:0.047 SPNG:0.025] | mkt=0 | tvol=361,163.0
+2026-02-17 09:17:14,314   T163 d43 | pos=[WNTR:-6776 | SMMR:+486 | ATMN:+4227 | SPNG:+1766] | agg=13,255.0/50,000(27%) | pnl=N/A | sigma=[WNTR:0.029 SMMR:0.031 ATMN:0.023 SPNG:0.026] | mkt=0 | tvol=371,703.0
+2026-02-17 09:17:19,657   T168 d48 | pos=[WNTR:-6776 | SMMR:+4236 | ATMN:+9282 | SPNG:-4084] | agg=24,378.0/50,000(49%) | pnl=N/A | sigma=[WNTR:0.037 SMMR:0.027 ATMN:0.025 SPNG:0.031] | mkt=0 | tvol=386,358.0
+2026-02-17 09:17:24,374   T173 d53 | pos=[WNTR:-1776 | SMMR:+0 | ATMN:+900 | SPNG:+0] | agg=2,676.0/50,000(5%) | pnl=N/A | sigma=[WNTR:0.034 SMMR:0.024 ATMN:0.037 SPNG:0.034] | mkt=0 | tvol=409,008.0
+2026-02-17 09:17:25,501     [LOCKDOWN] T175 sec=55 agg=853.0 close_lim=11000
+2026-02-17 09:17:29,882 
+  === DAY 4 (tick 180) ===
+2026-02-17 09:17:34,387   T182 d02 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+853] | agg=853.0/50,000(2%) | pnl=N/A | sigma=[WNTR:0.035 SMMR:0.200 ATMN:0.150 SPNG:0.184] | mkt=0 | tvol=413,599.0
+2026-02-17 09:17:39,552   T187 d07 | pos=[WNTR:-2400 | SMMR:+1500 | ATMN:+4098 | SPNG:+673] | agg=8,671.0/50,000(17%) | pnl=N/A | sigma=[WNTR:0.043 SMMR:0.200 ATMN:0.200 SPNG:0.200] | mkt=0 | tvol=436,537.0
+2026-02-17 09:17:45,099   T192 d12 | pos=[WNTR:-77 | SMMR:+3300 | ATMN:+3282 | SPNG:-647] | agg=7,306.0/50,000(15%) | pnl=N/A | sigma=[WNTR:0.042 SMMR:0.200 ATMN:0.200 SPNG:0.200] | mkt=0 | tvol=445,404.0
+2026-02-17 09:17:48,295   T197 d17 | pos=[WNTR:-77 | SMMR:-2190 | ATMN:+3282 | SPNG:-827] | agg=6,376.0/50,000(13%) | pnl=N/A | sigma=[WNTR:0.043 SMMR:0.200 ATMN:0.200 SPNG:0.200] | mkt=0 | tvol=451,914.0
+2026-02-17 09:17:53,694   T202 d22 | pos=[WNTR:-5477 | SMMR:+2310 | ATMN:+2820 | SPNG:+403] | agg=11,010.0/50,000(22%) | pnl=N/A | sigma=[WNTR:0.033 SMMR:0.035 ATMN:0.200 SPNG:0.170] | mkt=0 | tvol=465,506.0
+2026-02-17 09:18:00,244   T207 d27 | pos=[WNTR:-5477 | SMMR:-252 | ATMN:+5820 | SPNG:-47] | agg=11,596.0/50,000(23%) | pnl=N/A | sigma=[WNTR:0.034 SMMR:0.040 ATMN:0.057 SPNG:0.035] | mkt=0 | tvol=483,102.0
+2026-02-17 09:18:02,939   T212 d32 | pos=[WNTR:-5477 | SMMR:+4248 | ATMN:+4326 | SPNG:+1690] | agg=15,741.0/50,000(31%) | pnl=N/A | sigma=[WNTR:0.035 SMMR:0.043 ATMN:0.076 SPNG:0.034] | mkt=0 | tvol=502,239.0
+2026-02-17 09:18:08,745   T217 d37 | pos=[WNTR:-5477 | SMMR:-3248 | ATMN:+6284 | SPNG:-468] | agg=15,477.0/50,000(31%) | pnl=N/A | sigma=[WNTR:0.035 SMMR:0.045 ATMN:0.079 SPNG:0.036] | mkt=0 | tvol=519,961.0
+2026-02-17 09:18:12,789   T222 d42 | pos=[WNTR:-5477 | SMMR:-3248 | ATMN:+4136 | SPNG:-1668] | agg=14,529.0/50,000(29%) | pnl=N/A | sigma=[WNTR:0.036 SMMR:0.052 ATMN:0.075 SPNG:0.042] | mkt=0 | tvol=527,901.0
+2026-02-17 09:18:20,043   T228 d48 | pos=[WNTR:-5477 | SMMR:-3248 | ATMN:-455 | SPNG:-733] | agg=9,913.0/50,000(20%) | pnl=N/A | sigma=[WNTR:0.024 SMMR:0.044 ATMN:0.075 SPNG:0.059] | mkt=0 | tvol=536,915.0
+2026-02-17 09:18:24,748   T233 d53 | pos=[WNTR:-477 | SMMR:+0 | ATMN:+644 | SPNG:+243] | agg=1,364.0/50,000(3%) | pnl=N/A | sigma=[WNTR:0.032 SMMR:0.015 ATMN:0.042 SPNG:0.067] | mkt=0 | tvol=552,448.0
+2026-02-17 09:18:25,459     [LOCKDOWN] T235 sec=55 agg=0.0 close_lim=11000
+2026-02-17 09:18:30,307 
+  === DAY 5 (tick 240) ===
+2026-02-17 09:18:34,796   T242 d02 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:-180] | agg=180.0/50,000(0%) | pnl=N/A | sigma=[WNTR:0.200 SMMR:0.015 ATMN:0.200 SPNG:0.200] | mkt=0 | tvol=553,992.0
+2026-02-17 09:18:39,391   T247 d07 | pos=[WNTR:-2160 | SMMR:-5000 | ATMN:+1440 | SPNG:-360] | agg=8,960.0/50,000(18%) | pnl=N/A | sigma=[WNTR:0.200 SMMR:0.019 ATMN:0.200 SPNG:0.200] | mkt=0 | tvol=567,452.0
+2026-02-17 09:18:45,382   T253 d13 | pos=[WNTR:+4440 | SMMR:-12067 | ATMN:-1440 | SPNG:-1560] | agg=19,507.0/50,000(39%) | pnl=N/A | sigma=[WNTR:0.200 SMMR:0.041 ATMN:0.200 SPNG:0.200] | mkt=0 | tvol=586,399.0
+2026-02-17 09:18:50,783   T258 d18 | pos=[WNTR:+552 | SMMR:+787 | ATMN:-1440 | SPNG:-1988] | agg=4,767.0/50,000(10%) | pnl=N/A | sigma=[WNTR:0.200 SMMR:0.043 ATMN:0.200 SPNG:0.200] | mkt=0 | tvol=606,953.0
+2026-02-17 09:18:54,284   T263 d23 | pos=[WNTR:+5952 | SMMR:+787 | ATMN:-800 | SPNG:-2077] | agg=9,616.0/50,000(19%) | pnl=N/A | sigma=[WNTR:0.043 SMMR:0.043 ATMN:0.072 SPNG:0.105] | mkt=0 | tvol=615,652.0
+2026-02-17 09:19:00,340   T268 d28 | pos=[WNTR:+5952 | SMMR:+7082 | ATMN:-4800 | SPNG:-1968] | agg=19,802.0/50,000(40%) | pnl=N/A | sigma=[WNTR:0.040 SMMR:0.045 ATMN:0.034 SPNG:0.060] | mkt=0 | tvol=634,284.0
+2026-02-17 09:19:05,142   T273 d33 | pos=[WNTR:+2452 | SMMR:+1562 | ATMN:-10156 | SPNG:+1062] | agg=15,232.0/50,000(30%) | pnl=N/A | sigma=[WNTR:0.038 SMMR:0.041 ATMN:0.027 SPNG:0.064] | mkt=0 | tvol=651,690.0
+2026-02-17 09:19:10,385   T278 d38 | pos=[WNTR:+2452 | SMMR:+7998 | ATMN:-10500 | SPNG:-558] | agg=21,508.0/50,000(43%) | pnl=N/A | sigma=[WNTR:0.026 SMMR:0.048 ATMN:0.030 SPNG:0.064] | mkt=0 | tvol=668,160.0
+2026-02-17 09:19:14,315   T283 d43 | pos=[WNTR:+2452 | SMMR:+7998 | ATMN:-5600 | SPNG:-558] | agg=16,608.0/50,000(33%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.049 ATMN:0.029 SPNG:0.068] | mkt=0 | tvol=673,060.0
+2026-02-17 09:19:19,995   T288 d48 | pos=[WNTR:+5059 | SMMR:+7998 | ATMN:-4256 | SPNG:+1008] | agg=18,321.0/50,000(37%) | pnl=N/A | sigma=[WNTR:0.033 SMMR:0.046 ATMN:0.033 SPNG:0.059] | mkt=0 | tvol=687,759.0
+2026-02-17 09:19:24,834   T293 d53 | pos=[WNTR:+148 | SMMR:+2998 | ATMN:+0 | SPNG:-72] | agg=3,218.0/50,000(6%) | pnl=N/A | sigma=[WNTR:0.043 SMMR:0.028 ATMN:0.036 SPNG:0.062] | mkt=0 | tvol=703,006.0
+2026-02-17 09:19:25,837     [LOCKDOWN] T295 sec=55 agg=3820.0 close_lim=11000
+2026-02-17 09:19:30,758 
+  === DAY 6 (tick 300) ===
+2026-02-17 09:19:31,035 
+  [SIMULATION ENDED]
+2026-02-17 09:19:31,039   Final P&L: $0.00
+2026-02-17 09:19:31,039   Orders: +2116/-363
+2026-02-17 09:19:31,041   Market orders: 0
+2026-02-17 09:19:31,042   Volume: 709,604.0
+2026-02-17 09:19:31,042   Est. rebates: $11,887.13
+2026-02-17 09:19:31,044   Final aggregate: 3,820.0
+2026-02-17 09:19:31,044     WNTR: +3,148.0
+2026-02-17 09:19:31,045     SMMR: +0.0
+2026-02-17 09:19:31,046     ATMN: +0.0
+2026-02-17 09:19:31,046     SPNG: -672.0
+2026-02-17 09:19:31,047 
+  Waiting for next simulation...
+
+2026-02-17 09:19:34,049   Waiting for ACTIVE status...
+2026-02-17 09:19:34,055   Simulation STOPPED.
+2026-02-17 09:19:36,059   Waiting for ACTIVE status...
+2026-02-17 09:19:36,070   Simulation STOPPED.
+2026-02-17 09:19:38,073   Waiting for ACTIVE status...
+2026-02-17 09:19:38,078   Simulation STOPPED.
+2026-02-17 09:19:40,079   Waiting for ACTIVE status...
+2026-02-17 09:19:40,084   Simulation STOPPED.
+2026-02-17 09:19:42,085   Waiting for ACTIVE status...
+2026-02-17 09:19:42,090   Simulation STOPPED.
+2026-02-17 09:19:44,093   Waiting for ACTIVE status...
+2026-02-17 09:19:44,097   Simulation STOPPED.
+2026-02-17 09:19:46,098   Waiting for ACTIVE status...
+2026-02-17 09:19:46,103   Simulation STOPPED.
+2026-02-17 09:19:48,105   Waiting for ACTIVE status...
+2026-02-17 09:19:48,111   Simulation STOPPED.
+2026-02-17 09:19:50,114   Waiting for ACTIVE status...
+2026-02-17 09:19:50,118   Simulation STOPPED.
+2026-02-17 09:19:52,119   Waiting for ACTIVE status...
+2026-02-17 09:19:52,124   Simulation STOPPED.
+2026-02-17 09:19:54,127   Waiting for ACTIVE status...
+2026-02-17 09:19:54,136   Simulation STOPPED.
+2026-02-17 09:19:56,138   Waiting for ACTIVE status...
+2026-02-17 09:19:56,148   Simulation STOPPED.
+2026-02-17 09:19:58,149   Waiting for ACTIVE status...
+2026-02-17 09:19:58,182   Simulation STOPPED.
+2026-02-17 09:20:00,184   Waiting for ACTIVE status...
+2026-02-17 09:20:00,189   Simulation STOPPED.
+2026-02-17 09:20:02,191   Waiting for ACTIVE status...
+2026-02-17 09:20:02,235   Simulation STOPPED.
+2026-02-17 09:20:04,236   Waiting for ACTIVE status...
+2026-02-17 09:20:04,238   Simulation STOPPED.
+2026-02-17 09:20:06,240   Waiting for ACTIVE status...
+2026-02-17 09:20:06,244   Simulation STOPPED.
+2026-02-17 09:20:08,246   Waiting for ACTIVE status...
+2026-02-17 09:20:08,251   Simulation STOPPED.
+2026-02-17 09:20:10,252   Waiting for ACTIVE status...
+2026-02-17 09:20:10,259   Simulation STOPPED.
+2026-02-17 09:20:12,260   Waiting for ACTIVE status...
+2026-02-17 09:20:12,267   Simulation STOPPED.
+2026-02-17 09:20:14,269   Waiting for ACTIVE status...
+2026-02-17 09:20:14,274   Simulation STOPPED.
+2026-02-17 09:20:16,276   Waiting for ACTIVE status...
+2026-02-17 09:20:16,284   Simulation STOPPED.
+2026-02-17 09:20:18,286   Waiting for ACTIVE status...
+2026-02-17 09:20:18,294   Simulation STOPPED.
+2026-02-17 09:20:20,296   Waiting for ACTIVE status...
+2026-02-17 09:20:20,300   Simulation STOPPED.
+2026-02-17 09:20:22,302   Waiting for ACTIVE status...
+2026-02-17 09:20:22,307   Simulation STOPPED.
+2026-02-17 09:20:24,309   Waiting for ACTIVE status...
+2026-02-17 09:20:24,314   Simulation STOPPED.
+2026-02-17 09:20:26,315   Waiting for ACTIVE status...
+2026-02-17 09:20:26,321   Simulation STOPPED.
+2026-02-17 09:20:28,324   Waiting for ACTIVE status...
+2026-02-17 09:20:28,328   Simulation STOPPED.
+2026-02-17 09:20:30,331   Waiting for ACTIVE status...
+2026-02-17 09:20:30,335   Simulation STOPPED.
+2026-02-17 09:20:32,337   Waiting for ACTIVE status...
+2026-02-17 09:20:32,344   Simulation STOPPED.
+2026-02-17 09:20:34,347   Waiting for ACTIVE status...
+2026-02-17 09:20:34,354   Simulation STOPPED.
+2026-02-17 09:20:36,359   Waiting for ACTIVE status...
+2026-02-17 09:20:36,362   Simulation STOPPED.
+2026-02-17 09:20:38,364   Waiting for ACTIVE status...
+2026-02-17 09:20:38,369   Simulation STOPPED.
+2026-02-17 09:20:40,369   Waiting for ACTIVE status...
+2026-02-17 09:20:40,371   Simulation STOPPED.
+2026-02-17 09:20:42,373   Waiting for ACTIVE status...
+2026-02-17 09:20:42,376   Simulation STOPPED.

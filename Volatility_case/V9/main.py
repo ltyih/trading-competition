@@ -6,7 +6,7 @@ Strategy:
   - Trade delta-hedged straddles with mathematically optimal sizing
   - Reposition at each week boundary (ticks 2/75/150/225)
   - Position size n* maximizes: vol_profit - positioning_cost - rebalancing_cost
-  - Delta hedge only when approaching the delta limit
+  - Delta hedge on a configurable tick interval
 """
 
 import sys

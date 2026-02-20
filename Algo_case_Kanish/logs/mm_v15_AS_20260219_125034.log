@@ -1,0 +1,62 @@
+2026-02-19 12:50:34,713   Waiting for RIT connection...
+2026-02-19 12:50:34,729   Connected!
+2026-02-19 12:50:34,729   Waiting for ACTIVE status...
+2026-02-19 12:50:34,733   Simulation is ACTIVE!
+2026-02-19 12:50:34,734 
+================================================================================
+  ALGO MARKET MAKING BOT V15 - AVELLANEDA-STOIKOV ENGINE
+  Optimal quotes | High volume | AS skew | Jump detection
+  Gross: 50,000 | Close: 9,000 | Per-stock: 15,000
+  Cycle: 25ms | Layers: 3 | gamma=0.05
+  http://localhost:9999/v1 | Key: AJDSYHVC
+================================================================================
+
+2026-02-19 12:50:34,763   Intraday gross limit: 100,000
+2026-02-19 12:50:34,763   Close-time limit: 9,000
+2026-02-19 12:50:34,763   Net limit: 50,000
+2026-02-19 12:50:34,764   WNTR: per_stock=15,000, base_size=6000, rebate=$0.025
+2026-02-19 12:50:34,764   SMMR: per_stock=15,000, base_size=5000, rebate=$0.02
+2026-02-19 12:50:34,764   ATMN: per_stock=15,000, base_size=4000, rebate=$0.015
+2026-02-19 12:50:34,764   SPNG: per_stock=15,000, base_size=3000, rebate=$0.01
+2026-02-19 12:50:34,768   Starting NLV: $0.00
+2026-02-19 12:50:34,899   T340 d40 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:50:39,791   T345 d45 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:50:44,827   T350 d50 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:50:49,731     [LOCKDOWN] T355 sec=55 agg=0 close_lim=9000
+2026-02-19 12:50:54,727 
+  === DAY 7 (tick 360) ===
+2026-02-19 12:50:56,796   T362 d02 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:51:01,930   T367 d07 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:51:06,882   T372 d12 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:51:11,853   T377 d17 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:51:16,882   T382 d22 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:51:22,026   T387 d27 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:51:26,915   T392 d32 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:51:31,904   T397 d37 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:51:37,095   T402 d42 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:51:41,893   T407 d47 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:51:46,898   T412 d52 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:51:49,886     [LOCKDOWN] T415 sec=55 agg=0 close_lim=9000
+2026-02-19 12:51:54,907 
+  === DAY 8 (tick 420) ===
+2026-02-19 12:51:57,028   T422 d02 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:52:02,061   T427 d07 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:52:07,072   T432 d12 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:52:12,063   T437 d17 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:52:17,103   T442 d22 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:52:22,219   T447 d27 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:52:27,247   T452 d32 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:52:32,240   T457 d37 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:52:37,276   T462 d42 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:52:42,289   T467 d47 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:52:47,257   T472 d52 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:52:50,298     [LOCKDOWN] T475 sec=55 agg=0 close_lim=9000
+2026-02-19 12:52:55,373 
+  === DAY 9 (tick 480) ===
+2026-02-19 12:52:57,387   T482 d02 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:53:02,548   T487 d07 | pos=[WNTR:+0 | SMMR:+0 | ATMN:+0 | SPNG:+0] | agg=0/100,000(0%) | pnl=N/A | sigma=[WNTR:0.030 SMMR:0.030 ATMN:0.030 SPNG:0.030] | mkt=0 | tvol=0
+2026-02-19 12:53:07,172 
+  [INTERRUPTED]
+2026-02-19 12:53:07,181 
+  Waiting for next simulation...
+
