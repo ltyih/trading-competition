@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Producer Fuel Planner</title>
+    <style>
+        body { font-family: monospace; margin: 10px; background: #f5f5f5; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .section { background: white; border: 1px solid #ccc; margin: 10px 0; padding: 10px; }
+        .section h2 { margin-top: 0; font-size: 16px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 6px; text-align: left; }
+        th { background: #eee; }
+        input[type="number"] { width: 120px; padding: 4px; }
+        button { padding: 6px 12px; cursor: pointer; }
+        .status { padding: 4px 8px; display: inline-block; }
+        .status.active { background: #90EE90; }
+        .status.inactive { background: #FFB6C1; }
+        .lockin.yes { color: green; font-weight: bold; }
+        .lockin.no { color: orange; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        @media (max-width: 1000px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RITC 2026 Producer Fuel Planner</h1>
+
+        <div class="section">
+            <h2>Case Status</h2>
+            <div id="case-status">Loading...</div>
+        </div>
+
+        <div class="section">
+            <h2>News</h2>
+            <div id="news">Loading...</div>
+        </div>
+
+        <div class="grid">
+            <div class="section">
+                <h2>Prices</h2>
+                <table id="prices-table">
+                    <thead><tr><th>Ticker</th><th>Bid</th><th>Ask</th><th>Last</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>Limits</h2>
+                <table id="limits-table">
+                    <thead><tr><th>Name</th><th>Gross</th><th>Gross Limit</th><th>Net</th><th>Net Limit</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Supply Base</h2>
+            <div id="supply-base">Enter distributor demand and tender net, then click Compute Recommendation.</div>
+        </div>
+
+        <div class="section">
+            <h2>Input</h2>
+            <form id="input-form">
+                <label>Distributor demand (ELEC contracts): <input type="number" id="distributor-demand" value="0" step="0.1"></label><br><br>
+                <label>Tender net (ELEC contracts): <input type="number" id="tender-net" value="0" step="0.1"></label><br><br>
+                <button type="submit">Compute Recommendation</button>
+            </form>
+        </div>
+
+        <div class="section">
+            <h2>Recommendations</h2>
+            <div id="recommendations">-</div>
+        </div>
+    </div>
+
+    <script>
+        let lastNewsId = 0;
+
+        function updateCase() {
+            fetch('/api/case')
+                .then(r => r.json())
+                .then(data => {
+                    const status = data.status || 'UNKNOWN';
+                    const period = data.period ?? '-';
+                    const tick = data.tick ?? '-';
+                    document.getElementById('case-status').innerHTML = 
+                        `Period: <strong>${period}</strong> | Tick: <strong>${tick}</strong> | Status: <span class="status ${status === 'ACTIVE' ? 'active' : 'inactive'}">${status}</span>`;
+                })
+                .catch(e => console.error('Case error:', e));
+        }
+
+        function updateNews() {
+            fetch(`/api/news?since=${lastNewsId}`)
+                .then(r => r.json())
+                .then(data => {
+                    if (Array.isArray(data)) {
+                        let sunlight = null, spot = null;
+                        data.forEach(item => {
+                            if (item.news_id > lastNewsId) lastNewsId = item.news_id;
+                            const h = (item.headline || '').toUpperCase();
+                            if (h.includes('SUNLIGHT')) sunlight = item;
+                            if (h.includes('SPOT') || h.includes('BULLETIN')) spot = item;
+                        });
+                        let html = '';
+                        if (sunlight) html += `<div><strong>SUNLIGHT:</strong> ${sunlight.headline} - ${sunlight.body}</div>`;
+                        if (spot) html += `<div><strong>SPOT:</strong> ${spot.headline} - ${spot.body}</div>`;
+                        if (!html) html = 'No news yet.';
+                        document.getElementById('news').innerHTML = html;
+                    }
+                })
+                .catch(e => console.error('News error:', e));
+        }
+
+        function updatePrices() {
+            fetch('/api/securities')
+                .then(r => r.json())
+                .then(data => {
+                    const tbody = document.querySelector('#prices-table tbody');
+                    tbody.innerHTML = '';
+                    if (Array.isArray(data)) {
+                        data.forEach(s => {
+                            const ticker = (s.ticker || '').trim();
+                            if (ticker.toUpperCase() === 'NG' || ticker.toUpperCase() === 'ELEC-F' || /^ELEC-day\d+$/i.test(ticker)) {
+                                const row = tbody.insertRow();
+                                row.insertCell(0).textContent = ticker;
+                                row.insertCell(1).textContent = s.bid ?? '-';
+                                row.insertCell(2).textContent = s.ask ?? '-';
+                                row.insertCell(3).textContent = s.last ?? '-';
+                            }
+                        });
+                    }
+                })
+                .catch(e => console.error('Prices error:', e));
+        }
+
+        function updateLimits() {
+            fetch('/api/limits')
+                .then(r => r.json())
+                .then(data => {
+                    const tbody = document.querySelector('#limits-table tbody');
+                    tbody.innerHTML = '';
+                    if (Array.isArray(data)) {
+                        data.forEach(l => {
+                            const row = tbody.insertRow();
+                            row.insertCell(0).textContent = l.name || '-';
+                            row.insertCell(1).textContent = l.gross ?? '-';
+                            row.insertCell(2).textContent = l.gross_limit ?? '-';
+                            row.insertCell(3).textContent = l.net ?? '-';
+                            row.insertCell(4).textContent = l.net_limit ?? '-';
+                        });
+                    }
+                })
+                .catch(e => console.error('Limits error:', e));
+        }
+
+        function computeRecommendation() {
+            const distributorDemand = parseFloat(document.getElementById('distributor-demand').value) || 0;
+            const tenderNet = parseFloat(document.getElementById('tender-net').value) || 0;
+            fetch('/api/recommendation', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({distributor_demand: distributorDemand, tender_net: tenderNet})
+            })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById('recommendations').innerHTML = `<div style="color:red;">Error: ${data.error}</div>`;
+                        return;
+                    }
+                    const lockin = data.lock_in_window ? '<span class="lockin yes">LOCK-IN WINDOW: Yes (exact evening update received)</span>' : '<span class="lockin no">LOCK-IN WINDOW: Not yet</span>';
+                    document.getElementById('supply-base').innerHTML = 
+                        `<div><strong>Solar tomorrow:</strong> ${data.solar_elec_tomorrow.toFixed(1)} ELEC contracts (${data.solar_mwh.toLocaleString()} MWh)</div>` +
+                        `<div><strong>Conversion tomorrow:</strong> ${data.q_produce_non_solar.toFixed(1)} ELEC contracts (${data.conversion_mwh.toLocaleString()} MWh)</div>` +
+                        `<div><strong>Total supply tomorrow:</strong> ${data.target_total_elec.toFixed(1)} ELEC contracts (${data.total_supply_mwh.toLocaleString()} MWh)</div>`;
+                    document.getElementById('recommendations').innerHTML = 
+                        `<div><strong>Forwards:</strong> Sell ${data.recommended_forwards_sell_elec_f.toFixed(0)} ELEC-F contracts (${(data.recommended_forwards_sell_elec_f * 500).toLocaleString()} MWh)</div>` +
+                        `<div><strong>Production:</strong> Produce ${data.q_produce_non_solar.toFixed(1)} ELEC contracts (${data.conversion_mwh.toLocaleString()} MWh) via conversion; buy ${data.ng_needed} NG today; use ${data.crude_oil_units} crude oil units</div>` +
+                        `<div><strong>Expected disposal risk:</strong> $${data.disposal_risk_dollars.toLocaleString()}</div>` +
+                        `<div>${lockin}</div>`;
+                })
+                .catch(e => {
+                    document.getElementById('recommendations').innerHTML = `<div style="color:red;">Error: ${e.message}</div>`;
+                });
+        }
+
+        document.getElementById('input-form').addEventListener('submit', e => {
+            e.preventDefault();
+            computeRecommendation();
+        });
+
+        // Poll every 2 seconds
+        setInterval(() => {
+            updateCase();
+            updateNews();
+            updatePrices();
+            updateLimits();
+        }, 2000);
+
+        // Initial load
+        updateCase();
+        updateNews();
+        updatePrices();
+        updateLimits();
+    </script>
+</body>
+</html>
