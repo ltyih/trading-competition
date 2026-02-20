@@ -306,6 +306,7 @@ class ASMarketMaker:
         self.gross_limit = DEFAULT_GROSS_LIMIT
         self.close_limit = CLOSE_TIME_LIMIT
         self.net_limit = DEFAULT_NET_LIMIT
+        self._close_limit_confirmed = False   # True once read from news
 
         # P&L
         self.start_nlv = 0.0
@@ -326,6 +327,7 @@ class ASMarketMaker:
         self.rebate_earned_est = 0.0
 
         self.in_lockdown = False
+        self._widen_entered = False
 
     # ============================================================
     # AVELLANEDA-STOIKOV CORE FORMULAS
@@ -505,7 +507,11 @@ class ASMarketMaker:
 
     def update_pnl(self):
         nlv = self.api.get_nlv()
-        if nlv is not None and self.start_nlv > 0:
+        if nlv is not None and nlv > 0:
+            # Latch start_nlv on first non-zero read (API returns 0 at startup)
+            if self.start_nlv <= 0:
+                self.start_nlv = nlv
+                print(f"    [NLV] Start NLV latched: ${nlv:,.2f}")
             self.current_pnl = nlv - self.start_nlv
         if self.current_pnl <= CIRCUIT_BREAKER_HALT:
             if not self.circuit_breaker_halt:
@@ -850,13 +856,14 @@ class ASMarketMaker:
         close_target = int(self.close_limit * CLOSE_TARGET_UTILIZATION)
 
         if second_in_day >= PRE_CLOSE_FLATTEN_SEC:
-            # Cancel everything and flatten aggressively
+            # Market-order flatten: cancel every tick so no stale limits accumulate
+            self.api.cancel_all_orders()
+            self.order_tracker.clear_all()
             if not self.in_lockdown:
-                self.api.cancel_all_orders()
-                self.order_tracker.clear_all()
                 self.in_lockdown = True
                 print(f"    [LOCKDOWN] T{tick} sec={second_in_day} "
-                      f"agg={aggregate} close_lim={self.close_limit}")
+                      f"agg={aggregate} close_lim={self.close_limit} "
+                      f"target={close_target}")
 
             if aggregate > close_target:
                 sorted_positions = sorted(
@@ -872,24 +879,36 @@ class ASMarketMaker:
                     self.api.submit_market_order(t, to_reduce, side)
                     self.market_orders_sent += 1
                     remaining -= to_reduce
-                    print(f"    [FLATTEN] {t}: MKT {side} {to_reduce} "
-                          f"(pos={pos}, agg={aggregate}, target={close_target})")
+                    print(f"    [FLATTEN] {t}: MKT {side} {to_reduce:,} "
+                          f"(pos={pos:+,} agg={aggregate:,} target={close_target:,})")
 
         elif second_in_day >= PRE_CLOSE_WIDEN_SEC:
-            # Widen phase: still quote but with wider spreads + reduce
-            for ticker in TICKERS:
-                pos = self.positions.get(ticker, 0)
-                if abs(pos) < 200:
-                    continue
-                mid = self.mid_prices.get(ticker, 25.0)
-                reduce_size = min(abs(pos), 5000)
-                reduce_size = max(100, min(reduce_size, MAX_ORDER_SIZE))
-                if pos > 0:
-                    price = round(mid - 0.01, 2)
-                    self.api.submit_limit_order(ticker, reduce_size, "SELL", price)
-                else:
-                    price = round(mid + 0.01, 2)
-                    self.api.submit_limit_order(ticker, reduce_size, "BUY", price)
+            # Widen phase: cancel MM quotes ONCE, then place limit reduces near mid.
+            # Limit orders sit in book for ~7 seconds earning rebates.
+            # At PRE_CLOSE_FLATTEN_SEC, they get cancelled and market orders finish the job.
+            if not self._widen_entered:
+                self._widen_entered = True
+                self.api.cancel_all_orders()
+                self.order_tracker.clear_all()
+                print(f"    [WIDEN] T{tick} sec={second_in_day} "
+                      f"agg={aggregate} -> placing limit reduces")
+
+                for ticker in TICKERS:
+                    pos = self.positions.get(ticker, 0)
+                    if abs(pos) < 200:
+                        continue
+                    mid = self.mid_prices.get(ticker, 25.0)
+                    # Offer to sell/buy at mid ± 1c — aggressive but earns rebate
+                    reduce_size = min(abs(pos), MAX_ORDER_SIZE)
+                    reduce_size = max(100, reduce_size)
+                    if pos > 0:
+                        price = round(mid - 0.01, 2)
+                        self.api.submit_limit_order(ticker, reduce_size, "SELL", price)
+                        print(f"      {ticker}: limit SELL {reduce_size:,} @ {price}")
+                    else:
+                        price = round(mid + 0.01, 2)
+                        self.api.submit_limit_order(ticker, reduce_size, "BUY", price)
+                        print(f"      {ticker}: limit BUY  {reduce_size:,} @ {price}")
 
     # ============================================================
     # EMERGENCY HANDLERS
@@ -933,24 +952,42 @@ class ASMarketMaker:
     # ============================================================
 
     def check_news_for_limits(self):
-        """Check news feed for aggregate limit announcements."""
+        """Check news feed for the aggregate position limit announced at tick 1.
+        Targets the specific headline to avoid false matches from later news.
+        Stops scanning once confirmed.
+        """
+        if self._close_limit_confirmed:
+            return
+        import re
         news = self.api.get_news()
         if not news:
             return
         for item in news:
-            body = str(item.get("body", "")).lower()
-            # Try to parse aggregate limit from news
-            if "aggregate" in body or "limit" in body or "position" in body:
-                # Extract number
-                import re
-                numbers = re.findall(r'[\d,]+', body)
-                for num_str in numbers:
+            headline = str(item.get("headline", "")).lower()
+            body = str(item.get("body", ""))
+            # Target the specific tick-1 announcement by headline
+            if "aggregate position limit" in headline:
+                m = re.search(r'limit\s+(?:to|of)\s+([\d,]+)', body, re.IGNORECASE)
+                if m:
+                    try:
+                        num = int(m.group(1).replace(",", ""))
+                        if num != self.close_limit:
+                            print(f"    [NEWS] Aggregate close-time limit: {num:,}")
+                            self.close_limit = num
+                        self._close_limit_confirmed = True
+                        return
+                    except ValueError:
+                        pass
+                # Fallback: any number 1000-50000 in this specific headline's body
+                for num_str in re.findall(r'[\d,]+', body):
                     try:
                         num = int(num_str.replace(",", ""))
                         if 1000 <= num <= 50000:
                             if num != self.close_limit:
-                                print(f"    [NEWS] Aggregate limit updated: {num:,}")
+                                print(f"    [NEWS] Aggregate close-time limit: {num:,}")
                                 self.close_limit = num
+                            self._close_limit_confirmed = True
+                            return
                     except ValueError:
                         pass
 
@@ -972,10 +1009,8 @@ class ASMarketMaker:
             print(f"  {t}: per_stock={PER_STOCK_TRADING_LIMIT:,}, "
                   f"base_size={BASE_ORDER_SIZE[t]}, rebate=${REBATES[t]}")
 
-        nlv = self.api.get_nlv()
-        if nlv is not None:
-            self.start_nlv = nlv
-            print(f"  Starting NLV: ${nlv:,.2f}")
+        # NLV is often 0 at startup; update_pnl() will latch it on first non-zero read
+        print(f"  Starting NLV: will latch on first non-zero read")
 
         # Check news on first tick for aggregate limit
         self.check_news_for_limits()
@@ -1032,6 +1067,7 @@ class ASMarketMaker:
                         print(f"    Close limit: {self.close_limit:,}")
 
                     self.in_lockdown = False
+                    self._widen_entered = False
                     last_day = current_day
 
                 # Circuit breaker halt
@@ -1061,19 +1097,16 @@ class ASMarketMaker:
                 # ============================================================
                 if second_in_day >= PRE_CLOSE_WIDEN_SEC:
                     self.pre_close_handler(tick, second_in_day)
-                    if second_in_day >= PRE_CLOSE_CANCEL_SEC:
-                        time.sleep(CYCLE_SLEEP)
-                        continue
-                    # Still do normal quoting with wide spreads during PRE_CLOSE_WIDEN phase
-                    # (AS formula handles widening via high gamma)
+                    time.sleep(CYCLE_SLEEP)
+                    continue  # Never do normal quoting during close phase
 
                 # ============================================================
                 # POST-CLOSE RECOVERY
                 # ============================================================
                 if second_in_day < POST_CLOSE_RECOVERY_SEC:
-                    if self.order_tracker.has_any_order(TICKERS[0]):
-                        self.api.cancel_all_orders()
-                        self.order_tracker.clear_all()
+                    # Always cancel on new day open — previous check only tested TICKERS[0]
+                    self.api.cancel_all_orders()
+                    self.order_tracker.clear_all()
                     time.sleep(CYCLE_SLEEP)
                     continue
 

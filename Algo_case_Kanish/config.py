@@ -46,7 +46,9 @@ AS_GAMMA_PRE_CLOSE = 0.80    # Near close: very high risk aversion (force flatte
 # k - order arrival intensity parameter (from Lambda(delta) = A*exp(-k*delta))
 # Higher k = orders more sensitive to price, tighter optimal spread
 # Calibrate from observed fill rates
-AS_K_PARAMETER = 1.5         # Estimated from typical fill rates
+# k=1.5 gives half-spread of $1.31 (catastrophically wide — nobody fills)
+# k=45  gives half-spread of $0.046 (competitive, inside typical market spreads)
+AS_K_PARAMETER = 45          # Calibrated: produces ~$0.046 half-spread at mid-day
 
 # sigma^2 estimation
 AS_VOL_WINDOW = 15           # Ticks to estimate volatility
@@ -80,8 +82,8 @@ DEFAULT_GROSS_LIMIT = 50000
 DEFAULT_NET_LIMIT = 30000
 CLOSE_TIME_LIMIT = 9000       # Aggregate limit at close (announced per heat)
 
-# Per-stock: allow BIGGER positions during trading, flatten aggressively at close
-PER_STOCK_TRADING_LIMIT = 15000   # During active trading: allow up to 15k/stock
+# Per-stock: keep positions tight so aggregate stays under close_limit
+PER_STOCK_TRADING_LIMIT = 10000   # During active trading: allow up to 10k/stock
 PER_STOCK_CLOSE_LIMIT = 2000      # At close: need aggregate under close_limit
 
 # ========== Utilization Thresholds (of gross_limit) ==========
@@ -100,14 +102,19 @@ CYCLE_SLEEP = 0.025       # 25ms - faster cycling = more requotes = more fills
 HEAT_DURATION = 300
 DAY_LENGTH = 60
 
-# ========== Market Close Protocol (TIGHT - maximize trading time) ==========
-PRE_CLOSE_WIDEN_SEC = 52       # Second 52: widen spreads slightly
-PRE_CLOSE_CANCEL_SEC = 55      # Second 55: cancel all, start flattening
-PRE_CLOSE_FLATTEN_SEC = 55     # Second 55: market-order flatten
-CLOSE_TARGET_UTILIZATION = 0.60  # Target 60% of close_limit at close
+# ========== Market Close Protocol ==========
+# Data shows widen phase (7 sec limit orders at mid-1c) does all the work.
+# Aggregate at lockdown was 0-3090 every day (limit=12000) — massively overkill.
+# Moving widen to sec 45 gains +10 active seconds/day = +50 ticks = +31% trading time.
+#   Sec 45-51 (WIDEN): cancel MM quotes, place limit reduces at mid (earn rebates)
+#   Sec 52-59 (FLATTEN): cancel everything every tick, market-order flatten (backup)
+PRE_CLOSE_WIDEN_SEC = 45       # Second 45: cancel MM, place limit reduces
+PRE_CLOSE_CANCEL_SEC = 52      # Second 52: cancel everything, start market-order flatten
+PRE_CLOSE_FLATTEN_SEC = 52     # Second 52: market-order flatten begins
+CLOSE_TARGET_UTILIZATION = 0.90  # Target 90% of close_limit (tiny buffer)
 
 # Post-close recovery (new day)
-POST_CLOSE_RECOVERY_SEC = 2    # 2 seconds to let price settle after open
+POST_CLOSE_RECOVERY_SEC = 1    # 1 second recovery (was 2, saves 5 ticks/heat)
 POST_CLOSE_SPREAD_MULT = 2.0   # Wide spreads during recovery
 POST_CLOSE_SIZE_MULT = 0.3     # Small sizes during recovery
 
@@ -115,7 +122,9 @@ POST_CLOSE_SIZE_MULT = 0.3     # Small sizes during recovery
 VOL_LOOKBACK = 12
 VOL_LOW_THRESHOLD = 0.005
 VOL_HIGH_THRESHOLD = 0.03
-VOL_SPREAD_MULT = {"LOW": 0.80, "MEDIUM": 1.0, "HIGH": 1.6}
+# AS formula already incorporates sigma into spread via risk_premium term.
+# VOL_SPREAD_MULT was double-penalizing volatility. HIGH reduced from 1.6 to 1.1.
+VOL_SPREAD_MULT = {"LOW": 0.80, "MEDIUM": 1.0, "HIGH": 1.1}
 VOL_SIZE_MULT = {"LOW": 1.3, "MEDIUM": 1.0, "HIGH": 0.5}
 
 # ========== Jump/News Detection ==========
