@@ -37,7 +37,7 @@ TRADING_DAYS_PER_YEAR = 240
 TRADING_DAYS_PER_MONTH = 20
 
 # Ticks at which to take new straddle positions (start of each week)
-POSITION_TICKS = [1, 74, 149, 224]
+POSITION_TICKS = [2, 75, 150, 225]
 
 # Scheduled gradual close windows for weeks 1-4.
 # Close starts at each start tick and must be complete by the deadline tick.
@@ -67,13 +67,37 @@ HEDGE_TARGET_DELTA = 0.0
 # Wall-clock re-hedge interval in seconds for sub-second gamma scalping.
 # The simulator tick still updates once per second; this controls hedge-only
 # recalculations between tick updates.
-HEDGE_INTERVAL_SEC = 0.10
+HEDGE_INTERVAL_SEC = 0.1
 
 # Maximum RTM shares to trade per hedge action.
 HEDGE_MAX_SHARES_PER_HEDGE = 10000
 
-# Minimum shares to bother hedging
-MIN_HEDGE_SIZE = 0
+# Ignore tiny hedge adjustments inside this delta band (shares).
+HEDGE_DEADBAND_SHARES = 250
+
+# Minimum shares to bother hedging after deadband is exceeded.
+MIN_HEDGE_SIZE = 250
+
+# Use passive limit orders for hedges to reduce spread crossing.
+HEDGE_USE_LIMIT_ORDERS = True
+
+# If |delta| exceeds this multiple of limit, fall back to market order.
+# Example: 1.20 means market fallback only once |delta| >= 120% of limit.
+HEDGE_MARKET_FALLBACK_MULT = 1.20
+
+# For long-gamma holding books, enforce scalp-friendly hedge sequencing:
+# buys should occur below prior hedge sells and sells above prior hedge buys.
+HEDGE_SCALP_PRICE_FILTER = True
+
+# Minimum favorable price edge (in dollars) versus last opposite hedge.
+HEDGE_SCALP_MIN_EDGE = 0.01
+
+# Bypass scalp-price filter only when risk is extreme.
+# Example: 1.50 means bypass once |delta| >= 150% of limit.
+HEDGE_SCALP_EMERGENCY_MULT = 1.50
+
+# Emit detailed hedge diagnostics (delta context + bid/ask + fill metadata).
+HEDGE_DIAGNOSTIC_LOGS = True
 
 # =============================================================================
 # EXECUTION
@@ -97,5 +121,5 @@ MAX_STRADDLES = 875
 
 # Force max position when absolute IV-RV gap exceeds this threshold (decimal).
 # Example: 0.03 = 3 vol points.
-FORCED_N_VOL_GAP_THRESHOLD = 0.03
+FORCED_N_VOL_GAP_THRESHOLD = 0.05
 

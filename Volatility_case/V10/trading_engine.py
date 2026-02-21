@@ -25,7 +25,9 @@ from config import (
     RTM_MAX_TRADE_SIZE, RTM_GROSS_LIMIT, RTM_NET_LIMIT,
     OPTIONS_GROSS_LIMIT, OPTIONS_NET_LIMIT,
     MIN_OPTION_PRICE, HEDGE_TARGET_DELTA,
-    HEDGE_MAX_SHARES_PER_HEDGE, MIN_HEDGE_SIZE, POSITION_TICKS,
+    HEDGE_MAX_SHARES_PER_HEDGE, HEDGE_DEADBAND_SHARES, MIN_HEDGE_SIZE,
+    HEDGE_USE_LIMIT_ORDERS, HEDGE_MARKET_FALLBACK_MULT, HEDGE_SCALP_PRICE_FILTER,
+    HEDGE_SCALP_MIN_EDGE, HEDGE_SCALP_EMERGENCY_MULT, HEDGE_DIAGNOSTIC_LOGS, POSITION_TICKS,
     WEEKLY_CLOSE_START_TICKS, WEEKLY_CLOSE_DEADLINE_TICKS,
     MAX_STRADDLES, FORCED_N_VOL_GAP_THRESHOLD,
 )
@@ -107,6 +109,8 @@ class StraddleEngine:
         # Delta hedging
         self.last_hedge_tick = -100
         self.rtm_volume = 0
+        self.last_hedge_buy_px = None
+        self.last_hedge_sell_px = None
 
         # Cycle tracking for closing/positioning
         self.close_ticks = 0
@@ -128,6 +132,8 @@ class StraddleEngine:
         self.pending_profit = 0.0
         self.last_hedge_tick = -100
         self.rtm_volume = 0
+        self.last_hedge_buy_px = None
+        self.last_hedge_sell_px = None
         self.close_ticks = 0
         self.position_ticks = 0
         self.close_cancel_phase = True
@@ -712,6 +718,9 @@ class StraddleEngine:
             n_star, direction, f_star, strike = self.run_optimizer(pre_trade_state, tick)
 
             if n_star > 0 and direction != 0:
+                # New position cycle: reset hedge scalp anchors.
+                self.last_hedge_buy_px = None
+                self.last_hedge_sell_px = None
                 self.current_n = n_star
                 self.current_direction = direction
                 self.current_strike = strike
@@ -754,7 +763,7 @@ class StraddleEngine:
             "hedge_trades": 0,
         }
 
-        if self.phase != Phase.HOLDING:
+        if self.phase not in (Phase.HOLDING, Phase.CLOSING):
             return result
 
         state = self.get_market_state(tick, compute_iv=False)
@@ -763,16 +772,23 @@ class StraddleEngine:
 
         result["delta"] = state.total_delta
         result["spot"] = state.spot
-        result["hedge_trades"] = self.delta_hedge(state, tick)
+        if self.phase == Phase.CLOSING:
+            result["hedge_trades"] = self.delta_hedge(
+                state, tick, allow_in_closing=True, limit_breach_only=True
+            )
+        else:
+            result["hedge_trades"] = self.delta_hedge(state, tick)
         return result
 
-    def delta_hedge(self, state: MarketState, tick: int) -> int:
+    def delta_hedge(self, state: MarketState, tick: int,
+                    allow_in_closing: bool = False,
+                    limit_breach_only: bool = False) -> int:
         """
         Delta hedging policy:
         - Long position: continuous re-hedging when outside target band.
         - Short position: minimal hedging, only when delta limit is breached.
         """
-        if self.phase == Phase.CLOSING:
+        if self.phase == Phase.CLOSING and not allow_in_closing:
             return 0
 
         L = self.vol_state.delta_limit
@@ -783,7 +799,11 @@ class StraddleEngine:
         abs_delta = abs(current_delta)
 
         short_mode = (self.current_direction < 0 and self.current_n > 0)
-        if short_mode:
+        if limit_breach_only:
+            if abs_delta < L:
+                return 0
+            hedge_mode = "close-limit"
+        elif short_mode:
             # Minimize hedging for short option books: only act on limit breach.
             if abs_delta < L:
                 return 0
@@ -802,9 +822,14 @@ class StraddleEngine:
             return 0
 
         hedge_needed = target_delta - current_delta
-        hedge_total = abs(int(round(hedge_needed)))
+        deadband = max(int(HEDGE_DEADBAND_SHARES), 0)
+        if abs(hedge_needed) <= deadband:
+            return 0
 
-        if hedge_total < MIN_HEDGE_SIZE:
+        hedge_total = abs(int(round(hedge_needed)))
+        min_hedge_size = max(int(MIN_HEDGE_SIZE), 0)
+
+        if hedge_total < min_hedge_size:
             return 0
 
         # Check stock position limits before hedging
@@ -816,36 +841,154 @@ class StraddleEngine:
         max_allowed = max(max_allowed, 0)
         hedge_total = min(hedge_total, max_allowed)
 
-        if hedge_total < MIN_HEDGE_SIZE:
+        if hedge_total < min_hedge_size:
             logger.warning("Hedge capped by ETF limit: need %d, allowed %d",
-                          abs(int(round(hedge_needed))), max_allowed)
+                           abs(int(round(hedge_needed))), max_allowed)
             return 0
 
         # Submit ONE hedge order per cycle (prevents overshoot from stale position)
         hedge_cap = max(int(HEDGE_MAX_SHARES_PER_HEDGE), 0)
         hedge_qty = min(hedge_total, RTM_MAX_TRADE_SIZE, hedge_cap)
-        if hedge_qty < MIN_HEDGE_SIZE:
+        if hedge_qty < min_hedge_size:
             return 0
         if hedge_qty < hedge_total:
             logger.info("Hedge qty capped: requested %d, capped %d", hedge_total, hedge_qty)
 
+        option_delta = current_delta - state.stock_position
+        spot_mid = state.spot
+        spot_bid = state.spot_bid
+        spot_ask = state.spot_ask
+        fallback_mult = max(float(HEDGE_MARKET_FALLBACK_MULT), 1.0)
+        severe_breach = abs_delta >= (L * fallback_mult)
+
+        order_kind = "MARKET"
+        limit_price = None
+        if HEDGE_USE_LIMIT_ORDERS and not severe_breach:
+            if action == "BUY":
+                limit_price = spot_bid if spot_bid > 0 else spot_mid
+            else:
+                limit_price = spot_ask if spot_ask > 0 else spot_mid
+            if limit_price and limit_price > 0:
+                order_kind = "LIMIT"
+        elif HEDGE_USE_LIMIT_ORDERS and severe_breach:
+            hedge_mode = f"{hedge_mode}-mkt-fallback"
+
+        est_exec_px = (
+            limit_price if order_kind == "LIMIT"
+            else (spot_ask if action == "BUY" else spot_bid)
+        )
+
+        # Enforce scalp-friendly sequencing for long-gamma holding books.
+        scalp_filter_active = (
+            bool(HEDGE_SCALP_PRICE_FILTER)
+            and self.phase == Phase.HOLDING
+            and self.current_direction > 0
+            and not limit_breach_only
+        )
+        scalp_emergency_mult = max(float(HEDGE_SCALP_EMERGENCY_MULT), 1.0)
+        scalp_emergency = abs_delta >= (L * scalp_emergency_mult)
+        min_edge = max(float(HEDGE_SCALP_MIN_EDGE), 0.0)
+        if scalp_filter_active and not scalp_emergency and spot_mid > 0:
+            if action == "BUY" and self.last_hedge_sell_px is not None:
+                buy_cap = self.last_hedge_sell_px - min_edge
+                if spot_mid > buy_cap:
+                    logger.info(
+                        "HEDGE_SKIP scalp-filter BUY blocked: spot=%.4f > max_buy=%.4f "
+                        "(last_sell=%.4f edge=%.4f)",
+                        spot_mid, buy_cap, self.last_hedge_sell_px, min_edge,
+                    )
+                    return 0
+            if action == "SELL" and self.last_hedge_buy_px is not None:
+                sell_floor = self.last_hedge_buy_px + min_edge
+                if spot_mid < sell_floor:
+                    logger.info(
+                        "HEDGE_SKIP scalp-filter SELL blocked: spot=%.4f < min_sell=%.4f "
+                        "(last_buy=%.4f edge=%.4f)",
+                        spot_mid, sell_floor, self.last_hedge_buy_px, min_edge,
+                    )
+                    return 0
+
+        if HEDGE_DIAGNOSTIC_LOGS:
+            logger.info(
+                "HEDGE_DIAG PRE tick=%d phase=%s mode=%s action=%s qty=%d order_type=%s "
+                "delta_total=%.0f delta_option=%.0f delta_stock=%d target=%.0f limit=%.0f "
+                "spot_bid=%.4f spot_ask=%.4f spot_mid=%.4f limit_px=%.4f est_exec=%.4f "
+                "scalp_filter=%s scalp_emergency=%s",
+                tick, self.phase, hedge_mode, action, hedge_qty, order_kind,
+                current_delta, option_delta, int(state.stock_position), target_delta, L,
+                spot_bid, spot_ask, spot_mid, (limit_price or 0.0), est_exec_px,
+                scalp_filter_active, scalp_emergency,
+            )
+
         # Cancel pending stock orders to prevent accumulation, only when submitting.
         self.api.cancel_orders_for_ticker(UNDERLYING_TICKER)
-        result = self.api.submit_market_order(UNDERLYING_TICKER, hedge_qty, action)
+        if order_kind == "LIMIT":
+            result = self.api.submit_limit_order(UNDERLYING_TICKER, hedge_qty, action, float(limit_price))
+        else:
+            result = self.api.submit_market_order(UNDERLYING_TICKER, hedge_qty, action)
         orders_sent = 0
+        volume_add = 0
+        filled_qty = None
         if result:
             orders_sent = 1
-            self.rtm_volume += hedge_qty
+            filled_qty = result.get("quantity_filled")
+            if filled_qty is None:
+                filled_qty = result.get("filled")
+            if filled_qty is None:
+                volume_add = hedge_qty if order_kind == "MARKET" else 0
+            else:
+                try:
+                        volume_add = max(int(round(float(filled_qty))), 0)
+                except Exception:
+                    volume_add = hedge_qty if order_kind == "MARKET" else 0
+            self.rtm_volume += volume_add
 
         if orders_sent > 0:
             self.last_hedge_tick = tick
+            price_suffix = f" @ {limit_price:.2f}" if order_kind == "LIMIT" and limit_price else ""
             logger.info(
-                        "HEDGE %s %d RTM | delta %.0f -> ~%.0f | target %.0f (%.0f%% of limit %.0f) "
+                        "HEDGE %s %d RTM via %s%s | delta %.0f | target %.0f (%.0f%% of limit %.0f) "
                         "| mode %s",
-                        action, hedge_qty, current_delta,
-                        current_delta + (hedge_qty if action == "BUY" else -hedge_qty),
+                        action, hedge_qty, order_kind, price_suffix, current_delta,
                         target_delta, target_pct * 100, L,
                         hedge_mode)
+
+            # Update scalp anchors only on observed fills.
+            if volume_add > 0:
+                fill_px_value = None
+                for key in ("price", "avg_price", "vwap"):
+                    raw = result.get(key)
+                    if raw is None:
+                        continue
+                    try:
+                        fill_px_value = float(raw)
+                        break
+                    except Exception:
+                        continue
+                if fill_px_value is None and est_exec_px:
+                    fill_px_value = float(est_exec_px)
+                if fill_px_value and fill_px_value > 0:
+                    if action == "BUY":
+                        self.last_hedge_buy_px = fill_px_value
+                    else:
+                        self.last_hedge_sell_px = fill_px_value
+
+            if HEDGE_DIAGNOSTIC_LOGS:
+                diag_filled_qty = (
+                    filled_qty
+                    or result.get("quantity")
+                    or hedge_qty
+                )
+                fill_price = (
+                    result.get("price")
+                    or result.get("avg_price")
+                    or result.get("vwap")
+                    or est_exec_px
+                )
+                logger.info(
+                    "HEDGE_DIAG POST tick=%d action=%s order_type=%s order_id=%s filled=%s fill_price=%s",
+                    tick, action, order_kind, result.get("order_id", "?"), diag_filled_qty, fill_price,
+                )
         return orders_sent
 
     # ========================================================================
@@ -919,7 +1062,17 @@ class StraddleEngine:
             self.phase = Phase.CLOSING
             trades = self._run_scheduled_close_step(state, tick, deadline_tick)
             result["option_trades"] = trades
-            if self.is_flat(state):
+
+            post_close_state = self.get_market_state(tick, compute_iv=False) or state
+            result["spot"] = post_close_state.spot
+            result["delta"] = post_close_state.total_delta
+            result["gross"] = post_close_state.options_gross
+            result["net"] = post_close_state.options_net
+            result["hedge_trades"] = self.delta_hedge(
+                post_close_state, tick, allow_in_closing=True, limit_breach_only=True
+            )
+
+            if self.is_flat(post_close_state):
                 logger.info("Scheduled close complete week %d by tick %d",
                             close_week, tick)
                 self.phase = Phase.IDLE
@@ -936,13 +1089,8 @@ class StraddleEngine:
         # ===== Phase: CLOSING (flattening old position) =====
         if self.phase == Phase.CLOSING:
             self.close_ticks += 1
-            if self.is_flat(state):
-                logger.info("Position flat. Waiting for next scheduled positioning tick.")
-                self.phase = Phase.IDLE
-                self.current_n = 0
-                self.current_direction = 0
-                self.current_strike = None
-            elif self.close_ticks > 5:
+
+            if self.close_ticks > 5:
                 # Force: try closing again
                 trades = self.close_all_positions(state)
                 result["option_trades"] = trades
@@ -955,6 +1103,22 @@ class StraddleEngine:
                     self.current_n = 0
                     self.current_direction = 0
                     self.current_strike = None
+
+            post_close_state = self.get_market_state(tick, compute_iv=False) or state
+            result["spot"] = post_close_state.spot
+            result["delta"] = post_close_state.total_delta
+            result["gross"] = post_close_state.options_gross
+            result["net"] = post_close_state.options_net
+            result["hedge_trades"] = self.delta_hedge(
+                post_close_state, tick, allow_in_closing=True, limit_breach_only=True
+            )
+
+            if self.is_flat(post_close_state):
+                logger.info("Position flat. Waiting for next scheduled positioning tick.")
+                self.phase = Phase.IDLE
+                self.current_n = 0
+                self.current_direction = 0
+                self.current_strike = None
             result["phase"] = self.phase
             return result
 
