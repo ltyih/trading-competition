@@ -1,0 +1,6 @@
+2026-02-08 18:09:33,744 [INFO] news_parser: NEWS: Delta limit = 12000
+2026-02-08 18:09:33,744 [INFO] news_parser: NEWS: Penalty rate = 4.00%
+2026-02-08 18:10:48,161 [INFO] news_parser: NEWS: Current realized vol = 15.0% (history: ['15%'])
+2026-02-08 18:12:03,556 [INFO] news_parser: NEWS: Current realized vol = 12.0% (history: ['15%', '12%'])
+2026-02-08 18:13:18,829 [INFO] news_parser: NEWS: Current realized vol = 19.0% (history: ['15%', '12%', '19%'])
+2026-02-08 18:15:37,805 [WARNING] rit_api: POST /commands/cancel returned 401: {"code":"UNAUTHORIZED","message":"Simulation must be running."}

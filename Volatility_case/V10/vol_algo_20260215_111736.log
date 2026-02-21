@@ -1,0 +1,570 @@
+2026-02-15 11:17:36,943 [INFO] news_parser: NEWS: Forecast vol next week = 22.0% - 27.0% (mid=24.5%) [NOW USING FORECAST]
+2026-02-15 11:17:36,959 [INFO] trading_engine: WEEK 1 positioning tick 68
+2026-02-15 11:17:37,119 [INFO] trading_engine: No delta limit from news, using default 10000
+2026-02-15 11:17:37,119 [INFO] optimizer: Not profitable: gain/contract=$2.3404, pos_cost=$4.0200
+2026-02-15 11:17:37,120 [INFO] trading_engine: No profitable trade for this week (n*=0)
+2026-02-15 11:17:43,173 [INFO] news_parser: NEWS: Current realized vol = 25.0% (history: ['25%']) [NOW USING REALIZED]
+2026-02-15 11:17:43,179 [INFO] trading_engine: WEEK 2 positioning tick 75
+2026-02-15 11:17:44,178 [INFO] trading_engine: No delta limit from news, using default 10000
+2026-02-15 11:17:44,180 [INFO] optimizer: ============================================================
+2026-02-15 11:17:44,180 [INFO] optimizer: OPTIMIZER RESULT: n*=400 LONG straddles @ strike 53
+2026-02-15 11:17:44,180 [INFO] optimizer:   Expected profit: $9804.62
+2026-02-15 11:17:44,180 [INFO] optimizer:   Gain/contract: $29.7316 | Pos cost/contract: $4.0200
+2026-02-15 11:17:44,180 [INFO] optimizer:   Rebalancing cost: $480.02 | Z=1.03
+2026-02-15 11:17:44,180 [INFO] optimizer:   Inputs: S0=52.88 sigma=0.2500 sigma_hat=0.1297 L=10000 Gamma=24.1952
+2026-02-15 11:17:44,180 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-15 11:17:44,181 [INFO] optimizer: ============================================================
+2026-02-15 11:17:44,249 [INFO] rit_api: MARKET BUY 100 RTM1C53 -> order_id=4277
+2026-02-15 11:17:44,305 [INFO] rit_api: MARKET BUY 100 RTM1P53 -> order_id=4289
+2026-02-15 11:17:44,362 [INFO] rit_api: MARKET BUY 100 RTM1C53 -> order_id=4292
+2026-02-15 11:17:44,427 [INFO] rit_api: MARKET BUY 100 RTM1P53 -> order_id=4296
+2026-02-15 11:17:44,485 [INFO] rit_api: MARKET BUY 100 RTM1C53 -> order_id=4299
+2026-02-15 11:17:44,543 [INFO] rit_api: MARKET BUY 100 RTM1P53 -> order_id=4302
+2026-02-15 11:17:44,601 [INFO] rit_api: MARKET BUY 100 RTM1C53 -> order_id=4304
+2026-02-15 11:17:44,661 [INFO] rit_api: MARKET BUY 100 RTM1P53 -> order_id=4306
+2026-02-15 11:17:44,661 [INFO] trading_engine: STRADDLE BUY 400/400 @ K=53: 8 orders (400C+400P filled)
+2026-02-15 11:17:44,662 [INFO] trading_engine: POSITIONED: 400 LONG straddles @ 53 (week 2, expected $9805)
+2026-02-15 11:18:02,380 [INFO] rit_api: MARKET BUY 9380 RTM -> order_id=5440
+2026-02-15 11:18:02,380 [INFO] trading_engine: HEDGE BUY 9380 RTM | delta -9380 -> ~0 | limit 10000 (94%)
+2026-02-15 11:18:20,353 [INFO] news_parser: NEWS: Forecast vol next week = 23.0% - 28.0% (mid=25.5%) [NOW USING FORECAST]
+2026-02-15 11:18:58,632 [INFO] news_parser: NEWS: Current realized vol = 23.0% (history: ['25%', '23%']) [NOW USING REALIZED]
+2026-02-15 11:18:58,636 [INFO] trading_engine: WEEK 3 positioning tick 150
+2026-02-15 11:18:58,636 [INFO] trading_engine: No delta limit from news, using default 10000
+2026-02-15 11:18:58,637 [INFO] optimizer: ============================================================
+2026-02-15 11:18:58,637 [INFO] optimizer: OPTIMIZER RESULT: n*=210 SHORT straddles @ strike 51
+2026-02-15 11:18:58,637 [INFO] optimizer:   Expected profit: $208.30
+2026-02-15 11:18:58,637 [INFO] optimizer:   Gain/contract: $5.9440 | Pos cost/contract: $4.0200
+2026-02-15 11:18:58,637 [INFO] optimizer:   Rebalancing cost: $195.74 | Z=1.45
+2026-02-15 11:18:58,638 [INFO] optimizer:   Inputs: S0=51.25 sigma=0.2300 sigma_hat=0.2451 L=10000 Gamma=32.8917
+2026-02-15 11:18:58,638 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-15 11:18:58,638 [INFO] optimizer: ============================================================
+2026-02-15 11:18:58,638 [INFO] trading_engine: HOLD (reposition not worth it): f_new=$208 <= cost=$4040
+2026-02-15 11:18:58,754 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=8123
+2026-02-15 11:18:58,754 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -11055 -> ~-1055 | limit 10000 (111%)
+2026-02-15 11:19:08,810 [INFO] rit_api: MARKET SELL 9690 RTM -> order_id=8731
+2026-02-15 11:19:08,811 [INFO] trading_engine: HEDGE SELL 9690 RTM | delta 9690 -> ~0 | limit 10000 (97%)
+2026-02-15 11:19:18,865 [INFO] rit_api: MARKET BUY 9525 RTM -> order_id=9357
+2026-02-15 11:19:18,865 [INFO] trading_engine: HEDGE BUY 9525 RTM | delta -9525 -> ~0 | limit 10000 (95%)
+2026-02-15 11:19:35,807 [INFO] news_parser: NEWS: Forecast vol next week = 28.0% - 33.0% (mid=30.5%) [NOW USING FORECAST]
+2026-02-15 11:19:39,930 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=10313
+2026-02-15 11:19:39,931 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 10009 -> ~9 | limit 10000 (100%)
+2026-02-15 11:20:14,011 [INFO] news_parser: NEWS: Current realized vol = 29.0% (history: ['25%', '23%', '29%']) [NOW USING REALIZED]
+2026-02-15 11:20:14,013 [INFO] trading_engine: WEEK 4 positioning tick 225
+2026-02-15 11:20:14,014 [INFO] trading_engine: No delta limit from news, using default 10000
+2026-02-15 11:20:14,015 [INFO] optimizer: ============================================================
+2026-02-15 11:20:14,015 [INFO] optimizer: OPTIMIZER RESULT: n*=400 LONG straddles @ strike 52
+2026-02-15 11:20:14,015 [INFO] optimizer:   Expected profit: $8630.72
+2026-02-15 11:20:14,015 [INFO] optimizer:   Gain/contract: $29.2180 | Pos cost/contract: $4.0200
+2026-02-15 11:20:14,015 [INFO] optimizer:   Rebalancing cost: $1448.48 | Z=0.69
+2026-02-15 11:20:14,015 [INFO] optimizer:   Inputs: S0=52.13 sigma=0.2900 sigma_hat=0.2312 L=10000 Gamma=36.4473
+2026-02-15 11:20:14,015 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-15 11:20:14,015 [INFO] optimizer: ============================================================
+2026-02-15 11:20:14,015 [INFO] trading_engine: HOLD THROUGH week 4: same direction=LONG strike=53 (saved $3200 in repositioning costs)
+2026-02-15 11:20:17,177 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=12130
+2026-02-15 11:20:17,178 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -10430 -> ~-430 | limit 10000 (104%)
+2026-02-15 11:20:36,233 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=13216
+2026-02-15 11:20:36,233 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -11023 -> ~-1023 | limit 10000 (110%)
+2026-02-15 11:20:46,392 [INFO] rit_api: MARKET BUY 9383 RTM -> order_id=13695
+2026-02-15 11:20:46,392 [INFO] trading_engine: HEDGE BUY 9383 RTM | delta -9383 -> ~-0 | limit 10000 (94%)
+2026-02-15 11:20:59,290 [INFO] trading_engine: ENTERING UNWIND at tick 270
+2026-02-15 11:20:59,407 [INFO] rit_api: MARKET SELL 100 RTM1C53 -> order_id=14336
+2026-02-15 11:20:59,468 [INFO] rit_api: MARKET SELL 100 RTM1C53 -> order_id=14337
+2026-02-15 11:20:59,528 [INFO] rit_api: MARKET SELL 100 RTM1C53 -> order_id=14338
+2026-02-15 11:20:59,588 [INFO] rit_api: MARKET SELL 100 RTM1C53 -> order_id=14339
+2026-02-15 11:20:59,648 [INFO] rit_api: MARKET SELL 100 RTM1P53 -> order_id=14340
+2026-02-15 11:20:59,710 [INFO] rit_api: MARKET SELL 100 RTM1P53 -> order_id=14341
+2026-02-15 11:20:59,768 [INFO] rit_api: MARKET SELL 100 RTM1P53 -> order_id=14342
+2026-02-15 11:20:59,826 [INFO] rit_api: MARKET SELL 100 RTM1P53 -> order_id=14343
+2026-02-15 11:20:59,885 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=14344
+2026-02-15 11:20:59,950 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=14345
+2026-02-15 11:21:00,011 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=14346
+2026-02-15 11:21:00,069 [INFO] rit_api: MARKET SELL 8598 RTM -> order_id=14347
+2026-02-15 11:21:34,449 [ERROR] rit_api: POST /commands/cancel error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:21:39,572 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:21:45,091 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:21:50,605 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:21:56,132 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:22:01,655 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:22:07,177 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:23:13,095 [INFO] news_parser: NEWS: Delta limit = 11000
+2026-02-15 11:23:13,095 [INFO] news_parser: NEWS: Penalty rate = 3.00%
+2026-02-15 11:23:48,270 [INFO] news_parser: NEWS: Forecast vol next week = 32.0% - 37.0% (mid=34.5%) [NOW USING FORECAST]
+2026-02-15 11:23:48,276 [INFO] trading_engine: WEEK 1 positioning tick 36
+2026-02-15 11:23:49,283 [INFO] optimizer: ============================================================
+2026-02-15 11:23:49,283 [INFO] optimizer: OPTIMIZER RESULT: n*=400 LONG straddles @ strike 49
+2026-02-15 11:23:49,283 [INFO] optimizer:   Expected profit: $13458.81
+2026-02-15 11:23:49,283 [INFO] optimizer:   Gain/contract: $38.5852 | Pos cost/contract: $4.0200
+2026-02-15 11:23:49,283 [INFO] optimizer:   Rebalancing cost: $367.28 | Z=1.57
+2026-02-15 11:23:49,283 [INFO] optimizer:   Inputs: S0=48.91 sigma=0.3450 sigma_hat=0.1524 L=11000 Gamma=17.4880
+2026-02-15 11:23:49,283 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-15 11:23:49,284 [INFO] optimizer: ============================================================
+2026-02-15 11:23:49,340 [INFO] rit_api: MARKET BUY 100 RTM1C49 -> order_id=1922
+2026-02-15 11:23:49,398 [INFO] rit_api: MARKET BUY 100 RTM1P49 -> order_id=1923
+2026-02-15 11:23:49,455 [INFO] rit_api: MARKET BUY 100 RTM1C49 -> order_id=1924
+2026-02-15 11:23:49,512 [INFO] rit_api: MARKET BUY 100 RTM1P49 -> order_id=1926
+2026-02-15 11:23:49,570 [INFO] rit_api: MARKET BUY 100 RTM1C49 -> order_id=1927
+2026-02-15 11:23:49,629 [INFO] rit_api: MARKET BUY 100 RTM1P49 -> order_id=1928
+2026-02-15 11:23:49,689 [INFO] rit_api: MARKET BUY 100 RTM1C49 -> order_id=1929
+2026-02-15 11:23:49,748 [INFO] rit_api: MARKET BUY 100 RTM1P49 -> order_id=1930
+2026-02-15 11:23:49,748 [INFO] trading_engine: STRADDLE BUY 400/400 @ K=49: 8 orders (400C+400P filled)
+2026-02-15 11:23:49,749 [INFO] trading_engine: POSITIONED: 400 LONG straddles @ 49 (week 1, expected $13459)
+2026-02-15 11:24:27,455 [INFO] news_parser: NEWS: Current realized vol = 36.0% (history: ['36%']) [NOW USING REALIZED]
+2026-02-15 11:24:27,458 [INFO] trading_engine: WEEK 2 positioning tick 75
+2026-02-15 11:24:27,459 [INFO] optimizer: ============================================================
+2026-02-15 11:24:27,459 [INFO] optimizer: OPTIMIZER RESULT: n*=400 LONG straddles @ strike 49
+2026-02-15 11:24:27,459 [INFO] optimizer:   Expected profit: $16255.63
+2026-02-15 11:24:27,459 [INFO] optimizer:   Gain/contract: $45.8092 | Pos cost/contract: $4.0200
+2026-02-15 11:24:27,460 [INFO] optimizer:   Rebalancing cost: $460.05 | Z=1.51
+2026-02-15 11:24:27,460 [INFO] optimizer:   Inputs: S0=48.62 sigma=0.3600 sigma_hat=0.1383 L=11000 Gamma=18.2183
+2026-02-15 11:24:27,460 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-15 11:24:27,460 [INFO] optimizer: ============================================================
+2026-02-15 11:24:27,460 [INFO] trading_engine: HOLD THROUGH week 2: same direction=LONG strike=49 (saved $3200 in repositioning costs)
+2026-02-15 11:24:54,747 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=5500
+2026-02-15 11:24:54,747 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 10165 -> ~165 | limit 11000 (92%)
+2026-02-15 11:25:00,803 [INFO] rit_api: MARKET SELL 9778 RTM -> order_id=5793
+2026-02-15 11:25:00,803 [INFO] trading_engine: HEDGE SELL 9778 RTM | delta 9778 -> ~-0 | limit 11000 (89%)
+2026-02-15 11:25:04,685 [INFO] news_parser: NEWS: Forecast vol next week = 13.0% - 18.0% (mid=15.5%) [NOW USING FORECAST]
+2026-02-15 11:25:05,820 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=6037
+2026-02-15 11:25:05,820 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 12008 -> ~2008 | limit 11000 (109%)
+2026-02-15 11:25:42,936 [INFO] news_parser: NEWS: Current realized vol = 18.0% (history: ['36%', '18%']) [NOW USING REALIZED]
+2026-02-15 11:25:42,939 [INFO] trading_engine: WEEK 3 positioning tick 150
+2026-02-15 11:25:42,940 [INFO] optimizer: ============================================================
+2026-02-15 11:25:42,941 [INFO] optimizer: OPTIMIZER RESULT: n*=400 SHORT straddles @ strike 51
+2026-02-15 11:25:42,941 [INFO] optimizer:   Expected profit: $34079.77
+2026-02-15 11:25:42,941 [INFO] optimizer:   Gain/contract: $91.4584 | Pos cost/contract: $4.0200
+2026-02-15 11:25:42,941 [INFO] optimizer:   Rebalancing cost: $895.60 | Z=0.67
+2026-02-15 11:25:42,941 [INFO] optimizer:   Inputs: S0=51.38 sigma=0.1800 sigma_hat=0.3460 L=11000 Gamma=41.2506
+2026-02-15 11:25:42,941 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-15 11:25:42,941 [INFO] optimizer: ============================================================
+2026-02-15 11:25:42,941 [INFO] trading_engine: REPOSITIONING: dir 1->-1, strike 49->51 (f=$34080)
+2026-02-15 11:25:42,999 [INFO] trading_engine: CLOSE: cancel phase - waiting for cancels to settle
+2026-02-15 11:25:49,056 [INFO] rit_api: MARKET SELL 100 RTM1C49 -> order_id=8237
+2026-02-15 11:25:49,115 [INFO] rit_api: MARKET SELL 100 RTM1C49 -> order_id=8278
+2026-02-15 11:25:49,174 [INFO] rit_api: MARKET SELL 100 RTM1C49 -> order_id=8279
+2026-02-15 11:25:49,234 [INFO] rit_api: MARKET SELL 100 RTM1C49 -> order_id=8280
+2026-02-15 11:25:49,295 [INFO] rit_api: MARKET SELL 100 RTM1P49 -> order_id=8281
+2026-02-15 11:25:49,364 [INFO] rit_api: MARKET SELL 100 RTM1P49 -> order_id=8283
+2026-02-15 11:25:49,424 [INFO] rit_api: MARKET SELL 100 RTM1P49 -> order_id=8284
+2026-02-15 11:25:49,483 [INFO] rit_api: MARKET SELL 100 RTM1P49 -> order_id=8285
+2026-02-15 11:25:50,091 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=8335
+2026-02-15 11:25:50,151 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=8338
+2026-02-15 11:25:50,212 [INFO] rit_api: MARKET BUY 9778 RTM -> order_id=8339
+2026-02-15 11:25:50,958 [INFO] trading_engine: Position flat. Ready to reposition.
+2026-02-15 11:25:51,970 [INFO] trading_engine: Using saved optimizer result: n=400 SHORT @ K=51
+2026-02-15 11:25:52,028 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=8436
+2026-02-15 11:25:52,087 [INFO] rit_api: MARKET SELL 100 RTM1P51 -> order_id=8439
+2026-02-15 11:25:52,146 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=8441
+2026-02-15 11:25:52,208 [INFO] rit_api: MARKET SELL 100 RTM1P51 -> order_id=8442
+2026-02-15 11:25:52,269 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=8444
+2026-02-15 11:25:52,329 [INFO] rit_api: MARKET SELL 100 RTM1P51 -> order_id=8445
+2026-02-15 11:25:52,392 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=8446
+2026-02-15 11:25:52,454 [INFO] rit_api: MARKET SELL 100 RTM1P51 -> order_id=8447
+2026-02-15 11:25:52,455 [INFO] trading_engine: STRADDLE SELL 400/400 @ K=51: 8 orders (400C+400P filled)
+2026-02-15 11:25:52,455 [INFO] trading_engine: POSITIONED: 400 SHORT straddles @ 51 (week 3, expected $34080)
+2026-02-15 11:25:53,059 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=8493
+2026-02-15 11:25:53,060 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -19546 -> ~-9546 | limit 11000 (178%)
+2026-02-15 11:25:58,096 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=8743
+2026-02-15 11:25:58,097 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -11080 -> ~-1080 | limit 11000 (101%)
+2026-02-15 11:26:17,184 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=9683
+2026-02-15 11:26:17,185 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -10625 -> ~-625 | limit 11000 (97%)
+2026-02-15 11:26:20,116 [INFO] news_parser: NEWS: Forecast vol next week = 31.0% - 36.0% (mid=33.5%) [NOW USING FORECAST]
+2026-02-15 11:26:22,248 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=9910
+2026-02-15 11:26:22,249 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 11435 -> ~1435 | limit 11000 (104%)
+2026-02-15 11:26:58,274 [INFO] news_parser: NEWS: Current realized vol = 35.0% (history: ['36%', '18%', '35%']) [NOW USING REALIZED]
+2026-02-15 11:26:58,276 [INFO] trading_engine: WEEK 4 positioning tick 225
+2026-02-15 11:26:58,277 [INFO] optimizer: ============================================================
+2026-02-15 11:26:58,277 [INFO] optimizer: OPTIMIZER RESULT: n*=400 LONG straddles @ strike 52
+2026-02-15 11:26:58,278 [INFO] optimizer:   Expected profit: $26098.93
+2026-02-15 11:26:58,278 [INFO] optimizer:   Gain/contract: $72.4860 | Pos cost/contract: $4.0200
+2026-02-15 11:26:58,278 [INFO] optimizer:   Rebalancing cost: $1287.48 | Z=0.90
+2026-02-15 11:26:58,278 [INFO] optimizer:   Inputs: S0=51.95 sigma=0.3500 sigma_hat=0.1753 L=11000 Gamma=30.4018
+2026-02-15 11:26:58,278 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-15 11:26:58,278 [INFO] optimizer: ============================================================
+2026-02-15 11:26:58,278 [INFO] trading_engine: REPOSITIONING: dir -1->1, strike 51->52 (f=$26099)
+2026-02-15 11:26:58,335 [INFO] trading_engine: CLOSE: cancel phase - waiting for cancels to settle
+2026-02-15 11:27:04,426 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=11898
+2026-02-15 11:27:04,484 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=11899
+2026-02-15 11:27:04,543 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=11900
+2026-02-15 11:27:04,605 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=11901
+2026-02-15 11:27:04,663 [INFO] rit_api: MARKET BUY 100 RTM1P51 -> order_id=11902
+2026-02-15 11:27:04,720 [INFO] rit_api: MARKET BUY 100 RTM1P51 -> order_id=11903
+2026-02-15 11:27:04,781 [INFO] rit_api: MARKET BUY 100 RTM1P51 -> order_id=11904
+2026-02-15 11:27:04,840 [INFO] rit_api: MARKET BUY 100 RTM1P51 -> order_id=11905
+2026-02-15 11:27:05,377 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=11949
+2026-02-15 11:27:05,435 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=11950
+2026-02-15 11:27:06,276 [INFO] trading_engine: Position flat. Ready to reposition.
+2026-02-15 11:27:07,283 [INFO] trading_engine: Using saved optimizer result: n=400 LONG @ K=52
+2026-02-15 11:27:07,341 [INFO] rit_api: MARKET BUY 100 RTM1C52 -> order_id=12041
+2026-02-15 11:27:07,399 [INFO] rit_api: MARKET BUY 100 RTM1P52 -> order_id=12042
+2026-02-15 11:27:07,459 [INFO] rit_api: MARKET BUY 100 RTM1C52 -> order_id=12045
+2026-02-15 11:27:07,516 [INFO] rit_api: MARKET BUY 100 RTM1P52 -> order_id=12046
+2026-02-15 11:27:07,576 [INFO] rit_api: MARKET BUY 100 RTM1C52 -> order_id=12047
+2026-02-15 11:27:07,642 [INFO] rit_api: MARKET BUY 100 RTM1P52 -> order_id=12048
+2026-02-15 11:27:07,702 [INFO] rit_api: MARKET BUY 100 RTM1C52 -> order_id=12049
+2026-02-15 11:27:07,759 [INFO] rit_api: MARKET BUY 100 RTM1P52 -> order_id=12050
+2026-02-15 11:27:07,760 [INFO] trading_engine: STRADDLE BUY 400/400 @ K=52: 8 orders (400C+400P filled)
+2026-02-15 11:27:07,760 [INFO] trading_engine: POSITIONED: 400 LONG straddles @ 52 (week 4, expected $26099)
+2026-02-15 11:27:29,542 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=13064
+2026-02-15 11:27:29,542 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 10361 -> ~361 | limit 11000 (94%)
+2026-02-15 11:27:35,587 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=13337
+2026-02-15 11:27:35,588 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -12672 -> ~-2672 | limit 11000 (115%)
+2026-02-15 11:27:41,593 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=13611
+2026-02-15 11:27:41,593 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 12734 -> ~2734 | limit 11000 (116%)
+2026-02-15 11:27:43,524 [INFO] trading_engine: ENTERING UNWIND at tick 270
+2026-02-15 11:27:43,644 [INFO] rit_api: MARKET SELL 100 RTM1C52 -> order_id=13707
+2026-02-15 11:27:43,709 [INFO] rit_api: MARKET SELL 100 RTM1C52 -> order_id=13708
+2026-02-15 11:27:43,768 [INFO] rit_api: MARKET SELL 100 RTM1C52 -> order_id=13709
+2026-02-15 11:27:43,826 [INFO] rit_api: MARKET SELL 100 RTM1C52 -> order_id=13710
+2026-02-15 11:27:43,888 [INFO] rit_api: MARKET SELL 100 RTM1P52 -> order_id=13711
+2026-02-15 11:27:43,949 [INFO] rit_api: MARKET SELL 100 RTM1P52 -> order_id=13713
+2026-02-15 11:27:44,007 [INFO] rit_api: MARKET SELL 100 RTM1P52 -> order_id=13715
+2026-02-15 11:27:44,065 [INFO] rit_api: MARKET SELL 100 RTM1P52 -> order_id=13716
+2026-02-15 11:27:44,129 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=13718
+2026-02-15 11:28:18,630 [ERROR] rit_api: POST /commands/cancel error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:28:23,740 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:28:29,257 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:28:34,794 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:28:40,325 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:28:45,846 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:28:51,370 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:29:57,682 [INFO] news_parser: NEWS: Delta limit = 12000
+2026-02-15 11:29:57,683 [INFO] news_parser: NEWS: Penalty rate = 3.00%
+2026-02-15 11:30:32,897 [INFO] news_parser: NEWS: Forecast vol next week = 28.0% - 33.0% (mid=30.5%) [NOW USING FORECAST]
+2026-02-15 11:30:32,900 [INFO] trading_engine: WEEK 1 positioning tick 36
+2026-02-15 11:30:33,866 [INFO] optimizer: Not profitable: gain/contract=$3.7367, pos_cost=$4.0200
+2026-02-15 11:30:33,866 [INFO] trading_engine: No profitable trade for this week (n*=0)
+2026-02-15 11:31:12,006 [INFO] news_parser: NEWS: Current realized vol = 29.0% (history: ['29%']) [NOW USING REALIZED]
+2026-02-15 11:31:12,009 [INFO] trading_engine: WEEK 2 positioning tick 75
+2026-02-15 11:31:13,032 [INFO] optimizer: ============================================================
+2026-02-15 11:31:13,032 [INFO] optimizer: OPTIMIZER RESULT: n*=400 SHORT straddles @ strike 51
+2026-02-15 11:31:13,032 [INFO] optimizer:   Expected profit: $22698.90
+2026-02-15 11:31:13,033 [INFO] optimizer:   Gain/contract: $61.7607 | Pos cost/contract: $4.0200
+2026-02-15 11:31:13,033 [INFO] optimizer:   Rebalancing cost: $397.37 | Z=1.40
+2026-02-15 11:31:13,033 [INFO] optimizer:   Inputs: S0=51.22 sigma=0.2900 sigma_hat=0.4452 L=12000 Gamma=21.4359
+2026-02-15 11:31:13,033 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-15 11:31:13,033 [INFO] optimizer: ============================================================
+2026-02-15 11:31:13,092 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=4873
+2026-02-15 11:31:13,152 [INFO] rit_api: MARKET SELL 100 RTM1P51 -> order_id=4892
+2026-02-15 11:31:13,212 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=4896
+2026-02-15 11:31:13,271 [INFO] rit_api: MARKET SELL 100 RTM1P51 -> order_id=4899
+2026-02-15 11:31:13,331 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=4902
+2026-02-15 11:31:13,397 [INFO] rit_api: MARKET SELL 100 RTM1P51 -> order_id=4904
+2026-02-15 11:31:13,455 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=4906
+2026-02-15 11:31:13,515 [INFO] rit_api: MARKET SELL 100 RTM1P51 -> order_id=4909
+2026-02-15 11:31:13,516 [INFO] trading_engine: STRADDLE SELL 400/400 @ K=51: 8 orders (400C+400P filled)
+2026-02-15 11:31:13,516 [INFO] trading_engine: POSITIONED: 400 SHORT straddles @ 51 (week 2, expected $22699)
+2026-02-15 11:31:23,211 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=5737
+2026-02-15 11:31:23,212 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -10805 -> ~-805 | limit 12000 (90%)
+2026-02-15 11:31:49,214 [INFO] news_parser: NEWS: Forecast vol next week = 13.0% - 18.0% (mid=15.5%) [NOW USING FORECAST]
+2026-02-15 11:31:49,342 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=7433
+2026-02-15 11:31:49,343 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -12764 -> ~-2764 | limit 12000 (106%)
+2026-02-15 11:32:04,433 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=8161
+2026-02-15 11:32:04,434 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 14525 -> ~4525 | limit 12000 (121%)
+2026-02-15 11:32:18,475 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=8893
+2026-02-15 11:32:18,475 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 11403 -> ~1403 | limit 12000 (95%)
+2026-02-15 11:32:27,375 [INFO] news_parser: NEWS: Current realized vol = 15.0% (history: ['29%', '15%']) [NOW USING REALIZED]
+2026-02-15 11:32:27,379 [INFO] trading_engine: WEEK 3 positioning tick 150
+2026-02-15 11:32:27,381 [INFO] optimizer: ============================================================
+2026-02-15 11:32:27,381 [INFO] optimizer: OPTIMIZER RESULT: n*=400 SHORT straddles @ strike 50
+2026-02-15 11:32:27,381 [INFO] optimizer:   Expected profit: $30763.57
+2026-02-15 11:32:27,381 [INFO] optimizer:   Gain/contract: $82.5872 | Pos cost/contract: $4.0200
+2026-02-15 11:32:27,381 [INFO] optimizer:   Rebalancing cost: $663.31 | Z=0.59
+2026-02-15 11:32:27,382 [INFO] optimizer:   Inputs: S0=50.22 sigma=0.1500 sigma_hat=0.2982 L=12000 Gamma=51.2400
+2026-02-15 11:32:27,382 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-15 11:32:27,382 [INFO] optimizer: ============================================================
+2026-02-15 11:32:27,382 [INFO] trading_engine: HOLD THROUGH week 3: same direction=SHORT strike=51 (saved $3200 in repositioning costs)
+2026-02-15 11:32:27,502 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=9395
+2026-02-15 11:32:27,503 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 14980 -> ~4980 | limit 12000 (125%)
+2026-02-15 11:32:51,623 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=10680
+2026-02-15 11:32:51,624 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -11339 -> ~-1339 | limit 12000 (94%)
+2026-02-15 11:33:02,700 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=11250
+2026-02-15 11:33:02,700 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -11114 -> ~-1114 | limit 12000 (93%)
+2026-02-15 11:33:04,561 [INFO] news_parser: NEWS: Forecast vol next week = 6.0% - 11.0% (mid=8.5%) [NOW USING FORECAST]
+2026-02-15 11:33:07,705 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=11473
+2026-02-15 11:33:07,705 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -11687 -> ~-1687 | limit 12000 (97%)
+2026-02-15 11:33:13,705 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=11728
+2026-02-15 11:33:13,706 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 18039 -> ~8039 | limit 12000 (150%)
+2026-02-15 11:33:18,724 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=11945
+2026-02-15 11:33:18,724 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 15964 -> ~5964 | limit 12000 (133%)
+2026-02-15 11:33:24,751 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=12229
+2026-02-15 11:33:24,751 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 17240 -> ~7240 | limit 12000 (144%)
+2026-02-15 11:33:29,773 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=12443
+2026-02-15 11:33:29,774 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 16788 -> ~6788 | limit 12000 (140%)
+2026-02-15 11:33:35,855 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=12698
+2026-02-15 11:33:35,855 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 10957 -> ~957 | limit 12000 (91%)
+2026-02-15 11:33:42,771 [INFO] news_parser: NEWS: Current realized vol = 9.0% (history: ['29%', '15%', '9%']) [NOW USING REALIZED]
+2026-02-15 11:33:42,774 [INFO] trading_engine: WEEK 4 positioning tick 225
+2026-02-15 11:33:42,776 [INFO] optimizer: ============================================================
+2026-02-15 11:33:42,776 [INFO] optimizer: OPTIMIZER RESULT: n*=400 SHORT straddles @ strike 50
+2026-02-15 11:33:42,776 [INFO] optimizer:   Expected profit: $14447.66
+2026-02-15 11:33:42,776 [INFO] optimizer:   Gain/contract: $43.1794 | Pos cost/contract: $4.0200
+2026-02-15 11:33:42,776 [INFO] optimizer:   Rebalancing cost: $1216.10 | Z=0.25
+2026-02-15 11:33:42,776 [INFO] optimizer:   Inputs: S0=50.05 sigma=0.0900 sigma_hat=0.1509 L=12000 Gamma=122.2932
+2026-02-15 11:33:42,776 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-15 11:33:42,776 [INFO] optimizer: ============================================================
+2026-02-15 11:33:42,777 [INFO] trading_engine: HOLD THROUGH week 4: same direction=SHORT strike=51 (saved $3200 in repositioning costs)
+2026-02-15 11:34:28,038 [INFO] trading_engine: ENTERING UNWIND at tick 270
+2026-02-15 11:34:28,154 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=15089
+2026-02-15 11:34:28,212 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=15090
+2026-02-15 11:34:28,269 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=15091
+2026-02-15 11:34:28,327 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=15092
+2026-02-15 11:34:28,385 [INFO] rit_api: MARKET BUY 100 RTM1P51 -> order_id=15093
+2026-02-15 11:34:28,448 [INFO] rit_api: MARKET BUY 100 RTM1P51 -> order_id=15094
+2026-02-15 11:34:28,506 [INFO] rit_api: MARKET BUY 100 RTM1P51 -> order_id=15095
+2026-02-15 11:34:28,565 [INFO] rit_api: MARKET BUY 100 RTM1P51 -> order_id=15096
+2026-02-15 11:34:28,626 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=15097
+2026-02-15 11:34:28,691 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=15098
+2026-02-15 11:34:28,750 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=15099
+2026-02-15 11:34:58,169 [WARNING] rit_api: POST /commands/cancel returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Simulation is not active."}
+2026-02-15 11:36:43,723 [INFO] news_parser: NEWS: Delta limit = 11000
+2026-02-15 11:36:43,724 [INFO] news_parser: NEWS: Penalty rate = 5.00%
+2026-02-15 11:37:18,939 [INFO] news_parser: NEWS: Forecast vol next week = 12.0% - 17.0% (mid=14.5%) [NOW USING FORECAST]
+2026-02-15 11:37:18,942 [INFO] trading_engine: WEEK 1 positioning tick 36
+2026-02-15 11:37:19,946 [INFO] optimizer: ============================================================
+2026-02-15 11:37:19,947 [INFO] optimizer: OPTIMIZER RESULT: n*=400 SHORT straddles @ strike 50
+2026-02-15 11:37:19,947 [INFO] optimizer:   Expected profit: $5234.09
+2026-02-15 11:37:19,947 [INFO] optimizer:   Gain/contract: $18.4746 | Pos cost/contract: $4.0200
+2026-02-15 11:37:19,947 [INFO] optimizer:   Rebalancing cost: $547.76 | Z=0.70
+2026-02-15 11:37:19,948 [INFO] optimizer:   Inputs: S0=50.43 sigma=0.1450 sigma_hat=0.2007 L=11000 Gamma=39.2416
+2026-02-15 11:37:19,948 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-15 11:37:19,948 [INFO] optimizer: ============================================================
+2026-02-15 11:37:20,010 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=2446
+2026-02-15 11:37:20,072 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=2448
+2026-02-15 11:37:20,130 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=2450
+2026-02-15 11:37:20,189 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=2452
+2026-02-15 11:37:20,248 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=2453
+2026-02-15 11:37:20,306 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=2455
+2026-02-15 11:37:20,364 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=2456
+2026-02-15 11:37:20,427 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=2457
+2026-02-15 11:37:20,428 [INFO] trading_engine: STRADDLE SELL 400/400 @ K=50: 8 orders (400C+400P filled)
+2026-02-15 11:37:20,428 [INFO] trading_engine: POSITIONED: 400 SHORT straddles @ 50 (week 1, expected $5234)
+2026-02-15 11:37:26,098 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=2728
+2026-02-15 11:37:26,098 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -12840 -> ~-2840 | limit 11000 (117%)
+2026-02-15 11:37:31,123 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=2999
+2026-02-15 11:37:31,123 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -11481 -> ~-1481 | limit 11000 (104%)
+2026-02-15 11:37:43,151 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=3538
+2026-02-15 11:37:43,151 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 10879 -> ~879 | limit 11000 (99%)
+2026-02-15 11:37:58,125 [INFO] news_parser: NEWS: Current realized vol = 17.0% (history: ['17%']) [NOW USING REALIZED]
+2026-02-15 11:37:58,127 [INFO] trading_engine: WEEK 2 positioning tick 75
+2026-02-15 11:37:58,129 [INFO] optimizer: ============================================================
+2026-02-15 11:37:58,129 [INFO] optimizer: OPTIMIZER RESULT: n*=400 SHORT straddles @ strike 50
+2026-02-15 11:37:58,129 [INFO] optimizer:   Expected profit: $8615.95
+2026-02-15 11:37:58,129 [INFO] optimizer:   Gain/contract: $26.9038 | Pos cost/contract: $4.0200
+2026-02-15 11:37:58,129 [INFO] optimizer:   Rebalancing cost: $537.56 | Z=0.75
+2026-02-15 11:37:58,129 [INFO] optimizer:   Inputs: S0=50.37 sigma=0.1700 sigma_hat=0.2430 L=11000 Gamma=36.5717
+2026-02-15 11:37:58,129 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-15 11:37:58,129 [INFO] optimizer: ============================================================
+2026-02-15 11:37:58,129 [INFO] trading_engine: HOLD THROUGH week 2: same direction=SHORT strike=50 (saved $3200 in repositioning costs)
+2026-02-15 11:38:35,301 [INFO] news_parser: NEWS: Forecast vol next week = 21.0% - 26.0% (mid=23.5%) [NOW USING FORECAST]
+2026-02-15 11:38:52,549 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=6866
+2026-02-15 11:38:52,550 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -10004 -> ~-4 | limit 11000 (91%)
+2026-02-15 11:39:13,571 [INFO] news_parser: NEWS: Current realized vol = 23.0% (history: ['17%', '23%']) [NOW USING REALIZED]
+2026-02-15 11:39:13,574 [INFO] trading_engine: WEEK 3 positioning tick 150
+2026-02-15 11:39:13,576 [INFO] optimizer: ============================================================
+2026-02-15 11:39:13,576 [INFO] optimizer: OPTIMIZER RESULT: n*=400 LONG straddles @ strike 52
+2026-02-15 11:39:13,576 [INFO] optimizer:   Expected profit: $5617.67
+2026-02-15 11:39:13,576 [INFO] optimizer:   Gain/contract: $19.7040 | Pos cost/contract: $4.0200
+2026-02-15 11:39:13,576 [INFO] optimizer:   Rebalancing cost: $655.93 | Z=0.84
+2026-02-15 11:39:13,576 [INFO] optimizer:   Inputs: S0=51.88 sigma=0.2300 sigma_hat=0.1722 L=11000 Gamma=32.7472
+2026-02-15 11:39:13,576 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-15 11:39:13,576 [INFO] optimizer: ============================================================
+2026-02-15 11:39:13,576 [INFO] trading_engine: REPOSITIONING: dir -1->1, strike 50->52 (f=$5618)
+2026-02-15 11:39:13,633 [INFO] trading_engine: CLOSE: cancel phase - waiting for cancels to settle
+2026-02-15 11:39:19,716 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=8254
+2026-02-15 11:39:19,784 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=8255
+2026-02-15 11:39:19,846 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=8256
+2026-02-15 11:39:19,904 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=8257
+2026-02-15 11:39:19,962 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=8258
+2026-02-15 11:39:20,020 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=8259
+2026-02-15 11:39:20,084 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=8260
+2026-02-15 11:39:20,142 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=8261
+2026-02-15 11:39:20,741 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=8304
+2026-02-15 11:39:20,799 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=8305
+2026-02-15 11:39:21,606 [INFO] trading_engine: Position flat. Ready to reposition.
+2026-02-15 11:39:22,608 [INFO] trading_engine: Using saved optimizer result: n=400 LONG @ K=52
+2026-02-15 11:39:22,667 [INFO] rit_api: MARKET BUY 100 RTM1C52 -> order_id=8390
+2026-02-15 11:39:22,724 [INFO] rit_api: MARKET BUY 100 RTM1P52 -> order_id=8391
+2026-02-15 11:39:22,781 [INFO] rit_api: MARKET BUY 100 RTM1C52 -> order_id=8392
+2026-02-15 11:39:22,839 [INFO] rit_api: MARKET BUY 100 RTM1P52 -> order_id=8393
+2026-02-15 11:39:22,900 [INFO] rit_api: MARKET BUY 100 RTM1C52 -> order_id=8394
+2026-02-15 11:39:22,958 [INFO] rit_api: MARKET BUY 100 RTM1P52 -> order_id=8395
+2026-02-15 11:39:23,017 [INFO] rit_api: MARKET BUY 100 RTM1C52 -> order_id=8396
+2026-02-15 11:39:23,074 [INFO] rit_api: MARKET BUY 100 RTM1P52 -> order_id=8397
+2026-02-15 11:39:23,074 [INFO] trading_engine: STRADDLE BUY 400/400 @ K=52: 8 orders (400C+400P filled)
+2026-02-15 11:39:23,075 [INFO] trading_engine: POSITIONED: 400 LONG straddles @ 52 (week 3, expected $5618)
+2026-02-15 11:39:29,762 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=8835
+2026-02-15 11:39:29,762 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -13145 -> ~-3145 | limit 11000 (119%)
+2026-02-15 11:39:50,763 [INFO] news_parser: NEWS: Forecast vol next week = 26.0% - 31.0% (mid=28.5%) [NOW USING FORECAST]
+2026-02-15 11:39:51,887 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=9833
+2026-02-15 11:39:51,888 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 10069 -> ~69 | limit 11000 (92%)
+2026-02-15 11:40:10,997 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=10727
+2026-02-15 11:40:10,997 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 10760 -> ~760 | limit 11000 (98%)
+2026-02-15 11:40:28,962 [INFO] news_parser: NEWS: Current realized vol = 28.0% (history: ['17%', '23%', '28%']) [NOW USING REALIZED]
+2026-02-15 11:40:28,965 [INFO] trading_engine: WEEK 4 positioning tick 225
+2026-02-15 11:40:28,966 [INFO] optimizer: ============================================================
+2026-02-15 11:40:28,966 [INFO] optimizer: OPTIMIZER RESULT: n*=400 LONG straddles @ strike 53
+2026-02-15 11:40:28,967 [INFO] optimizer:   Expected profit: $8552.93
+2026-02-15 11:40:28,967 [INFO] optimizer:   Gain/contract: $29.4197 | Pos cost/contract: $4.0200
+2026-02-15 11:40:28,967 [INFO] optimizer:   Rebalancing cost: $1606.96 | Z=0.74
+2026-02-15 11:40:28,967 [INFO] optimizer:   Inputs: S0=52.66 sigma=0.2800 sigma_hat=0.2207 L=11000 Gamma=37.1299
+2026-02-15 11:40:28,967 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-15 11:40:28,968 [INFO] optimizer: ============================================================
+2026-02-15 11:40:28,968 [INFO] trading_engine: HOLD THROUGH week 4: same direction=LONG strike=52 (saved $3200 in repositioning costs)
+2026-02-15 11:40:30,094 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=11623
+2026-02-15 11:40:30,094 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -11349 -> ~-1349 | limit 11000 (103%)
+2026-02-15 11:40:46,200 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=12461
+2026-02-15 11:40:46,201 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 10016 -> ~16 | limit 11000 (91%)
+2026-02-15 11:40:51,252 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=12686
+2026-02-15 11:40:51,252 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -11085 -> ~-1085 | limit 11000 (101%)
+2026-02-15 11:41:03,268 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=13232
+2026-02-15 11:41:03,269 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 10501 -> ~501 | limit 11000 (95%)
+2026-02-15 11:41:14,372 [INFO] trading_engine: ENTERING UNWIND at tick 270
+2026-02-15 11:41:14,497 [INFO] rit_api: MARKET SELL 100 RTM1C52 -> order_id=13728
+2026-02-15 11:41:14,556 [INFO] rit_api: MARKET SELL 100 RTM1C52 -> order_id=13729
+2026-02-15 11:41:14,615 [INFO] rit_api: MARKET SELL 100 RTM1C52 -> order_id=13730
+2026-02-15 11:41:14,675 [INFO] rit_api: MARKET SELL 100 RTM1C52 -> order_id=13731
+2026-02-15 11:41:14,736 [INFO] rit_api: MARKET SELL 100 RTM1P52 -> order_id=13732
+2026-02-15 11:41:14,796 [INFO] rit_api: MARKET SELL 100 RTM1P52 -> order_id=13733
+2026-02-15 11:41:14,859 [INFO] rit_api: MARKET SELL 100 RTM1P52 -> order_id=13734
+2026-02-15 11:41:14,917 [INFO] rit_api: MARKET SELL 100 RTM1P52 -> order_id=13735
+2026-02-15 11:41:14,977 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=13736
+2026-02-15 11:41:49,411 [ERROR] rit_api: POST /commands/cancel error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:41:54,518 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:42:00,035 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:42:05,540 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:42:11,064 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:42:16,583 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:42:22,093 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:42:27,597 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:43:32,959 [INFO] news_parser: NEWS: Delta limit = 5000
+2026-02-15 11:43:32,960 [INFO] news_parser: NEWS: Penalty rate = 1.00%
+2026-02-15 11:44:08,078 [INFO] news_parser: NEWS: Forecast vol next week = 20.0% - 25.0% (mid=22.5%) [NOW USING FORECAST]
+2026-02-15 11:44:08,081 [INFO] trading_engine: WEEK 1 positioning tick 36
+2026-02-15 11:44:09,080 [INFO] optimizer: ============================================================
+2026-02-15 11:44:09,081 [INFO] optimizer: OPTIMIZER RESULT: n*=400 SHORT straddles @ strike 52
+2026-02-15 11:44:09,081 [INFO] optimizer:   Expected profit: $3602.42
+2026-02-15 11:44:09,081 [INFO] optimizer:   Gain/contract: $15.1659 | Pos cost/contract: $4.0200
+2026-02-15 11:44:09,081 [INFO] optimizer:   Rebalancing cost: $855.93 | Z=0.50
+2026-02-15 11:44:09,081 [INFO] optimizer:   Inputs: S0=52.13 sigma=0.2250 sigma_hat=0.2715 L=5000 Gamma=25.1035
+2026-02-15 11:44:09,082 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-15 11:44:09,082 [INFO] optimizer: ============================================================
+2026-02-15 11:44:09,141 [INFO] rit_api: MARKET SELL 100 RTM1C52 -> order_id=2892
+2026-02-15 11:44:09,199 [INFO] rit_api: MARKET SELL 100 RTM1P52 -> order_id=2893
+2026-02-15 11:44:09,256 [INFO] rit_api: MARKET SELL 100 RTM1C52 -> order_id=2894
+2026-02-15 11:44:09,314 [INFO] rit_api: MARKET SELL 100 RTM1P52 -> order_id=2895
+2026-02-15 11:44:09,376 [INFO] rit_api: MARKET SELL 100 RTM1C52 -> order_id=2896
+2026-02-15 11:44:09,434 [INFO] rit_api: MARKET SELL 100 RTM1P52 -> order_id=2897
+2026-02-15 11:44:09,491 [INFO] rit_api: MARKET SELL 100 RTM1C52 -> order_id=2898
+2026-02-15 11:44:09,548 [INFO] rit_api: MARKET SELL 100 RTM1P52 -> order_id=2899
+2026-02-15 11:44:09,549 [INFO] trading_engine: STRADDLE SELL 400/400 @ K=52: 8 orders (400C+400P filled)
+2026-02-15 11:44:09,549 [INFO] trading_engine: POSITIONED: 400 SHORT straddles @ 52 (week 1, expected $3602)
+2026-02-15 11:44:17,207 [INFO] rit_api: MARKET SELL 6126 RTM -> order_id=3355
+2026-02-15 11:44:17,208 [INFO] trading_engine: HEDGE SELL 6126 RTM | delta 6126 -> ~-0 | limit 5000 (123%)
+2026-02-15 11:44:23,273 [INFO] rit_api: MARKET SELL 6257 RTM -> order_id=3633
+2026-02-15 11:44:23,273 [INFO] trading_engine: HEDGE SELL 6257 RTM | delta 6257 -> ~-0 | limit 5000 (125%)
+2026-02-15 11:44:28,345 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=3900
+2026-02-15 11:44:28,346 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -11954 -> ~-1954 | limit 5000 (239%)
+2026-02-15 11:44:37,385 [INFO] rit_api: MARKET SELL 7118 RTM -> order_id=4354
+2026-02-15 11:44:37,385 [INFO] trading_engine: HEDGE SELL 7118 RTM | delta 7118 -> ~-0 | limit 5000 (142%)
+2026-02-15 11:44:44,421 [INFO] rit_api: MARKET BUY 4974 RTM -> order_id=4663
+2026-02-15 11:44:44,421 [INFO] trading_engine: HEDGE BUY 4974 RTM | delta -4974 -> ~-0 | limit 5000 (99%)
+2026-02-15 11:44:47,319 [INFO] news_parser: NEWS: Current realized vol = 21.0% (history: ['21%']) [NOW USING REALIZED]
+2026-02-15 11:44:47,322 [INFO] trading_engine: WEEK 2 positioning tick 75
+2026-02-15 11:44:47,323 [INFO] optimizer: ============================================================
+2026-02-15 11:44:47,323 [INFO] optimizer: OPTIMIZER RESULT: n*=400 SHORT straddles @ strike 51
+2026-02-15 11:44:47,324 [INFO] optimizer:   Expected profit: $2232.94
+2026-02-15 11:44:47,324 [INFO] optimizer:   Gain/contract: $12.1706 | Pos cost/contract: $4.0200
+2026-02-15 11:44:47,324 [INFO] optimizer:   Rebalancing cost: $1027.28 | Z=0.42
+2026-02-15 11:44:47,324 [INFO] optimizer:   Inputs: S0=50.88 sigma=0.2100 sigma_hat=0.2459 L=5000 Gamma=29.8647
+2026-02-15 11:44:47,324 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-15 11:44:47,324 [INFO] optimizer: ============================================================
+2026-02-15 11:44:47,325 [INFO] trading_engine: HOLD THROUGH week 2: same direction=SHORT strike=52 (saved $3200 in repositioning costs)
+2026-02-15 11:44:49,459 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=5088
+2026-02-15 11:44:49,459 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 10572 -> ~572 | limit 5000 (211%)
+2026-02-15 11:44:59,525 [INFO] rit_api: MARKET SELL 6292 RTM -> order_id=5954
+2026-02-15 11:44:59,525 [INFO] trading_engine: HEDGE SELL 6292 RTM | delta 6292 -> ~0 | limit 5000 (126%)
+2026-02-15 11:45:05,511 [INFO] rit_api: MARKET BUY 4485 RTM -> order_id=6360
+2026-02-15 11:45:05,512 [INFO] trading_engine: HEDGE BUY 4485 RTM | delta -4485 -> ~-0 | limit 5000 (90%)
+2026-02-15 11:45:12,559 [INFO] rit_api: MARKET BUY 5932 RTM -> order_id=6690
+2026-02-15 11:45:12,559 [INFO] trading_engine: HEDGE BUY 5932 RTM | delta -5932 -> ~0 | limit 5000 (119%)
+2026-02-15 11:45:20,612 [INFO] rit_api: MARKET SELL 6325 RTM -> order_id=7149
+2026-02-15 11:45:20,612 [INFO] trading_engine: HEDGE SELL 6325 RTM | delta 6325 -> ~0 | limit 5000 (127%)
+2026-02-15 11:45:24,528 [INFO] news_parser: NEWS: Forecast vol next week = 22.0% - 27.0% (mid=24.5%) [NOW USING FORECAST]
+2026-02-15 11:45:25,670 [INFO] rit_api: MARKET BUY 5842 RTM -> order_id=7383
+2026-02-15 11:45:25,670 [INFO] trading_engine: HEDGE BUY 5842 RTM | delta -5842 -> ~-0 | limit 5000 (117%)
+2026-02-15 11:45:32,759 [INFO] rit_api: MARKET SELL 5332 RTM -> order_id=7705
+2026-02-15 11:45:32,759 [INFO] trading_engine: HEDGE SELL 5332 RTM | delta 5332 -> ~0 | limit 5000 (107%)
+2026-02-15 11:45:38,763 [INFO] rit_api: MARKET BUY 4998 RTM -> order_id=7988
+2026-02-15 11:45:38,763 [INFO] trading_engine: HEDGE BUY 4998 RTM | delta -4998 -> ~-0 | limit 5000 (100%)
+2026-02-15 11:46:02,845 [INFO] news_parser: NEWS: Current realized vol = 26.0% (history: ['21%', '26%']) [NOW USING REALIZED]
+2026-02-15 11:46:02,848 [INFO] trading_engine: WEEK 3 positioning tick 150
+2026-02-15 11:46:02,848 [INFO] optimizer: ============================================================
+2026-02-15 11:46:02,849 [INFO] optimizer: OPTIMIZER RESULT: n*=256 LONG straddles @ strike 51
+2026-02-15 11:46:02,849 [INFO] optimizer:   Expected profit: $2293.11
+2026-02-15 11:46:02,849 [INFO] optimizer:   Gain/contract: $16.6790 | Pos cost/contract: $4.0200
+2026-02-15 11:46:02,849 [INFO] optimizer:   Rebalancing cost: $947.60 | Z=0.68
+2026-02-15 11:46:02,849 [INFO] optimizer:   Inputs: S0=51.44 sigma=0.2600 sigma_hat=0.2116 L=5000 Gamma=28.7120
+2026-02-15 11:46:02,849 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-15 11:46:02,849 [INFO] optimizer: ============================================================
+2026-02-15 11:46:02,849 [INFO] trading_engine: HOLD (reposition not worth it): f_new=$2293 <= cost=$4224
+2026-02-15 11:46:02,965 [INFO] rit_api: MARKET BUY 5584 RTM -> order_id=9235
+2026-02-15 11:46:02,965 [INFO] trading_engine: HEDGE BUY 5584 RTM | delta -5584 -> ~-0 | limit 5000 (112%)
+2026-02-15 11:46:07,956 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=9713
+2026-02-15 11:46:07,956 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 10339 -> ~339 | limit 5000 (207%)
+2026-02-15 11:46:12,984 [INFO] rit_api: MARKET BUY 7971 RTM -> order_id=9946
+2026-02-15 11:46:12,985 [INFO] trading_engine: HEDGE BUY 7971 RTM | delta -7971 -> ~0 | limit 5000 (159%)
+2026-02-15 11:46:18,003 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=10237
+2026-02-15 11:46:18,003 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 10801 -> ~801 | limit 5000 (216%)
+2026-02-15 11:46:23,039 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=10559
+2026-02-15 11:46:23,040 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -10146 -> ~-146 | limit 5000 (203%)
+2026-02-15 11:46:32,057 [INFO] rit_api: MARKET BUY 7652 RTM -> order_id=11037
+2026-02-15 11:46:32,058 [INFO] trading_engine: HEDGE BUY 7652 RTM | delta -7652 -> ~0 | limit 5000 (153%)
+2026-02-15 11:46:38,089 [INFO] rit_api: MARKET BUY 4558 RTM -> order_id=11374
+2026-02-15 11:46:38,090 [INFO] trading_engine: HEDGE BUY 4558 RTM | delta -4558 -> ~0 | limit 5000 (91%)
+2026-02-15 11:46:39,981 [INFO] news_parser: NEWS: Forecast vol next week = 22.0% - 27.0% (mid=24.5%) [NOW USING FORECAST]
+2026-02-15 11:46:52,172 [INFO] rit_api: MARKET SELL 4490 RTM -> order_id=12026
+2026-02-15 11:46:52,172 [INFO] trading_engine: HEDGE SELL 4490 RTM | delta 4490 -> ~-0 | limit 5000 (90%)
+2026-02-15 11:46:57,200 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=12293
+2026-02-15 11:46:57,200 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 17134 -> ~7134 | limit 5000 (343%)
+2026-02-15 11:47:04,252 [INFO] rit_api: MARKET SELL 6512 RTM -> order_id=12616
+2026-02-15 11:47:04,253 [INFO] trading_engine: HEDGE SELL 6512 RTM | delta 6512 -> ~0 | limit 5000 (130%)
+2026-02-15 11:47:10,375 [INFO] rit_api: MARKET SELL 4822 RTM -> order_id=12969
+2026-02-15 11:47:10,375 [INFO] trading_engine: HEDGE SELL 4822 RTM | delta 4822 -> ~0 | limit 5000 (96%)
+2026-02-15 11:47:16,307 [INFO] rit_api: MARKET SELL 4552 RTM -> order_id=13237
+2026-02-15 11:47:16,308 [INFO] trading_engine: HEDGE SELL 4552 RTM | delta 4552 -> ~0 | limit 5000 (91%)
+2026-02-15 11:47:18,202 [INFO] news_parser: NEWS: Current realized vol = 27.0% (history: ['21%', '26%', '27%']) [NOW USING REALIZED]
+2026-02-15 11:47:18,205 [INFO] trading_engine: WEEK 4 positioning tick 225
+2026-02-15 11:47:18,206 [INFO] optimizer: ============================================================
+2026-02-15 11:47:18,206 [INFO] optimizer: OPTIMIZER RESULT: n*=26 LONG straddles @ strike 50
+2026-02-15 11:47:18,206 [INFO] optimizer:   Expected profit: $12.03
+2026-02-15 11:47:18,206 [INFO] optimizer:   Gain/contract: $4.9397 | Pos cost/contract: $4.0200
+2026-02-15 11:47:18,206 [INFO] optimizer:   Rebalancing cost: $11.88 | Z=4.69
+2026-02-15 11:47:18,207 [INFO] optimizer:   Inputs: S0=49.94 sigma=0.2700 sigma_hat=0.2605 L=5000 Gamma=40.9940
+2026-02-15 11:47:18,207 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-15 11:47:18,207 [INFO] optimizer: ============================================================
+2026-02-15 11:47:18,207 [INFO] trading_engine: HOLD (reposition not worth it): f_new=$12 <= cost=$3304
+2026-02-15 11:47:21,333 [INFO] rit_api: MARKET SELL 5486 RTM -> order_id=13502
+2026-02-15 11:47:21,333 [INFO] trading_engine: HEDGE SELL 5486 RTM | delta 5486 -> ~-0 | limit 5000 (110%)
+2026-02-15 11:47:29,386 [INFO] rit_api: MARKET SELL 4861 RTM -> order_id=13983
+2026-02-15 11:47:29,386 [INFO] trading_engine: HEDGE SELL 4861 RTM | delta 4861 -> ~-0 | limit 5000 (97%)
+2026-02-15 11:47:46,520 [INFO] rit_api: MARKET BUY 4781 RTM -> order_id=14811
+2026-02-15 11:47:46,520 [INFO] trading_engine: HEDGE BUY 4781 RTM | delta -4781 -> ~0 | limit 5000 (96%)
+2026-02-15 11:47:51,535 [INFO] rit_api: MARKET SELL 6637 RTM -> order_id=15060
+2026-02-15 11:47:51,536 [INFO] trading_engine: HEDGE SELL 6637 RTM | delta 6637 -> ~0 | limit 5000 (133%)
+2026-02-15 11:48:03,511 [INFO] trading_engine: ENTERING UNWIND at tick 270
+2026-02-15 11:48:03,629 [INFO] rit_api: MARKET BUY 100 RTM1C52 -> order_id=15635
+2026-02-15 11:48:03,689 [INFO] rit_api: MARKET BUY 100 RTM1C52 -> order_id=15637
+2026-02-15 11:48:03,751 [INFO] rit_api: MARKET BUY 100 RTM1C52 -> order_id=15638
+2026-02-15 11:48:03,811 [INFO] rit_api: MARKET BUY 100 RTM1C52 -> order_id=15639
+2026-02-15 11:48:03,870 [INFO] rit_api: MARKET BUY 100 RTM1P52 -> order_id=15640
+2026-02-15 11:48:03,930 [INFO] rit_api: MARKET BUY 100 RTM1P52 -> order_id=15641
+2026-02-15 11:48:03,988 [INFO] rit_api: MARKET BUY 100 RTM1P52 -> order_id=15642
+2026-02-15 11:48:04,050 [INFO] rit_api: MARKET BUY 100 RTM1P52 -> order_id=15643
+2026-02-15 11:48:04,111 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=15644
+2026-02-15 11:48:04,170 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=15645
+2026-02-15 11:48:04,229 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=15646
+2026-02-15 11:48:04,290 [INFO] rit_api: MARKET BUY 8033 RTM -> order_id=15647
+2026-02-15 11:48:38,652 [ERROR] rit_api: POST /commands/cancel error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:48:43,792 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:48:49,313 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-15 11:48:54,838 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)

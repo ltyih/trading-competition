@@ -1,0 +1,653 @@
+2026-02-07 17:41:53,614 [INFO] news_parser: NEWS: Forecast vol next week = 15.0% - 20.0%
+2026-02-07 17:41:53,721 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.14 -> order_id=6267
+2026-02-07 17:41:53,797 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.21 -> order_id=6270
+2026-02-07 17:41:53,877 [INFO] rit_api: LIMIT SELL 10 RTM1P45 @ 0.18 -> order_id=6273
+2026-02-07 17:41:53,934 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.37 -> order_id=6276
+2026-02-07 17:41:53,994 [INFO] rit_api: MARKET BUY 5176 RTM -> order_id=6279
+2026-02-07 17:41:54,558 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.13 -> order_id=6280
+2026-02-07 17:41:54,616 [INFO] rit_api: LIMIT SELL 10 RTM1P45 @ 0.20 -> order_id=6281
+2026-02-07 17:41:54,672 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.24 -> order_id=6324
+2026-02-07 17:41:54,738 [INFO] rit_api: LIMIT SELL 10 RTM1P46 @ 0.33 -> order_id=6325
+2026-02-07 17:41:55,316 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.16 -> order_id=6330
+2026-02-07 17:41:55,375 [INFO] rit_api: LIMIT SELL 10 RTM1P45 @ 0.15 -> order_id=6331
+2026-02-07 17:41:55,433 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.29 -> order_id=6332
+2026-02-07 17:41:55,492 [INFO] rit_api: LIMIT SELL 10 RTM1P46 @ 0.35 -> order_id=6333
+2026-02-07 17:41:56,061 [INFO] rit_api: LIMIT SELL 10 RTM1P45 @ 0.11 -> order_id=6384
+2026-02-07 17:41:56,116 [INFO] rit_api: LIMIT SELL 10 RTM1P46 @ 0.22 -> order_id=6385
+2026-02-07 17:41:56,180 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.25 -> order_id=6386
+2026-02-07 17:41:56,240 [INFO] rit_api: LIMIT SELL 10 RTM1P47 @ 0.39 -> order_id=6387
+2026-02-07 17:41:56,302 [INFO] rit_api: MARKET SELL 4325 RTM -> order_id=6388
+2026-02-07 17:41:56,877 [INFO] rit_api: LIMIT SELL 10 RTM1P45 @ 0.15 -> order_id=6434
+2026-02-07 17:41:56,926 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.22 -> order_id=6436
+2026-02-07 17:41:56,992 [INFO] rit_api: LIMIT SELL 10 RTM1P46 @ 0.27 -> order_id=6440
+2026-02-07 17:41:57,048 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.35 -> order_id=6441
+2026-02-07 17:41:57,870 [INFO] rit_api: LIMIT SELL 10 RTM1P45 @ 0.11 -> order_id=6484
+2026-02-07 17:41:57,926 [INFO] rit_api: LIMIT SELL 10 RTM1P46 @ 0.20 -> order_id=6487
+2026-02-07 17:41:57,981 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.29 -> order_id=6491
+2026-02-07 17:41:58,036 [INFO] rit_api: LIMIT SELL 10 RTM1P47 @ 0.36 -> order_id=6494
+2026-02-07 17:41:58,897 [INFO] rit_api: LIMIT SELL 10 RTM1P45 @ 0.11 -> order_id=6538
+2026-02-07 17:41:58,960 [INFO] rit_api: LIMIT SELL 10 RTM1P46 @ 0.22 -> order_id=6539
+2026-02-07 17:41:59,018 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.31 -> order_id=6540
+2026-02-07 17:41:59,076 [INFO] rit_api: LIMIT SELL 10 RTM1P47 @ 0.36 -> order_id=6541
+2026-02-07 17:41:59,908 [INFO] rit_api: LIMIT SELL 10 RTM1P45 @ 0.10 -> order_id=6584
+2026-02-07 17:41:59,966 [INFO] rit_api: LIMIT SELL 10 RTM1P46 @ 0.21 -> order_id=6585
+2026-02-07 17:42:00,023 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.28 -> order_id=6586
+2026-02-07 17:42:00,078 [INFO] rit_api: LIMIT SELL 10 RTM1P47 @ 0.38 -> order_id=6587
+2026-02-07 17:42:00,907 [INFO] rit_api: LIMIT SELL 10 RTM1P45 @ 0.14 -> order_id=6630
+2026-02-07 17:42:00,964 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.25 -> order_id=6632
+2026-02-07 17:42:01,020 [INFO] rit_api: LIMIT SELL 10 RTM1P46 @ 0.26 -> order_id=6636
+2026-02-07 17:42:01,076 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.40 -> order_id=6637
+2026-02-07 17:42:01,899 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.18 -> order_id=6686
+2026-02-07 17:42:01,953 [INFO] rit_api: LIMIT SELL 10 RTM1P45 @ 0.19 -> order_id=6687
+2026-02-07 17:42:02,020 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.28 -> order_id=6688
+2026-02-07 17:42:02,082 [INFO] rit_api: LIMIT SELL 10 RTM1P46 @ 0.37 -> order_id=6689
+2026-02-07 17:42:02,147 [INFO] rit_api: MARKET BUY 3373 RTM -> order_id=6690
+2026-02-07 17:42:02,966 [INFO] rit_api: LIMIT SELL 10 RTM1P45 @ 0.14 -> order_id=6737
+2026-02-07 17:42:03,028 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.23 -> order_id=6740
+2026-02-07 17:42:03,087 [INFO] rit_api: LIMIT SELL 10 RTM1P46 @ 0.28 -> order_id=6741
+2026-02-07 17:42:03,135 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.37 -> order_id=6743
+2026-02-07 17:42:03,966 [INFO] rit_api: LIMIT SELL 10 RTM1P45 @ 0.15 -> order_id=6786
+2026-02-07 17:42:04,022 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.20 -> order_id=6787
+2026-02-07 17:42:04,073 [INFO] rit_api: LIMIT SELL 10 RTM1P46 @ 0.30 -> order_id=6788
+2026-02-07 17:42:04,135 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.37 -> order_id=6789
+2026-02-07 17:42:04,953 [INFO] rit_api: LIMIT SELL 10 RTM1P45 @ 0.12 -> order_id=6835
+2026-02-07 17:42:05,001 [INFO] rit_api: LIMIT SELL 10 RTM1P46 @ 0.24 -> order_id=6836
+2026-02-07 17:42:05,071 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.28 -> order_id=6838
+2026-02-07 17:42:05,138 [INFO] rit_api: LIMIT SELL 10 RTM1P47 @ 0.43 -> order_id=6839
+2026-02-07 17:42:05,197 [INFO] rit_api: MARKET SELL 2924 RTM -> order_id=6840
+2026-02-07 17:42:06,015 [INFO] rit_api: LIMIT SELL 10 RTM1P45 @ 0.10 -> order_id=6887
+2026-02-07 17:42:06,071 [INFO] rit_api: LIMIT SELL 10 RTM1P46 @ 0.19 -> order_id=6889
+2026-02-07 17:42:06,127 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.35 -> order_id=6890
+2026-02-07 17:42:06,183 [INFO] rit_api: LIMIT SELL 10 RTM1P47 @ 0.35 -> order_id=6893
+2026-02-07 17:42:07,004 [INFO] rit_api: LIMIT SELL 10 RTM1P45 @ 0.08 -> order_id=6940
+2026-02-07 17:42:07,068 [INFO] rit_api: LIMIT SELL 10 RTM1P46 @ 0.16 -> order_id=6941
+2026-02-07 17:42:07,125 [INFO] rit_api: LIMIT SELL 10 RTM1P47 @ 0.30 -> order_id=6943
+2026-02-07 17:42:07,182 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.39 -> order_id=6944
+2026-02-07 17:42:07,241 [INFO] rit_api: MARKET SELL 2517 RTM -> order_id=6945
+2026-02-07 17:42:08,060 [INFO] rit_api: LIMIT SELL 10 RTM1P45 @ 0.08 -> order_id=6988
+2026-02-07 17:42:08,116 [INFO] rit_api: LIMIT SELL 10 RTM1P46 @ 0.16 -> order_id=6989
+2026-02-07 17:42:08,172 [INFO] rit_api: LIMIT SELL 10 RTM1P47 @ 0.29 -> order_id=6990
+2026-02-07 17:42:08,227 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.43 -> order_id=6991
+2026-02-07 17:42:09,049 [INFO] rit_api: LIMIT SELL 10 RTM1P45 @ 0.10 -> order_id=7039
+2026-02-07 17:42:09,108 [INFO] rit_api: LIMIT SELL 10 RTM1P46 @ 0.20 -> order_id=7040
+2026-02-07 17:42:09,161 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.34 -> order_id=7042
+2026-02-07 17:42:09,220 [INFO] rit_api: LIMIT SELL 10 RTM1P47 @ 0.37 -> order_id=7043
+2026-02-07 17:42:10,040 [INFO] rit_api: LIMIT SELL 10 RTM1P45 @ 0.12 -> order_id=7086
+2026-02-07 17:42:10,094 [INFO] rit_api: LIMIT SELL 10 RTM1P46 @ 0.22 -> order_id=7087
+2026-02-07 17:42:10,151 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.30 -> order_id=7088
+2026-02-07 17:42:10,207 [INFO] rit_api: LIMIT SELL 10 RTM1P47 @ 0.39 -> order_id=7089
+2026-02-07 17:42:11,028 [INFO] rit_api: LIMIT SELL 10 RTM1P45 @ 0.11 -> order_id=7133
+2026-02-07 17:42:11,086 [INFO] rit_api: LIMIT SELL 10 RTM1P46 @ 0.23 -> order_id=7134
+2026-02-07 17:42:11,149 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.31 -> order_id=7135
+2026-02-07 17:42:11,199 [INFO] rit_api: LIMIT SELL 10 RTM1P47 @ 0.39 -> order_id=7136
+2026-02-07 17:42:12,022 [INFO] rit_api: LIMIT SELL 10 RTM1P45 @ 0.09 -> order_id=7186
+2026-02-07 17:42:12,084 [INFO] rit_api: LIMIT SELL 10 RTM1P46 @ 0.17 -> order_id=7190
+2026-02-07 17:42:12,137 [INFO] rit_api: LIMIT SELL 10 RTM1P47 @ 0.32 -> order_id=7193
+2026-02-07 17:42:12,201 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.39 -> order_id=7196
+2026-02-07 17:42:13,038 [INFO] rit_api: LIMIT SELL 10 RTM1P46 @ 0.17 -> order_id=7258
+2026-02-07 17:42:13,094 [INFO] rit_api: LIMIT SELL 10 RTM1P47 @ 0.31 -> order_id=7259
+2026-02-07 17:42:13,150 [INFO] rit_api: LIMIT SELL 10 RTM1P48 @ 0.52 -> order_id=7260
+2026-02-07 17:42:13,217 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.64 -> order_id=7261
+2026-02-07 17:42:14,037 [INFO] rit_api: LIMIT SELL 10 RTM1P47 @ 0.36 -> order_id=7304
+2026-02-07 17:42:14,095 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.56 -> order_id=7305
+2026-02-07 17:42:14,150 [INFO] rit_api: LIMIT SELL 10 RTM1P48 @ 0.61 -> order_id=7306
+2026-02-07 17:42:14,207 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.82 -> order_id=7307
+2026-02-07 17:42:15,026 [INFO] rit_api: LIMIT SELL 10 RTM1P47 @ 0.37 -> order_id=7351
+2026-02-07 17:42:15,083 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.52 -> order_id=7352
+2026-02-07 17:42:15,139 [INFO] rit_api: LIMIT SELL 10 RTM1P48 @ 0.59 -> order_id=7353
+2026-02-07 17:42:15,195 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.77 -> order_id=7354
+2026-02-07 17:42:16,022 [INFO] rit_api: LIMIT SELL 10 RTM1P47 @ 0.38 -> order_id=7397
+2026-02-07 17:42:16,077 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.52 -> order_id=7398
+2026-02-07 17:42:16,132 [INFO] rit_api: LIMIT SELL 10 RTM1P48 @ 0.56 -> order_id=7414
+2026-02-07 17:42:16,189 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.78 -> order_id=7415
+2026-02-07 17:42:17,030 [INFO] rit_api: LIMIT SELL 10 RTM1P47 @ 0.36 -> order_id=7472
+2026-02-07 17:42:17,085 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.49 -> order_id=7473
+2026-02-07 17:42:17,143 [INFO] rit_api: LIMIT SELL 10 RTM1P48 @ 0.59 -> order_id=7474
+2026-02-07 17:42:17,199 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.78 -> order_id=7475
+2026-02-07 17:42:18,022 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.41 -> order_id=7520
+2026-02-07 17:42:18,080 [INFO] rit_api: LIMIT SELL 10 RTM1P47 @ 0.47 -> order_id=7521
+2026-02-07 17:42:18,136 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.59 -> order_id=7522
+2026-02-07 17:42:18,191 [INFO] rit_api: LIMIT SELL 10 RTM1P48 @ 0.78 -> order_id=7523
+2026-02-07 17:42:19,011 [INFO] rit_api: LIMIT SELL 10 RTM1P47 @ 0.41 -> order_id=7567
+2026-02-07 17:42:19,067 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.47 -> order_id=7568
+2026-02-07 17:42:19,123 [INFO] rit_api: LIMIT SELL 10 RTM1P48 @ 0.58 -> order_id=7569
+2026-02-07 17:42:19,178 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.72 -> order_id=7570
+2026-02-07 17:42:19,998 [INFO] rit_api: LIMIT SELL 10 RTM1P47 @ 0.39 -> order_id=7614
+2026-02-07 17:42:20,054 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.43 -> order_id=7615
+2026-02-07 17:42:20,110 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.69 -> order_id=7616
+2026-02-07 17:42:20,167 [INFO] rit_api: LIMIT SELL 10 RTM1P48 @ 0.63 -> order_id=7617
+2026-02-07 17:42:20,987 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.44 -> order_id=7660
+2026-02-07 17:42:21,042 [INFO] rit_api: LIMIT SELL 10 RTM1P48 @ 0.64 -> order_id=7661
+2026-02-07 17:42:21,098 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.71 -> order_id=7662
+2026-02-07 17:42:21,151 [INFO] rit_api: LIMIT SELL 10 RTM1P49 @ 0.98 -> order_id=7663
+2026-02-07 17:42:21,973 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.40 -> order_id=7706
+2026-02-07 17:42:22,030 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.60 -> order_id=7707
+2026-02-07 17:42:22,079 [INFO] rit_api: LIMIT SELL 10 RTM1P48 @ 0.70 -> order_id=7709
+2026-02-07 17:42:22,144 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 0.92 -> order_id=7710
+2026-02-07 17:42:22,932 [INFO] news_parser: NEWS: Current realized vol = 18.0%
+2026-02-07 17:42:23,008 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.42 -> order_id=7754
+2026-02-07 17:42:23,065 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.65 -> order_id=7757
+2026-02-07 17:42:23,125 [INFO] rit_api: LIMIT SELL 10 RTM1P48 @ 0.68 -> order_id=7762
+2026-02-07 17:42:23,182 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 0.99 -> order_id=7766
+2026-02-07 17:42:24,011 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.68 -> order_id=7852
+2026-02-07 17:42:24,067 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 1.04 -> order_id=7856
+2026-02-07 17:42:24,122 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 1.34 -> order_id=7861
+2026-02-07 17:42:24,198 [INFO] rit_api: LIMIT SELL 10 RTM1P49 @ 1.33 -> order_id=7865
+2026-02-07 17:42:24,278 [INFO] rit_api: MARKET BUY 2656 RTM -> order_id=7872
+2026-02-07 17:42:25,098 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.85 -> order_id=7934
+2026-02-07 17:42:25,162 [INFO] rit_api: LIMIT SELL 10 RTM1P49 @ 1.34 -> order_id=7936
+2026-02-07 17:42:25,215 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 1.30 -> order_id=7937
+2026-02-07 17:42:25,276 [INFO] rit_api: LIMIT SELL 10 RTM1C50 @ 1.59 -> order_id=7938
+2026-02-07 17:42:26,095 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.96 -> order_id=7982
+2026-02-07 17:42:26,151 [INFO] rit_api: LIMIT SELL 10 RTM1P49 @ 1.05 -> order_id=7983
+2026-02-07 17:42:26,218 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 1.38 -> order_id=7984
+2026-02-07 17:42:26,274 [INFO] rit_api: LIMIT SELL 10 RTM1P50 @ 1.49 -> order_id=7986
+2026-02-07 17:42:27,098 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.83 -> order_id=8061
+2026-02-07 17:42:27,154 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 1.18 -> order_id=8062
+2026-02-07 17:42:27,224 [INFO] rit_api: LIMIT SELL 10 RTM1P49 @ 1.19 -> order_id=8071
+2026-02-07 17:42:27,282 [INFO] rit_api: LIMIT SELL 10 RTM1C50 @ 1.41 -> order_id=8072
+2026-02-07 17:42:28,104 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.73 -> order_id=8134
+2026-02-07 17:42:28,160 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 0.85 -> order_id=8135
+2026-02-07 17:42:28,217 [INFO] rit_api: LIMIT SELL 10 RTM1P49 @ 1.21 -> order_id=8136
+2026-02-07 17:42:28,272 [INFO] rit_api: LIMIT SELL 10 RTM1C50 @ 1.38 -> order_id=8137
+2026-02-07 17:42:29,093 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.60 -> order_id=8186
+2026-02-07 17:42:29,147 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 0.84 -> order_id=8187
+2026-02-07 17:42:29,207 [INFO] rit_api: LIMIT SELL 10 RTM1P49 @ 0.95 -> order_id=8188
+2026-02-07 17:42:29,258 [INFO] rit_api: LIMIT SELL 10 RTM1C50 @ 1.19 -> order_id=8189
+2026-02-07 17:42:30,085 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.55 -> order_id=8232
+2026-02-07 17:42:30,143 [INFO] rit_api: LIMIT SELL 10 RTM1P49 @ 0.99 -> order_id=8233
+2026-02-07 17:42:30,200 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 0.76 -> order_id=8234
+2026-02-07 17:42:30,255 [INFO] rit_api: LIMIT SELL 10 RTM1C50 @ 1.30 -> order_id=8235
+2026-02-07 17:42:31,077 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.57 -> order_id=8278
+2026-02-07 17:42:31,135 [INFO] rit_api: LIMIT SELL 10 RTM1P49 @ 0.76 -> order_id=8279
+2026-02-07 17:42:31,196 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 0.78 -> order_id=8280
+2026-02-07 17:42:31,268 [INFO] rit_api: LIMIT SELL 10 RTM1C50 @ 1.28 -> order_id=8281
+2026-02-07 17:42:31,342 [INFO] rit_api: MARKET BUY 3389 RTM -> order_id=8282
+2026-02-07 17:42:32,158 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.49 -> order_id=8326
+2026-02-07 17:42:32,213 [INFO] rit_api: LIMIT SELL 10 RTM1P49 @ 0.76 -> order_id=8327
+2026-02-07 17:42:32,268 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 0.73 -> order_id=8328
+2026-02-07 17:42:32,326 [INFO] rit_api: LIMIT SELL 10 RTM1C50 @ 1.21 -> order_id=8329
+2026-02-07 17:42:33,162 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 0.69 -> order_id=8372
+2026-02-07 17:42:33,220 [INFO] rit_api: LIMIT SELL 10 RTM1P49 @ 0.71 -> order_id=8373
+2026-02-07 17:42:33,274 [INFO] rit_api: LIMIT SELL 10 RTM1C50 @ 1.04 -> order_id=8375
+2026-02-07 17:42:33,333 [INFO] rit_api: LIMIT SELL 10 RTM1P50 @ 1.21 -> order_id=8376
+2026-02-07 17:42:34,154 [INFO] rit_api: LIMIT SELL 10 RTM1P49 @ 0.55 -> order_id=8420
+2026-02-07 17:42:34,208 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 0.64 -> order_id=8421
+2026-02-07 17:42:34,265 [INFO] rit_api: LIMIT SELL 10 RTM1P50 @ 0.99 -> order_id=8422
+2026-02-07 17:42:34,314 [INFO] rit_api: LIMIT SELL 10 RTM1C50 @ 1.10 -> order_id=8424
+2026-02-07 17:42:35,144 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 0.59 -> order_id=8467
+2026-02-07 17:42:35,203 [INFO] rit_api: LIMIT SELL 10 RTM1P50 @ 1.01 -> order_id=8468
+2026-02-07 17:42:35,258 [INFO] rit_api: LIMIT SELL 10 RTM1C50 @ 1.07 -> order_id=8469
+2026-02-07 17:42:35,315 [INFO] rit_api: LIMIT SELL 10 RTM1P51 @ 1.53 -> order_id=8470
+2026-02-07 17:42:36,147 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:36,203 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:36,260 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:36,318 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:37,141 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:37,205 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:37,269 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:37,322 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:38,147 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:38,197 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:38,261 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:38,318 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:39,140 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:39,196 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:39,251 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:39,312 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:40,132 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:40,189 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:40,245 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:40,300 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:41,123 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:41,178 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:41,226 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:41,296 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:42,116 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:42,173 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:42,229 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:42,284 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:43,109 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:43,165 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:43,223 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:43,279 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:44,115 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:44,174 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:44,236 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:44,294 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:45,117 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:45,203 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:45,265 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:45,322 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:46,143 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:46,200 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:46,257 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:46,315 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:47,136 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:47,189 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:47,245 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:47,301 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:48,122 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:48,181 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:48,235 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:48,299 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:49,125 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:49,177 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:49,237 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:49,293 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:50,118 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:50,176 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:50,229 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:50,288 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:51,107 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:51,166 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:51,221 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:51,276 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:52,096 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:52,168 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:52,224 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:52,285 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:53,108 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:53,166 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:53,236 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:53,294 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:53,355 [INFO] rit_api: MARKET BUY 3698 RTM -> order_id=9255
+2026-02-07 17:42:54,174 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:54,233 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:54,291 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:54,350 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:55,168 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:55,232 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:55,285 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:55,350 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:55,409 [INFO] rit_api: MARKET SELL 3307 RTM -> order_id=9377
+2026-02-07 17:42:56,225 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:56,278 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:56,342 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:56,403 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:57,225 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:57,299 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:57,355 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:57,412 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:58,240 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:58,298 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:58,355 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:58,413 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:59,238 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:59,296 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:59,350 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:42:59,405 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:00,182 [INFO] news_parser: NEWS: Forecast vol next week = 23.0% - 28.0%
+2026-02-07 17:43:00,254 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:00,312 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:00,373 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:00,431 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:01,284 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:01,342 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:01,400 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:01,457 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:02,281 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:02,338 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:02,395 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:02,451 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:03,275 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:03,328 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:03,389 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:03,456 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:04,281 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:04,342 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:04,398 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:04,459 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:05,279 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:05,337 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:05,395 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:05,451 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:06,273 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:06,331 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:06,389 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:06,447 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:07,264 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:07,339 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:07,393 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:07,451 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:08,278 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:08,337 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:08,390 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:08,459 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:08,523 [INFO] rit_api: MARKET SELL 3670 RTM -> order_id=9934
+2026-02-07 17:43:09,337 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:09,398 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:09,456 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:09,515 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:10,337 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:10,392 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:10,448 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:10,508 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:11,339 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:11,393 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:11,457 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:11,512 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:11,574 [INFO] rit_api: MARKET BUY 3537 RTM -> order_id=10061
+2026-02-07 17:43:12,390 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:12,456 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:12,513 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:12,567 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:13,396 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:13,453 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:13,510 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:13,566 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:14,397 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:14,454 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:14,512 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:14,569 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:15,395 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:15,452 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:15,513 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:15,571 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:16,387 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:16,466 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:16,527 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:17,346 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:17,398 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:17,462 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:17,516 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:17,579 [INFO] rit_api: MARKET BUY 3911 RTM -> order_id=10326
+2026-02-07 17:43:18,401 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:18,458 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:18,512 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:19,336 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:19,394 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:20,224 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:20,283 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:22,373 [INFO] rit_api: LIMIT BUY 10 RTM1C52 @ 0.11 -> order_id=10564
+2026-02-07 17:43:22,429 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 0.33 -> order_id=10566
+2026-02-07 17:43:22,487 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:23,311 [INFO] rit_api: LIMIT BUY 10 RTM1C52 @ 0.09 -> order_id=10611
+2026-02-07 17:43:23,367 [INFO] rit_api: LIMIT BUY 10 RTM1P50 @ 0.44 -> order_id=10614
+2026-02-07 17:43:24,449 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.06 -> order_id=10663
+2026-02-07 17:43:24,506 [INFO] rit_api: LIMIT BUY 10 RTM1C51 @ 0.21 -> order_id=10664
+2026-02-07 17:43:24,563 [INFO] rit_api: LIMIT SELL 10 RTM1P50 @ 0.56 -> order_id=10665
+2026-02-07 17:43:24,618 [INFO] rit_api: LIMIT BUY 10 RTM1P48 @ 0.05 -> order_id=10666
+2026-02-07 17:43:25,440 [INFO] rit_api: LIMIT SELL 10 RTM1P48 @ 0.03 -> order_id=10709
+2026-02-07 17:43:25,496 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 0.25 -> order_id=10710
+2026-02-07 17:43:25,554 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:25,612 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:26,434 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:26,490 [INFO] rit_api: LIMIT BUY 10 RTM1P48 @ 0.06 -> order_id=10754
+2026-02-07 17:43:26,546 [INFO] rit_api: LIMIT BUY 10 RTM1P49 @ 0.22 -> order_id=10755
+2026-02-07 17:43:26,611 [INFO] rit_api: LIMIT BUY 10 RTM1C51 @ 0.18 -> order_id=10756
+2026-02-07 17:43:26,673 [INFO] rit_api: MARKET SELL 4318 RTM -> order_id=10757
+2026-02-07 17:43:27,489 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.05 -> order_id=10800
+2026-02-07 17:43:27,543 [INFO] rit_api: LIMIT SELL 10 RTM1P48 @ 0.05 -> order_id=10801
+2026-02-07 17:43:27,606 [INFO] rit_api: LIMIT BUY 10 RTM1P49 @ 0.20 -> order_id=10802
+2026-02-07 17:43:27,661 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 0.18 -> order_id=10803
+2026-02-07 17:43:28,489 [INFO] rit_api: LIMIT SELL 10 RTM1P50 @ 0.52 -> order_id=10846
+2026-02-07 17:43:28,546 [INFO] rit_api: LIMIT BUY 10 RTM1C51 @ 0.22 -> order_id=10848
+2026-02-07 17:43:28,601 [INFO] rit_api: LIMIT SELL 10 RTM1C50 @ 0.63 -> order_id=10849
+2026-02-07 17:43:28,657 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:29,482 [INFO] rit_api: LIMIT BUY 10 RTM1C52 @ 0.07 -> order_id=10892
+2026-02-07 17:43:29,540 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 0.25 -> order_id=10893
+2026-02-07 17:43:29,599 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:29,660 [INFO] rit_api: MARKET BUY 3582 RTM -> order_id=10894
+2026-02-07 17:43:30,477 [INFO] rit_api: LIMIT BUY 10 RTM1P48 @ 0.03 -> order_id=10937
+2026-02-07 17:43:30,539 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.08 -> order_id=10938
+2026-02-07 17:43:30,597 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:30,669 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:31,491 [INFO] rit_api: LIMIT BUY 10 RTM1C52 @ 0.09 -> order_id=10981
+2026-02-07 17:43:31,547 [INFO] rit_api: LIMIT SELL 10 RTM1P48 @ 0.01 -> order_id=10982
+2026-02-07 17:43:31,604 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:31,661 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:31,721 [INFO] rit_api: MARKET BUY 2584 RTM -> order_id=10983
+2026-02-07 17:43:32,290 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:32,346 [INFO] rit_api: LIMIT BUY 10 RTM1C52 @ 0.12 -> order_id=11026
+2026-02-07 17:43:32,403 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 0.38 -> order_id=11027
+2026-02-07 17:43:32,460 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:33,535 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:33,595 [INFO] rit_api: LIMIT BUY 10 RTM1P50 @ 0.25 -> order_id=11070
+2026-02-07 17:43:33,651 [INFO] rit_api: LIMIT BUY 10 RTM1P49 @ 0.07 -> order_id=11071
+2026-02-07 17:43:33,708 [INFO] rit_api: LIMIT BUY 10 RTM1C50 @ 0.95 -> order_id=11072
+2026-02-07 17:43:33,768 [INFO] rit_api: MARKET BUY 3112 RTM -> order_id=11073
+2026-02-07 17:43:34,332 [INFO] rit_api: LIMIT BUY 10 RTM1C53 @ 0.04 -> order_id=11116
+2026-02-07 17:43:34,389 [INFO] rit_api: LIMIT BUY 10 RTM1C52 @ 0.16 -> order_id=11117
+2026-02-07 17:43:34,446 [INFO] rit_api: LIMIT SELL 10 RTM1P49 @ 0.04 -> order_id=11118
+2026-02-07 17:43:34,504 [INFO] rit_api: LIMIT BUY 10 RTM1P50 @ 0.21 -> order_id=11119
+2026-02-07 17:43:35,326 [INFO] rit_api: LIMIT SELL 10 RTM1P49 @ 0.03 -> order_id=11162
+2026-02-07 17:43:35,382 [INFO] rit_api: LIMIT BUY 10 RTM1P50 @ 0.17 -> order_id=11163
+2026-02-07 17:43:35,437 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.04 -> order_id=11164
+2026-02-07 17:43:35,494 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.19 -> order_id=11165
+2026-02-07 17:43:35,556 [INFO] rit_api: MARKET BUY 2671 RTM -> order_id=11166
+2026-02-07 17:43:36,373 [INFO] rit_api: LIMIT BUY 10 RTM1P49 @ 0.04 -> order_id=11209
+2026-02-07 17:43:36,430 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.19 -> order_id=11210
+2026-02-07 17:43:36,486 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 0.56 -> order_id=11211
+2026-02-07 17:43:37,559 [INFO] rit_api: LIMIT BUY 10 RTM1P49 @ 0.05 -> order_id=11254
+2026-02-07 17:43:37,617 [INFO] rit_api: LIMIT BUY 10 RTM1C53 @ 0.04 -> order_id=11255
+2026-02-07 17:43:37,671 [INFO] rit_api: LIMIT BUY 10 RTM1C52 @ 0.15 -> order_id=11256
+2026-02-07 17:43:38,433 [INFO] news_parser: NEWS: Current realized vol = 28.0%
+2026-02-07 17:43:38,499 [INFO] rit_api: LIMIT BUY 10 RTM1P49 @ 0.05 -> order_id=11310
+2026-02-07 17:43:38,554 [INFO] rit_api: LIMIT BUY 10 RTM1C53 @ 0.06 -> order_id=11313
+2026-02-07 17:43:38,617 [INFO] rit_api: LIMIT BUY 10 RTM1C54 @ 0.03 -> order_id=11316
+2026-02-07 17:43:38,672 [INFO] rit_api: LIMIT BUY 10 RTM1P48 @ 0.03 -> order_id=11318
+2026-02-07 17:43:39,500 [INFO] rit_api: LIMIT BUY 10 RTM1C54 @ 0.04 -> order_id=11391
+2026-02-07 17:43:39,558 [INFO] rit_api: LIMIT BUY 10 RTM1P49 @ 0.11 -> order_id=11394
+2026-02-07 17:43:39,615 [INFO] rit_api: LIMIT BUY 10 RTM1P48 @ 0.05 -> order_id=11397
+2026-02-07 17:43:39,671 [INFO] rit_api: LIMIT BUY 10 RTM1C52 @ 0.27 -> order_id=11399
+2026-02-07 17:43:40,490 [INFO] rit_api: LIMIT BUY 10 RTM1P48 @ 0.04 -> order_id=11459
+2026-02-07 17:43:40,546 [INFO] rit_api: LIMIT BUY 10 RTM1C54 @ 0.05 -> order_id=11460
+2026-02-07 17:43:40,602 [INFO] rit_api: LIMIT BUY 10 RTM1P49 @ 0.13 -> order_id=11461
+2026-02-07 17:43:40,659 [INFO] rit_api: LIMIT BUY 10 RTM1C53 @ 0.15 -> order_id=11464
+2026-02-07 17:43:41,487 [INFO] rit_api: LIMIT BUY 10 RTM1P48 @ 0.05 -> order_id=11507
+2026-02-07 17:43:41,551 [INFO] rit_api: LIMIT BUY 10 RTM1C53 @ 0.10 -> order_id=11508
+2026-02-07 17:43:41,608 [INFO] rit_api: LIMIT BUY 10 RTM1P49 @ 0.14 -> order_id=11509
+2026-02-07 17:43:41,673 [INFO] rit_api: LIMIT BUY 10 RTM1C52 @ 0.29 -> order_id=11511
+2026-02-07 17:43:42,505 [INFO] rit_api: LIMIT BUY 10 RTM1C53 @ 0.12 -> order_id=11554
+2026-02-07 17:43:42,563 [INFO] rit_api: LIMIT BUY 10 RTM1P49 @ 0.17 -> order_id=11555
+2026-02-07 17:43:42,621 [INFO] rit_api: LIMIT BUY 10 RTM1C51 @ 0.65 -> order_id=11556
+2026-02-07 17:43:42,681 [INFO] rit_api: LIMIT BUY 10 RTM1P51 @ 0.80 -> order_id=11557
+2026-02-07 17:43:43,504 [INFO] rit_api: LIMIT SELL 10 RTM1P48 @ 0.08 -> order_id=11605
+2026-02-07 17:43:43,566 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.04 -> order_id=11606
+2026-02-07 17:43:43,622 [INFO] rit_api: LIMIT BUY 10 RTM1C51 @ 0.59 -> order_id=11608
+2026-02-07 17:43:43,682 [INFO] rit_api: LIMIT BUY 10 RTM1P51 @ 0.93 -> order_id=11609
+2026-02-07 17:43:43,765 [INFO] rit_api: MARKET SELL 2742 RTM -> order_id=11610
+2026-02-07 17:43:44,578 [INFO] rit_api: LIMIT SELL 10 RTM1P48 @ 0.06 -> order_id=11656
+2026-02-07 17:43:44,644 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.07 -> order_id=11657
+2026-02-07 17:43:44,700 [INFO] rit_api: LIMIT SELL 10 RTM1P50 @ 0.43 -> order_id=11660
+2026-02-07 17:43:44,770 [INFO] rit_api: LIMIT BUY 10 RTM1C52 @ 0.36 -> order_id=11661
+2026-02-07 17:43:45,406 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.19 -> order_id=11704
+2026-02-07 17:43:45,465 [INFO] rit_api: LIMIT SELL 10 RTM1C54 @ 0.06 -> order_id=11705
+2026-02-07 17:43:45,521 [INFO] rit_api: LIMIT SELL 10 RTM1P49 @ 0.20 -> order_id=11706
+2026-02-07 17:43:45,580 [INFO] rit_api: LIMIT SELL 10 RTM1P50 @ 0.46 -> order_id=11707
+2026-02-07 17:43:46,409 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.41 -> order_id=11781
+2026-02-07 17:43:46,467 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.15 -> order_id=11784
+2026-02-07 17:43:46,526 [INFO] rit_api: LIMIT SELL 10 RTM1P48 @ 0.08 -> order_id=11785
+2026-02-07 17:43:46,611 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 0.68 -> order_id=11786
+2026-02-07 17:43:47,438 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.37 -> order_id=11831
+2026-02-07 17:43:47,496 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.12 -> order_id=11834
+2026-02-07 17:43:47,555 [INFO] rit_api: LIMIT SELL 10 RTM1P48 @ 0.12 -> order_id=11835
+2026-02-07 17:43:47,636 [INFO] rit_api: LIMIT SELL 10 RTM1C51 @ 0.58 -> order_id=11836
+2026-02-07 17:43:48,462 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.34 -> order_id=11879
+2026-02-07 17:43:48,522 [INFO] rit_api: LIMIT SELL 10 RTM1P49 @ 0.34 -> order_id=11880
+2026-02-07 17:43:48,603 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.10 -> order_id=11881
+2026-02-07 17:43:48,661 [INFO] rit_api: LIMIT SELL 10 RTM1P50 @ 0.64 -> order_id=11882
+2026-02-07 17:43:49,487 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.33 -> order_id=11925
+2026-02-07 17:43:49,543 [INFO] rit_api: LIMIT SELL 10 RTM1C53 @ 0.11 -> order_id=11926
+2026-02-07 17:43:49,600 [INFO] rit_api: LIMIT SELL 10 RTM1P50 @ 0.80 -> order_id=11927
+2026-02-07 17:43:49,660 [INFO] rit_api: LIMIT SELL 10 RTM1P49 @ 0.33 -> order_id=11928
+2026-02-07 17:43:50,489 [INFO] rit_api: LIMIT SELL 10 RTM1C52 @ 0.33 -> order_id=11997
+2026-02-07 17:43:50,546 [INFO] rit_api: LIMIT SELL 10 RTM1P49 @ 0.35 -> order_id=11998
+2026-02-07 17:43:50,610 [INFO] rit_api: LIMIT SELL 10 RTM1P50 @ 0.72 -> order_id=11999
+2026-02-07 17:43:50,669 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:51,509 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:51,566 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:51,618 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:51,693 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:52,525 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:52,582 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:52,645 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:52,709 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:53,542 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:53,599 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:53,666 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:53,727 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:53,789 [INFO] rit_api: MARKET BUY 5929 RTM -> order_id=12167
+2026-02-07 17:43:54,614 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:54,674 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:54,735 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:54,791 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:54,854 [INFO] rit_api: MARKET SELL 2563 RTM -> order_id=12215
+2026-02-07 17:43:55,448 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:55,534 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:55,592 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:55,650 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:56,479 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:56,537 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:56,599 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:56,660 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:57,490 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:57,550 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:57,607 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:57,670 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:58,500 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:58,558 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:58,617 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:58,676 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:58,739 [INFO] rit_api: MARKET BUY 3670 RTM -> order_id=12390
+2026-02-07 17:43:59,565 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:59,624 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:59,686 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:43:59,743 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:00,575 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:00,634 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:00,693 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:00,751 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:01,583 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:01,641 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:01,701 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:01,759 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:02,597 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:02,660 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:02,721 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:02,781 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:03,612 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:03,672 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:03,727 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:03,789 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:03,853 [INFO] rit_api: MARKET SELL 3674 RTM -> order_id=12665
+2026-02-07 17:44:04,689 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:04,743 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:04,804 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:04,869 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:04,933 [INFO] rit_api: MARKET SELL 3555 RTM -> order_id=12711
+2026-02-07 17:44:05,517 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:05,584 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:05,638 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:05,701 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:06,537 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:06,598 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:06,651 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:06,717 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:07,548 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:07,600 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:07,663 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:07,718 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:08,549 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:08,605 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:08,664 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:08,740 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:09,573 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:09,631 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:09,688 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:09,746 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:10,615 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:10,675 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:10,734 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:10,793 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:11,625 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:11,684 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:11,743 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:11,805 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:11,889 [INFO] rit_api: MARKET SELL 4280 RTM -> order_id=13016
+2026-02-07 17:44:12,710 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:12,767 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:12,826 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:12,883 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:12,949 [INFO] rit_api: MARKET BUY 3286 RTM -> order_id=13067
+2026-02-07 17:44:13,558 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:13,621 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:13,681 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:13,739 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:14,603 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:14,661 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:14,719 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:14,782 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:14,844 [INFO] rit_api: MARKET BUY 4318 RTM -> order_id=13156
+2026-02-07 17:44:15,668 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:15,726 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:15,784 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:15,842 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:16,673 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:16,730 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:16,789 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:16,849 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:17,681 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:17,740 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:17,809 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:17,868 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:18,690 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:18,747 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:18,804 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:18,862 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:19,686 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:19,743 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:19,803 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:19,860 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:19,920 [INFO] rit_api: MARKET SELL 2932 RTM -> order_id=13377
+2026-02-07 17:44:20,739 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:20,804 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:20,872 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:20,926 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:21,751 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:21,811 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:21,868 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:21,923 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:22,748 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:22,801 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:22,865 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:22,926 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:23,749 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:23,811 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:23,886 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:23,952 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:24,779 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:24,837 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:24,902 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:24,955 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:25,016 [INFO] rit_api: MARKET BUY 2691 RTM -> order_id=13594
+2026-02-07 17:44:25,894 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:25,960 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:26,105 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:26,165 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:26,248 [INFO] rit_api: MARKET BUY 3747 RTM -> order_id=13642
+2026-02-07 17:44:26,905 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:26,958 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:27,018 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:27,168 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:27,496 [INFO] rit_api: MARKET BUY 3284 RTM -> order_id=13731
+2026-02-07 17:44:28,065 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:28,229 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:28,290 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:28,352 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-07 17:44:29,024 [INFO] rit_api: MARKET BUY 100 RTM1P45 -> order_id=13775
+2026-02-07 17:44:29,082 [INFO] rit_api: MARKET BUY 100 RTM1P46 -> order_id=13776
+2026-02-07 17:44:29,288 [INFO] rit_api: MARKET BUY 100 RTM1P47 -> order_id=13778
+2026-02-07 17:44:29,354 [INFO] rit_api: MARKET BUY 100 RTM1P48 -> order_id=13779
+2026-02-07 17:44:29,415 [INFO] rit_api: MARKET BUY 60 RTM1P49 -> order_id=13780
+2026-02-07 17:44:29,550 [INFO] rit_api: MARKET BUY 90 RTM1C50 -> order_id=13781
+2026-02-07 17:44:29,629 [INFO] rit_api: MARKET BUY 60 RTM1P50 -> order_id=13824
+2026-02-07 17:44:29,689 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=13825
+2026-02-07 17:44:30,348 [INFO] rit_api: MARKET SELL 10 RTM1P51 -> order_id=13826
+2026-02-07 17:44:30,464 [INFO] rit_api: MARKET BUY 100 RTM1C52 -> order_id=13828
+2026-02-07 17:44:30,585 [INFO] rit_api: MARKET BUY 100 RTM1C53 -> order_id=13871
+2026-02-07 17:44:30,723 [INFO] rit_api: MARKET BUY 100 RTM1C54 -> order_id=13872
+2026-02-07 17:44:30,787 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=13873
+2026-02-07 17:44:31,368 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=13875
+2026-02-07 17:44:31,972 [INFO] rit_api: MARKET SELL 155 RTM -> order_id=13918

@@ -1,0 +1,1362 @@
+2026-02-19 15:16:17,884 [INFO] news_parser: NEWS: Current realized vol = 27.0% (history: ['27%']) [NOW USING REALIZED]
+2026-02-19 15:16:17,884 [INFO] news_parser: NEWS: Delta limit = 13000
+2026-02-19 15:16:17,885 [INFO] news_parser: NEWS: Penalty rate = 3.00%
+2026-02-19 15:16:17,887 [INFO] trading_engine: WEEK 1 positioning tick 1
+2026-02-19 15:16:17,887 [INFO] trading_engine: Immediate positioning at week 1 tick 1
+2026-02-19 15:16:17,894 [INFO] trading_engine: FORCED SIZE: |IV-RV|=8.73% > 3.00% => n=875 LONG @ K=50
+2026-02-19 15:16:17,907 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=83
+2026-02-19 15:16:17,937 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=84
+2026-02-19 15:16:17,944 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=85
+2026-02-19 15:16:17,952 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=87
+2026-02-19 15:16:17,958 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=88
+2026-02-19 15:16:17,966 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=89
+2026-02-19 15:16:17,972 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=90
+2026-02-19 15:16:17,979 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=91
+2026-02-19 15:16:17,986 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=92
+2026-02-19 15:16:17,993 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=93
+2026-02-19 15:16:18,005 [INFO] rit_api: MARKET SELL 100 RTM1C54 -> order_id=94
+2026-02-19 15:16:18,021 [INFO] rit_api: MARKET SELL 100 RTM1P45 -> order_id=96
+2026-02-19 15:16:18,028 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=98
+2026-02-19 15:16:18,035 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=99
+2026-02-19 15:16:18,042 [INFO] rit_api: MARKET SELL 100 RTM1C54 -> order_id=100
+2026-02-19 15:16:18,049 [INFO] rit_api: MARKET SELL 100 RTM1P45 -> order_id=101
+2026-02-19 15:16:18,059 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=102
+2026-02-19 15:16:18,097 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=104
+2026-02-19 15:16:18,103 [INFO] rit_api: MARKET SELL 100 RTM1C54 -> order_id=106
+2026-02-19 15:16:18,110 [INFO] rit_api: MARKET SELL 100 RTM1P45 -> order_id=107
+2026-02-19 15:16:18,130 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=108
+2026-02-19 15:16:18,136 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=111
+2026-02-19 15:16:18,143 [INFO] rit_api: MARKET SELL 75 RTM1C54 -> order_id=112
+2026-02-19 15:16:18,150 [INFO] rit_api: MARKET SELL 75 RTM1P45 -> order_id=114
+2026-02-19 15:16:18,158 [INFO] rit_api: MARKET BUY 75 RTM1C50 -> order_id=115
+2026-02-19 15:16:18,164 [INFO] rit_api: MARKET BUY 75 RTM1P50 -> order_id=116
+2026-02-19 15:16:18,164 [INFO] trading_engine: STRADDLE BUY 875/875 @ K=50: 26 orders | ATM 875C+875P | EXTREME C54 375 + P45 375
+2026-02-19 15:16:18,164 [INFO] trading_engine: POSITIONED: 875 LONG straddles @ 50 (week 1, expected $0)
+2026-02-19 15:16:18,393 [INFO] rit_api: MARKET BUY 3309 RTM -> order_id=166
+2026-02-19 15:16:18,393 [INFO] trading_engine: HEDGE BUY 3309 RTM | delta -3309 -> ~-0 | target -0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:19,375 [INFO] rit_api: MARKET SELL 1408 RTM -> order_id=375
+2026-02-19 15:16:19,376 [INFO] trading_engine: HEDGE SELL 1408 RTM | delta 1408 -> ~0 | target 0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:20,462 [INFO] rit_api: MARKET SELL 1552 RTM -> order_id=687
+2026-02-19 15:16:20,463 [INFO] trading_engine: HEDGE SELL 1552 RTM | delta 1552 -> ~0 | target 0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:21,394 [INFO] rit_api: MARKET SELL 2816 RTM -> order_id=927
+2026-02-19 15:16:21,394 [INFO] trading_engine: HEDGE SELL 2816 RTM | delta 2816 -> ~-0 | target 0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:22,541 [INFO] rit_api: MARKET SELL 1685 RTM -> order_id=1033
+2026-02-19 15:16:22,541 [INFO] trading_engine: HEDGE SELL 1685 RTM | delta 1685 -> ~-0 | target 0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:23,463 [INFO] rit_api: MARKET SELL 1955 RTM -> order_id=1228
+2026-02-19 15:16:23,463 [INFO] trading_engine: HEDGE SELL 1955 RTM | delta 1955 -> ~-0 | target 0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:24,500 [INFO] rit_api: MARKET BUY 957 RTM -> order_id=1491
+2026-02-19 15:16:24,501 [INFO] trading_engine: HEDGE BUY 957 RTM | delta -957 -> ~-0 | target -0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:25,488 [INFO] rit_api: MARKET SELL 1403 RTM -> order_id=1716
+2026-02-19 15:16:25,489 [INFO] trading_engine: HEDGE SELL 1403 RTM | delta 1403 -> ~-0 | target 0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:26,519 [INFO] rit_api: MARKET BUY 3911 RTM -> order_id=1855
+2026-02-19 15:16:26,519 [INFO] trading_engine: HEDGE BUY 3911 RTM | delta -3911 -> ~0 | target -0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:27,504 [INFO] rit_api: MARKET SELL 4914 RTM -> order_id=2088
+2026-02-19 15:16:27,505 [INFO] trading_engine: HEDGE SELL 4914 RTM | delta 4914 -> ~-0 | target 0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:28,585 [INFO] rit_api: MARKET BUY 4473 RTM -> order_id=2203
+2026-02-19 15:16:28,585 [INFO] trading_engine: HEDGE BUY 4473 RTM | delta -4473 -> ~0 | target -0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:29,459 [INFO] rit_api: MARKET BUY 4585 RTM -> order_id=2411
+2026-02-19 15:16:29,459 [INFO] trading_engine: HEDGE BUY 4585 RTM | delta -4585 -> ~0 | target -0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:30,484 [INFO] rit_api: MARKET SELL 866 RTM -> order_id=2695
+2026-02-19 15:16:30,485 [INFO] trading_engine: HEDGE SELL 866 RTM | delta 866 -> ~0 | target 0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:31,535 [INFO] rit_api: MARKET BUY 145 RTM -> order_id=2997
+2026-02-19 15:16:31,536 [INFO] trading_engine: HEDGE BUY 145 RTM | delta -145 -> ~-0 | target -0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:32,563 [INFO] rit_api: MARKET SELL 6462 RTM -> order_id=3275
+2026-02-19 15:16:32,563 [INFO] trading_engine: HEDGE SELL 6462 RTM | delta 6462 -> ~0 | target 0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:33,596 [INFO] rit_api: MARKET BUY 1695 RTM -> order_id=3467
+2026-02-19 15:16:33,596 [INFO] trading_engine: HEDGE BUY 1695 RTM | delta -1695 -> ~0 | target -0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:34,627 [INFO] rit_api: MARKET BUY 1140 RTM -> order_id=3641
+2026-02-19 15:16:34,628 [INFO] trading_engine: HEDGE BUY 1140 RTM | delta -1140 -> ~0 | target -0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:35,576 [INFO] rit_api: MARKET SELL 874 RTM -> order_id=3722
+2026-02-19 15:16:35,577 [INFO] trading_engine: HEDGE SELL 874 RTM | delta 874 -> ~0 | target 0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:36,505 [INFO] rit_api: MARKET BUY 4651 RTM -> order_id=3925
+2026-02-19 15:16:36,506 [INFO] trading_engine: HEDGE BUY 4651 RTM | delta -4651 -> ~0 | target -0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:37,530 [INFO] rit_api: MARKET SELL 2491 RTM -> order_id=4031
+2026-02-19 15:16:37,530 [INFO] trading_engine: HEDGE SELL 2491 RTM | delta 2491 -> ~0 | target 0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:38,536 [INFO] rit_api: MARKET SELL 4498 RTM -> order_id=4283
+2026-02-19 15:16:38,536 [INFO] trading_engine: HEDGE SELL 4498 RTM | delta 4498 -> ~0 | target 0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:39,517 [INFO] rit_api: MARKET BUY 8325 RTM -> order_id=4403
+2026-02-19 15:16:39,517 [INFO] trading_engine: HEDGE BUY 8325 RTM | delta -8325 -> ~0 | target -0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:40,652 [INFO] rit_api: MARKET SELL 442 RTM -> order_id=4699
+2026-02-19 15:16:40,652 [INFO] trading_engine: HEDGE SELL 442 RTM | delta 442 -> ~0 | target 0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:41,578 [INFO] rit_api: MARKET BUY 3138 RTM -> order_id=4742
+2026-02-19 15:16:41,578 [INFO] trading_engine: HEDGE BUY 3138 RTM | delta -3138 -> ~-0 | target -0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:42,599 [INFO] rit_api: MARKET BUY 1511 RTM -> order_id=4789
+2026-02-19 15:16:42,619 [INFO] trading_engine: HEDGE BUY 1511 RTM | delta -1511 -> ~-0 | target -0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:43,611 [INFO] rit_api: MARKET BUY 166 RTM -> order_id=4835
+2026-02-19 15:16:43,611 [INFO] trading_engine: HEDGE BUY 166 RTM | delta -166 -> ~0 | target -0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:44,648 [INFO] rit_api: MARKET SELL 1192 RTM -> order_id=4883
+2026-02-19 15:16:44,648 [INFO] trading_engine: HEDGE SELL 1192 RTM | delta 1192 -> ~-0 | target 0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:45,563 [INFO] rit_api: MARKET SELL 3006 RTM -> order_id=4943
+2026-02-19 15:16:45,563 [INFO] trading_engine: HEDGE SELL 3006 RTM | delta 3006 -> ~-0 | target 0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:46,552 [INFO] rit_api: MARKET SELL 2104 RTM -> order_id=5227
+2026-02-19 15:16:46,552 [INFO] trading_engine: HEDGE SELL 2104 RTM | delta 2104 -> ~0 | target 0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:47,619 [INFO] rit_api: MARKET BUY 7122 RTM -> order_id=5276
+2026-02-19 15:16:47,619 [INFO] trading_engine: HEDGE BUY 7122 RTM | delta -7122 -> ~-0 | target -0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:48,580 [INFO] rit_api: MARKET SELL 4093 RTM -> order_id=5326
+2026-02-19 15:16:48,580 [INFO] trading_engine: HEDGE SELL 4093 RTM | delta 4093 -> ~0 | target 0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:49,674 [INFO] rit_api: MARKET BUY 5196 RTM -> order_id=5394
+2026-02-19 15:16:49,674 [INFO] trading_engine: HEDGE BUY 5196 RTM | delta -5196 -> ~-0 | target -0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:50,700 [INFO] rit_api: MARKET SELL 2735 RTM -> order_id=5459
+2026-02-19 15:16:50,700 [INFO] trading_engine: HEDGE SELL 2735 RTM | delta 2735 -> ~0 | target 0 (0% of limit 13000) | mode interval 1t
+2026-02-19 15:16:51,609 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-19 15:16:51,615 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=5527
+2026-02-19 15:16:51,625 [INFO] rit_api: MARKET SELL 46 RTM1C50 -> order_id=5528
+2026-02-19 15:16:51,632 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=5529
+2026-02-19 15:16:51,643 [INFO] rit_api: MARKET SELL 46 RTM1P50 -> order_id=5530
+2026-02-19 15:16:51,650 [INFO] rit_api: MARKET BUY 63 RTM1C54 -> order_id=5531
+2026-02-19 15:16:51,660 [INFO] rit_api: MARKET SELL 972 RTM -> order_id=5532
+2026-02-19 15:16:51,660 [INFO] trading_engine: SCHEDULED CLOSE tick 35: options_closed=355 stock_closed=972 orders=6
+2026-02-19 15:16:51,660 [INFO] trading_engine: Scheduled close week 1 tick 35 (window 35-40), trades=6
+2026-02-19 15:16:52,530 [INFO] news_parser: NEWS: Current realized vol = 19.0% (history: ['27%', '19%']) [NOW USING REALIZED]
+2026-02-19 15:16:52,531 [INFO] news_parser: NEWS: Forecast vol next week = 19.0% - 24.0% (mid=21.5%) [NOW USING FORECAST]
+2026-02-19 15:16:52,540 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=5814
+2026-02-19 15:16:52,557 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=5815
+2026-02-19 15:16:52,565 [INFO] rit_api: MARKET SELL 46 RTM1C50 -> order_id=5816
+2026-02-19 15:16:52,571 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=5827
+2026-02-19 15:16:52,579 [INFO] rit_api: MARKET SELL 46 RTM1P50 -> order_id=5828
+2026-02-19 15:16:52,585 [INFO] rit_api: MARKET BUY 63 RTM1C54 -> order_id=5829
+2026-02-19 15:16:52,593 [INFO] rit_api: MARKET SELL 972 RTM -> order_id=5830
+2026-02-19 15:16:52,593 [INFO] trading_engine: SCHEDULED CLOSE tick 36: options_closed=430 stock_closed=972 orders=7
+2026-02-19 15:16:52,595 [INFO] trading_engine: Scheduled close week 1 tick 36 (window 35-40), trades=7
+2026-02-19 15:16:53,658 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=5933
+2026-02-19 15:16:53,664 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=5934
+2026-02-19 15:16:53,670 [INFO] rit_api: MARKET SELL 46 RTM1C50 -> order_id=5950
+2026-02-19 15:16:53,675 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=5952
+2026-02-19 15:16:53,683 [INFO] rit_api: MARKET SELL 46 RTM1P50 -> order_id=5953
+2026-02-19 15:16:53,691 [INFO] rit_api: MARKET BUY 63 RTM1C54 -> order_id=5954
+2026-02-19 15:16:53,696 [INFO] rit_api: MARKET SELL 971 RTM -> order_id=5955
+2026-02-19 15:16:53,697 [INFO] trading_engine: SCHEDULED CLOSE tick 37: options_closed=430 stock_closed=971 orders=7
+2026-02-19 15:16:53,697 [INFO] trading_engine: Scheduled close week 1 tick 37 (window 35-40), trades=7
+2026-02-19 15:16:54,604 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=6015
+2026-02-19 15:16:54,610 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=6016
+2026-02-19 15:16:54,617 [INFO] rit_api: MARKET SELL 46 RTM1C50 -> order_id=6017
+2026-02-19 15:16:54,623 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=6018
+2026-02-19 15:16:54,630 [INFO] rit_api: MARKET SELL 46 RTM1P50 -> order_id=6019
+2026-02-19 15:16:54,642 [INFO] rit_api: MARKET BUY 62 RTM1C54 -> order_id=6020
+2026-02-19 15:16:54,648 [INFO] rit_api: MARKET SELL 971 RTM -> order_id=6021
+2026-02-19 15:16:54,648 [INFO] trading_engine: SCHEDULED CLOSE tick 38: options_closed=429 stock_closed=971 orders=7
+2026-02-19 15:16:54,648 [INFO] trading_engine: Scheduled close week 1 tick 38 (window 35-40), trades=7
+2026-02-19 15:16:55,714 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=6136
+2026-02-19 15:16:55,720 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=6138
+2026-02-19 15:16:55,728 [INFO] rit_api: MARKET SELL 46 RTM1C50 -> order_id=6142
+2026-02-19 15:16:55,734 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=6146
+2026-02-19 15:16:55,740 [INFO] rit_api: MARKET SELL 46 RTM1P50 -> order_id=6151
+2026-02-19 15:16:55,746 [INFO] rit_api: MARKET BUY 62 RTM1C54 -> order_id=6155
+2026-02-19 15:16:55,753 [INFO] rit_api: MARKET SELL 971 RTM -> order_id=6159
+2026-02-19 15:16:55,755 [INFO] trading_engine: SCHEDULED CLOSE tick 39: options_closed=429 stock_closed=971 orders=7
+2026-02-19 15:16:55,755 [INFO] trading_engine: Scheduled close week 1 tick 39 (window 35-40), trades=7
+2026-02-19 15:16:56,713 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=6229
+2026-02-19 15:16:56,719 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=6231
+2026-02-19 15:16:56,725 [INFO] rit_api: MARKET SELL 45 RTM1C50 -> order_id=6232
+2026-02-19 15:16:56,733 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=6233
+2026-02-19 15:16:56,739 [INFO] rit_api: MARKET SELL 45 RTM1P50 -> order_id=6234
+2026-02-19 15:16:56,749 [INFO] rit_api: MARKET BUY 62 RTM1C54 -> order_id=6235
+2026-02-19 15:16:56,755 [INFO] rit_api: MARKET SELL 971 RTM -> order_id=6236
+2026-02-19 15:16:56,757 [INFO] trading_engine: SCHEDULED CLOSE tick 40: options_closed=427 stock_closed=971 orders=7
+2026-02-19 15:16:56,758 [INFO] trading_engine: Scheduled close week 1 tick 40 (window 35-40), trades=7
+2026-02-19 15:16:57,655 [INFO] trading_engine: Position flat. Waiting for next scheduled positioning tick.
+2026-02-19 15:17:30,931 [INFO] trading_engine: WEEK 2 positioning tick 74
+2026-02-19 15:17:30,931 [INFO] trading_engine: Immediate positioning at week 2 tick 74
+2026-02-19 15:17:30,935 [INFO] trading_engine: FORCED SIZE: |IV-RV|=5.70% > 3.00% => n=875 SHORT @ K=49
+2026-02-19 15:17:30,942 [INFO] rit_api: MARKET SELL 100 RTM1C49 -> order_id=8394
+2026-02-19 15:17:30,949 [INFO] rit_api: MARKET SELL 100 RTM1P49 -> order_id=8395
+2026-02-19 15:17:30,959 [INFO] rit_api: MARKET SELL 100 RTM1C49 -> order_id=8400
+2026-02-19 15:17:30,967 [INFO] rit_api: MARKET SELL 100 RTM1P49 -> order_id=8406
+2026-02-19 15:17:30,974 [INFO] rit_api: MARKET SELL 100 RTM1C49 -> order_id=8411
+2026-02-19 15:17:30,981 [INFO] rit_api: MARKET SELL 100 RTM1P49 -> order_id=8415
+2026-02-19 15:17:30,989 [INFO] rit_api: MARKET SELL 100 RTM1C49 -> order_id=8420
+2026-02-19 15:17:30,996 [INFO] rit_api: MARKET SELL 100 RTM1P49 -> order_id=8421
+2026-02-19 15:17:31,013 [INFO] rit_api: MARKET SELL 100 RTM1C49 -> order_id=8422
+2026-02-19 15:17:31,026 [INFO] rit_api: MARKET SELL 100 RTM1P49 -> order_id=8423
+2026-02-19 15:17:31,033 [INFO] rit_api: MARKET BUY 100 RTM1C54 -> order_id=8424
+2026-02-19 15:17:31,040 [INFO] rit_api: MARKET BUY 100 RTM1P45 -> order_id=8425
+2026-02-19 15:17:31,046 [INFO] rit_api: MARKET SELL 100 RTM1C49 -> order_id=8426
+2026-02-19 15:17:31,052 [INFO] rit_api: MARKET SELL 100 RTM1P49 -> order_id=8427
+2026-02-19 15:17:31,058 [INFO] rit_api: MARKET BUY 100 RTM1C54 -> order_id=8428
+2026-02-19 15:17:31,064 [INFO] rit_api: MARKET BUY 100 RTM1P45 -> order_id=8429
+2026-02-19 15:17:31,071 [INFO] rit_api: MARKET SELL 100 RTM1C49 -> order_id=8430
+2026-02-19 15:17:31,077 [INFO] rit_api: MARKET SELL 100 RTM1P49 -> order_id=8431
+2026-02-19 15:17:31,083 [INFO] rit_api: MARKET BUY 100 RTM1C54 -> order_id=8432
+2026-02-19 15:17:31,119 [INFO] rit_api: MARKET BUY 100 RTM1P45 -> order_id=8433
+2026-02-19 15:17:31,125 [INFO] rit_api: MARKET SELL 100 RTM1C49 -> order_id=8434
+2026-02-19 15:17:31,140 [INFO] rit_api: MARKET SELL 100 RTM1P49 -> order_id=8435
+2026-02-19 15:17:31,155 [INFO] rit_api: MARKET BUY 75 RTM1C54 -> order_id=8436
+2026-02-19 15:17:31,172 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=8437
+2026-02-19 15:17:31,179 [INFO] rit_api: MARKET SELL 75 RTM1C49 -> order_id=8438
+2026-02-19 15:17:31,187 [INFO] rit_api: MARKET SELL 75 RTM1P49 -> order_id=8439
+2026-02-19 15:17:31,187 [INFO] trading_engine: STRADDLE SELL 875/875 @ K=49: 26 orders | ATM 875C+875P | EXTREME C54 375 + P45 375
+2026-02-19 15:17:31,187 [INFO] trading_engine: POSITIONED: 875 SHORT straddles @ 49 (week 2, expected $0)
+2026-02-19 15:17:31,820 [INFO] news_parser: NEWS: Current realized vol = 21.0% (history: ['27%', '19%', '21%']) [NOW USING REALIZED]
+2026-02-19 15:17:31,841 [INFO] trading_engine: Hedge qty capped: requested 24576, capped 10000
+2026-02-19 15:17:31,851 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=8482
+2026-02-19 15:17:31,852 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -24576 -> ~-14576 | target -0 (0% of limit 13000) | mode limit
+2026-02-19 15:17:34,929 [INFO] trading_engine: Hedge qty capped: requested 15851, capped 10000
+2026-02-19 15:17:34,935 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=8987
+2026-02-19 15:17:34,935 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -15851 -> ~-5851 | target -0 (0% of limit 13000) | mode limit
+2026-02-19 15:17:39,884 [INFO] trading_engine: Hedge qty capped: requested 14008, capped 10000
+2026-02-19 15:17:39,891 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=9735
+2026-02-19 15:17:39,891 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -14008 -> ~-4008 | target -0 (0% of limit 13000) | mode limit
+2026-02-19 15:18:08,076 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-19 15:18:08,082 [INFO] rit_api: MARKET BUY 100 RTM1C49 -> order_id=12521
+2026-02-19 15:18:08,090 [INFO] rit_api: MARKET BUY 46 RTM1C49 -> order_id=12522
+2026-02-19 15:18:08,097 [INFO] rit_api: MARKET BUY 100 RTM1P49 -> order_id=12524
+2026-02-19 15:18:08,104 [INFO] rit_api: MARKET BUY 46 RTM1P49 -> order_id=12525
+2026-02-19 15:18:08,191 [INFO] rit_api: MARKET SELL 63 RTM1C54 -> order_id=12526
+2026-02-19 15:18:08,200 [INFO] rit_api: MARKET SELL 5000 RTM -> order_id=12529
+2026-02-19 15:18:08,200 [INFO] trading_engine: SCHEDULED CLOSE tick 111: options_closed=355 stock_closed=5000 orders=6
+2026-02-19 15:18:08,202 [INFO] trading_engine: Scheduled close week 2 tick 111 (window 111-116), trades=6
+2026-02-19 15:18:09,108 [INFO] news_parser: NEWS: Current realized vol = 20.0% (history: ['27%', '19%', '21%', '20%']) [NOW USING REALIZED]
+2026-02-19 15:18:09,108 [INFO] news_parser: NEWS: Forecast vol next week = 20.0% - 25.0% (mid=22.5%) [NOW USING FORECAST]
+2026-02-19 15:18:09,120 [INFO] rit_api: MARKET SELL 75 RTM1P45 -> order_id=12577
+2026-02-19 15:18:09,129 [INFO] rit_api: MARKET BUY 100 RTM1C49 -> order_id=12578
+2026-02-19 15:18:09,136 [INFO] rit_api: MARKET BUY 46 RTM1C49 -> order_id=12579
+2026-02-19 15:18:09,144 [INFO] rit_api: MARKET BUY 100 RTM1P49 -> order_id=12580
+2026-02-19 15:18:09,152 [INFO] rit_api: MARKET BUY 46 RTM1P49 -> order_id=12581
+2026-02-19 15:18:09,160 [INFO] rit_api: MARKET SELL 63 RTM1C54 -> order_id=12582
+2026-02-19 15:18:09,169 [INFO] rit_api: MARKET SELL 5000 RTM -> order_id=12583
+2026-02-19 15:18:09,172 [INFO] trading_engine: SCHEDULED CLOSE tick 112: options_closed=430 stock_closed=5000 orders=7
+2026-02-19 15:18:09,172 [INFO] trading_engine: Scheduled close week 2 tick 112 (window 111-116), trades=7
+2026-02-19 15:18:10,037 [INFO] rit_api: MARKET SELL 75 RTM1P45 -> order_id=12631
+2026-02-19 15:18:10,050 [INFO] rit_api: MARKET BUY 100 RTM1C49 -> order_id=12632
+2026-02-19 15:18:10,058 [INFO] rit_api: MARKET BUY 46 RTM1C49 -> order_id=12633
+2026-02-19 15:18:10,064 [INFO] rit_api: MARKET BUY 100 RTM1P49 -> order_id=12634
+2026-02-19 15:18:10,071 [INFO] rit_api: MARKET BUY 46 RTM1P49 -> order_id=12635
+2026-02-19 15:18:10,079 [INFO] rit_api: MARKET SELL 63 RTM1C54 -> order_id=12636
+2026-02-19 15:18:10,086 [INFO] rit_api: MARKET SELL 5000 RTM -> order_id=12637
+2026-02-19 15:18:10,087 [INFO] trading_engine: SCHEDULED CLOSE tick 113: options_closed=430 stock_closed=5000 orders=7
+2026-02-19 15:18:10,087 [INFO] trading_engine: Scheduled close week 2 tick 113 (window 111-116), trades=7
+2026-02-19 15:18:11,048 [INFO] rit_api: MARKET SELL 75 RTM1P45 -> order_id=12690
+2026-02-19 15:18:11,065 [INFO] rit_api: MARKET BUY 100 RTM1C49 -> order_id=12695
+2026-02-19 15:18:11,072 [INFO] rit_api: MARKET BUY 46 RTM1C49 -> order_id=12701
+2026-02-19 15:18:11,079 [INFO] rit_api: MARKET BUY 100 RTM1P49 -> order_id=12705
+2026-02-19 15:18:11,086 [INFO] rit_api: MARKET BUY 46 RTM1P49 -> order_id=12711
+2026-02-19 15:18:11,094 [INFO] rit_api: MARKET SELL 62 RTM1C54 -> order_id=12717
+2026-02-19 15:18:11,104 [INFO] rit_api: MARKET SELL 5000 RTM -> order_id=12719
+2026-02-19 15:18:11,105 [INFO] trading_engine: SCHEDULED CLOSE tick 114: options_closed=429 stock_closed=5000 orders=7
+2026-02-19 15:18:11,105 [INFO] trading_engine: Scheduled close week 2 tick 114 (window 111-116), trades=7
+2026-02-19 15:18:12,083 [INFO] rit_api: MARKET SELL 75 RTM1P45 -> order_id=12818
+2026-02-19 15:18:12,089 [INFO] rit_api: MARKET BUY 100 RTM1C49 -> order_id=12822
+2026-02-19 15:18:12,095 [INFO] rit_api: MARKET BUY 46 RTM1C49 -> order_id=12823
+2026-02-19 15:18:12,101 [INFO] rit_api: MARKET BUY 100 RTM1P49 -> order_id=12824
+2026-02-19 15:18:12,106 [INFO] rit_api: MARKET BUY 46 RTM1P49 -> order_id=12825
+2026-02-19 15:18:12,113 [INFO] rit_api: MARKET SELL 62 RTM1C54 -> order_id=12826
+2026-02-19 15:18:12,121 [INFO] rit_api: MARKET SELL 5000 RTM -> order_id=12827
+2026-02-19 15:18:12,121 [INFO] trading_engine: SCHEDULED CLOSE tick 115: options_closed=429 stock_closed=5000 orders=7
+2026-02-19 15:18:12,121 [INFO] trading_engine: Scheduled close week 2 tick 115 (window 111-116), trades=7
+2026-02-19 15:18:13,128 [INFO] rit_api: MARKET SELL 75 RTM1P45 -> order_id=12913
+2026-02-19 15:18:13,134 [INFO] rit_api: MARKET BUY 100 RTM1C49 -> order_id=12914
+2026-02-19 15:18:13,142 [INFO] rit_api: MARKET BUY 45 RTM1C49 -> order_id=12915
+2026-02-19 15:18:13,149 [INFO] rit_api: MARKET BUY 100 RTM1P49 -> order_id=12916
+2026-02-19 15:18:13,156 [INFO] rit_api: MARKET BUY 45 RTM1P49 -> order_id=12917
+2026-02-19 15:18:13,162 [INFO] rit_api: MARKET SELL 62 RTM1C54 -> order_id=12918
+2026-02-19 15:18:13,170 [INFO] rit_api: MARKET SELL 5000 RTM -> order_id=12919
+2026-02-19 15:18:13,171 [INFO] trading_engine: SCHEDULED CLOSE tick 116: options_closed=427 stock_closed=5000 orders=7
+2026-02-19 15:18:13,172 [INFO] trading_engine: Scheduled close week 2 tick 116 (window 111-116), trades=7
+2026-02-19 15:18:14,129 [INFO] trading_engine: Position flat. Waiting for next scheduled positioning tick.
+2026-02-19 15:18:46,273 [INFO] trading_engine: WEEK 3 positioning tick 149
+2026-02-19 15:18:46,273 [INFO] trading_engine: Immediate positioning at week 3 tick 149
+2026-02-19 15:18:46,276 [INFO] optimizer: Not profitable: gain/contract=$3.1361, pos_cost=$4.0200
+2026-02-19 15:18:46,276 [INFO] trading_engine: No profitable trade for this week (n*=0)
+2026-02-19 15:18:47,280 [INFO] news_parser: NEWS: Current realized vol = 23.0% (history: ['27%', '19%', '21%', '20%', '23%']) [NOW USING REALIZED]
+2026-02-19 15:19:23,512 [INFO] trading_engine: Scheduled close complete week 3 by tick 186
+2026-02-19 15:19:24,586 [INFO] news_parser: NEWS: Current realized vol = 7.0% (history: ['27%', '19%', '21%', '20%', '23%', '7%']) [NOW USING REALIZED]
+2026-02-19 15:19:24,587 [INFO] news_parser: NEWS: Forecast vol next week = 7.0% - 12.0% (mid=9.5%) [NOW USING FORECAST]
+2026-02-19 15:19:24,591 [INFO] trading_engine: Scheduled close complete week 3 by tick 187
+2026-02-19 15:19:25,502 [INFO] trading_engine: Scheduled close complete week 3 by tick 188
+2026-02-19 15:19:26,510 [INFO] trading_engine: Scheduled close complete week 3 by tick 189
+2026-02-19 15:19:27,570 [INFO] trading_engine: Scheduled close complete week 3 by tick 190
+2026-02-19 15:19:28,579 [INFO] trading_engine: Scheduled close complete week 3 by tick 191
+2026-02-19 15:20:01,676 [INFO] trading_engine: WEEK 4 positioning tick 224
+2026-02-19 15:20:01,676 [INFO] trading_engine: Immediate positioning at week 4 tick 224
+2026-02-19 15:20:01,680 [INFO] trading_engine: FORCED SIZE: |IV-RV|=13.29% > 3.00% => n=875 SHORT @ K=48
+2026-02-19 15:20:01,687 [INFO] rit_api: MARKET SELL 100 RTM1C48 -> order_id=19257
+2026-02-19 15:20:01,698 [INFO] rit_api: MARKET SELL 100 RTM1P48 -> order_id=19258
+2026-02-19 15:20:01,705 [INFO] rit_api: MARKET SELL 100 RTM1C48 -> order_id=19259
+2026-02-19 15:20:01,712 [INFO] rit_api: MARKET SELL 100 RTM1P48 -> order_id=19260
+2026-02-19 15:20:01,723 [INFO] rit_api: MARKET SELL 100 RTM1C48 -> order_id=19261
+2026-02-19 15:20:01,740 [INFO] rit_api: MARKET SELL 100 RTM1P48 -> order_id=19262
+2026-02-19 15:20:01,747 [INFO] rit_api: MARKET SELL 100 RTM1C48 -> order_id=19263
+2026-02-19 15:20:01,754 [INFO] rit_api: MARKET SELL 100 RTM1P48 -> order_id=19264
+2026-02-19 15:20:01,762 [INFO] rit_api: MARKET SELL 100 RTM1C48 -> order_id=19265
+2026-02-19 15:20:01,769 [INFO] rit_api: MARKET SELL 100 RTM1P48 -> order_id=19266
+2026-02-19 15:20:01,776 [INFO] rit_api: MARKET BUY 100 RTM1C54 -> order_id=19267
+2026-02-19 15:20:01,783 [INFO] rit_api: MARKET BUY 100 RTM1P45 -> order_id=19268
+2026-02-19 15:20:01,790 [INFO] rit_api: MARKET SELL 100 RTM1C48 -> order_id=19269
+2026-02-19 15:20:01,799 [INFO] rit_api: MARKET SELL 100 RTM1P48 -> order_id=19270
+2026-02-19 15:20:01,805 [INFO] rit_api: MARKET BUY 100 RTM1C54 -> order_id=19271
+2026-02-19 15:20:01,812 [INFO] rit_api: MARKET BUY 100 RTM1P45 -> order_id=19272
+2026-02-19 15:20:01,823 [INFO] rit_api: MARKET SELL 100 RTM1C48 -> order_id=19273
+2026-02-19 15:20:01,829 [INFO] rit_api: MARKET SELL 100 RTM1P48 -> order_id=19274
+2026-02-19 15:20:01,836 [INFO] rit_api: MARKET BUY 100 RTM1C54 -> order_id=19275
+2026-02-19 15:20:01,843 [INFO] rit_api: MARKET BUY 100 RTM1P45 -> order_id=19276
+2026-02-19 15:20:01,853 [INFO] rit_api: MARKET SELL 100 RTM1C48 -> order_id=19277
+2026-02-19 15:20:01,859 [INFO] rit_api: MARKET SELL 100 RTM1P48 -> order_id=19278
+2026-02-19 15:20:01,865 [INFO] rit_api: MARKET BUY 75 RTM1C54 -> order_id=19279
+2026-02-19 15:20:01,871 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=19280
+2026-02-19 15:20:01,889 [INFO] rit_api: MARKET SELL 75 RTM1C48 -> order_id=19281
+2026-02-19 15:20:01,901 [INFO] rit_api: MARKET SELL 75 RTM1P48 -> order_id=19282
+2026-02-19 15:20:01,902 [INFO] trading_engine: STRADDLE SELL 875/875 @ K=48: 26 orders | ATM 875C+875P | EXTREME C54 375 + P45 375
+2026-02-19 15:20:01,902 [INFO] trading_engine: POSITIONED: 875 SHORT straddles @ 48 (week 4, expected $0)
+2026-02-19 15:20:02,657 [INFO] news_parser: NEWS: Current realized vol = 12.0% (history: ['27%', '19%', '21%', '20%', '23%', '7%', '12%']) [NOW USING REALIZED]
+2026-02-19 15:20:04,700 [INFO] trading_engine: Hedge qty capped: requested 14637, capped 10000
+2026-02-19 15:20:04,706 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=19562
+2026-02-19 15:20:04,706 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 14637 -> ~4637 | target 0 (0% of limit 13000) | mode limit
+2026-02-19 15:20:11,812 [INFO] trading_engine: Hedge qty capped: requested 13220, capped 10000
+2026-02-19 15:20:11,821 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=19895
+2026-02-19 15:20:11,821 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 13220 -> ~3220 | target 0 (0% of limit 13000) | mode limit
+2026-02-19 15:20:13,746 [INFO] trading_engine: Hedge qty capped: requested 13614, capped 10000
+2026-02-19 15:20:13,754 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=20002
+2026-02-19 15:20:13,755 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 13614 -> ~3614 | target 0 (0% of limit 13000) | mode limit
+2026-02-19 15:20:21,839 [INFO] trading_engine: Hedge qty capped: requested 13161, capped 10000
+2026-02-19 15:20:21,848 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=20475
+2026-02-19 15:20:21,848 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 13161 -> ~3161 | target 0 (0% of limit 13000) | mode limit
+2026-02-19 15:20:26,819 [INFO] trading_engine: Hedge qty capped: requested 22328, capped 10000
+2026-02-19 15:20:26,825 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=20725
+2026-02-19 15:20:26,825 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -22328 -> ~-12328 | target -0 (0% of limit 13000) | mode limit
+2026-02-19 15:20:31,966 [INFO] trading_engine: Hedge qty capped: requested 18715, capped 10000
+2026-02-19 15:20:31,973 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=21015
+2026-02-19 15:20:31,974 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -18715 -> ~-8715 | target -0 (0% of limit 13000) | mode limit
+2026-02-19 15:20:32,841 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-19 15:20:32,849 [INFO] rit_api: MARKET BUY 100 RTM1C48 -> order_id=21070
+2026-02-19 15:20:32,855 [INFO] rit_api: MARKET BUY 46 RTM1C48 -> order_id=21071
+2026-02-19 15:20:32,862 [INFO] rit_api: MARKET BUY 100 RTM1P48 -> order_id=21073
+2026-02-19 15:20:32,871 [INFO] rit_api: MARKET BUY 46 RTM1P48 -> order_id=21077
+2026-02-19 15:20:32,878 [INFO] rit_api: MARKET SELL 63 RTM1C54 -> order_id=21078
+2026-02-19 15:20:32,885 [INFO] rit_api: MARKET BUY 3334 RTM -> order_id=21079
+2026-02-19 15:20:32,886 [INFO] trading_engine: SCHEDULED CLOSE tick 255: options_closed=355 stock_closed=3334 orders=6
+2026-02-19 15:20:32,887 [INFO] trading_engine: Scheduled close week 4 tick 255 (window 255-260), trades=6
+2026-02-19 15:20:33,851 [INFO] rit_api: MARKET SELL 75 RTM1P45 -> order_id=21141
+2026-02-19 15:20:33,858 [INFO] rit_api: MARKET BUY 100 RTM1C48 -> order_id=21143
+2026-02-19 15:20:33,865 [INFO] rit_api: MARKET BUY 46 RTM1C48 -> order_id=21144
+2026-02-19 15:20:33,874 [INFO] rit_api: MARKET BUY 100 RTM1P48 -> order_id=21145
+2026-02-19 15:20:33,881 [INFO] rit_api: MARKET BUY 46 RTM1P48 -> order_id=21146
+2026-02-19 15:20:33,906 [INFO] rit_api: MARKET SELL 63 RTM1C54 -> order_id=21147
+2026-02-19 15:20:33,917 [INFO] rit_api: MARKET BUY 3334 RTM -> order_id=21148
+2026-02-19 15:20:33,918 [INFO] trading_engine: SCHEDULED CLOSE tick 256: options_closed=430 stock_closed=3334 orders=7
+2026-02-19 15:20:33,919 [INFO] trading_engine: Scheduled close week 4 tick 256 (window 255-260), trades=7
+2026-02-19 15:20:34,894 [INFO] rit_api: MARKET SELL 75 RTM1P45 -> order_id=21202
+2026-02-19 15:20:34,911 [INFO] rit_api: MARKET BUY 100 RTM1C48 -> order_id=21203
+2026-02-19 15:20:34,920 [INFO] rit_api: MARKET BUY 46 RTM1C48 -> order_id=21204
+2026-02-19 15:20:34,927 [INFO] rit_api: MARKET BUY 100 RTM1P48 -> order_id=21205
+2026-02-19 15:20:34,937 [INFO] rit_api: MARKET BUY 46 RTM1P48 -> order_id=21208
+2026-02-19 15:20:34,949 [INFO] rit_api: MARKET SELL 63 RTM1C54 -> order_id=21209
+2026-02-19 15:20:34,968 [INFO] rit_api: MARKET BUY 3333 RTM -> order_id=21210
+2026-02-19 15:20:34,968 [INFO] trading_engine: SCHEDULED CLOSE tick 257: options_closed=430 stock_closed=3333 orders=7
+2026-02-19 15:20:34,969 [INFO] trading_engine: Scheduled close week 4 tick 257 (window 255-260), trades=7
+2026-02-19 15:20:35,831 [INFO] rit_api: MARKET SELL 75 RTM1P45 -> order_id=21257
+2026-02-19 15:20:35,844 [INFO] rit_api: MARKET BUY 100 RTM1C48 -> order_id=21258
+2026-02-19 15:20:35,851 [INFO] rit_api: MARKET BUY 46 RTM1C48 -> order_id=21259
+2026-02-19 15:20:35,859 [INFO] rit_api: MARKET BUY 100 RTM1P48 -> order_id=21260
+2026-02-19 15:20:35,866 [INFO] rit_api: MARKET BUY 46 RTM1P48 -> order_id=21261
+2026-02-19 15:20:35,873 [INFO] rit_api: MARKET SELL 62 RTM1C54 -> order_id=21262
+2026-02-19 15:20:35,879 [INFO] rit_api: MARKET BUY 3333 RTM -> order_id=21265
+2026-02-19 15:20:35,880 [INFO] trading_engine: SCHEDULED CLOSE tick 258: options_closed=429 stock_closed=3333 orders=7
+2026-02-19 15:20:35,880 [INFO] trading_engine: Scheduled close week 4 tick 258 (window 255-260), trades=7
+2026-02-19 15:20:36,848 [INFO] rit_api: MARKET SELL 75 RTM1P45 -> order_id=21312
+2026-02-19 15:20:36,854 [INFO] rit_api: MARKET BUY 100 RTM1C48 -> order_id=21313
+2026-02-19 15:20:36,860 [INFO] rit_api: MARKET BUY 46 RTM1C48 -> order_id=21314
+2026-02-19 15:20:36,886 [INFO] rit_api: MARKET BUY 100 RTM1P48 -> order_id=21315
+2026-02-19 15:20:36,893 [INFO] rit_api: MARKET BUY 46 RTM1P48 -> order_id=21316
+2026-02-19 15:20:36,899 [INFO] rit_api: MARKET SELL 62 RTM1C54 -> order_id=21317
+2026-02-19 15:20:36,907 [INFO] rit_api: MARKET BUY 3333 RTM -> order_id=21318
+2026-02-19 15:20:36,907 [INFO] trading_engine: SCHEDULED CLOSE tick 259: options_closed=429 stock_closed=3333 orders=7
+2026-02-19 15:20:36,907 [INFO] trading_engine: Scheduled close week 4 tick 259 (window 255-260), trades=7
+2026-02-19 15:20:37,922 [INFO] rit_api: MARKET SELL 75 RTM1P45 -> order_id=21367
+2026-02-19 15:20:37,927 [INFO] rit_api: MARKET BUY 100 RTM1C48 -> order_id=21369
+2026-02-19 15:20:37,936 [INFO] rit_api: MARKET BUY 45 RTM1C48 -> order_id=21371
+2026-02-19 15:20:37,943 [INFO] rit_api: MARKET BUY 100 RTM1P48 -> order_id=21372
+2026-02-19 15:20:37,952 [INFO] rit_api: MARKET BUY 45 RTM1P48 -> order_id=21373
+2026-02-19 15:20:37,959 [INFO] rit_api: MARKET SELL 62 RTM1C54 -> order_id=21374
+2026-02-19 15:20:37,970 [INFO] rit_api: MARKET BUY 3333 RTM -> order_id=21375
+2026-02-19 15:20:37,970 [INFO] trading_engine: SCHEDULED CLOSE tick 260: options_closed=427 stock_closed=3333 orders=7
+2026-02-19 15:20:37,970 [INFO] trading_engine: Scheduled close week 4 tick 260 (window 255-260), trades=7
+2026-02-19 15:20:38,928 [INFO] trading_engine: Position flat. Waiting for next scheduled positioning tick.
+2026-02-19 15:21:41,419 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:41,421 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:41,925 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:42,428 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:42,931 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:43,435 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:43,939 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:44,442 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:44,946 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:45,450 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:45,954 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:46,458 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:46,962 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:47,466 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:47,970 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:48,473 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:48,978 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:49,481 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:49,985 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:50,489 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:50,992 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:51,496 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:52,000 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:52,504 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:53,009 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:53,513 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:54,017 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:54,521 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:55,025 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:55,528 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:56,031 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:56,535 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:57,038 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:57,541 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:21:58,044 [WARNING] rit_api: GET /case returned 401
+2026-02-19 15:22:15,571 [INFO] trading_engine: WEEK 4 positioning tick 224
+2026-02-19 15:22:15,571 [INFO] trading_engine: Immediate positioning at week 4 tick 224
+2026-02-19 15:22:15,574 [INFO] trading_engine: No realized vol available at positioning tick 224; skipping entry this tick
+2026-02-19 15:22:46,622 [INFO] trading_engine: Scheduled close complete week 4 by tick 255
+2026-02-19 15:22:47,629 [INFO] trading_engine: Scheduled close complete week 4 by tick 256
+2026-02-19 15:22:48,765 [INFO] trading_engine: Scheduled close complete week 4 by tick 257
+2026-02-19 15:22:49,673 [INFO] trading_engine: Scheduled close complete week 4 by tick 258
+2026-02-19 15:22:50,692 [INFO] trading_engine: Scheduled close complete week 4 by tick 259
+2026-02-19 15:22:51,694 [INFO] trading_engine: Scheduled close complete week 4 by tick 260
+2026-02-19 15:28:41,768 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-19 15:28:46,768 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-19 15:28:52,283 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-19 15:28:57,820 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-19 15:29:03,340 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-19 15:29:08,874 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-19 15:29:14,384 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-19 15:29:19,890 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-19 15:29:25,399 [ERROR] rit_api: GET /case error: HTTPConnectionPool(host='localhost', port=9999): Read timed out. (read timeout=5)
+2026-02-19 15:30:28,139 [INFO] trading_engine: WEEK 1 positioning tick 1
+2026-02-19 15:30:28,139 [INFO] trading_engine: Immediate positioning at week 1 tick 1
+2026-02-19 15:30:28,140 [INFO] trading_engine: No realized vol available at positioning tick 1; skipping entry this tick
+2026-02-19 15:30:28,732 [INFO] trading_engine: WEEK 1 positioning tick 2
+2026-02-19 15:30:28,733 [INFO] trading_engine: Immediate positioning at week 1 tick 2
+2026-02-19 15:30:28,736 [INFO] trading_engine: No realized vol available at positioning tick 2; skipping entry this tick
+2026-02-19 15:30:29,694 [INFO] trading_engine: WEEK 1 positioning tick 3
+2026-02-19 15:30:29,694 [INFO] trading_engine: Immediate positioning at week 1 tick 3
+2026-02-19 15:30:29,696 [INFO] trading_engine: No realized vol available at positioning tick 3; skipping entry this tick
+2026-02-19 15:30:30,642 [INFO] trading_engine: WEEK 1 positioning tick 4
+2026-02-19 15:30:30,642 [INFO] trading_engine: Immediate positioning at week 1 tick 4
+2026-02-19 15:30:30,644 [INFO] trading_engine: No realized vol available at positioning tick 4; skipping entry this tick
+2026-02-19 15:30:31,658 [INFO] trading_engine: WEEK 1 positioning tick 5
+2026-02-19 15:30:31,660 [INFO] trading_engine: Immediate positioning at week 1 tick 5
+2026-02-19 15:30:31,662 [INFO] trading_engine: No realized vol available at positioning tick 5; skipping entry this tick
+2026-02-19 15:30:32,772 [INFO] trading_engine: WEEK 1 positioning tick 6
+2026-02-19 15:30:32,772 [INFO] trading_engine: Immediate positioning at week 1 tick 6
+2026-02-19 15:30:32,774 [INFO] trading_engine: No realized vol available at positioning tick 6; skipping entry this tick
+2026-02-19 15:30:33,677 [INFO] trading_engine: WEEK 1 positioning tick 7
+2026-02-19 15:30:33,678 [INFO] trading_engine: Immediate positioning at week 1 tick 7
+2026-02-19 15:30:33,679 [INFO] trading_engine: No realized vol available at positioning tick 7; skipping entry this tick
+2026-02-19 15:30:34,687 [INFO] trading_engine: WEEK 1 positioning tick 8
+2026-02-19 15:30:34,687 [INFO] trading_engine: Immediate positioning at week 1 tick 8
+2026-02-19 15:30:34,689 [INFO] trading_engine: No realized vol available at positioning tick 8; skipping entry this tick
+2026-02-19 15:30:35,744 [INFO] trading_engine: WEEK 1 positioning tick 9
+2026-02-19 15:30:35,744 [INFO] trading_engine: Immediate positioning at week 1 tick 9
+2026-02-19 15:30:35,745 [INFO] trading_engine: No realized vol available at positioning tick 9; skipping entry this tick
+2026-02-19 15:30:36,753 [INFO] trading_engine: WEEK 1 positioning tick 10
+2026-02-19 15:30:36,753 [INFO] trading_engine: Immediate positioning at week 1 tick 10
+2026-02-19 15:30:36,755 [INFO] trading_engine: No realized vol available at positioning tick 10; skipping entry this tick
+2026-02-19 15:30:37,763 [INFO] trading_engine: WEEK 1 positioning tick 11
+2026-02-19 15:30:37,764 [INFO] trading_engine: Immediate positioning at week 1 tick 11
+2026-02-19 15:30:37,766 [INFO] trading_engine: No realized vol available at positioning tick 11; skipping entry this tick
+2026-02-19 15:30:38,819 [INFO] trading_engine: WEEK 1 positioning tick 12
+2026-02-19 15:30:38,820 [INFO] trading_engine: Immediate positioning at week 1 tick 12
+2026-02-19 15:30:38,821 [INFO] trading_engine: No realized vol available at positioning tick 12; skipping entry this tick
+2026-02-19 15:30:39,668 [INFO] trading_engine: WEEK 1 positioning tick 13
+2026-02-19 15:30:39,669 [INFO] trading_engine: Immediate positioning at week 1 tick 13
+2026-02-19 15:30:39,677 [INFO] trading_engine: No realized vol available at positioning tick 13; skipping entry this tick
+2026-02-19 15:30:40,684 [INFO] trading_engine: WEEK 1 positioning tick 14
+2026-02-19 15:30:40,685 [INFO] trading_engine: Immediate positioning at week 1 tick 14
+2026-02-19 15:30:40,687 [INFO] trading_engine: No realized vol available at positioning tick 14; skipping entry this tick
+2026-02-19 15:30:41,795 [INFO] trading_engine: WEEK 1 positioning tick 15
+2026-02-19 15:30:41,795 [INFO] trading_engine: Immediate positioning at week 1 tick 15
+2026-02-19 15:30:41,797 [INFO] trading_engine: No realized vol available at positioning tick 15; skipping entry this tick
+2026-02-19 15:30:42,798 [INFO] trading_engine: WEEK 1 positioning tick 16
+2026-02-19 15:30:42,798 [INFO] trading_engine: Immediate positioning at week 1 tick 16
+2026-02-19 15:30:42,799 [INFO] trading_engine: No realized vol available at positioning tick 16; skipping entry this tick
+2026-02-19 15:30:43,695 [INFO] trading_engine: WEEK 1 positioning tick 17
+2026-02-19 15:30:43,696 [INFO] trading_engine: Immediate positioning at week 1 tick 17
+2026-02-19 15:30:43,699 [INFO] trading_engine: No realized vol available at positioning tick 17; skipping entry this tick
+2026-02-19 15:30:44,860 [INFO] trading_engine: WEEK 1 positioning tick 18
+2026-02-19 15:30:44,861 [INFO] trading_engine: Immediate positioning at week 1 tick 18
+2026-02-19 15:30:44,862 [INFO] trading_engine: No realized vol available at positioning tick 18; skipping entry this tick
+2026-02-19 15:30:45,868 [INFO] trading_engine: WEEK 1 positioning tick 19
+2026-02-19 15:30:45,869 [INFO] trading_engine: Immediate positioning at week 1 tick 19
+2026-02-19 15:30:45,870 [INFO] trading_engine: No realized vol available at positioning tick 19; skipping entry this tick
+2026-02-19 15:30:46,714 [INFO] trading_engine: WEEK 1 positioning tick 20
+2026-02-19 15:30:46,715 [INFO] trading_engine: Immediate positioning at week 1 tick 20
+2026-02-19 15:30:46,718 [INFO] trading_engine: No realized vol available at positioning tick 20; skipping entry this tick
+2026-02-19 15:30:47,827 [INFO] trading_engine: WEEK 1 positioning tick 21
+2026-02-19 15:30:47,827 [INFO] trading_engine: Immediate positioning at week 1 tick 21
+2026-02-19 15:30:47,828 [INFO] trading_engine: No realized vol available at positioning tick 21; skipping entry this tick
+2026-02-19 15:30:48,834 [INFO] trading_engine: WEEK 1 positioning tick 22
+2026-02-19 15:30:48,834 [INFO] trading_engine: Immediate positioning at week 1 tick 22
+2026-02-19 15:30:48,835 [INFO] trading_engine: No realized vol available at positioning tick 22; skipping entry this tick
+2026-02-19 15:30:49,843 [INFO] trading_engine: WEEK 1 positioning tick 23
+2026-02-19 15:30:49,845 [INFO] trading_engine: Immediate positioning at week 1 tick 23
+2026-02-19 15:30:49,848 [INFO] trading_engine: No realized vol available at positioning tick 23; skipping entry this tick
+2026-02-19 15:30:50,749 [INFO] trading_engine: WEEK 1 positioning tick 24
+2026-02-19 15:30:50,749 [INFO] trading_engine: Immediate positioning at week 1 tick 24
+2026-02-19 15:30:50,756 [INFO] trading_engine: No realized vol available at positioning tick 24; skipping entry this tick
+2026-02-19 15:30:51,767 [INFO] trading_engine: WEEK 1 positioning tick 25
+2026-02-19 15:30:51,768 [INFO] trading_engine: Immediate positioning at week 1 tick 25
+2026-02-19 15:30:51,770 [INFO] trading_engine: No realized vol available at positioning tick 25; skipping entry this tick
+2026-02-19 15:30:52,936 [INFO] trading_engine: WEEK 1 positioning tick 26
+2026-02-19 15:30:52,936 [INFO] trading_engine: Immediate positioning at week 1 tick 26
+2026-02-19 15:30:52,938 [INFO] trading_engine: No realized vol available at positioning tick 26; skipping entry this tick
+2026-02-19 15:30:53,786 [INFO] trading_engine: WEEK 1 positioning tick 27
+2026-02-19 15:30:53,786 [INFO] trading_engine: Immediate positioning at week 1 tick 27
+2026-02-19 15:30:53,788 [INFO] trading_engine: No realized vol available at positioning tick 27; skipping entry this tick
+2026-02-19 15:30:54,890 [INFO] trading_engine: WEEK 1 positioning tick 28
+2026-02-19 15:30:54,890 [INFO] trading_engine: Immediate positioning at week 1 tick 28
+2026-02-19 15:30:54,892 [INFO] trading_engine: No realized vol available at positioning tick 28; skipping entry this tick
+2026-02-19 15:30:55,837 [INFO] trading_engine: WEEK 1 positioning tick 29
+2026-02-19 15:30:55,837 [INFO] trading_engine: Immediate positioning at week 1 tick 29
+2026-02-19 15:30:55,840 [INFO] trading_engine: No realized vol available at positioning tick 29; skipping entry this tick
+2026-02-19 15:30:56,837 [INFO] trading_engine: WEEK 1 positioning tick 30
+2026-02-19 15:30:56,837 [INFO] trading_engine: Immediate positioning at week 1 tick 30
+2026-02-19 15:30:56,839 [INFO] trading_engine: No realized vol available at positioning tick 30; skipping entry this tick
+2026-02-19 15:30:57,940 [INFO] trading_engine: WEEK 1 positioning tick 31
+2026-02-19 15:30:57,941 [INFO] trading_engine: Immediate positioning at week 1 tick 31
+2026-02-19 15:30:57,942 [INFO] trading_engine: No realized vol available at positioning tick 31; skipping entry this tick
+2026-02-19 15:30:58,997 [INFO] trading_engine: WEEK 1 positioning tick 32
+2026-02-19 15:30:58,998 [INFO] trading_engine: Immediate positioning at week 1 tick 32
+2026-02-19 15:30:58,999 [INFO] trading_engine: No realized vol available at positioning tick 32; skipping entry this tick
+2026-02-19 15:30:59,850 [INFO] trading_engine: WEEK 1 positioning tick 33
+2026-02-19 15:30:59,850 [INFO] trading_engine: Immediate positioning at week 1 tick 33
+2026-02-19 15:30:59,852 [INFO] trading_engine: No realized vol available at positioning tick 33; skipping entry this tick
+2026-02-19 15:31:00,862 [INFO] trading_engine: WEEK 1 positioning tick 34
+2026-02-19 15:31:00,863 [INFO] trading_engine: Immediate positioning at week 1 tick 34
+2026-02-19 15:31:00,864 [INFO] trading_engine: No realized vol available at positioning tick 34; skipping entry this tick
+2026-02-19 15:31:01,865 [INFO] trading_engine: Scheduled close complete week 1 by tick 35
+2026-02-19 15:31:02,903 [INFO] trading_engine: Scheduled close complete week 1 by tick 36
+2026-02-19 15:31:04,015 [INFO] trading_engine: Scheduled close complete week 1 by tick 37
+2026-02-19 15:31:04,915 [INFO] trading_engine: Scheduled close complete week 1 by tick 38
+2026-02-19 15:31:05,916 [INFO] trading_engine: Scheduled close complete week 1 by tick 39
+2026-02-19 15:31:07,020 [INFO] trading_engine: Scheduled close complete week 1 by tick 40
+2026-02-19 15:31:07,930 [INFO] trading_engine: WEEK 1 positioning tick 41
+2026-02-19 15:31:07,931 [INFO] trading_engine: Immediate positioning at week 1 tick 41
+2026-02-19 15:31:07,932 [INFO] trading_engine: No realized vol available at positioning tick 41; skipping entry this tick
+2026-02-19 15:31:08,941 [INFO] trading_engine: WEEK 1 positioning tick 42
+2026-02-19 15:31:08,941 [INFO] trading_engine: Immediate positioning at week 1 tick 42
+2026-02-19 15:31:08,943 [INFO] trading_engine: No realized vol available at positioning tick 42; skipping entry this tick
+2026-02-19 15:31:10,056 [INFO] trading_engine: WEEK 1 positioning tick 43
+2026-02-19 15:31:10,057 [INFO] trading_engine: Immediate positioning at week 1 tick 43
+2026-02-19 15:31:10,058 [INFO] trading_engine: No realized vol available at positioning tick 43; skipping entry this tick
+2026-02-19 15:31:10,963 [INFO] trading_engine: WEEK 1 positioning tick 44
+2026-02-19 15:31:10,963 [INFO] trading_engine: Immediate positioning at week 1 tick 44
+2026-02-19 15:31:10,965 [INFO] trading_engine: No realized vol available at positioning tick 44; skipping entry this tick
+2026-02-19 15:31:11,949 [INFO] trading_engine: WEEK 1 positioning tick 45
+2026-02-19 15:31:11,949 [INFO] trading_engine: Immediate positioning at week 1 tick 45
+2026-02-19 15:31:11,953 [INFO] trading_engine: No realized vol available at positioning tick 45; skipping entry this tick
+2026-02-19 15:31:13,006 [INFO] trading_engine: WEEK 1 positioning tick 46
+2026-02-19 15:31:13,006 [INFO] trading_engine: Immediate positioning at week 1 tick 46
+2026-02-19 15:31:13,007 [INFO] trading_engine: No realized vol available at positioning tick 46; skipping entry this tick
+2026-02-19 15:31:13,969 [INFO] trading_engine: WEEK 1 positioning tick 47
+2026-02-19 15:31:13,969 [INFO] trading_engine: Immediate positioning at week 1 tick 47
+2026-02-19 15:31:13,971 [INFO] trading_engine: No realized vol available at positioning tick 47; skipping entry this tick
+2026-02-19 15:31:15,030 [INFO] trading_engine: WEEK 1 positioning tick 48
+2026-02-19 15:31:15,030 [INFO] trading_engine: Immediate positioning at week 1 tick 48
+2026-02-19 15:31:15,034 [INFO] trading_engine: No realized vol available at positioning tick 48; skipping entry this tick
+2026-02-19 15:31:16,033 [INFO] trading_engine: WEEK 1 positioning tick 49
+2026-02-19 15:31:16,033 [INFO] trading_engine: Immediate positioning at week 1 tick 49
+2026-02-19 15:31:16,034 [INFO] trading_engine: No realized vol available at positioning tick 49; skipping entry this tick
+2026-02-19 15:31:16,991 [INFO] trading_engine: WEEK 1 positioning tick 50
+2026-02-19 15:31:16,991 [INFO] trading_engine: Immediate positioning at week 1 tick 50
+2026-02-19 15:31:16,995 [INFO] trading_engine: No realized vol available at positioning tick 50; skipping entry this tick
+2026-02-19 15:31:18,012 [INFO] trading_engine: WEEK 1 positioning tick 51
+2026-02-19 15:31:18,013 [INFO] trading_engine: Immediate positioning at week 1 tick 51
+2026-02-19 15:31:18,014 [INFO] trading_engine: No realized vol available at positioning tick 51; skipping entry this tick
+2026-02-19 15:31:19,020 [INFO] trading_engine: WEEK 1 positioning tick 52
+2026-02-19 15:31:19,020 [INFO] trading_engine: Immediate positioning at week 1 tick 52
+2026-02-19 15:31:19,023 [INFO] trading_engine: No realized vol available at positioning tick 52; skipping entry this tick
+2026-02-19 15:31:20,026 [INFO] trading_engine: WEEK 1 positioning tick 53
+2026-02-19 15:31:20,026 [INFO] trading_engine: Immediate positioning at week 1 tick 53
+2026-02-19 15:31:20,027 [INFO] trading_engine: No realized vol available at positioning tick 53; skipping entry this tick
+2026-02-19 15:31:21,044 [INFO] trading_engine: WEEK 1 positioning tick 54
+2026-02-19 15:31:21,045 [INFO] trading_engine: Immediate positioning at week 1 tick 54
+2026-02-19 15:31:21,046 [INFO] trading_engine: No realized vol available at positioning tick 54; skipping entry this tick
+2026-02-19 15:31:22,012 [INFO] trading_engine: WEEK 1 positioning tick 55
+2026-02-19 15:31:22,013 [INFO] trading_engine: Immediate positioning at week 1 tick 55
+2026-02-19 15:31:22,030 [INFO] trading_engine: No realized vol available at positioning tick 55; skipping entry this tick
+2026-02-19 15:31:23,149 [INFO] trading_engine: WEEK 1 positioning tick 56
+2026-02-19 15:31:23,149 [INFO] trading_engine: Immediate positioning at week 1 tick 56
+2026-02-19 15:31:23,150 [INFO] trading_engine: No realized vol available at positioning tick 56; skipping entry this tick
+2026-02-19 15:31:24,053 [INFO] trading_engine: WEEK 1 positioning tick 57
+2026-02-19 15:31:24,053 [INFO] trading_engine: Immediate positioning at week 1 tick 57
+2026-02-19 15:31:24,054 [INFO] trading_engine: No realized vol available at positioning tick 57; skipping entry this tick
+2026-02-19 15:31:25,057 [INFO] trading_engine: WEEK 1 positioning tick 58
+2026-02-19 15:31:25,058 [INFO] trading_engine: Immediate positioning at week 1 tick 58
+2026-02-19 15:31:25,059 [INFO] trading_engine: No realized vol available at positioning tick 58; skipping entry this tick
+2026-02-19 15:31:26,120 [INFO] trading_engine: WEEK 1 positioning tick 59
+2026-02-19 15:31:26,120 [INFO] trading_engine: Immediate positioning at week 1 tick 59
+2026-02-19 15:31:26,122 [INFO] trading_engine: No realized vol available at positioning tick 59; skipping entry this tick
+2026-02-19 15:31:27,134 [INFO] trading_engine: WEEK 1 positioning tick 60
+2026-02-19 15:31:27,134 [INFO] trading_engine: Immediate positioning at week 1 tick 60
+2026-02-19 15:31:27,135 [INFO] trading_engine: No realized vol available at positioning tick 60; skipping entry this tick
+2026-02-19 15:31:28,145 [INFO] trading_engine: WEEK 1 positioning tick 61
+2026-02-19 15:31:28,146 [INFO] trading_engine: Immediate positioning at week 1 tick 61
+2026-02-19 15:31:28,154 [INFO] trading_engine: No realized vol available at positioning tick 61; skipping entry this tick
+2026-02-19 15:31:29,155 [INFO] trading_engine: WEEK 1 positioning tick 62
+2026-02-19 15:31:29,155 [INFO] trading_engine: Immediate positioning at week 1 tick 62
+2026-02-19 15:31:29,157 [INFO] trading_engine: No realized vol available at positioning tick 62; skipping entry this tick
+2026-02-19 15:31:30,109 [INFO] trading_engine: WEEK 1 positioning tick 63
+2026-02-19 15:31:30,109 [INFO] trading_engine: Immediate positioning at week 1 tick 63
+2026-02-19 15:31:30,110 [INFO] trading_engine: No realized vol available at positioning tick 63; skipping entry this tick
+2026-02-19 15:31:31,060 [INFO] trading_engine: WEEK 1 positioning tick 64
+2026-02-19 15:31:31,060 [INFO] trading_engine: Immediate positioning at week 1 tick 64
+2026-02-19 15:31:31,063 [INFO] trading_engine: No realized vol available at positioning tick 64; skipping entry this tick
+2026-02-19 15:31:32,172 [INFO] trading_engine: WEEK 1 positioning tick 65
+2026-02-19 15:31:32,172 [INFO] trading_engine: Immediate positioning at week 1 tick 65
+2026-02-19 15:31:32,173 [INFO] trading_engine: No realized vol available at positioning tick 65; skipping entry this tick
+2026-02-19 15:31:33,180 [INFO] trading_engine: WEEK 1 positioning tick 66
+2026-02-19 15:31:33,181 [INFO] trading_engine: Immediate positioning at week 1 tick 66
+2026-02-19 15:31:33,182 [INFO] trading_engine: No realized vol available at positioning tick 66; skipping entry this tick
+2026-02-19 15:31:34,188 [INFO] trading_engine: WEEK 1 positioning tick 67
+2026-02-19 15:31:34,188 [INFO] trading_engine: Immediate positioning at week 1 tick 67
+2026-02-19 15:31:34,191 [INFO] trading_engine: No realized vol available at positioning tick 67; skipping entry this tick
+2026-02-19 15:31:35,098 [INFO] trading_engine: WEEK 1 positioning tick 68
+2026-02-19 15:31:35,098 [INFO] trading_engine: Immediate positioning at week 1 tick 68
+2026-02-19 15:31:35,101 [INFO] trading_engine: No realized vol available at positioning tick 68; skipping entry this tick
+2026-02-19 15:31:36,106 [INFO] trading_engine: WEEK 1 positioning tick 69
+2026-02-19 15:31:36,107 [INFO] trading_engine: Immediate positioning at week 1 tick 69
+2026-02-19 15:31:36,110 [INFO] trading_engine: No realized vol available at positioning tick 69; skipping entry this tick
+2026-02-19 15:31:37,169 [INFO] trading_engine: WEEK 1 positioning tick 70
+2026-02-19 15:31:37,169 [INFO] trading_engine: Immediate positioning at week 1 tick 70
+2026-02-19 15:31:37,172 [INFO] trading_engine: No realized vol available at positioning tick 70; skipping entry this tick
+2026-02-19 15:31:38,181 [INFO] trading_engine: WEEK 1 positioning tick 71
+2026-02-19 15:31:38,181 [INFO] trading_engine: Immediate positioning at week 1 tick 71
+2026-02-19 15:31:38,192 [INFO] trading_engine: No realized vol available at positioning tick 71; skipping entry this tick
+2026-02-19 15:31:39,215 [INFO] trading_engine: WEEK 1 positioning tick 72
+2026-02-19 15:31:39,217 [INFO] trading_engine: Immediate positioning at week 1 tick 72
+2026-02-19 15:31:39,218 [INFO] trading_engine: No realized vol available at positioning tick 72; skipping entry this tick
+2026-02-19 15:31:40,126 [INFO] trading_engine: WEEK 1 positioning tick 73
+2026-02-19 15:31:40,126 [INFO] trading_engine: Immediate positioning at week 1 tick 73
+2026-02-19 15:31:40,127 [INFO] trading_engine: No realized vol available at positioning tick 73; skipping entry this tick
+2026-02-19 15:31:41,130 [INFO] trading_engine: WEEK 2 positioning tick 74
+2026-02-19 15:31:41,130 [INFO] trading_engine: Immediate positioning at week 2 tick 74
+2026-02-19 15:31:41,132 [INFO] trading_engine: No realized vol available at positioning tick 74; skipping entry this tick
+2026-02-19 15:32:18,283 [INFO] trading_engine: Scheduled close complete week 2 by tick 111
+2026-02-19 15:32:19,303 [INFO] trading_engine: Scheduled close complete week 2 by tick 112
+2026-02-19 15:32:20,309 [INFO] trading_engine: Scheduled close complete week 2 by tick 113
+2026-02-19 15:32:21,313 [INFO] trading_engine: Scheduled close complete week 2 by tick 114
+2026-02-19 15:32:22,314 [INFO] trading_engine: Scheduled close complete week 2 by tick 115
+2026-02-19 15:32:23,330 [INFO] trading_engine: Scheduled close complete week 2 by tick 116
+2026-02-19 15:32:56,520 [INFO] trading_engine: WEEK 3 positioning tick 149
+2026-02-19 15:32:56,521 [INFO] trading_engine: Immediate positioning at week 3 tick 149
+2026-02-19 15:32:56,530 [INFO] trading_engine: No realized vol available at positioning tick 149; skipping entry this tick
+2026-02-19 15:33:33,679 [INFO] trading_engine: Scheduled close complete week 3 by tick 186
+2026-02-19 15:33:34,732 [INFO] trading_engine: Scheduled close complete week 3 by tick 187
+2026-02-19 15:33:35,686 [INFO] trading_engine: Scheduled close complete week 3 by tick 188
+2026-02-19 15:33:36,756 [INFO] trading_engine: Scheduled close complete week 3 by tick 189
+2026-02-19 15:33:37,707 [INFO] trading_engine: Scheduled close complete week 3 by tick 190
+2026-02-19 15:33:38,715 [INFO] trading_engine: Scheduled close complete week 3 by tick 191
+2026-02-19 15:34:11,896 [INFO] trading_engine: WEEK 4 positioning tick 224
+2026-02-19 15:34:11,897 [INFO] trading_engine: Immediate positioning at week 4 tick 224
+2026-02-19 15:34:11,905 [INFO] trading_engine: No realized vol available at positioning tick 224; skipping entry this tick
+2026-02-19 15:34:43,016 [INFO] trading_engine: Scheduled close complete week 4 by tick 255
+2026-02-19 15:34:44,017 [INFO] trading_engine: Scheduled close complete week 4 by tick 256
+2026-02-19 15:34:45,069 [INFO] trading_engine: Scheduled close complete week 4 by tick 257
+2026-02-19 15:34:46,057 [INFO] trading_engine: Scheduled close complete week 4 by tick 258
+2026-02-19 15:34:47,112 [INFO] trading_engine: Scheduled close complete week 4 by tick 259
+2026-02-19 15:34:48,272 [INFO] trading_engine: Scheduled close complete week 4 by tick 260
+2026-02-19 15:42:27,825 [INFO] trading_engine: WEEK 1 positioning tick 1
+2026-02-19 15:42:27,826 [INFO] trading_engine: Immediate positioning at week 1 tick 1
+2026-02-19 15:42:27,828 [INFO] trading_engine: No realized vol available at positioning tick 1; skipping entry this tick
+2026-02-19 15:42:28,781 [INFO] trading_engine: WEEK 1 positioning tick 2
+2026-02-19 15:42:28,782 [INFO] trading_engine: Immediate positioning at week 1 tick 2
+2026-02-19 15:42:28,783 [INFO] trading_engine: No realized vol available at positioning tick 2; skipping entry this tick
+2026-02-19 15:42:29,891 [INFO] trading_engine: WEEK 1 positioning tick 3
+2026-02-19 15:42:29,892 [INFO] trading_engine: Immediate positioning at week 1 tick 3
+2026-02-19 15:42:29,893 [INFO] trading_engine: No realized vol available at positioning tick 3; skipping entry this tick
+2026-02-19 15:42:30,902 [INFO] trading_engine: WEEK 1 positioning tick 4
+2026-02-19 15:42:30,902 [INFO] trading_engine: Immediate positioning at week 1 tick 4
+2026-02-19 15:42:30,903 [INFO] trading_engine: No realized vol available at positioning tick 4; skipping entry this tick
+2026-02-19 15:42:31,953 [INFO] trading_engine: WEEK 1 positioning tick 5
+2026-02-19 15:42:31,954 [INFO] trading_engine: Immediate positioning at week 1 tick 5
+2026-02-19 15:42:31,955 [INFO] trading_engine: No realized vol available at positioning tick 5; skipping entry this tick
+2026-02-19 15:42:32,851 [INFO] trading_engine: WEEK 1 positioning tick 6
+2026-02-19 15:42:32,852 [INFO] trading_engine: Immediate positioning at week 1 tick 6
+2026-02-19 15:42:32,854 [INFO] trading_engine: No realized vol available at positioning tick 6; skipping entry this tick
+2026-02-19 15:42:33,857 [INFO] trading_engine: WEEK 1 positioning tick 7
+2026-02-19 15:42:33,877 [INFO] trading_engine: Immediate positioning at week 1 tick 7
+2026-02-19 15:42:33,879 [INFO] trading_engine: No realized vol available at positioning tick 7; skipping entry this tick
+2026-02-19 15:42:34,881 [INFO] trading_engine: WEEK 1 positioning tick 8
+2026-02-19 15:42:34,881 [INFO] trading_engine: Immediate positioning at week 1 tick 8
+2026-02-19 15:42:34,885 [INFO] trading_engine: No realized vol available at positioning tick 8; skipping entry this tick
+2026-02-19 15:42:35,837 [INFO] trading_engine: WEEK 1 positioning tick 9
+2026-02-19 15:42:35,838 [INFO] trading_engine: Immediate positioning at week 1 tick 9
+2026-02-19 15:42:35,839 [INFO] trading_engine: No realized vol available at positioning tick 9; skipping entry this tick
+2026-02-19 15:42:36,841 [INFO] trading_engine: WEEK 1 positioning tick 10
+2026-02-19 15:42:36,842 [INFO] trading_engine: Immediate positioning at week 1 tick 10
+2026-02-19 15:42:36,844 [INFO] trading_engine: No realized vol available at positioning tick 10; skipping entry this tick
+2026-02-19 15:42:37,848 [INFO] trading_engine: WEEK 1 positioning tick 11
+2026-02-19 15:42:37,848 [INFO] trading_engine: Immediate positioning at week 1 tick 11
+2026-02-19 15:42:37,850 [INFO] trading_engine: No realized vol available at positioning tick 11; skipping entry this tick
+2026-02-19 15:42:38,852 [INFO] trading_engine: WEEK 1 positioning tick 12
+2026-02-19 15:42:38,852 [INFO] trading_engine: Immediate positioning at week 1 tick 12
+2026-02-19 15:42:38,854 [INFO] trading_engine: No realized vol available at positioning tick 12; skipping entry this tick
+2026-02-19 15:42:39,854 [INFO] trading_engine: WEEK 1 positioning tick 13
+2026-02-19 15:42:39,855 [INFO] trading_engine: Immediate positioning at week 1 tick 13
+2026-02-19 15:42:39,856 [INFO] trading_engine: No realized vol available at positioning tick 13; skipping entry this tick
+2026-02-19 15:42:40,917 [INFO] trading_engine: WEEK 1 positioning tick 14
+2026-02-19 15:42:40,918 [INFO] trading_engine: Immediate positioning at week 1 tick 14
+2026-02-19 15:42:40,921 [INFO] trading_engine: No realized vol available at positioning tick 14; skipping entry this tick
+2026-02-19 15:42:41,871 [INFO] trading_engine: WEEK 1 positioning tick 15
+2026-02-19 15:42:41,871 [INFO] trading_engine: Immediate positioning at week 1 tick 15
+2026-02-19 15:42:41,872 [INFO] trading_engine: No realized vol available at positioning tick 15; skipping entry this tick
+2026-02-19 15:42:42,984 [INFO] trading_engine: WEEK 1 positioning tick 16
+2026-02-19 15:42:42,984 [INFO] trading_engine: Immediate positioning at week 1 tick 16
+2026-02-19 15:42:42,987 [INFO] trading_engine: No realized vol available at positioning tick 16; skipping entry this tick
+2026-02-19 15:42:43,882 [INFO] trading_engine: WEEK 1 positioning tick 17
+2026-02-19 15:42:43,883 [INFO] trading_engine: Immediate positioning at week 1 tick 17
+2026-02-19 15:42:43,884 [INFO] trading_engine: No realized vol available at positioning tick 17; skipping entry this tick
+2026-02-19 15:42:44,886 [INFO] trading_engine: WEEK 1 positioning tick 18
+2026-02-19 15:42:44,886 [INFO] trading_engine: Immediate positioning at week 1 tick 18
+2026-02-19 15:42:44,888 [INFO] trading_engine: No realized vol available at positioning tick 18; skipping entry this tick
+2026-02-19 15:42:45,940 [INFO] trading_engine: WEEK 1 positioning tick 19
+2026-02-19 15:42:45,940 [INFO] trading_engine: Immediate positioning at week 1 tick 19
+2026-02-19 15:42:45,944 [INFO] trading_engine: No realized vol available at positioning tick 19; skipping entry this tick
+2026-02-19 15:42:46,893 [INFO] trading_engine: WEEK 1 positioning tick 20
+2026-02-19 15:42:46,894 [INFO] trading_engine: Immediate positioning at week 1 tick 20
+2026-02-19 15:42:46,897 [INFO] trading_engine: No realized vol available at positioning tick 20; skipping entry this tick
+2026-02-19 15:42:47,902 [INFO] trading_engine: WEEK 1 positioning tick 21
+2026-02-19 15:42:47,903 [INFO] trading_engine: Immediate positioning at week 1 tick 21
+2026-02-19 15:42:47,905 [INFO] trading_engine: No realized vol available at positioning tick 21; skipping entry this tick
+2026-02-19 15:42:48,912 [INFO] trading_engine: WEEK 1 positioning tick 22
+2026-02-19 15:42:48,913 [INFO] trading_engine: Immediate positioning at week 1 tick 22
+2026-02-19 15:42:48,920 [INFO] trading_engine: No realized vol available at positioning tick 22; skipping entry this tick
+2026-02-19 15:42:49,923 [INFO] trading_engine: WEEK 1 positioning tick 23
+2026-02-19 15:42:49,924 [INFO] trading_engine: Immediate positioning at week 1 tick 23
+2026-02-19 15:42:49,925 [INFO] trading_engine: No realized vol available at positioning tick 23; skipping entry this tick
+2026-02-19 15:42:50,925 [INFO] trading_engine: WEEK 1 positioning tick 24
+2026-02-19 15:42:50,926 [INFO] trading_engine: Immediate positioning at week 1 tick 24
+2026-02-19 15:42:50,927 [INFO] trading_engine: No realized vol available at positioning tick 24; skipping entry this tick
+2026-02-19 15:42:51,936 [INFO] trading_engine: WEEK 1 positioning tick 25
+2026-02-19 15:42:51,937 [INFO] trading_engine: Immediate positioning at week 1 tick 25
+2026-02-19 15:42:51,938 [INFO] trading_engine: No realized vol available at positioning tick 25; skipping entry this tick
+2026-02-19 15:42:53,046 [INFO] trading_engine: WEEK 1 positioning tick 26
+2026-02-19 15:42:53,046 [INFO] trading_engine: Immediate positioning at week 1 tick 26
+2026-02-19 15:42:53,048 [INFO] trading_engine: No realized vol available at positioning tick 26; skipping entry this tick
+2026-02-19 15:42:54,058 [INFO] trading_engine: WEEK 1 positioning tick 27
+2026-02-19 15:42:54,058 [INFO] trading_engine: Immediate positioning at week 1 tick 27
+2026-02-19 15:42:54,059 [INFO] trading_engine: No realized vol available at positioning tick 27; skipping entry this tick
+2026-02-19 15:42:54,960 [INFO] trading_engine: WEEK 1 positioning tick 28
+2026-02-19 15:42:54,961 [INFO] trading_engine: Immediate positioning at week 1 tick 28
+2026-02-19 15:42:54,964 [INFO] trading_engine: No realized vol available at positioning tick 28; skipping entry this tick
+2026-02-19 15:42:55,961 [INFO] trading_engine: WEEK 1 positioning tick 29
+2026-02-19 15:42:55,962 [INFO] trading_engine: Immediate positioning at week 1 tick 29
+2026-02-19 15:42:55,963 [INFO] trading_engine: No realized vol available at positioning tick 29; skipping entry this tick
+2026-02-19 15:42:56,970 [INFO] trading_engine: WEEK 1 positioning tick 30
+2026-02-19 15:42:56,971 [INFO] trading_engine: Immediate positioning at week 1 tick 30
+2026-02-19 15:42:56,972 [INFO] trading_engine: No realized vol available at positioning tick 30; skipping entry this tick
+2026-02-19 15:42:57,974 [INFO] trading_engine: WEEK 1 positioning tick 31
+2026-02-19 15:42:57,974 [INFO] trading_engine: Immediate positioning at week 1 tick 31
+2026-02-19 15:42:57,975 [INFO] trading_engine: No realized vol available at positioning tick 31; skipping entry this tick
+2026-02-19 15:42:59,001 [INFO] trading_engine: WEEK 1 positioning tick 32
+2026-02-19 15:42:59,002 [INFO] trading_engine: Immediate positioning at week 1 tick 32
+2026-02-19 15:42:59,004 [INFO] trading_engine: No realized vol available at positioning tick 32; skipping entry this tick
+2026-02-19 15:42:59,968 [INFO] trading_engine: WEEK 1 positioning tick 33
+2026-02-19 15:42:59,969 [INFO] trading_engine: Immediate positioning at week 1 tick 33
+2026-02-19 15:42:59,971 [INFO] trading_engine: No realized vol available at positioning tick 33; skipping entry this tick
+2026-02-19 15:43:00,998 [INFO] trading_engine: WEEK 1 positioning tick 34
+2026-02-19 15:43:00,998 [INFO] trading_engine: Immediate positioning at week 1 tick 34
+2026-02-19 15:43:00,999 [INFO] trading_engine: No realized vol available at positioning tick 34; skipping entry this tick
+2026-02-19 15:43:02,027 [INFO] trading_engine: Scheduled close complete week 1 by tick 35
+2026-02-19 15:43:03,005 [INFO] trading_engine: Scheduled close complete week 1 by tick 36
+2026-02-19 15:43:04,005 [INFO] trading_engine: Scheduled close complete week 1 by tick 37
+2026-02-19 15:43:05,007 [INFO] trading_engine: Scheduled close complete week 1 by tick 38
+2026-02-19 15:43:06,013 [INFO] trading_engine: Scheduled close complete week 1 by tick 39
+2026-02-19 15:43:07,020 [INFO] trading_engine: Scheduled close complete week 1 by tick 40
+2026-02-19 15:43:08,023 [INFO] trading_engine: WEEK 1 positioning tick 41
+2026-02-19 15:43:08,023 [INFO] trading_engine: Immediate positioning at week 1 tick 41
+2026-02-19 15:43:08,024 [INFO] trading_engine: No realized vol available at positioning tick 41; skipping entry this tick
+2026-02-19 15:43:09,039 [INFO] trading_engine: WEEK 1 positioning tick 42
+2026-02-19 15:43:09,040 [INFO] trading_engine: Immediate positioning at week 1 tick 42
+2026-02-19 15:43:09,041 [INFO] trading_engine: No realized vol available at positioning tick 42; skipping entry this tick
+2026-02-19 15:43:10,031 [INFO] trading_engine: WEEK 1 positioning tick 43
+2026-02-19 15:43:10,032 [INFO] trading_engine: Immediate positioning at week 1 tick 43
+2026-02-19 15:43:10,033 [INFO] trading_engine: No realized vol available at positioning tick 43; skipping entry this tick
+2026-02-19 15:43:11,060 [INFO] trading_engine: WEEK 1 positioning tick 44
+2026-02-19 15:43:11,060 [INFO] trading_engine: Immediate positioning at week 1 tick 44
+2026-02-19 15:43:11,061 [INFO] trading_engine: No realized vol available at positioning tick 44; skipping entry this tick
+2026-02-19 15:43:12,070 [INFO] trading_engine: WEEK 1 positioning tick 45
+2026-02-19 15:43:12,070 [INFO] trading_engine: Immediate positioning at week 1 tick 45
+2026-02-19 15:43:12,072 [INFO] trading_engine: No realized vol available at positioning tick 45; skipping entry this tick
+2026-02-19 15:43:13,089 [INFO] trading_engine: WEEK 1 positioning tick 46
+2026-02-19 15:43:13,090 [INFO] trading_engine: Immediate positioning at week 1 tick 46
+2026-02-19 15:43:13,091 [INFO] trading_engine: No realized vol available at positioning tick 46; skipping entry this tick
+2026-02-19 15:43:14,055 [INFO] trading_engine: WEEK 1 positioning tick 47
+2026-02-19 15:43:14,056 [INFO] trading_engine: Immediate positioning at week 1 tick 47
+2026-02-19 15:43:14,058 [INFO] trading_engine: No realized vol available at positioning tick 47; skipping entry this tick
+2026-02-19 15:43:15,159 [INFO] trading_engine: WEEK 1 positioning tick 48
+2026-02-19 15:43:15,159 [INFO] trading_engine: Immediate positioning at week 1 tick 48
+2026-02-19 15:43:15,161 [INFO] trading_engine: No realized vol available at positioning tick 48; skipping entry this tick
+2026-02-19 15:43:16,060 [INFO] trading_engine: WEEK 1 positioning tick 49
+2026-02-19 15:43:16,061 [INFO] trading_engine: Immediate positioning at week 1 tick 49
+2026-02-19 15:43:16,062 [INFO] trading_engine: No realized vol available at positioning tick 49; skipping entry this tick
+2026-02-19 15:43:17,076 [INFO] trading_engine: WEEK 1 positioning tick 50
+2026-02-19 15:43:17,077 [INFO] trading_engine: Immediate positioning at week 1 tick 50
+2026-02-19 15:43:17,080 [INFO] trading_engine: No realized vol available at positioning tick 50; skipping entry this tick
+2026-02-19 15:43:18,083 [INFO] trading_engine: WEEK 1 positioning tick 51
+2026-02-19 15:43:18,083 [INFO] trading_engine: Immediate positioning at week 1 tick 51
+2026-02-19 15:43:18,084 [INFO] trading_engine: No realized vol available at positioning tick 51; skipping entry this tick
+2026-02-19 15:43:19,092 [INFO] trading_engine: WEEK 1 positioning tick 52
+2026-02-19 15:43:19,093 [INFO] trading_engine: Immediate positioning at week 1 tick 52
+2026-02-19 15:43:19,095 [INFO] trading_engine: No realized vol available at positioning tick 52; skipping entry this tick
+2026-02-19 15:43:20,099 [INFO] trading_engine: WEEK 1 positioning tick 53
+2026-02-19 15:43:20,099 [INFO] trading_engine: Immediate positioning at week 1 tick 53
+2026-02-19 15:43:20,101 [INFO] trading_engine: No realized vol available at positioning tick 53; skipping entry this tick
+2026-02-19 15:43:21,108 [INFO] trading_engine: WEEK 1 positioning tick 54
+2026-02-19 15:43:21,109 [INFO] trading_engine: Immediate positioning at week 1 tick 54
+2026-02-19 15:43:21,117 [INFO] trading_engine: No realized vol available at positioning tick 54; skipping entry this tick
+2026-02-19 15:43:22,105 [INFO] trading_engine: WEEK 1 positioning tick 55
+2026-02-19 15:43:22,106 [INFO] trading_engine: Immediate positioning at week 1 tick 55
+2026-02-19 15:43:22,120 [INFO] trading_engine: No realized vol available at positioning tick 55; skipping entry this tick
+2026-02-19 15:43:23,255 [INFO] trading_engine: WEEK 1 positioning tick 56
+2026-02-19 15:43:23,255 [INFO] trading_engine: Immediate positioning at week 1 tick 56
+2026-02-19 15:43:23,258 [INFO] trading_engine: No realized vol available at positioning tick 56; skipping entry this tick
+2026-02-19 15:43:24,155 [INFO] trading_engine: WEEK 1 positioning tick 57
+2026-02-19 15:43:24,155 [INFO] trading_engine: Immediate positioning at week 1 tick 57
+2026-02-19 15:43:24,156 [INFO] trading_engine: No realized vol available at positioning tick 57; skipping entry this tick
+2026-02-19 15:43:25,150 [INFO] trading_engine: WEEK 1 positioning tick 58
+2026-02-19 15:43:25,151 [INFO] trading_engine: Immediate positioning at week 1 tick 58
+2026-02-19 15:43:25,152 [INFO] trading_engine: No realized vol available at positioning tick 58; skipping entry this tick
+2026-02-19 15:43:26,154 [INFO] trading_engine: WEEK 1 positioning tick 59
+2026-02-19 15:43:26,154 [INFO] trading_engine: Immediate positioning at week 1 tick 59
+2026-02-19 15:43:26,155 [INFO] trading_engine: No realized vol available at positioning tick 59; skipping entry this tick
+2026-02-19 15:43:27,165 [INFO] trading_engine: WEEK 1 positioning tick 60
+2026-02-19 15:43:27,166 [INFO] trading_engine: Immediate positioning at week 1 tick 60
+2026-02-19 15:43:27,168 [INFO] trading_engine: No realized vol available at positioning tick 60; skipping entry this tick
+2026-02-19 15:43:28,131 [INFO] trading_engine: WEEK 1 positioning tick 61
+2026-02-19 15:43:28,132 [INFO] trading_engine: Immediate positioning at week 1 tick 61
+2026-02-19 15:43:28,135 [INFO] trading_engine: No realized vol available at positioning tick 61; skipping entry this tick
+2026-02-19 15:43:29,148 [INFO] trading_engine: WEEK 1 positioning tick 62
+2026-02-19 15:43:29,149 [INFO] trading_engine: Immediate positioning at week 1 tick 62
+2026-02-19 15:43:29,151 [INFO] trading_engine: No realized vol available at positioning tick 62; skipping entry this tick
+2026-02-19 15:43:30,158 [INFO] trading_engine: WEEK 1 positioning tick 63
+2026-02-19 15:43:30,158 [INFO] trading_engine: Immediate positioning at week 1 tick 63
+2026-02-19 15:43:30,160 [INFO] trading_engine: No realized vol available at positioning tick 63; skipping entry this tick
+2026-02-19 15:43:31,220 [INFO] trading_engine: WEEK 1 positioning tick 64
+2026-02-19 15:43:31,221 [INFO] trading_engine: Immediate positioning at week 1 tick 64
+2026-02-19 15:43:31,223 [INFO] trading_engine: No realized vol available at positioning tick 64; skipping entry this tick
+2026-02-19 15:43:32,224 [INFO] trading_engine: WEEK 1 positioning tick 65
+2026-02-19 15:43:32,224 [INFO] trading_engine: Immediate positioning at week 1 tick 65
+2026-02-19 15:43:32,227 [INFO] trading_engine: No realized vol available at positioning tick 65; skipping entry this tick
+2026-02-19 15:43:33,237 [INFO] trading_engine: WEEK 1 positioning tick 66
+2026-02-19 15:43:33,237 [INFO] trading_engine: Immediate positioning at week 1 tick 66
+2026-02-19 15:43:33,239 [INFO] trading_engine: No realized vol available at positioning tick 66; skipping entry this tick
+2026-02-19 15:43:34,193 [INFO] trading_engine: WEEK 1 positioning tick 67
+2026-02-19 15:43:34,193 [INFO] trading_engine: Immediate positioning at week 1 tick 67
+2026-02-19 15:43:34,194 [INFO] trading_engine: No realized vol available at positioning tick 67; skipping entry this tick
+2026-02-19 15:43:35,199 [INFO] trading_engine: WEEK 1 positioning tick 68
+2026-02-19 15:43:35,199 [INFO] trading_engine: Immediate positioning at week 1 tick 68
+2026-02-19 15:43:35,201 [INFO] trading_engine: No realized vol available at positioning tick 68; skipping entry this tick
+2026-02-19 15:43:36,258 [INFO] trading_engine: WEEK 1 positioning tick 69
+2026-02-19 15:43:36,258 [INFO] trading_engine: Immediate positioning at week 1 tick 69
+2026-02-19 15:43:36,259 [INFO] trading_engine: No realized vol available at positioning tick 69; skipping entry this tick
+2026-02-19 15:43:37,268 [INFO] trading_engine: WEEK 1 positioning tick 70
+2026-02-19 15:43:37,269 [INFO] trading_engine: Immediate positioning at week 1 tick 70
+2026-02-19 15:43:37,270 [INFO] trading_engine: No realized vol available at positioning tick 70; skipping entry this tick
+2026-02-19 15:43:38,219 [INFO] trading_engine: WEEK 1 positioning tick 71
+2026-02-19 15:43:38,219 [INFO] trading_engine: Immediate positioning at week 1 tick 71
+2026-02-19 15:43:38,221 [INFO] trading_engine: No realized vol available at positioning tick 71; skipping entry this tick
+2026-02-19 15:43:39,177 [INFO] trading_engine: WEEK 1 positioning tick 72
+2026-02-19 15:43:39,178 [INFO] trading_engine: Immediate positioning at week 1 tick 72
+2026-02-19 15:43:39,182 [INFO] trading_engine: No realized vol available at positioning tick 72; skipping entry this tick
+2026-02-19 15:43:40,234 [INFO] trading_engine: WEEK 1 positioning tick 73
+2026-02-19 15:43:40,234 [INFO] trading_engine: Immediate positioning at week 1 tick 73
+2026-02-19 15:43:40,235 [INFO] trading_engine: No realized vol available at positioning tick 73; skipping entry this tick
+2026-02-19 15:43:41,192 [INFO] trading_engine: WEEK 2 positioning tick 74
+2026-02-19 15:43:41,192 [INFO] trading_engine: Immediate positioning at week 2 tick 74
+2026-02-19 15:43:41,202 [INFO] trading_engine: No realized vol available at positioning tick 74; skipping entry this tick
+2026-02-19 15:44:18,407 [INFO] trading_engine: Scheduled close complete week 2 by tick 111
+2026-02-19 15:44:19,408 [INFO] trading_engine: Scheduled close complete week 2 by tick 112
+2026-02-19 15:44:20,418 [INFO] trading_engine: Scheduled close complete week 2 by tick 113
+2026-02-19 15:44:21,423 [INFO] trading_engine: Scheduled close complete week 2 by tick 114
+2026-02-19 15:44:22,420 [INFO] trading_engine: Scheduled close complete week 2 by tick 115
+2026-02-19 15:44:23,423 [INFO] trading_engine: Scheduled close complete week 2 by tick 116
+2026-02-19 15:44:56,625 [INFO] trading_engine: WEEK 3 positioning tick 149
+2026-02-19 15:44:56,625 [INFO] trading_engine: Immediate positioning at week 3 tick 149
+2026-02-19 15:44:56,627 [INFO] trading_engine: No realized vol available at positioning tick 149; skipping entry this tick
+2026-02-19 15:45:33,820 [INFO] trading_engine: Scheduled close complete week 3 by tick 186
+2026-02-19 15:45:34,837 [INFO] trading_engine: Scheduled close complete week 3 by tick 187
+2026-02-19 15:45:35,847 [INFO] trading_engine: Scheduled close complete week 3 by tick 188
+2026-02-19 15:45:36,856 [INFO] trading_engine: Scheduled close complete week 3 by tick 189
+2026-02-19 15:45:37,859 [INFO] trading_engine: Scheduled close complete week 3 by tick 190
+2026-02-19 15:45:38,868 [INFO] trading_engine: Scheduled close complete week 3 by tick 191
+2026-02-19 15:46:12,017 [INFO] trading_engine: WEEK 4 positioning tick 224
+2026-02-19 15:46:12,018 [INFO] trading_engine: Immediate positioning at week 4 tick 224
+2026-02-19 15:46:12,020 [INFO] trading_engine: No realized vol available at positioning tick 224; skipping entry this tick
+2026-02-19 15:46:43,219 [INFO] trading_engine: Scheduled close complete week 4 by tick 255
+2026-02-19 15:46:44,226 [INFO] trading_engine: Scheduled close complete week 4 by tick 256
+2026-02-19 15:46:45,243 [INFO] trading_engine: Scheduled close complete week 4 by tick 257
+2026-02-19 15:46:46,302 [INFO] trading_engine: Scheduled close complete week 4 by tick 258
+2026-02-19 15:46:47,263 [INFO] trading_engine: Scheduled close complete week 4 by tick 259
+2026-02-19 15:46:48,213 [INFO] trading_engine: Scheduled close complete week 4 by tick 260
+2026-02-19 15:54:35,572 [INFO] trading_engine: WEEK 1 positioning tick 1
+2026-02-19 15:54:35,573 [INFO] trading_engine: Immediate positioning at week 1 tick 1
+2026-02-19 15:54:35,574 [INFO] trading_engine: No realized vol available at positioning tick 1; skipping entry this tick
+2026-02-19 15:54:36,012 [INFO] trading_engine: WEEK 1 positioning tick 2
+2026-02-19 15:54:36,012 [INFO] trading_engine: Immediate positioning at week 1 tick 2
+2026-02-19 15:54:36,014 [INFO] trading_engine: No realized vol available at positioning tick 2; skipping entry this tick
+2026-02-19 15:54:37,015 [INFO] trading_engine: WEEK 1 positioning tick 3
+2026-02-19 15:54:37,015 [INFO] trading_engine: Immediate positioning at week 1 tick 3
+2026-02-19 15:54:37,016 [INFO] trading_engine: No realized vol available at positioning tick 3; skipping entry this tick
+2026-02-19 15:54:38,024 [INFO] trading_engine: WEEK 1 positioning tick 4
+2026-02-19 15:54:38,024 [INFO] trading_engine: Immediate positioning at week 1 tick 4
+2026-02-19 15:54:38,025 [INFO] trading_engine: No realized vol available at positioning tick 4; skipping entry this tick
+2026-02-19 15:54:39,030 [INFO] trading_engine: WEEK 1 positioning tick 5
+2026-02-19 15:54:39,030 [INFO] trading_engine: Immediate positioning at week 1 tick 5
+2026-02-19 15:54:39,031 [INFO] trading_engine: No realized vol available at positioning tick 5; skipping entry this tick
+2026-02-19 15:54:40,037 [INFO] trading_engine: WEEK 1 positioning tick 6
+2026-02-19 15:54:40,037 [INFO] trading_engine: Immediate positioning at week 1 tick 6
+2026-02-19 15:54:40,038 [INFO] trading_engine: No realized vol available at positioning tick 6; skipping entry this tick
+2026-02-19 15:54:41,058 [INFO] trading_engine: WEEK 1 positioning tick 7
+2026-02-19 15:54:41,059 [INFO] trading_engine: Immediate positioning at week 1 tick 7
+2026-02-19 15:54:41,062 [INFO] trading_engine: No realized vol available at positioning tick 7; skipping entry this tick
+2026-02-19 15:54:42,071 [INFO] trading_engine: WEEK 1 positioning tick 8
+2026-02-19 15:54:42,071 [INFO] trading_engine: Immediate positioning at week 1 tick 8
+2026-02-19 15:54:42,073 [INFO] trading_engine: No realized vol available at positioning tick 8; skipping entry this tick
+2026-02-19 15:54:43,044 [INFO] trading_engine: WEEK 1 positioning tick 9
+2026-02-19 15:54:43,045 [INFO] trading_engine: Immediate positioning at week 1 tick 9
+2026-02-19 15:54:43,047 [INFO] trading_engine: No realized vol available at positioning tick 9; skipping entry this tick
+2026-02-19 15:54:44,101 [INFO] trading_engine: WEEK 1 positioning tick 10
+2026-02-19 15:54:44,101 [INFO] trading_engine: Immediate positioning at week 1 tick 10
+2026-02-19 15:54:44,103 [INFO] trading_engine: No realized vol available at positioning tick 10; skipping entry this tick
+2026-02-19 15:54:45,102 [INFO] trading_engine: WEEK 1 positioning tick 11
+2026-02-19 15:54:45,102 [INFO] trading_engine: Immediate positioning at week 1 tick 11
+2026-02-19 15:54:45,103 [INFO] trading_engine: No realized vol available at positioning tick 11; skipping entry this tick
+2026-02-19 15:54:46,062 [INFO] trading_engine: WEEK 1 positioning tick 12
+2026-02-19 15:54:46,063 [INFO] trading_engine: Immediate positioning at week 1 tick 12
+2026-02-19 15:54:46,064 [INFO] trading_engine: No realized vol available at positioning tick 12; skipping entry this tick
+2026-02-19 15:54:47,067 [INFO] trading_engine: WEEK 1 positioning tick 13
+2026-02-19 15:54:47,067 [INFO] trading_engine: Immediate positioning at week 1 tick 13
+2026-02-19 15:54:47,068 [INFO] trading_engine: No realized vol available at positioning tick 13; skipping entry this tick
+2026-02-19 15:54:48,065 [INFO] trading_engine: WEEK 1 positioning tick 14
+2026-02-19 15:54:48,065 [INFO] trading_engine: Immediate positioning at week 1 tick 14
+2026-02-19 15:54:48,066 [INFO] trading_engine: No realized vol available at positioning tick 14; skipping entry this tick
+2026-02-19 15:54:49,075 [INFO] trading_engine: WEEK 1 positioning tick 15
+2026-02-19 15:54:49,076 [INFO] trading_engine: Immediate positioning at week 1 tick 15
+2026-02-19 15:54:49,078 [INFO] trading_engine: No realized vol available at positioning tick 15; skipping entry this tick
+2026-02-19 15:54:50,090 [INFO] trading_engine: WEEK 1 positioning tick 16
+2026-02-19 15:54:50,090 [INFO] trading_engine: Immediate positioning at week 1 tick 16
+2026-02-19 15:54:50,092 [INFO] trading_engine: No realized vol available at positioning tick 16; skipping entry this tick
+2026-02-19 15:54:51,093 [INFO] trading_engine: WEEK 1 positioning tick 17
+2026-02-19 15:54:51,093 [INFO] trading_engine: Immediate positioning at week 1 tick 17
+2026-02-19 15:54:51,094 [INFO] trading_engine: No realized vol available at positioning tick 17; skipping entry this tick
+2026-02-19 15:54:52,091 [INFO] trading_engine: WEEK 1 positioning tick 18
+2026-02-19 15:54:52,092 [INFO] trading_engine: Immediate positioning at week 1 tick 18
+2026-02-19 15:54:52,093 [INFO] trading_engine: No realized vol available at positioning tick 18; skipping entry this tick
+2026-02-19 15:54:53,098 [INFO] trading_engine: WEEK 1 positioning tick 19
+2026-02-19 15:54:53,099 [INFO] trading_engine: Immediate positioning at week 1 tick 19
+2026-02-19 15:54:53,100 [INFO] trading_engine: No realized vol available at positioning tick 19; skipping entry this tick
+2026-02-19 15:54:54,153 [INFO] trading_engine: WEEK 1 positioning tick 20
+2026-02-19 15:54:54,153 [INFO] trading_engine: Immediate positioning at week 1 tick 20
+2026-02-19 15:54:54,154 [INFO] trading_engine: No realized vol available at positioning tick 20; skipping entry this tick
+2026-02-19 15:54:55,162 [INFO] trading_engine: WEEK 1 positioning tick 21
+2026-02-19 15:54:55,163 [INFO] trading_engine: Immediate positioning at week 1 tick 21
+2026-02-19 15:54:55,166 [INFO] trading_engine: No realized vol available at positioning tick 21; skipping entry this tick
+2026-02-19 15:54:56,123 [INFO] trading_engine: WEEK 1 positioning tick 22
+2026-02-19 15:54:56,123 [INFO] trading_engine: Immediate positioning at week 1 tick 22
+2026-02-19 15:54:56,131 [INFO] trading_engine: No realized vol available at positioning tick 22; skipping entry this tick
+2026-02-19 15:54:57,130 [INFO] trading_engine: WEEK 1 positioning tick 23
+2026-02-19 15:54:57,130 [INFO] trading_engine: Immediate positioning at week 1 tick 23
+2026-02-19 15:54:57,132 [INFO] trading_engine: No realized vol available at positioning tick 23; skipping entry this tick
+2026-02-19 15:54:58,140 [INFO] trading_engine: WEEK 1 positioning tick 24
+2026-02-19 15:54:58,153 [INFO] trading_engine: Immediate positioning at week 1 tick 24
+2026-02-19 15:54:58,163 [INFO] trading_engine: No realized vol available at positioning tick 24; skipping entry this tick
+2026-02-19 15:54:59,115 [INFO] trading_engine: WEEK 1 positioning tick 25
+2026-02-19 15:54:59,116 [INFO] trading_engine: Immediate positioning at week 1 tick 25
+2026-02-19 15:54:59,118 [INFO] trading_engine: No realized vol available at positioning tick 25; skipping entry this tick
+2026-02-19 15:55:00,125 [INFO] trading_engine: WEEK 1 positioning tick 26
+2026-02-19 15:55:00,127 [INFO] trading_engine: Immediate positioning at week 1 tick 26
+2026-02-19 15:55:00,132 [INFO] trading_engine: No realized vol available at positioning tick 26; skipping entry this tick
+2026-02-19 15:55:01,154 [INFO] trading_engine: WEEK 1 positioning tick 27
+2026-02-19 15:55:01,154 [INFO] trading_engine: Immediate positioning at week 1 tick 27
+2026-02-19 15:55:01,157 [INFO] trading_engine: No realized vol available at positioning tick 27; skipping entry this tick
+2026-02-19 15:55:02,159 [INFO] trading_engine: WEEK 1 positioning tick 28
+2026-02-19 15:55:02,159 [INFO] trading_engine: Immediate positioning at week 1 tick 28
+2026-02-19 15:55:02,160 [INFO] trading_engine: No realized vol available at positioning tick 28; skipping entry this tick
+2026-02-19 15:55:03,161 [INFO] trading_engine: WEEK 1 positioning tick 29
+2026-02-19 15:55:03,161 [INFO] trading_engine: Immediate positioning at week 1 tick 29
+2026-02-19 15:55:03,162 [INFO] trading_engine: No realized vol available at positioning tick 29; skipping entry this tick
+2026-02-19 15:55:04,165 [INFO] trading_engine: WEEK 1 positioning tick 30
+2026-02-19 15:55:04,165 [INFO] trading_engine: Immediate positioning at week 1 tick 30
+2026-02-19 15:55:04,167 [INFO] trading_engine: No realized vol available at positioning tick 30; skipping entry this tick
+2026-02-19 15:55:05,174 [INFO] trading_engine: WEEK 1 positioning tick 31
+2026-02-19 15:55:05,174 [INFO] trading_engine: Immediate positioning at week 1 tick 31
+2026-02-19 15:55:05,175 [INFO] trading_engine: No realized vol available at positioning tick 31; skipping entry this tick
+2026-02-19 15:55:06,136 [INFO] trading_engine: WEEK 1 positioning tick 32
+2026-02-19 15:55:06,137 [INFO] trading_engine: Immediate positioning at week 1 tick 32
+2026-02-19 15:55:06,140 [INFO] trading_engine: No realized vol available at positioning tick 32; skipping entry this tick
+2026-02-19 15:55:07,166 [INFO] trading_engine: WEEK 1 positioning tick 33
+2026-02-19 15:55:07,167 [INFO] trading_engine: Immediate positioning at week 1 tick 33
+2026-02-19 15:55:07,169 [INFO] trading_engine: No realized vol available at positioning tick 33; skipping entry this tick
+2026-02-19 15:55:08,173 [INFO] trading_engine: WEEK 1 positioning tick 34
+2026-02-19 15:55:08,173 [INFO] trading_engine: Immediate positioning at week 1 tick 34
+2026-02-19 15:55:08,174 [INFO] trading_engine: No realized vol available at positioning tick 34; skipping entry this tick
+2026-02-19 15:55:09,288 [INFO] trading_engine: Scheduled close complete week 1 by tick 35
+2026-02-19 15:55:10,185 [INFO] trading_engine: Scheduled close complete week 1 by tick 36
+2026-02-19 15:55:11,198 [INFO] trading_engine: Scheduled close complete week 1 by tick 37
+2026-02-19 15:55:12,200 [INFO] trading_engine: Scheduled close complete week 1 by tick 38
+2026-02-19 15:55:13,203 [INFO] trading_engine: Scheduled close complete week 1 by tick 39
+2026-02-19 15:55:14,219 [INFO] trading_engine: Scheduled close complete week 1 by tick 40
+2026-02-19 15:55:15,226 [INFO] trading_engine: WEEK 1 positioning tick 41
+2026-02-19 15:55:15,227 [INFO] trading_engine: Immediate positioning at week 1 tick 41
+2026-02-19 15:55:15,228 [INFO] trading_engine: No realized vol available at positioning tick 41; skipping entry this tick
+2026-02-19 15:55:16,231 [INFO] trading_engine: WEEK 1 positioning tick 42
+2026-02-19 15:55:16,231 [INFO] trading_engine: Immediate positioning at week 1 tick 42
+2026-02-19 15:55:16,232 [INFO] trading_engine: No realized vol available at positioning tick 42; skipping entry this tick
+2026-02-19 15:55:17,233 [INFO] trading_engine: WEEK 1 positioning tick 43
+2026-02-19 15:55:17,234 [INFO] trading_engine: Immediate positioning at week 1 tick 43
+2026-02-19 15:55:17,242 [INFO] trading_engine: No realized vol available at positioning tick 43; skipping entry this tick
+2026-02-19 15:55:18,244 [INFO] trading_engine: WEEK 1 positioning tick 44
+2026-02-19 15:55:18,244 [INFO] trading_engine: Immediate positioning at week 1 tick 44
+2026-02-19 15:55:18,246 [INFO] trading_engine: No realized vol available at positioning tick 44; skipping entry this tick
+2026-02-19 15:55:19,247 [INFO] trading_engine: WEEK 1 positioning tick 45
+2026-02-19 15:55:19,248 [INFO] trading_engine: Immediate positioning at week 1 tick 45
+2026-02-19 15:55:19,250 [INFO] trading_engine: No realized vol available at positioning tick 45; skipping entry this tick
+2026-02-19 15:55:20,247 [INFO] trading_engine: WEEK 1 positioning tick 46
+2026-02-19 15:55:20,247 [INFO] trading_engine: Immediate positioning at week 1 tick 46
+2026-02-19 15:55:20,248 [INFO] trading_engine: No realized vol available at positioning tick 46; skipping entry this tick
+2026-02-19 15:55:21,365 [INFO] trading_engine: WEEK 1 positioning tick 47
+2026-02-19 15:55:21,366 [INFO] trading_engine: Immediate positioning at week 1 tick 47
+2026-02-19 15:55:21,370 [INFO] trading_engine: No realized vol available at positioning tick 47; skipping entry this tick
+2026-02-19 15:55:22,268 [INFO] trading_engine: WEEK 1 positioning tick 48
+2026-02-19 15:55:22,268 [INFO] trading_engine: Immediate positioning at week 1 tick 48
+2026-02-19 15:55:22,269 [INFO] trading_engine: No realized vol available at positioning tick 48; skipping entry this tick
+2026-02-19 15:55:23,327 [INFO] trading_engine: WEEK 1 positioning tick 49
+2026-02-19 15:55:23,327 [INFO] trading_engine: Immediate positioning at week 1 tick 49
+2026-02-19 15:55:23,328 [INFO] trading_engine: No realized vol available at positioning tick 49; skipping entry this tick
+2026-02-19 15:55:24,336 [INFO] trading_engine: WEEK 1 positioning tick 50
+2026-02-19 15:55:24,337 [INFO] trading_engine: Immediate positioning at week 1 tick 50
+2026-02-19 15:55:24,340 [INFO] trading_engine: No realized vol available at positioning tick 50; skipping entry this tick
+2026-02-19 15:55:25,244 [INFO] trading_engine: WEEK 1 positioning tick 51
+2026-02-19 15:55:25,245 [INFO] trading_engine: Immediate positioning at week 1 tick 51
+2026-02-19 15:55:25,247 [INFO] trading_engine: No realized vol available at positioning tick 51; skipping entry this tick
+2026-02-19 15:55:26,301 [INFO] trading_engine: WEEK 1 positioning tick 52
+2026-02-19 15:55:26,302 [INFO] trading_engine: Immediate positioning at week 1 tick 52
+2026-02-19 15:55:26,303 [INFO] trading_engine: No realized vol available at positioning tick 52; skipping entry this tick
+2026-02-19 15:55:27,259 [INFO] trading_engine: WEEK 1 positioning tick 53
+2026-02-19 15:55:27,259 [INFO] trading_engine: Immediate positioning at week 1 tick 53
+2026-02-19 15:55:27,266 [INFO] trading_engine: No realized vol available at positioning tick 53; skipping entry this tick
+2026-02-19 15:55:28,297 [INFO] trading_engine: WEEK 1 positioning tick 54
+2026-02-19 15:55:28,298 [INFO] trading_engine: Immediate positioning at week 1 tick 54
+2026-02-19 15:55:28,299 [INFO] trading_engine: No realized vol available at positioning tick 54; skipping entry this tick
+2026-02-19 15:55:29,366 [INFO] trading_engine: WEEK 1 positioning tick 55
+2026-02-19 15:55:29,367 [INFO] trading_engine: Immediate positioning at week 1 tick 55
+2026-02-19 15:55:29,382 [INFO] trading_engine: No realized vol available at positioning tick 55; skipping entry this tick
+2026-02-19 15:55:30,326 [INFO] trading_engine: WEEK 1 positioning tick 56
+2026-02-19 15:55:30,326 [INFO] trading_engine: Immediate positioning at week 1 tick 56
+2026-02-19 15:55:30,327 [INFO] trading_engine: No realized vol available at positioning tick 56; skipping entry this tick
+2026-02-19 15:55:31,327 [INFO] trading_engine: WEEK 1 positioning tick 57
+2026-02-19 15:55:31,328 [INFO] trading_engine: Immediate positioning at week 1 tick 57
+2026-02-19 15:55:31,329 [INFO] trading_engine: No realized vol available at positioning tick 57; skipping entry this tick
+2026-02-19 15:55:32,338 [INFO] trading_engine: WEEK 1 positioning tick 58
+2026-02-19 15:55:32,338 [INFO] trading_engine: Immediate positioning at week 1 tick 58
+2026-02-19 15:55:32,340 [INFO] trading_engine: No realized vol available at positioning tick 58; skipping entry this tick
+2026-02-19 15:55:33,338 [INFO] trading_engine: WEEK 1 positioning tick 59
+2026-02-19 15:55:33,338 [INFO] trading_engine: Immediate positioning at week 1 tick 59
+2026-02-19 15:55:33,340 [INFO] trading_engine: No realized vol available at positioning tick 59; skipping entry this tick
+2026-02-19 15:55:34,344 [INFO] trading_engine: WEEK 1 positioning tick 60
+2026-02-19 15:55:34,344 [INFO] trading_engine: Immediate positioning at week 1 tick 60
+2026-02-19 15:55:34,345 [INFO] trading_engine: No realized vol available at positioning tick 60; skipping entry this tick
+2026-02-19 15:55:35,306 [INFO] trading_engine: WEEK 1 positioning tick 61
+2026-02-19 15:55:35,306 [INFO] trading_engine: Immediate positioning at week 1 tick 61
+2026-02-19 15:55:35,309 [INFO] trading_engine: No realized vol available at positioning tick 61; skipping entry this tick
+2026-02-19 15:55:36,360 [INFO] trading_engine: WEEK 1 positioning tick 62
+2026-02-19 15:55:36,361 [INFO] trading_engine: Immediate positioning at week 1 tick 62
+2026-02-19 15:55:36,362 [INFO] trading_engine: No realized vol available at positioning tick 62; skipping entry this tick
+2026-02-19 15:55:37,371 [INFO] trading_engine: WEEK 1 positioning tick 63
+2026-02-19 15:55:37,372 [INFO] trading_engine: Immediate positioning at week 1 tick 63
+2026-02-19 15:55:37,374 [INFO] trading_engine: No realized vol available at positioning tick 63; skipping entry this tick
+2026-02-19 15:55:38,379 [INFO] trading_engine: WEEK 1 positioning tick 64
+2026-02-19 15:55:38,380 [INFO] trading_engine: Immediate positioning at week 1 tick 64
+2026-02-19 15:55:38,381 [INFO] trading_engine: No realized vol available at positioning tick 64; skipping entry this tick
+2026-02-19 15:55:39,435 [INFO] trading_engine: WEEK 1 positioning tick 65
+2026-02-19 15:55:39,435 [INFO] trading_engine: Immediate positioning at week 1 tick 65
+2026-02-19 15:55:39,436 [INFO] trading_engine: No realized vol available at positioning tick 65; skipping entry this tick
+2026-02-19 15:55:40,451 [INFO] trading_engine: WEEK 1 positioning tick 66
+2026-02-19 15:55:40,451 [INFO] trading_engine: Immediate positioning at week 1 tick 66
+2026-02-19 15:55:40,452 [INFO] trading_engine: No realized vol available at positioning tick 66; skipping entry this tick
+2026-02-19 15:55:41,463 [INFO] trading_engine: WEEK 1 positioning tick 67
+2026-02-19 15:55:41,463 [INFO] trading_engine: Immediate positioning at week 1 tick 67
+2026-02-19 15:55:41,465 [INFO] trading_engine: No realized vol available at positioning tick 67; skipping entry this tick
+2026-02-19 15:55:42,361 [INFO] trading_engine: WEEK 1 positioning tick 68
+2026-02-19 15:55:42,362 [INFO] trading_engine: Immediate positioning at week 1 tick 68
+2026-02-19 15:55:42,364 [INFO] trading_engine: No realized vol available at positioning tick 68; skipping entry this tick
+2026-02-19 15:55:43,485 [INFO] trading_engine: WEEK 1 positioning tick 69
+2026-02-19 15:55:43,486 [INFO] trading_engine: Immediate positioning at week 1 tick 69
+2026-02-19 15:55:43,489 [INFO] trading_engine: No realized vol available at positioning tick 69; skipping entry this tick
+2026-02-19 15:55:44,393 [INFO] trading_engine: WEEK 1 positioning tick 70
+2026-02-19 15:55:44,393 [INFO] trading_engine: Immediate positioning at week 1 tick 70
+2026-02-19 15:55:44,394 [INFO] trading_engine: No realized vol available at positioning tick 70; skipping entry this tick
+2026-02-19 15:55:45,395 [INFO] trading_engine: WEEK 1 positioning tick 71
+2026-02-19 15:55:45,395 [INFO] trading_engine: Immediate positioning at week 1 tick 71
+2026-02-19 15:55:45,396 [INFO] trading_engine: No realized vol available at positioning tick 71; skipping entry this tick
+2026-02-19 15:55:46,405 [INFO] trading_engine: WEEK 1 positioning tick 72
+2026-02-19 15:55:46,405 [INFO] trading_engine: Immediate positioning at week 1 tick 72
+2026-02-19 15:55:46,406 [INFO] trading_engine: No realized vol available at positioning tick 72; skipping entry this tick
+2026-02-19 15:55:47,421 [INFO] trading_engine: WEEK 1 positioning tick 73
+2026-02-19 15:55:47,421 [INFO] trading_engine: Immediate positioning at week 1 tick 73
+2026-02-19 15:55:47,423 [INFO] trading_engine: No realized vol available at positioning tick 73; skipping entry this tick
+2026-02-19 15:55:48,435 [INFO] trading_engine: WEEK 2 positioning tick 74
+2026-02-19 15:55:48,436 [INFO] trading_engine: Immediate positioning at week 2 tick 74
+2026-02-19 15:55:48,437 [INFO] trading_engine: No realized vol available at positioning tick 74; skipping entry this tick
+2026-02-19 15:56:25,620 [INFO] trading_engine: Scheduled close complete week 2 by tick 111
+2026-02-19 15:56:26,628 [INFO] trading_engine: Scheduled close complete week 2 by tick 112
+2026-02-19 15:56:27,635 [INFO] trading_engine: Scheduled close complete week 2 by tick 113
+2026-02-19 15:56:28,647 [INFO] trading_engine: Scheduled close complete week 2 by tick 114
+2026-02-19 15:56:29,657 [INFO] trading_engine: Scheduled close complete week 2 by tick 115
+2026-02-19 15:56:30,661 [INFO] trading_engine: Scheduled close complete week 2 by tick 116
+2026-02-19 15:57:03,816 [INFO] trading_engine: WEEK 3 positioning tick 149
+2026-02-19 15:57:03,816 [INFO] trading_engine: Immediate positioning at week 3 tick 149
+2026-02-19 15:57:03,818 [INFO] trading_engine: No realized vol available at positioning tick 149; skipping entry this tick
+2026-02-19 15:57:41,034 [INFO] trading_engine: Scheduled close complete week 3 by tick 186
+2026-02-19 15:57:42,094 [INFO] trading_engine: Scheduled close complete week 3 by tick 187
+2026-02-19 15:57:43,111 [INFO] trading_engine: Scheduled close complete week 3 by tick 188
+2026-02-19 15:57:44,012 [INFO] trading_engine: Scheduled close complete week 3 by tick 189
+2026-02-19 15:57:45,064 [INFO] trading_engine: Scheduled close complete week 3 by tick 190
+2026-02-19 15:57:46,078 [INFO] trading_engine: Scheduled close complete week 3 by tick 191
+2026-02-19 15:58:19,248 [INFO] trading_engine: WEEK 4 positioning tick 224
+2026-02-19 15:58:19,248 [INFO] trading_engine: Immediate positioning at week 4 tick 224
+2026-02-19 15:58:19,251 [INFO] trading_engine: No realized vol available at positioning tick 224; skipping entry this tick
+2026-02-19 15:58:50,509 [INFO] trading_engine: Scheduled close complete week 4 by tick 255
+2026-02-19 15:58:51,511 [INFO] trading_engine: Scheduled close complete week 4 by tick 256
+2026-02-19 15:58:52,516 [INFO] trading_engine: Scheduled close complete week 4 by tick 257
+2026-02-19 15:58:53,573 [INFO] trading_engine: Scheduled close complete week 4 by tick 258
+2026-02-19 15:58:54,469 [INFO] trading_engine: Scheduled close complete week 4 by tick 259
+2026-02-19 15:58:55,479 [INFO] trading_engine: Scheduled close complete week 4 by tick 260
+2026-02-19 16:06:39,100 [INFO] trading_engine: WEEK 1 positioning tick 1
+2026-02-19 16:06:39,100 [INFO] trading_engine: Immediate positioning at week 1 tick 1
+2026-02-19 16:06:39,102 [INFO] trading_engine: No realized vol available at positioning tick 1; skipping entry this tick
+2026-02-19 16:06:40,114 [INFO] trading_engine: WEEK 1 positioning tick 2
+2026-02-19 16:06:40,115 [INFO] trading_engine: Immediate positioning at week 1 tick 2
+2026-02-19 16:06:40,117 [INFO] trading_engine: No realized vol available at positioning tick 2; skipping entry this tick
+2026-02-19 16:06:41,124 [INFO] trading_engine: WEEK 1 positioning tick 3
+2026-02-19 16:06:41,125 [INFO] trading_engine: Immediate positioning at week 1 tick 3
+2026-02-19 16:06:41,131 [INFO] trading_engine: No realized vol available at positioning tick 3; skipping entry this tick
+2026-02-19 16:06:42,189 [INFO] trading_engine: WEEK 1 positioning tick 4
+2026-02-19 16:06:42,189 [INFO] trading_engine: Immediate positioning at week 1 tick 4
+2026-02-19 16:06:42,190 [INFO] trading_engine: No realized vol available at positioning tick 4; skipping entry this tick
+2026-02-19 16:06:43,083 [INFO] trading_engine: WEEK 1 positioning tick 5
+2026-02-19 16:06:43,083 [INFO] trading_engine: Immediate positioning at week 1 tick 5
+2026-02-19 16:06:43,084 [INFO] trading_engine: No realized vol available at positioning tick 5; skipping entry this tick
+2026-02-19 16:06:44,086 [INFO] trading_engine: WEEK 1 positioning tick 6
+2026-02-19 16:06:44,086 [INFO] trading_engine: Immediate positioning at week 1 tick 6
+2026-02-19 16:06:44,088 [INFO] trading_engine: No realized vol available at positioning tick 6; skipping entry this tick
+2026-02-19 16:06:45,043 [INFO] trading_engine: WEEK 1 positioning tick 7
+2026-02-19 16:06:45,044 [INFO] trading_engine: Immediate positioning at week 1 tick 7
+2026-02-19 16:06:45,047 [INFO] trading_engine: No realized vol available at positioning tick 7; skipping entry this tick
+2026-02-19 16:06:46,098 [INFO] trading_engine: WEEK 1 positioning tick 8
+2026-02-19 16:06:46,098 [INFO] trading_engine: Immediate positioning at week 1 tick 8
+2026-02-19 16:06:46,099 [INFO] trading_engine: No realized vol available at positioning tick 8; skipping entry this tick
+2026-02-19 16:06:47,096 [INFO] trading_engine: WEEK 1 positioning tick 9
+2026-02-19 16:06:47,096 [INFO] trading_engine: Immediate positioning at week 1 tick 9
+2026-02-19 16:06:47,097 [INFO] trading_engine: No realized vol available at positioning tick 9; skipping entry this tick
+2026-02-19 16:06:48,111 [INFO] trading_engine: WEEK 1 positioning tick 10
+2026-02-19 16:06:48,111 [INFO] trading_engine: Immediate positioning at week 1 tick 10
+2026-02-19 16:06:48,117 [INFO] trading_engine: No realized vol available at positioning tick 10; skipping entry this tick
+2026-02-19 16:06:49,080 [INFO] trading_engine: WEEK 1 positioning tick 11
+2026-02-19 16:06:49,080 [INFO] trading_engine: Immediate positioning at week 1 tick 11
+2026-02-19 16:06:49,082 [INFO] trading_engine: No realized vol available at positioning tick 11; skipping entry this tick
+2026-02-19 16:06:50,140 [INFO] trading_engine: WEEK 1 positioning tick 12
+2026-02-19 16:06:50,140 [INFO] trading_engine: Immediate positioning at week 1 tick 12
+2026-02-19 16:06:50,141 [INFO] trading_engine: No realized vol available at positioning tick 12; skipping entry this tick
+2026-02-19 16:06:51,143 [INFO] trading_engine: WEEK 1 positioning tick 13
+2026-02-19 16:06:51,143 [INFO] trading_engine: Immediate positioning at week 1 tick 13
+2026-02-19 16:06:51,144 [INFO] trading_engine: No realized vol available at positioning tick 13; skipping entry this tick
+2026-02-19 16:06:52,151 [INFO] trading_engine: WEEK 1 positioning tick 14
+2026-02-19 16:06:52,151 [INFO] trading_engine: Immediate positioning at week 1 tick 14
+2026-02-19 16:06:52,153 [INFO] trading_engine: No realized vol available at positioning tick 14; skipping entry this tick
+2026-02-19 16:06:53,154 [INFO] trading_engine: WEEK 1 positioning tick 15
+2026-02-19 16:06:53,154 [INFO] trading_engine: Immediate positioning at week 1 tick 15
+2026-02-19 16:06:53,156 [INFO] trading_engine: No realized vol available at positioning tick 15; skipping entry this tick
+2026-02-19 16:06:54,262 [INFO] trading_engine: WEEK 1 positioning tick 16
+2026-02-19 16:06:54,263 [INFO] trading_engine: Immediate positioning at week 1 tick 16
+2026-02-19 16:06:54,266 [INFO] trading_engine: No realized vol available at positioning tick 16; skipping entry this tick
+2026-02-19 16:06:55,278 [INFO] trading_engine: WEEK 1 positioning tick 17
+2026-02-19 16:06:55,278 [INFO] trading_engine: Immediate positioning at week 1 tick 17
+2026-02-19 16:06:55,280 [INFO] trading_engine: No realized vol available at positioning tick 17; skipping entry this tick
+2026-02-19 16:06:56,179 [INFO] trading_engine: WEEK 1 positioning tick 18
+2026-02-19 16:06:56,179 [INFO] trading_engine: Immediate positioning at week 1 tick 18
+2026-02-19 16:06:56,180 [INFO] trading_engine: No realized vol available at positioning tick 18; skipping entry this tick
+2026-02-19 16:06:57,234 [INFO] trading_engine: WEEK 1 positioning tick 19
+2026-02-19 16:06:57,234 [INFO] trading_engine: Immediate positioning at week 1 tick 19
+2026-02-19 16:06:57,235 [INFO] trading_engine: No realized vol available at positioning tick 19; skipping entry this tick
+2026-02-19 16:06:58,242 [INFO] trading_engine: WEEK 1 positioning tick 20
+2026-02-19 16:06:58,243 [INFO] trading_engine: Immediate positioning at week 1 tick 20
+2026-02-19 16:06:58,245 [INFO] trading_engine: No realized vol available at positioning tick 20; skipping entry this tick
+2026-02-19 16:06:59,154 [INFO] trading_engine: WEEK 1 positioning tick 21
+2026-02-19 16:06:59,154 [INFO] trading_engine: Immediate positioning at week 1 tick 21
+2026-02-19 16:06:59,156 [INFO] trading_engine: No realized vol available at positioning tick 21; skipping entry this tick
+2026-02-19 16:07:00,159 [INFO] trading_engine: WEEK 1 positioning tick 22
+2026-02-19 16:07:00,160 [INFO] trading_engine: Immediate positioning at week 1 tick 22
+2026-02-19 16:07:00,164 [INFO] trading_engine: No realized vol available at positioning tick 22; skipping entry this tick
+2026-02-19 16:07:01,178 [INFO] trading_engine: WEEK 1 positioning tick 23
+2026-02-19 16:07:01,179 [INFO] trading_engine: Immediate positioning at week 1 tick 23
+2026-02-19 16:07:01,181 [INFO] trading_engine: No realized vol available at positioning tick 23; skipping entry this tick
+2026-02-19 16:07:02,232 [INFO] trading_engine: WEEK 1 positioning tick 24
+2026-02-19 16:07:02,232 [INFO] trading_engine: Immediate positioning at week 1 tick 24
+2026-02-19 16:07:02,233 [INFO] trading_engine: No realized vol available at positioning tick 24; skipping entry this tick
+2026-02-19 16:07:03,184 [INFO] trading_engine: WEEK 1 positioning tick 25
+2026-02-19 16:07:03,185 [INFO] trading_engine: Immediate positioning at week 1 tick 25
+2026-02-19 16:07:03,187 [INFO] trading_engine: No realized vol available at positioning tick 25; skipping entry this tick
+2026-02-19 16:07:04,190 [INFO] trading_engine: WEEK 1 positioning tick 26
+2026-02-19 16:07:04,191 [INFO] trading_engine: Immediate positioning at week 1 tick 26
+2026-02-19 16:07:04,200 [INFO] trading_engine: No realized vol available at positioning tick 26; skipping entry this tick
+2026-02-19 16:07:05,202 [INFO] trading_engine: WEEK 1 positioning tick 27
+2026-02-19 16:07:05,202 [INFO] trading_engine: Immediate positioning at week 1 tick 27
+2026-02-19 16:07:05,203 [INFO] trading_engine: No realized vol available at positioning tick 27; skipping entry this tick
+2026-02-19 16:07:06,204 [INFO] trading_engine: WEEK 1 positioning tick 28
+2026-02-19 16:07:06,205 [INFO] trading_engine: Immediate positioning at week 1 tick 28
+2026-02-19 16:07:06,206 [INFO] trading_engine: No realized vol available at positioning tick 28; skipping entry this tick
+2026-02-19 16:07:07,220 [INFO] trading_engine: WEEK 1 positioning tick 29
+2026-02-19 16:07:07,220 [INFO] trading_engine: Immediate positioning at week 1 tick 29
+2026-02-19 16:07:07,221 [INFO] trading_engine: No realized vol available at positioning tick 29; skipping entry this tick
+2026-02-19 16:07:08,239 [INFO] trading_engine: WEEK 1 positioning tick 30
+2026-02-19 16:07:08,239 [INFO] trading_engine: Immediate positioning at week 1 tick 30
+2026-02-19 16:07:08,242 [INFO] trading_engine: No realized vol available at positioning tick 30; skipping entry this tick
+2026-02-19 16:07:09,238 [INFO] trading_engine: WEEK 1 positioning tick 31
+2026-02-19 16:07:09,238 [INFO] trading_engine: Immediate positioning at week 1 tick 31
+2026-02-19 16:07:09,239 [INFO] trading_engine: No realized vol available at positioning tick 31; skipping entry this tick
+2026-02-19 16:07:10,260 [INFO] trading_engine: WEEK 1 positioning tick 32
+2026-02-19 16:07:10,261 [INFO] trading_engine: Immediate positioning at week 1 tick 32
+2026-02-19 16:07:10,263 [INFO] trading_engine: No realized vol available at positioning tick 32; skipping entry this tick
+2026-02-19 16:07:11,262 [INFO] trading_engine: WEEK 1 positioning tick 33
+2026-02-19 16:07:11,262 [INFO] trading_engine: Immediate positioning at week 1 tick 33
+2026-02-19 16:07:11,263 [INFO] trading_engine: No realized vol available at positioning tick 33; skipping entry this tick
+2026-02-19 16:07:12,268 [INFO] trading_engine: WEEK 1 positioning tick 34
+2026-02-19 16:07:12,268 [INFO] trading_engine: Immediate positioning at week 1 tick 34
+2026-02-19 16:07:12,270 [INFO] trading_engine: No realized vol available at positioning tick 34; skipping entry this tick
+2026-02-19 16:07:13,279 [INFO] trading_engine: Scheduled close complete week 1 by tick 35
+2026-02-19 16:07:14,282 [INFO] trading_engine: Scheduled close complete week 1 by tick 36
+2026-02-19 16:07:15,342 [INFO] trading_engine: Scheduled close complete week 1 by tick 37
+2026-02-19 16:07:16,348 [INFO] trading_engine: Scheduled close complete week 1 by tick 38
+2026-02-19 16:07:17,243 [INFO] trading_engine: Scheduled close complete week 1 by tick 39
+2026-02-19 16:07:18,279 [INFO] trading_engine: Scheduled close complete week 1 by tick 40
+2026-02-19 16:07:19,274 [INFO] trading_engine: WEEK 1 positioning tick 41
+2026-02-19 16:07:19,274 [INFO] trading_engine: Immediate positioning at week 1 tick 41
+2026-02-19 16:07:19,275 [INFO] trading_engine: No realized vol available at positioning tick 41; skipping entry this tick
+2026-02-19 16:07:20,241 [INFO] trading_engine: WEEK 1 positioning tick 42
+2026-02-19 16:07:20,245 [INFO] trading_engine: Immediate positioning at week 1 tick 42
+2026-02-19 16:07:20,247 [INFO] trading_engine: No realized vol available at positioning tick 42; skipping entry this tick
+2026-02-19 16:07:21,253 [INFO] trading_engine: WEEK 1 positioning tick 43
+2026-02-19 16:07:21,255 [INFO] trading_engine: Immediate positioning at week 1 tick 43
+2026-02-19 16:07:21,261 [INFO] trading_engine: No realized vol available at positioning tick 43; skipping entry this tick
+2026-02-19 16:07:22,419 [INFO] trading_engine: WEEK 1 positioning tick 44
+2026-02-19 16:07:22,434 [INFO] trading_engine: Immediate positioning at week 1 tick 44
+2026-02-19 16:07:22,435 [INFO] trading_engine: No realized vol available at positioning tick 44; skipping entry this tick
+2026-02-19 16:07:23,333 [INFO] trading_engine: WEEK 1 positioning tick 45
+2026-02-19 16:07:23,333 [INFO] trading_engine: Immediate positioning at week 1 tick 45
+2026-02-19 16:07:23,334 [INFO] trading_engine: No realized vol available at positioning tick 45; skipping entry this tick
+2026-02-19 16:07:24,339 [INFO] trading_engine: WEEK 1 positioning tick 46
+2026-02-19 16:07:24,339 [INFO] trading_engine: Immediate positioning at week 1 tick 46
+2026-02-19 16:07:24,342 [INFO] trading_engine: No realized vol available at positioning tick 46; skipping entry this tick
+2026-02-19 16:07:25,296 [INFO] trading_engine: WEEK 1 positioning tick 47
+2026-02-19 16:07:25,297 [INFO] trading_engine: Immediate positioning at week 1 tick 47
+2026-02-19 16:07:25,298 [INFO] trading_engine: No realized vol available at positioning tick 47; skipping entry this tick
+2026-02-19 16:07:26,302 [INFO] trading_engine: WEEK 1 positioning tick 48
+2026-02-19 16:07:26,303 [INFO] trading_engine: Immediate positioning at week 1 tick 48
+2026-02-19 16:07:26,304 [INFO] trading_engine: No realized vol available at positioning tick 48; skipping entry this tick
+2026-02-19 16:07:27,304 [INFO] trading_engine: WEEK 1 positioning tick 49
+2026-02-19 16:07:27,305 [INFO] trading_engine: Immediate positioning at week 1 tick 49
+2026-02-19 16:07:27,308 [INFO] trading_engine: No realized vol available at positioning tick 49; skipping entry this tick
+2026-02-19 16:07:28,314 [INFO] trading_engine: WEEK 1 positioning tick 50
+2026-02-19 16:07:28,315 [INFO] trading_engine: Immediate positioning at week 1 tick 50
+2026-02-19 16:07:28,322 [INFO] trading_engine: No realized vol available at positioning tick 50; skipping entry this tick
+2026-02-19 16:07:29,331 [INFO] trading_engine: WEEK 1 positioning tick 51
+2026-02-19 16:07:29,331 [INFO] trading_engine: Immediate positioning at week 1 tick 51
+2026-02-19 16:07:29,332 [INFO] trading_engine: No realized vol available at positioning tick 51; skipping entry this tick
+2026-02-19 16:07:30,335 [INFO] trading_engine: WEEK 1 positioning tick 52
+2026-02-19 16:07:30,335 [INFO] trading_engine: Immediate positioning at week 1 tick 52
+2026-02-19 16:07:30,337 [INFO] trading_engine: No realized vol available at positioning tick 52; skipping entry this tick
+2026-02-19 16:07:31,438 [INFO] trading_engine: WEEK 1 positioning tick 53
+2026-02-19 16:07:31,439 [INFO] trading_engine: Immediate positioning at week 1 tick 53
+2026-02-19 16:07:31,439 [INFO] trading_engine: No realized vol available at positioning tick 53; skipping entry this tick
+2026-02-19 16:07:32,353 [INFO] trading_engine: WEEK 1 positioning tick 54
+2026-02-19 16:07:32,353 [INFO] trading_engine: Immediate positioning at week 1 tick 54
+2026-02-19 16:07:32,355 [INFO] trading_engine: No realized vol available at positioning tick 54; skipping entry this tick
+2026-02-19 16:07:33,467 [INFO] trading_engine: WEEK 1 positioning tick 55
+2026-02-19 16:07:33,468 [INFO] trading_engine: Immediate positioning at week 1 tick 55
+2026-02-19 16:07:33,469 [INFO] trading_engine: No realized vol available at positioning tick 55; skipping entry this tick
+2026-02-19 16:07:34,392 [INFO] trading_engine: WEEK 1 positioning tick 56
+2026-02-19 16:07:34,393 [INFO] trading_engine: Immediate positioning at week 1 tick 56
+2026-02-19 16:07:34,395 [INFO] trading_engine: No realized vol available at positioning tick 56; skipping entry this tick
+2026-02-19 16:07:35,512 [INFO] trading_engine: WEEK 1 positioning tick 57
+2026-02-19 16:07:35,513 [INFO] trading_engine: Immediate positioning at week 1 tick 57
+2026-02-19 16:07:35,514 [INFO] trading_engine: No realized vol available at positioning tick 57; skipping entry this tick
+2026-02-19 16:07:36,372 [INFO] trading_engine: WEEK 1 positioning tick 58
+2026-02-19 16:07:36,372 [INFO] trading_engine: Immediate positioning at week 1 tick 58
+2026-02-19 16:07:36,374 [INFO] trading_engine: No realized vol available at positioning tick 58; skipping entry this tick
+2026-02-19 16:07:37,393 [INFO] trading_engine: WEEK 1 positioning tick 59
+2026-02-19 16:07:37,394 [INFO] trading_engine: Immediate positioning at week 1 tick 59
+2026-02-19 16:07:37,395 [INFO] trading_engine: No realized vol available at positioning tick 59; skipping entry this tick
+2026-02-19 16:07:38,395 [INFO] trading_engine: WEEK 1 positioning tick 60
+2026-02-19 16:07:38,395 [INFO] trading_engine: Immediate positioning at week 1 tick 60
+2026-02-19 16:07:38,397 [INFO] trading_engine: No realized vol available at positioning tick 60; skipping entry this tick
+2026-02-19 16:07:39,406 [INFO] trading_engine: WEEK 1 positioning tick 61
+2026-02-19 16:07:39,407 [INFO] trading_engine: Immediate positioning at week 1 tick 61
+2026-02-19 16:07:39,409 [INFO] trading_engine: No realized vol available at positioning tick 61; skipping entry this tick
+2026-02-19 16:07:40,422 [INFO] trading_engine: WEEK 1 positioning tick 62
+2026-02-19 16:07:40,422 [INFO] trading_engine: Immediate positioning at week 1 tick 62
+2026-02-19 16:07:40,424 [INFO] trading_engine: No realized vol available at positioning tick 62; skipping entry this tick
+2026-02-19 16:07:41,435 [INFO] trading_engine: WEEK 1 positioning tick 63
+2026-02-19 16:07:41,436 [INFO] trading_engine: Immediate positioning at week 1 tick 63
+2026-02-19 16:07:41,437 [INFO] trading_engine: No realized vol available at positioning tick 63; skipping entry this tick
+2026-02-19 16:07:42,396 [INFO] trading_engine: WEEK 1 positioning tick 64
+2026-02-19 16:07:42,397 [INFO] trading_engine: Immediate positioning at week 1 tick 64
+2026-02-19 16:07:42,401 [INFO] trading_engine: No realized vol available at positioning tick 64; skipping entry this tick
+2026-02-19 16:07:43,412 [INFO] trading_engine: WEEK 1 positioning tick 65
+2026-02-19 16:07:43,412 [INFO] trading_engine: Immediate positioning at week 1 tick 65
+2026-02-19 16:07:43,416 [INFO] trading_engine: No realized vol available at positioning tick 65; skipping entry this tick
+2026-02-19 16:07:44,421 [INFO] trading_engine: WEEK 1 positioning tick 66
+2026-02-19 16:07:44,422 [INFO] trading_engine: Immediate positioning at week 1 tick 66
+2026-02-19 16:07:44,424 [INFO] trading_engine: No realized vol available at positioning tick 66; skipping entry this tick
+2026-02-19 16:07:45,431 [INFO] trading_engine: WEEK 1 positioning tick 67
+2026-02-19 16:07:45,432 [INFO] trading_engine: Immediate positioning at week 1 tick 67
+2026-02-19 16:07:45,434 [INFO] trading_engine: No realized vol available at positioning tick 67; skipping entry this tick
+2026-02-19 16:07:46,549 [INFO] trading_engine: WEEK 1 positioning tick 68
+2026-02-19 16:07:46,549 [INFO] trading_engine: Immediate positioning at week 1 tick 68
+2026-02-19 16:07:46,551 [INFO] trading_engine: No realized vol available at positioning tick 68; skipping entry this tick
+2026-02-19 16:07:47,465 [INFO] trading_engine: WEEK 1 positioning tick 69
+2026-02-19 16:07:47,466 [INFO] trading_engine: Immediate positioning at week 1 tick 69
+2026-02-19 16:07:47,467 [INFO] trading_engine: No realized vol available at positioning tick 69; skipping entry this tick
+2026-02-19 16:07:48,523 [INFO] trading_engine: WEEK 1 positioning tick 70
+2026-02-19 16:07:48,524 [INFO] trading_engine: Immediate positioning at week 1 tick 70
+2026-02-19 16:07:48,526 [INFO] trading_engine: No realized vol available at positioning tick 70; skipping entry this tick
+2026-02-19 16:07:49,534 [INFO] trading_engine: WEEK 1 positioning tick 71
+2026-02-19 16:07:49,535 [INFO] trading_engine: Immediate positioning at week 1 tick 71
+2026-02-19 16:07:49,539 [INFO] trading_engine: No realized vol available at positioning tick 71; skipping entry this tick
+2026-02-19 16:07:50,559 [INFO] trading_engine: WEEK 1 positioning tick 72
+2026-02-19 16:07:50,559 [INFO] trading_engine: Immediate positioning at week 1 tick 72
+2026-02-19 16:07:50,562 [INFO] trading_engine: No realized vol available at positioning tick 72; skipping entry this tick
+2026-02-19 16:07:51,462 [INFO] trading_engine: WEEK 1 positioning tick 73
+2026-02-19 16:07:51,463 [INFO] trading_engine: Immediate positioning at week 1 tick 73
+2026-02-19 16:07:51,464 [INFO] trading_engine: No realized vol available at positioning tick 73; skipping entry this tick
+2026-02-19 16:07:52,480 [INFO] trading_engine: WEEK 2 positioning tick 74
+2026-02-19 16:07:52,481 [INFO] trading_engine: Immediate positioning at week 2 tick 74
+2026-02-19 16:07:52,484 [INFO] trading_engine: No realized vol available at positioning tick 74; skipping entry this tick
+2026-02-19 16:08:29,658 [INFO] trading_engine: Scheduled close complete week 2 by tick 111
+2026-02-19 16:08:30,717 [INFO] trading_engine: Scheduled close complete week 2 by tick 112
+2026-02-19 16:08:31,732 [INFO] trading_engine: Scheduled close complete week 2 by tick 113
+2026-02-19 16:08:32,683 [INFO] trading_engine: Scheduled close complete week 2 by tick 114
+2026-02-19 16:08:33,691 [INFO] trading_engine: Scheduled close complete week 2 by tick 115
+2026-02-19 16:08:34,810 [INFO] trading_engine: Scheduled close complete week 2 by tick 116
+2026-02-19 16:09:07,852 [INFO] trading_engine: WEEK 3 positioning tick 149
+2026-02-19 16:09:07,852 [INFO] trading_engine: Immediate positioning at week 3 tick 149
+2026-02-19 16:09:07,854 [INFO] trading_engine: No realized vol available at positioning tick 149; skipping entry this tick
+2026-02-19 16:09:45,110 [INFO] trading_engine: Scheduled close complete week 3 by tick 186
+2026-02-19 16:09:46,114 [INFO] trading_engine: Scheduled close complete week 3 by tick 187
+2026-02-19 16:09:47,117 [INFO] trading_engine: Scheduled close complete week 3 by tick 188
+2026-02-19 16:09:48,120 [INFO] trading_engine: Scheduled close complete week 3 by tick 189
+2026-02-19 16:09:49,124 [INFO] trading_engine: Scheduled close complete week 3 by tick 190
+2026-02-19 16:09:50,132 [INFO] trading_engine: Scheduled close complete week 3 by tick 191
+2026-02-19 16:10:23,562 [INFO] trading_engine: WEEK 4 positioning tick 224
+2026-02-19 16:10:23,562 [INFO] trading_engine: Immediate positioning at week 4 tick 224
+2026-02-19 16:10:23,563 [INFO] trading_engine: No realized vol available at positioning tick 224; skipping entry this tick
+2026-02-19 16:10:54,551 [INFO] trading_engine: Scheduled close complete week 4 by tick 255
+2026-02-19 16:10:55,559 [INFO] trading_engine: Scheduled close complete week 4 by tick 256
+2026-02-19 16:10:56,587 [INFO] trading_engine: Scheduled close complete week 4 by tick 257
+2026-02-19 16:10:57,603 [INFO] trading_engine: Scheduled close complete week 4 by tick 258
+2026-02-19 16:10:58,600 [INFO] trading_engine: Scheduled close complete week 4 by tick 259
+2026-02-19 16:10:59,604 [INFO] trading_engine: Scheduled close complete week 4 by tick 260
