@@ -160,17 +160,28 @@ class AlmgrenChriss:
             variance_of_cost = s**2 * x0**2 * T / (3 * N)
             return expected_cost, max(0, variance_of_cost)
 
+        # Check denominators to avoid division by zero
+        sinh_kT = np.sinh(k * T)
+        sinh_kdt = np.sinh(k * dt)
+        denom_cost = 2 * dt**2 * sinh_kT**2
+        denom_var = sinh_kT**2 * sinh_kdt
+        
+        # If denominators are too small, fall back to TWAP approximation
+        if abs(denom_cost) < 1e-15 or abs(denom_var) < 1e-15:
+            N = max(1, int(T / dt))
+            expected_cost = 0.5 * g * x0**2 + eps * x0 + eta * x0**2 / N
+            variance_of_cost = s**2 * x0**2 * T / (3 * N)
+            return expected_cost, max(0, variance_of_cost)
+
         expected_cost = (
             0.5 * g * x0**2 + eps * x0 +
             eta * x0**2 * np.tanh(k * dt / 2) *
-            (dt * np.sinh(2 * k * T) + 2 * T * np.sinh(k * dt)) /
-            (2 * dt**2 * np.sinh(k * T)**2)
+            (dt * np.sinh(2 * k * T) + 2 * T * sinh_kdt) / denom_cost
         )
 
         variance_of_cost = (
             0.5 * s**2 * x0**2 *
-            (dt * np.sinh(k * T) * np.cosh(k * (T - dt)) - T * np.sinh(k * dt)) /
-            (np.sinh(k * T)**2 * np.sinh(k * dt))
+            (dt * sinh_kT * np.cosh(k * (T - dt)) - T * sinh_kdt) / denom_var
         )
 
         return expected_cost, max(0, variance_of_cost)
