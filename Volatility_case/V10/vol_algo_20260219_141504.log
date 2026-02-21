@@ -1,0 +1,944 @@
+2026-02-19 14:15:04,106 [INFO] news_parser: NEWS: Current realized vol = 26.0% (history: ['26%']) [NOW USING REALIZED]
+2026-02-19 14:15:04,107 [INFO] news_parser: NEWS: Delta limit = 8000
+2026-02-19 14:15:04,107 [INFO] news_parser: NEWS: Penalty rate = 2.00%
+2026-02-19 14:15:04,108 [INFO] news_parser: NEWS: Current realized vol = 11.0% (history: ['26%', '11%']) [NOW USING REALIZED]
+2026-02-19 14:15:04,108 [INFO] news_parser: NEWS: Forecast vol next week = 11.0% - 16.0% (mid=13.5%) [NOW USING FORECAST]
+2026-02-19 14:15:04,109 [INFO] news_parser: NEWS: Current realized vol = 12.0% (history: ['26%', '11%', '12%']) [NOW USING REALIZED]
+2026-02-19 14:15:04,132 [INFO] news_parser: NEWS: Current realized vol = 28.0% (history: ['26%', '11%', '12%', '28%']) [NOW USING REALIZED]
+2026-02-19 14:15:04,133 [INFO] news_parser: NEWS: Forecast vol next week = 28.0% - 33.0% (mid=30.5%) [NOW USING FORECAST]
+2026-02-19 14:15:04,133 [INFO] news_parser: NEWS: Current realized vol = 29.0% (history: ['26%', '11%', '12%', '28%', '29%']) [NOW USING REALIZED]
+2026-02-19 14:15:04,133 [INFO] news_parser: NEWS: Current realized vol = 19.0% (history: ['26%', '11%', '12%', '28%', '29%', '19%']) [NOW USING REALIZED]
+2026-02-19 14:15:04,133 [INFO] news_parser: NEWS: Forecast vol next week = 19.0% - 24.0% (mid=21.5%) [NOW USING FORECAST]
+2026-02-19 14:15:04,133 [INFO] news_parser: NEWS: Current realized vol = 23.0% (history: ['26%', '11%', '12%', '28%', '29%', '19%', '23%']) [NOW USING REALIZED]
+2026-02-19 14:15:25,009 [INFO] trading_engine: Scheduled close complete week 4 by tick 255
+2026-02-19 14:15:26,048 [INFO] trading_engine: Scheduled close complete week 4 by tick 256
+2026-02-19 14:15:27,046 [INFO] trading_engine: Scheduled close complete week 4 by tick 257
+2026-02-19 14:15:27,995 [INFO] trading_engine: Scheduled close complete week 4 by tick 258
+2026-02-19 14:15:28,976 [INFO] trading_engine: Scheduled close complete week 4 by tick 259
+2026-02-19 14:15:29,981 [INFO] trading_engine: Scheduled close complete week 4 by tick 260
+2026-02-19 14:18:24,881 [INFO] news_parser: NEWS: Current realized vol = 24.0% (history: ['24%']) [NOW USING REALIZED]
+2026-02-19 14:18:24,881 [INFO] news_parser: NEWS: Delta limit = 12000
+2026-02-19 14:18:24,882 [INFO] news_parser: NEWS: Penalty rate = 3.00%
+2026-02-19 14:18:24,887 [INFO] trading_engine: WEEK 1 positioning tick 1
+2026-02-19 14:18:24,887 [INFO] trading_engine: Immediate positioning at week 1 tick 1
+2026-02-19 14:18:24,914 [INFO] trading_engine: FORCED SIZE: |IV-RV|=5.82% > 3.00% => n=875 LONG @ K=50
+2026-02-19 14:18:24,923 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=79
+2026-02-19 14:18:24,933 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=80
+2026-02-19 14:18:24,947 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=81
+2026-02-19 14:18:24,965 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=83
+2026-02-19 14:18:24,975 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=85
+2026-02-19 14:18:24,982 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=86
+2026-02-19 14:18:24,990 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=87
+2026-02-19 14:18:24,997 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=88
+2026-02-19 14:18:25,005 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=89
+2026-02-19 14:18:25,013 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=91
+2026-02-19 14:18:25,019 [INFO] rit_api: MARKET SELL 100 RTM1C54 -> order_id=92
+2026-02-19 14:18:25,025 [INFO] rit_api: MARKET SELL 100 RTM1P45 -> order_id=94
+2026-02-19 14:18:25,032 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=95
+2026-02-19 14:18:25,038 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=96
+2026-02-19 14:18:25,044 [INFO] rit_api: MARKET SELL 100 RTM1C54 -> order_id=97
+2026-02-19 14:18:25,050 [INFO] rit_api: MARKET SELL 100 RTM1P45 -> order_id=98
+2026-02-19 14:18:25,057 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=99
+2026-02-19 14:18:25,065 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=100
+2026-02-19 14:18:25,071 [INFO] rit_api: MARKET SELL 100 RTM1C54 -> order_id=101
+2026-02-19 14:18:25,078 [INFO] rit_api: MARKET SELL 100 RTM1P45 -> order_id=102
+2026-02-19 14:18:25,084 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=104
+2026-02-19 14:18:25,091 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=105
+2026-02-19 14:18:25,098 [INFO] rit_api: MARKET SELL 75 RTM1C54 -> order_id=106
+2026-02-19 14:18:25,104 [INFO] rit_api: MARKET SELL 75 RTM1P45 -> order_id=108
+2026-02-19 14:18:25,111 [INFO] rit_api: MARKET BUY 75 RTM1C50 -> order_id=109
+2026-02-19 14:18:25,119 [INFO] rit_api: MARKET BUY 75 RTM1P50 -> order_id=111
+2026-02-19 14:18:25,119 [INFO] trading_engine: STRADDLE BUY 875/875 @ K=50: 26 orders | ATM 875C+875P | EXTREME C54 375 + P45 375
+2026-02-19 14:18:25,119 [INFO] trading_engine: POSITIONED: 875 LONG straddles @ 50 (week 1, expected $0)
+2026-02-19 14:18:25,766 [INFO] rit_api: MARKET SELL 1850 RTM -> order_id=217
+2026-02-19 14:18:25,767 [INFO] trading_engine: HEDGE SELL 1850 RTM | delta 1850 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:26,616 [INFO] rit_api: MARKET SELL 4559 RTM -> order_id=354
+2026-02-19 14:18:26,617 [INFO] trading_engine: HEDGE SELL 4559 RTM | delta 4559 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:27,608 [INFO] rit_api: MARKET SELL 2891 RTM -> order_id=472
+2026-02-19 14:18:27,609 [INFO] trading_engine: HEDGE SELL 2891 RTM | delta 2891 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:28,648 [INFO] rit_api: MARKET BUY 6114 RTM -> order_id=611
+2026-02-19 14:18:28,648 [INFO] trading_engine: HEDGE BUY 6114 RTM | delta -6114 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:29,697 [INFO] rit_api: MARKET SELL 4403 RTM -> order_id=815
+2026-02-19 14:18:29,697 [INFO] trading_engine: HEDGE SELL 4403 RTM | delta 4403 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:30,698 [INFO] rit_api: MARKET SELL 2100 RTM -> order_id=960
+2026-02-19 14:18:30,698 [INFO] trading_engine: HEDGE SELL 2100 RTM | delta 2100 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:31,725 [INFO] rit_api: MARKET SELL 1450 RTM -> order_id=1182
+2026-02-19 14:18:31,727 [INFO] trading_engine: HEDGE SELL 1450 RTM | delta 1450 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:32,603 [INFO] rit_api: MARKET BUY 3167 RTM -> order_id=1383
+2026-02-19 14:18:32,604 [INFO] trading_engine: HEDGE BUY 3167 RTM | delta -3167 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:33,684 [INFO] rit_api: MARKET SELL 345 RTM -> order_id=1542
+2026-02-19 14:18:33,685 [INFO] trading_engine: HEDGE SELL 345 RTM | delta 345 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:34,698 [INFO] rit_api: MARKET SELL 184 RTM -> order_id=1661
+2026-02-19 14:18:34,699 [INFO] trading_engine: HEDGE SELL 184 RTM | delta 184 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:35,838 [INFO] rit_api: MARKET SELL 3858 RTM -> order_id=1855
+2026-02-19 14:18:35,839 [INFO] trading_engine: HEDGE SELL 3858 RTM | delta 3858 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:36,698 [INFO] rit_api: MARKET BUY 1397 RTM -> order_id=1972
+2026-02-19 14:18:36,699 [INFO] trading_engine: HEDGE BUY 1397 RTM | delta -1397 -> ~-0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:37,741 [INFO] rit_api: MARKET BUY 5186 RTM -> order_id=2149
+2026-02-19 14:18:37,742 [INFO] trading_engine: HEDGE BUY 5186 RTM | delta -5186 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:38,649 [INFO] rit_api: MARKET BUY 3666 RTM -> order_id=2380
+2026-02-19 14:18:38,650 [INFO] trading_engine: HEDGE BUY 3666 RTM | delta -3666 -> ~-0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:39,683 [INFO] rit_api: MARKET BUY 2200 RTM -> order_id=2467
+2026-02-19 14:18:39,686 [INFO] trading_engine: HEDGE BUY 2200 RTM | delta -2200 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:40,707 [INFO] rit_api: MARKET SELL 4745 RTM -> order_id=2570
+2026-02-19 14:18:40,708 [INFO] trading_engine: HEDGE SELL 4745 RTM | delta 4745 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:41,736 [INFO] rit_api: MARKET BUY 1504 RTM -> order_id=2841
+2026-02-19 14:18:41,736 [INFO] trading_engine: HEDGE BUY 1504 RTM | delta -1504 -> ~-0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:42,777 [INFO] rit_api: MARKET SELL 1364 RTM -> order_id=2967
+2026-02-19 14:18:42,778 [INFO] trading_engine: HEDGE SELL 1364 RTM | delta 1364 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:43,692 [INFO] rit_api: MARKET SELL 1864 RTM -> order_id=3124
+2026-02-19 14:18:43,693 [INFO] trading_engine: HEDGE SELL 1864 RTM | delta 1864 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:44,655 [INFO] rit_api: MARKET BUY 6283 RTM -> order_id=3396
+2026-02-19 14:18:44,655 [INFO] trading_engine: HEDGE BUY 6283 RTM | delta -6283 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:45,723 [INFO] rit_api: MARKET BUY 1381 RTM -> order_id=3538
+2026-02-19 14:18:45,724 [INFO] trading_engine: HEDGE BUY 1381 RTM | delta -1381 -> ~-0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:46,643 [INFO] rit_api: MARKET BUY 3313 RTM -> order_id=3582
+2026-02-19 14:18:46,643 [INFO] trading_engine: HEDGE BUY 3313 RTM | delta -3313 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:47,670 [INFO] rit_api: MARKET BUY 4390 RTM -> order_id=3634
+2026-02-19 14:18:47,671 [INFO] trading_engine: HEDGE BUY 4390 RTM | delta -4390 -> ~-0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:48,692 [INFO] rit_api: MARKET SELL 4198 RTM -> order_id=3690
+2026-02-19 14:18:48,692 [INFO] trading_engine: HEDGE SELL 4198 RTM | delta 4198 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:49,677 [INFO] rit_api: MARKET SELL 3504 RTM -> order_id=3776
+2026-02-19 14:18:49,677 [INFO] trading_engine: HEDGE SELL 3504 RTM | delta 3504 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:50,699 [INFO] rit_api: MARKET BUY 1935 RTM -> order_id=3837
+2026-02-19 14:18:50,700 [INFO] trading_engine: HEDGE BUY 1935 RTM | delta -1935 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:51,769 [INFO] rit_api: MARKET BUY 358 RTM -> order_id=3897
+2026-02-19 14:18:51,769 [INFO] trading_engine: HEDGE BUY 358 RTM | delta -358 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:52,696 [INFO] rit_api: MARKET BUY 6 RTM -> order_id=3943
+2026-02-19 14:18:52,697 [INFO] trading_engine: HEDGE BUY 6 RTM | delta -6 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:53,821 [INFO] rit_api: MARKET BUY 1961 RTM -> order_id=3991
+2026-02-19 14:18:53,822 [INFO] trading_engine: HEDGE BUY 1961 RTM | delta -1961 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:54,853 [INFO] rit_api: MARKET BUY 1438 RTM -> order_id=4050
+2026-02-19 14:18:54,853 [INFO] trading_engine: HEDGE BUY 1438 RTM | delta -1438 -> ~-0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:55,734 [INFO] rit_api: MARKET BUY 193 RTM -> order_id=4098
+2026-02-19 14:18:55,734 [INFO] trading_engine: HEDGE BUY 193 RTM | delta -193 -> ~-0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:56,763 [INFO] rit_api: MARKET SELL 3090 RTM -> order_id=4148
+2026-02-19 14:18:56,763 [INFO] trading_engine: HEDGE SELL 3090 RTM | delta 3090 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:57,747 [INFO] rit_api: MARKET SELL 4139 RTM -> order_id=4220
+2026-02-19 14:18:57,747 [INFO] trading_engine: HEDGE SELL 4139 RTM | delta 4139 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:18:58,721 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-19 14:18:58,727 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=4364
+2026-02-19 14:18:58,734 [INFO] rit_api: MARKET SELL 46 RTM1C50 -> order_id=4365
+2026-02-19 14:18:58,741 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=4366
+2026-02-19 14:18:58,747 [INFO] rit_api: MARKET SELL 46 RTM1P50 -> order_id=4367
+2026-02-19 14:18:58,755 [INFO] rit_api: MARKET BUY 63 RTM1C54 -> order_id=4368
+2026-02-19 14:18:58,780 [INFO] rit_api: MARKET BUY 159 RTM -> order_id=4370
+2026-02-19 14:18:58,781 [INFO] trading_engine: SCHEDULED CLOSE tick 35: options_closed=355 stock_closed=159 orders=6
+2026-02-19 14:18:58,781 [INFO] trading_engine: Scheduled close week 1 tick 35 (window 35-40), trades=6
+2026-02-19 14:18:59,730 [INFO] news_parser: NEWS: Current realized vol = 24.0% (history: ['24%', '24%']) [NOW USING REALIZED]
+2026-02-19 14:18:59,730 [INFO] news_parser: NEWS: Forecast vol next week = 24.0% - 29.0% (mid=26.5%) [NOW USING FORECAST]
+2026-02-19 14:18:59,739 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=4433
+2026-02-19 14:18:59,747 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=4440
+2026-02-19 14:18:59,755 [INFO] rit_api: MARKET SELL 46 RTM1C50 -> order_id=4446
+2026-02-19 14:18:59,761 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=4452
+2026-02-19 14:18:59,770 [INFO] rit_api: MARKET SELL 46 RTM1P50 -> order_id=4456
+2026-02-19 14:18:59,777 [INFO] rit_api: MARKET BUY 63 RTM1C54 -> order_id=4457
+2026-02-19 14:18:59,786 [INFO] rit_api: MARKET BUY 159 RTM -> order_id=4472
+2026-02-19 14:18:59,788 [INFO] trading_engine: SCHEDULED CLOSE tick 36: options_closed=430 stock_closed=159 orders=7
+2026-02-19 14:18:59,788 [INFO] trading_engine: Scheduled close week 1 tick 36 (window 35-40), trades=7
+2026-02-19 14:19:00,744 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=4610
+2026-02-19 14:19:00,750 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=4616
+2026-02-19 14:19:00,758 [INFO] rit_api: MARKET SELL 46 RTM1C50 -> order_id=4621
+2026-02-19 14:19:00,764 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=4626
+2026-02-19 14:19:00,774 [INFO] rit_api: MARKET SELL 46 RTM1P50 -> order_id=4630
+2026-02-19 14:19:00,781 [INFO] rit_api: MARKET BUY 63 RTM1C54 -> order_id=4631
+2026-02-19 14:19:00,789 [INFO] rit_api: MARKET BUY 159 RTM -> order_id=4632
+2026-02-19 14:19:00,790 [INFO] trading_engine: SCHEDULED CLOSE tick 37: options_closed=430 stock_closed=159 orders=7
+2026-02-19 14:19:00,791 [INFO] trading_engine: Scheduled close week 1 tick 37 (window 35-40), trades=7
+2026-02-19 14:19:01,806 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=4758
+2026-02-19 14:19:01,817 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=4759
+2026-02-19 14:19:01,828 [INFO] rit_api: MARKET SELL 46 RTM1C50 -> order_id=4760
+2026-02-19 14:19:01,840 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=4762
+2026-02-19 14:19:01,847 [INFO] rit_api: MARKET SELL 46 RTM1P50 -> order_id=4763
+2026-02-19 14:19:01,858 [INFO] rit_api: MARKET BUY 62 RTM1C54 -> order_id=4765
+2026-02-19 14:19:01,868 [INFO] rit_api: MARKET BUY 159 RTM -> order_id=4766
+2026-02-19 14:19:01,868 [INFO] trading_engine: SCHEDULED CLOSE tick 38: options_closed=429 stock_closed=159 orders=7
+2026-02-19 14:19:01,868 [INFO] trading_engine: Scheduled close week 1 tick 38 (window 35-40), trades=7
+2026-02-19 14:19:02,778 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=4837
+2026-02-19 14:19:02,787 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=4838
+2026-02-19 14:19:02,794 [INFO] rit_api: MARKET SELL 46 RTM1C50 -> order_id=4839
+2026-02-19 14:19:02,801 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=4840
+2026-02-19 14:19:02,808 [INFO] rit_api: MARKET SELL 46 RTM1P50 -> order_id=4842
+2026-02-19 14:19:02,819 [INFO] rit_api: MARKET BUY 62 RTM1C54 -> order_id=4843
+2026-02-19 14:19:02,830 [INFO] rit_api: MARKET BUY 158 RTM -> order_id=4844
+2026-02-19 14:19:02,830 [INFO] trading_engine: SCHEDULED CLOSE tick 39: options_closed=429 stock_closed=158 orders=7
+2026-02-19 14:19:02,830 [INFO] trading_engine: Scheduled close week 1 tick 39 (window 35-40), trades=7
+2026-02-19 14:19:03,844 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=4967
+2026-02-19 14:19:03,851 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=4977
+2026-02-19 14:19:03,859 [INFO] rit_api: MARKET SELL 45 RTM1C50 -> order_id=4978
+2026-02-19 14:19:03,872 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=4979
+2026-02-19 14:19:03,880 [INFO] rit_api: MARKET SELL 45 RTM1P50 -> order_id=4980
+2026-02-19 14:19:03,889 [INFO] rit_api: MARKET BUY 62 RTM1C54 -> order_id=4981
+2026-02-19 14:19:03,897 [INFO] rit_api: MARKET BUY 158 RTM -> order_id=4982
+2026-02-19 14:19:03,897 [INFO] trading_engine: SCHEDULED CLOSE tick 40: options_closed=427 stock_closed=158 orders=7
+2026-02-19 14:19:03,900 [INFO] trading_engine: Scheduled close week 1 tick 40 (window 35-40), trades=7
+2026-02-19 14:19:04,856 [INFO] trading_engine: Position flat. Waiting for next scheduled positioning tick.
+2026-02-19 14:19:37,952 [INFO] trading_engine: WEEK 2 positioning tick 74
+2026-02-19 14:19:37,952 [INFO] trading_engine: Immediate positioning at week 2 tick 74
+2026-02-19 14:19:37,957 [INFO] optimizer: ============================================================
+2026-02-19 14:19:37,957 [INFO] optimizer: OPTIMIZER RESULT: n*=275 LONG straddles @ strike 50
+2026-02-19 14:19:37,957 [INFO] optimizer:   Expected profit: $211.68
+2026-02-19 14:19:37,957 [INFO] optimizer:   Gain/contract: $5.4931 | Pos cost/contract: $4.0200
+2026-02-19 14:19:37,957 [INFO] optimizer:   Rebalancing cost: $193.42 | Z=1.81
+2026-02-19 14:19:37,959 [INFO] optimizer:   Inputs: S0=49.62 sigma=0.2650 sigma_hat=0.2462 L=12000 Gamma=24.1371
+2026-02-19 14:19:37,959 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-19 14:19:37,959 [INFO] optimizer: ============================================================
+2026-02-19 14:19:37,971 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=7134
+2026-02-19 14:19:37,979 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=7141
+2026-02-19 14:19:37,985 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=7147
+2026-02-19 14:19:37,992 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=7149
+2026-02-19 14:19:37,999 [INFO] rit_api: MARKET BUY 75 RTM1C50 -> order_id=7150
+2026-02-19 14:19:38,006 [INFO] rit_api: MARKET BUY 75 RTM1P50 -> order_id=7151
+2026-02-19 14:19:38,006 [INFO] trading_engine: STRADDLE BUY 275/275 @ K=50: 6 orders | ATM 275C+275P | EXTREME C54 0 + P45 0
+2026-02-19 14:19:38,006 [INFO] trading_engine: POSITIONED: 275 LONG straddles @ 50 (week 2, expected $212)
+2026-02-19 14:19:38,930 [INFO] news_parser: NEWS: Current realized vol = 25.0% (history: ['24%', '24%', '25%']) [NOW USING REALIZED]
+2026-02-19 14:19:38,961 [INFO] rit_api: MARKET BUY 3677 RTM -> order_id=7233
+2026-02-19 14:19:38,961 [INFO] trading_engine: HEDGE BUY 3677 RTM | delta -3677 -> ~-0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:19:39,975 [INFO] rit_api: MARKET BUY 1550 RTM -> order_id=7356
+2026-02-19 14:19:39,975 [INFO] trading_engine: HEDGE BUY 1550 RTM | delta -1550 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:19:40,983 [INFO] rit_api: MARKET BUY 4686 RTM -> order_id=7545
+2026-02-19 14:19:40,984 [INFO] trading_engine: HEDGE BUY 4686 RTM | delta -4686 -> ~-0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:19:41,966 [INFO] rit_api: MARKET BUY 349 RTM -> order_id=7745
+2026-02-19 14:19:41,967 [INFO] trading_engine: HEDGE BUY 349 RTM | delta -349 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:19:42,962 [INFO] rit_api: MARKET BUY 797 RTM -> order_id=7929
+2026-02-19 14:19:42,962 [INFO] trading_engine: HEDGE BUY 797 RTM | delta -797 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:19:43,992 [INFO] rit_api: MARKET SELL 1206 RTM -> order_id=8053
+2026-02-19 14:19:43,992 [INFO] trading_engine: HEDGE SELL 1206 RTM | delta 1206 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:19:44,978 [INFO] rit_api: MARKET SELL 373 RTM -> order_id=8111
+2026-02-19 14:19:44,978 [INFO] trading_engine: HEDGE SELL 373 RTM | delta 373 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:19:45,994 [INFO] rit_api: MARKET BUY 552 RTM -> order_id=8184
+2026-02-19 14:19:45,995 [INFO] trading_engine: HEDGE BUY 552 RTM | delta -552 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:19:46,991 [INFO] rit_api: MARKET SELL 1446 RTM -> order_id=8317
+2026-02-19 14:19:46,991 [INFO] trading_engine: HEDGE SELL 1446 RTM | delta 1446 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:19:47,976 [INFO] rit_api: MARKET SELL 319 RTM -> order_id=8412
+2026-02-19 14:19:47,977 [INFO] trading_engine: HEDGE SELL 319 RTM | delta 319 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:19:49,008 [INFO] rit_api: MARKET BUY 769 RTM -> order_id=8595
+2026-02-19 14:19:49,008 [INFO] trading_engine: HEDGE BUY 769 RTM | delta -769 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:19:50,044 [INFO] rit_api: MARKET SELL 2531 RTM -> order_id=8759
+2026-02-19 14:19:50,044 [INFO] trading_engine: HEDGE SELL 2531 RTM | delta 2531 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:19:51,066 [INFO] rit_api: MARKET BUY 2032 RTM -> order_id=8853
+2026-02-19 14:19:51,066 [INFO] trading_engine: HEDGE BUY 2032 RTM | delta -2032 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:19:52,068 [INFO] rit_api: MARKET SELL 253 RTM -> order_id=9119
+2026-02-19 14:19:52,069 [INFO] trading_engine: HEDGE SELL 253 RTM | delta 253 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:19:53,034 [INFO] rit_api: MARKET BUY 1987 RTM -> order_id=9180
+2026-02-19 14:19:53,034 [INFO] trading_engine: HEDGE BUY 1987 RTM | delta -1987 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:19:54,029 [INFO] rit_api: MARKET BUY 357 RTM -> order_id=9456
+2026-02-19 14:19:54,030 [INFO] trading_engine: HEDGE BUY 357 RTM | delta -357 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:19:55,156 [INFO] rit_api: MARKET BUY 617 RTM -> order_id=9529
+2026-02-19 14:19:55,156 [INFO] trading_engine: HEDGE BUY 617 RTM | delta -617 -> ~-0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:19:56,174 [INFO] rit_api: MARKET SELL 898 RTM -> order_id=9613
+2026-02-19 14:19:56,174 [INFO] trading_engine: HEDGE SELL 898 RTM | delta 898 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:19:57,050 [INFO] rit_api: MARKET BUY 2240 RTM -> order_id=9694
+2026-02-19 14:19:57,050 [INFO] trading_engine: HEDGE BUY 2240 RTM | delta -2240 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:19:58,063 [INFO] rit_api: MARKET SELL 225 RTM -> order_id=9786
+2026-02-19 14:19:58,063 [INFO] trading_engine: HEDGE SELL 225 RTM | delta 225 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:19:59,088 [INFO] rit_api: MARKET BUY 221 RTM -> order_id=9838
+2026-02-19 14:19:59,089 [INFO] trading_engine: HEDGE BUY 221 RTM | delta -221 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:20:00,062 [INFO] rit_api: MARKET SELL 2064 RTM -> order_id=9892
+2026-02-19 14:20:00,063 [INFO] trading_engine: HEDGE SELL 2064 RTM | delta 2064 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:20:01,073 [INFO] rit_api: MARKET SELL 1270 RTM -> order_id=9971
+2026-02-19 14:20:01,074 [INFO] trading_engine: HEDGE SELL 1270 RTM | delta 1270 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:20:02,090 [INFO] rit_api: MARKET BUY 780 RTM -> order_id=10060
+2026-02-19 14:20:02,090 [INFO] trading_engine: HEDGE BUY 780 RTM | delta -780 -> ~-0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:20:03,073 [INFO] rit_api: MARKET SELL 7799 RTM -> order_id=10309
+2026-02-19 14:20:03,073 [INFO] trading_engine: HEDGE SELL 7799 RTM | delta 7799 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:20:04,162 [INFO] rit_api: MARKET SELL 169 RTM -> order_id=10418
+2026-02-19 14:20:04,162 [INFO] trading_engine: HEDGE SELL 169 RTM | delta 169 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:20:05,179 [INFO] rit_api: MARKET BUY 1028 RTM -> order_id=10673
+2026-02-19 14:20:05,179 [INFO] trading_engine: HEDGE BUY 1028 RTM | delta -1028 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:20:06,217 [INFO] rit_api: MARKET SELL 176 RTM -> order_id=10826
+2026-02-19 14:20:06,217 [INFO] trading_engine: HEDGE SELL 176 RTM | delta 176 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:20:07,125 [INFO] rit_api: MARKET BUY 603 RTM -> order_id=10963
+2026-02-19 14:20:07,125 [INFO] trading_engine: HEDGE BUY 603 RTM | delta -603 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:20:08,109 [INFO] rit_api: MARKET BUY 26 RTM -> order_id=11054
+2026-02-19 14:20:08,109 [INFO] trading_engine: HEDGE BUY 26 RTM | delta -26 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:20:09,180 [INFO] rit_api: MARKET BUY 250 RTM -> order_id=11144
+2026-02-19 14:20:09,180 [INFO] trading_engine: HEDGE BUY 250 RTM | delta -250 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:20:10,198 [INFO] rit_api: MARKET SELL 146 RTM -> order_id=11230
+2026-02-19 14:20:10,198 [INFO] trading_engine: HEDGE SELL 146 RTM | delta 146 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:20:11,129 [INFO] rit_api: MARKET SELL 26 RTM -> order_id=11311
+2026-02-19 14:20:11,129 [INFO] trading_engine: HEDGE SELL 26 RTM | delta 26 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:20:12,147 [INFO] rit_api: MARKET BUY 148 RTM -> order_id=11410
+2026-02-19 14:20:12,147 [INFO] trading_engine: HEDGE BUY 148 RTM | delta -148 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:20:13,139 [INFO] rit_api: MARKET BUY 145 RTM -> order_id=11492
+2026-02-19 14:20:13,140 [INFO] trading_engine: HEDGE BUY 145 RTM | delta -145 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:20:14,156 [INFO] rit_api: MARKET BUY 387 RTM -> order_id=11584
+2026-02-19 14:20:14,156 [INFO] trading_engine: HEDGE BUY 387 RTM | delta -387 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:20:15,170 [INFO] rit_api: MARKET SELL 13 RTM1C50 -> order_id=11697
+2026-02-19 14:20:15,176 [INFO] rit_api: MARKET SELL 13 RTM1P50 -> order_id=11703
+2026-02-19 14:20:15,185 [INFO] rit_api: MARKET SELL 717 RTM -> order_id=11706
+2026-02-19 14:20:15,189 [INFO] trading_engine: SCHEDULED CLOSE tick 111: options_closed=26 stock_closed=717 orders=3
+2026-02-19 14:20:15,189 [INFO] trading_engine: Scheduled close week 2 tick 111 (window 111-116), trades=3
+2026-02-19 14:20:16,246 [INFO] news_parser: NEWS: Current realized vol = 29.0% (history: ['24%', '24%', '25%', '29%']) [NOW USING REALIZED]
+2026-02-19 14:20:16,246 [INFO] news_parser: NEWS: Forecast vol next week = 29.0% - 34.0% (mid=31.5%) [NOW USING FORECAST]
+2026-02-19 14:20:16,255 [INFO] rit_api: MARKET SELL 13 RTM1C50 -> order_id=11774
+2026-02-19 14:20:16,263 [INFO] rit_api: MARKET SELL 13 RTM1P50 -> order_id=11775
+2026-02-19 14:20:16,281 [INFO] rit_api: MARKET SELL 717 RTM -> order_id=11777
+2026-02-19 14:20:16,281 [INFO] trading_engine: SCHEDULED CLOSE tick 112: options_closed=26 stock_closed=717 orders=3
+2026-02-19 14:20:16,282 [INFO] trading_engine: Scheduled close week 2 tick 112 (window 111-116), trades=3
+2026-02-19 14:20:17,237 [INFO] rit_api: MARKET SELL 13 RTM1C50 -> order_id=11822
+2026-02-19 14:20:17,244 [INFO] rit_api: MARKET SELL 13 RTM1P50 -> order_id=11824
+2026-02-19 14:20:17,252 [INFO] rit_api: MARKET SELL 717 RTM -> order_id=11825
+2026-02-19 14:20:17,253 [INFO] trading_engine: SCHEDULED CLOSE tick 113: options_closed=26 stock_closed=717 orders=3
+2026-02-19 14:20:17,253 [INFO] trading_engine: Scheduled close week 2 tick 113 (window 111-116), trades=3
+2026-02-19 14:20:18,179 [INFO] rit_api: MARKET SELL 12 RTM1C50 -> order_id=11897
+2026-02-19 14:20:18,185 [INFO] rit_api: MARKET SELL 12 RTM1P50 -> order_id=11902
+2026-02-19 14:20:18,192 [INFO] rit_api: MARKET SELL 717 RTM -> order_id=11907
+2026-02-19 14:20:18,193 [INFO] trading_engine: SCHEDULED CLOSE tick 114: options_closed=24 stock_closed=717 orders=3
+2026-02-19 14:20:18,193 [INFO] trading_engine: Scheduled close week 2 tick 114 (window 111-116), trades=3
+2026-02-19 14:20:19,218 [INFO] rit_api: MARKET SELL 12 RTM1C50 -> order_id=11985
+2026-02-19 14:20:19,224 [INFO] rit_api: MARKET SELL 12 RTM1P50 -> order_id=11986
+2026-02-19 14:20:19,230 [INFO] rit_api: MARKET SELL 716 RTM -> order_id=11988
+2026-02-19 14:20:19,231 [INFO] trading_engine: SCHEDULED CLOSE tick 115: options_closed=24 stock_closed=716 orders=3
+2026-02-19 14:20:19,231 [INFO] trading_engine: Scheduled close week 2 tick 115 (window 111-116), trades=3
+2026-02-19 14:20:20,195 [INFO] rit_api: MARKET SELL 12 RTM1C50 -> order_id=12032
+2026-02-19 14:20:20,200 [INFO] rit_api: MARKET SELL 12 RTM1P50 -> order_id=12033
+2026-02-19 14:20:20,206 [INFO] rit_api: MARKET SELL 716 RTM -> order_id=12034
+2026-02-19 14:20:20,206 [INFO] trading_engine: SCHEDULED CLOSE tick 116: options_closed=24 stock_closed=716 orders=3
+2026-02-19 14:20:20,207 [INFO] trading_engine: Scheduled close week 2 tick 116 (window 111-116), trades=3
+2026-02-19 14:20:21,258 [INFO] trading_engine: Position flat. Waiting for next scheduled positioning tick.
+2026-02-19 14:20:53,349 [INFO] trading_engine: WEEK 3 positioning tick 149
+2026-02-19 14:20:53,351 [INFO] trading_engine: Immediate positioning at week 3 tick 149
+2026-02-19 14:20:53,404 [INFO] trading_engine: FORCED SIZE: |IV-RV|=6.37% > 3.00% => n=875 LONG @ K=49
+2026-02-19 14:20:53,416 [INFO] rit_api: MARKET BUY 100 RTM1C49 -> order_id=14118
+2026-02-19 14:20:53,428 [INFO] rit_api: MARKET BUY 100 RTM1P49 -> order_id=14119
+2026-02-19 14:20:53,443 [INFO] rit_api: MARKET BUY 100 RTM1C49 -> order_id=14121
+2026-02-19 14:20:53,453 [INFO] rit_api: MARKET BUY 100 RTM1P49 -> order_id=14122
+2026-02-19 14:20:53,464 [INFO] rit_api: MARKET BUY 100 RTM1C49 -> order_id=14124
+2026-02-19 14:20:53,475 [INFO] rit_api: MARKET BUY 100 RTM1P49 -> order_id=14125
+2026-02-19 14:20:53,486 [INFO] rit_api: MARKET BUY 100 RTM1C49 -> order_id=14126
+2026-02-19 14:20:53,495 [INFO] rit_api: MARKET BUY 100 RTM1P49 -> order_id=14127
+2026-02-19 14:20:53,503 [INFO] rit_api: MARKET BUY 100 RTM1C49 -> order_id=14131
+2026-02-19 14:20:53,513 [INFO] rit_api: MARKET BUY 100 RTM1P49 -> order_id=14139
+2026-02-19 14:20:53,522 [INFO] rit_api: MARKET SELL 100 RTM1C54 -> order_id=14140
+2026-02-19 14:20:53,533 [INFO] rit_api: MARKET SELL 100 RTM1P45 -> order_id=14141
+2026-02-19 14:20:53,542 [INFO] rit_api: MARKET BUY 100 RTM1C49 -> order_id=14154
+2026-02-19 14:20:53,551 [INFO] rit_api: MARKET BUY 100 RTM1P49 -> order_id=14162
+2026-02-19 14:20:53,563 [INFO] rit_api: MARKET SELL 100 RTM1C54 -> order_id=14164
+2026-02-19 14:20:53,572 [INFO] rit_api: MARKET SELL 100 RTM1P45 -> order_id=14166
+2026-02-19 14:20:53,582 [INFO] rit_api: MARKET BUY 100 RTM1C49 -> order_id=14169
+2026-02-19 14:20:53,598 [INFO] rit_api: MARKET BUY 100 RTM1P49 -> order_id=14174
+2026-02-19 14:20:53,608 [INFO] rit_api: MARKET SELL 100 RTM1C54 -> order_id=14180
+2026-02-19 14:20:53,619 [INFO] rit_api: MARKET SELL 100 RTM1P45 -> order_id=14181
+2026-02-19 14:20:53,629 [INFO] rit_api: MARKET BUY 100 RTM1C49 -> order_id=14182
+2026-02-19 14:20:53,684 [INFO] rit_api: MARKET BUY 100 RTM1P49 -> order_id=14185
+2026-02-19 14:20:53,693 [INFO] rit_api: MARKET SELL 75 RTM1C54 -> order_id=14186
+2026-02-19 14:20:53,707 [INFO] rit_api: MARKET SELL 75 RTM1P45 -> order_id=14188
+2026-02-19 14:20:53,733 [INFO] rit_api: MARKET BUY 75 RTM1C49 -> order_id=14191
+2026-02-19 14:20:53,745 [INFO] rit_api: MARKET BUY 75 RTM1P49 -> order_id=14192
+2026-02-19 14:20:53,746 [INFO] trading_engine: STRADDLE BUY 875/875 @ K=49: 26 orders | ATM 875C+875P | EXTREME C54 375 + P45 375
+2026-02-19 14:20:53,746 [INFO] trading_engine: POSITIONED: 875 LONG straddles @ 49 (week 3, expected $0)
+2026-02-19 14:20:54,425 [INFO] news_parser: NEWS: Current realized vol = 31.0% (history: ['24%', '24%', '25%', '29%', '31%']) [NOW USING REALIZED]
+2026-02-19 14:20:54,479 [INFO] rit_api: MARKET SELL 7059 RTM -> order_id=14272
+2026-02-19 14:20:54,479 [INFO] trading_engine: HEDGE SELL 7059 RTM | delta 7059 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:20:55,403 [INFO] rit_api: MARKET BUY 1130 RTM -> order_id=14342
+2026-02-19 14:20:55,403 [INFO] trading_engine: HEDGE BUY 1130 RTM | delta -1130 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:20:56,391 [INFO] rit_api: MARKET SELL 962 RTM -> order_id=14535
+2026-02-19 14:20:56,392 [INFO] trading_engine: HEDGE SELL 962 RTM | delta 962 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:20:57,409 [INFO] rit_api: MARKET BUY 5584 RTM -> order_id=14627
+2026-02-19 14:20:57,409 [INFO] trading_engine: HEDGE BUY 5584 RTM | delta -5584 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:20:58,422 [INFO] rit_api: MARKET BUY 9923 RTM -> order_id=14722
+2026-02-19 14:20:58,422 [INFO] trading_engine: HEDGE BUY 9923 RTM | delta -9923 -> ~-0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:20:59,440 [INFO] rit_api: MARKET BUY 2566 RTM -> order_id=14940
+2026-02-19 14:20:59,441 [INFO] trading_engine: HEDGE BUY 2566 RTM | delta -2566 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:00,464 [INFO] rit_api: MARKET SELL 9100 RTM -> order_id=15110
+2026-02-19 14:21:00,464 [INFO] trading_engine: HEDGE SELL 9100 RTM | delta 9100 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:01,531 [INFO] rit_api: MARKET BUY 2992 RTM -> order_id=15387
+2026-02-19 14:21:01,532 [INFO] trading_engine: HEDGE BUY 2992 RTM | delta -2992 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:02,445 [INFO] rit_api: MARKET BUY 5355 RTM -> order_id=15514
+2026-02-19 14:21:02,447 [INFO] trading_engine: HEDGE BUY 5355 RTM | delta -5355 -> ~-0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:03,482 [INFO] rit_api: MARKET SELL 2488 RTM -> order_id=15642
+2026-02-19 14:21:03,482 [INFO] trading_engine: HEDGE SELL 2488 RTM | delta 2488 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:04,478 [INFO] rit_api: MARKET BUY 2434 RTM -> order_id=15716
+2026-02-19 14:21:04,480 [INFO] trading_engine: HEDGE BUY 2434 RTM | delta -2434 -> ~-0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:05,540 [INFO] rit_api: MARKET SELL 3512 RTM -> order_id=15838
+2026-02-19 14:21:05,546 [INFO] trading_engine: HEDGE SELL 3512 RTM | delta 3512 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:06,562 [INFO] rit_api: MARKET SELL 749 RTM -> order_id=15902
+2026-02-19 14:21:06,563 [INFO] trading_engine: HEDGE SELL 749 RTM | delta 749 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:07,493 [INFO] rit_api: MARKET SELL 1975 RTM -> order_id=16179
+2026-02-19 14:21:07,498 [INFO] trading_engine: HEDGE SELL 1975 RTM | delta 1975 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:08,454 [INFO] rit_api: MARKET BUY 4917 RTM -> order_id=16425
+2026-02-19 14:21:08,455 [INFO] trading_engine: HEDGE BUY 4917 RTM | delta -4917 -> ~-0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:09,460 [INFO] rit_api: MARKET BUY 2491 RTM -> order_id=16498
+2026-02-19 14:21:09,461 [INFO] trading_engine: HEDGE BUY 2491 RTM | delta -2491 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:10,547 [INFO] rit_api: MARKET SELL 5631 RTM -> order_id=16794
+2026-02-19 14:21:10,547 [INFO] trading_engine: HEDGE SELL 5631 RTM | delta 5631 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:11,492 [INFO] rit_api: MARKET BUY 6601 RTM -> order_id=16884
+2026-02-19 14:21:11,492 [INFO] trading_engine: HEDGE BUY 6601 RTM | delta -6601 -> ~-0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:12,532 [INFO] rit_api: MARKET SELL 9825 RTM -> order_id=17064
+2026-02-19 14:21:12,533 [INFO] trading_engine: HEDGE SELL 9825 RTM | delta 9825 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:13,479 [INFO] rit_api: MARKET SELL 7710 RTM -> order_id=17210
+2026-02-19 14:21:13,480 [INFO] trading_engine: HEDGE SELL 7710 RTM | delta 7710 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:14,516 [INFO] rit_api: MARKET SELL 4170 RTM -> order_id=17384
+2026-02-19 14:21:14,516 [INFO] trading_engine: HEDGE SELL 4170 RTM | delta 4170 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:15,482 [INFO] rit_api: MARKET BUY 2692 RTM -> order_id=17488
+2026-02-19 14:21:15,482 [INFO] trading_engine: HEDGE BUY 2692 RTM | delta -2692 -> ~-0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:16,496 [INFO] rit_api: MARKET SELL 3993 RTM -> order_id=17592
+2026-02-19 14:21:16,497 [INFO] trading_engine: HEDGE SELL 3993 RTM | delta 3993 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:17,637 [INFO] rit_api: MARKET SELL 7821 RTM -> order_id=17643
+2026-02-19 14:21:17,638 [INFO] trading_engine: HEDGE SELL 7821 RTM | delta 7821 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:18,601 [INFO] rit_api: MARKET BUY 7546 RTM -> order_id=17780
+2026-02-19 14:21:18,601 [INFO] trading_engine: HEDGE BUY 7546 RTM | delta -7546 -> ~-0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:19,545 [INFO] rit_api: MARKET BUY 390 RTM -> order_id=17872
+2026-02-19 14:21:19,546 [INFO] trading_engine: HEDGE BUY 390 RTM | delta -390 -> ~0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:20,507 [INFO] rit_api: MARKET SELL 1939 RTM -> order_id=17945
+2026-02-19 14:21:20,508 [INFO] trading_engine: HEDGE SELL 1939 RTM | delta 1939 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:21,495 [INFO] rit_api: MARKET SELL 5475 RTM -> order_id=18061
+2026-02-19 14:21:21,495 [INFO] trading_engine: HEDGE SELL 5475 RTM | delta 5475 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:22,524 [INFO] rit_api: MARKET SELL 1714 RTM -> order_id=18185
+2026-02-19 14:21:22,524 [INFO] trading_engine: HEDGE SELL 1714 RTM | delta 1714 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:23,499 [INFO] trading_engine: Hedge qty capped: requested 19395, capped 10000
+2026-02-19 14:21:23,508 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=18285
+2026-02-19 14:21:23,508 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -19395 -> ~-9395 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:24,529 [INFO] trading_engine: Hedge qty capped: requested 14735, capped 10000
+2026-02-19 14:21:24,537 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=18473
+2026-02-19 14:21:24,537 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -14735 -> ~-4735 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:25,512 [INFO] rit_api: MARKET SELL 6123 RTM -> order_id=18525
+2026-02-19 14:21:25,512 [INFO] trading_engine: HEDGE SELL 6123 RTM | delta 6123 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:26,542 [INFO] rit_api: MARKET SELL 7441 RTM -> order_id=18629
+2026-02-19 14:21:26,542 [INFO] trading_engine: HEDGE SELL 7441 RTM | delta 7441 -> ~0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:27,553 [INFO] rit_api: MARKET SELL 351 RTM -> order_id=18739
+2026-02-19 14:21:27,553 [INFO] trading_engine: HEDGE SELL 351 RTM | delta 351 -> ~-0 | target 0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:28,544 [INFO] rit_api: MARKET BUY 6841 RTM -> order_id=18827
+2026-02-19 14:21:28,544 [INFO] trading_engine: HEDGE BUY 6841 RTM | delta -6841 -> ~-0 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:29,564 [INFO] trading_engine: Hedge qty capped: requested 11878, capped 10000
+2026-02-19 14:21:29,571 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=18881
+2026-02-19 14:21:29,572 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -11878 -> ~-1878 | target -0 (0% of limit 12000) | interval 1t
+2026-02-19 14:21:30,590 [INFO] rit_api: MARKET BUY 63 RTM1P45 -> order_id=18932
+2026-02-19 14:21:30,615 [INFO] rit_api: MARKET BUY 5 RTM1C49 -> order_id=18933
+2026-02-19 14:21:30,621 [INFO] rit_api: MARKET BUY 5 RTM1P49 -> order_id=18934
+2026-02-19 14:21:30,628 [INFO] rit_api: MARKET BUY 63 RTM1C54 -> order_id=18935
+2026-02-19 14:21:30,634 [INFO] rit_api: MARKET SELL 571 RTM -> order_id=18938
+2026-02-19 14:21:30,635 [INFO] trading_engine: SCHEDULED CLOSE tick 186: options_closed=136 stock_closed=571 orders=5
+2026-02-19 14:21:30,635 [INFO] trading_engine: Scheduled close week 3 tick 186 (window 186-191), trades=5
+2026-02-19 14:21:31,583 [INFO] news_parser: NEWS: Current realized vol = 31.0% (history: ['24%', '24%', '25%', '29%', '31%', '31%']) [NOW USING REALIZED]
+2026-02-19 14:21:31,584 [INFO] news_parser: NEWS: Forecast vol next week = 31.0% - 36.0% (mid=33.5%) [NOW USING FORECAST]
+2026-02-19 14:21:31,608 [INFO] rit_api: MARKET BUY 63 RTM1P45 -> order_id=19011
+2026-02-19 14:21:31,618 [INFO] rit_api: MARKET BUY 4 RTM1C49 -> order_id=19012
+2026-02-19 14:21:31,625 [INFO] rit_api: MARKET BUY 4 RTM1P49 -> order_id=19014
+2026-02-19 14:21:31,634 [INFO] rit_api: MARKET BUY 63 RTM1C54 -> order_id=19015
+2026-02-19 14:21:31,642 [INFO] rit_api: MARKET SELL 571 RTM -> order_id=19016
+2026-02-19 14:21:31,642 [INFO] trading_engine: SCHEDULED CLOSE tick 187: options_closed=134 stock_closed=571 orders=5
+2026-02-19 14:21:31,643 [INFO] trading_engine: Scheduled close week 3 tick 187 (window 186-191), trades=5
+2026-02-19 14:21:32,606 [INFO] rit_api: MARKET BUY 63 RTM1P45 -> order_id=19112
+2026-02-19 14:21:32,614 [INFO] rit_api: MARKET BUY 4 RTM1C49 -> order_id=19113
+2026-02-19 14:21:32,623 [INFO] rit_api: MARKET BUY 4 RTM1P49 -> order_id=19114
+2026-02-19 14:21:32,630 [INFO] rit_api: MARKET BUY 63 RTM1C54 -> order_id=19116
+2026-02-19 14:21:32,641 [INFO] rit_api: MARKET SELL 571 RTM -> order_id=19117
+2026-02-19 14:21:32,641 [INFO] trading_engine: SCHEDULED CLOSE tick 188: options_closed=134 stock_closed=571 orders=5
+2026-02-19 14:21:32,642 [INFO] trading_engine: Scheduled close week 3 tick 188 (window 186-191), trades=5
+2026-02-19 14:21:33,660 [INFO] rit_api: MARKET BUY 62 RTM1P45 -> order_id=19210
+2026-02-19 14:21:33,669 [INFO] rit_api: MARKET BUY 4 RTM1C49 -> order_id=19211
+2026-02-19 14:21:33,676 [INFO] rit_api: MARKET BUY 4 RTM1P49 -> order_id=19212
+2026-02-19 14:21:33,687 [INFO] rit_api: MARKET BUY 62 RTM1C54 -> order_id=19213
+2026-02-19 14:21:33,698 [INFO] rit_api: MARKET SELL 571 RTM -> order_id=19215
+2026-02-19 14:21:33,698 [INFO] trading_engine: SCHEDULED CLOSE tick 189: options_closed=132 stock_closed=571 orders=5
+2026-02-19 14:21:33,698 [INFO] trading_engine: Scheduled close week 3 tick 189 (window 186-191), trades=5
+2026-02-19 14:21:34,674 [INFO] rit_api: MARKET BUY 62 RTM1P45 -> order_id=19268
+2026-02-19 14:21:34,682 [INFO] rit_api: MARKET BUY 4 RTM1C49 -> order_id=19269
+2026-02-19 14:21:34,691 [INFO] rit_api: MARKET BUY 4 RTM1P49 -> order_id=19270
+2026-02-19 14:21:34,698 [INFO] rit_api: MARKET BUY 62 RTM1C54 -> order_id=19271
+2026-02-19 14:21:34,706 [INFO] rit_api: MARKET SELL 570 RTM -> order_id=19273
+2026-02-19 14:21:34,706 [INFO] trading_engine: SCHEDULED CLOSE tick 190: options_closed=132 stock_closed=570 orders=5
+2026-02-19 14:21:34,706 [INFO] trading_engine: Scheduled close week 3 tick 190 (window 186-191), trades=5
+2026-02-19 14:21:35,572 [INFO] rit_api: MARKET BUY 62 RTM1P45 -> order_id=19320
+2026-02-19 14:21:35,579 [INFO] rit_api: MARKET BUY 4 RTM1C49 -> order_id=19321
+2026-02-19 14:21:35,586 [INFO] rit_api: MARKET BUY 4 RTM1P49 -> order_id=19322
+2026-02-19 14:21:35,593 [INFO] rit_api: MARKET BUY 62 RTM1C54 -> order_id=19323
+2026-02-19 14:21:35,599 [INFO] rit_api: MARKET SELL 570 RTM -> order_id=19324
+2026-02-19 14:21:35,599 [INFO] trading_engine: SCHEDULED CLOSE tick 191: options_closed=132 stock_closed=570 orders=5
+2026-02-19 14:21:35,599 [INFO] trading_engine: Scheduled close week 3 tick 191 (window 186-191), trades=5
+2026-02-19 14:21:36,566 [INFO] trading_engine: Position flat. Waiting for next scheduled positioning tick.
+2026-02-19 14:22:08,766 [INFO] trading_engine: WEEK 4 positioning tick 224
+2026-02-19 14:22:08,766 [INFO] trading_engine: Immediate positioning at week 4 tick 224
+2026-02-19 14:22:08,770 [INFO] optimizer: Not profitable: gain/contract=$3.0138, pos_cost=$4.0200
+2026-02-19 14:22:08,770 [INFO] trading_engine: No profitable trade for this week (n*=0)
+2026-02-19 14:22:09,765 [INFO] news_parser: NEWS: Current realized vol = 36.0% (history: ['24%', '24%', '25%', '29%', '31%', '31%', '36%']) [NOW USING REALIZED]
+2026-02-19 14:22:39,920 [INFO] trading_engine: Scheduled close complete week 4 by tick 255
+2026-02-19 14:22:40,951 [INFO] trading_engine: Scheduled close complete week 4 by tick 256
+2026-02-19 14:22:41,991 [INFO] trading_engine: Scheduled close complete week 4 by tick 257
+2026-02-19 14:22:42,974 [INFO] trading_engine: Scheduled close complete week 4 by tick 258
+2026-02-19 14:22:44,000 [INFO] trading_engine: Scheduled close complete week 4 by tick 259
+2026-02-19 14:22:45,038 [INFO] trading_engine: Scheduled close complete week 4 by tick 260
+2026-02-19 14:25:43,212 [INFO] news_parser: NEWS: Current realized vol = 17.0% (history: ['17%']) [NOW USING REALIZED]
+2026-02-19 14:25:43,213 [INFO] news_parser: NEWS: Delta limit = 13000
+2026-02-19 14:25:43,213 [INFO] news_parser: NEWS: Penalty rate = 5.00%
+2026-02-19 14:25:43,219 [INFO] trading_engine: WEEK 1 positioning tick 2
+2026-02-19 14:25:43,219 [INFO] trading_engine: Immediate positioning at week 1 tick 2
+2026-02-19 14:25:43,228 [INFO] trading_engine: FORCED SIZE: |IV-RV|=3.93% > 3.00% => n=875 LONG @ K=50
+2026-02-19 14:25:43,238 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=139
+2026-02-19 14:25:43,248 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=140
+2026-02-19 14:25:43,259 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=141
+2026-02-19 14:25:43,271 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=143
+2026-02-19 14:25:43,283 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=144
+2026-02-19 14:25:43,292 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=145
+2026-02-19 14:25:43,301 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=146
+2026-02-19 14:25:43,310 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=148
+2026-02-19 14:25:43,318 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=149
+2026-02-19 14:25:43,327 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=150
+2026-02-19 14:25:43,335 [INFO] rit_api: MARKET SELL 100 RTM1C54 -> order_id=151
+2026-02-19 14:25:43,343 [INFO] rit_api: MARKET SELL 100 RTM1P45 -> order_id=152
+2026-02-19 14:25:43,351 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=153
+2026-02-19 14:25:43,361 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=155
+2026-02-19 14:25:43,369 [INFO] rit_api: MARKET SELL 100 RTM1C54 -> order_id=156
+2026-02-19 14:25:43,378 [INFO] rit_api: MARKET SELL 100 RTM1P45 -> order_id=157
+2026-02-19 14:25:43,387 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=158
+2026-02-19 14:25:43,395 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=159
+2026-02-19 14:25:43,404 [INFO] rit_api: MARKET SELL 100 RTM1C54 -> order_id=161
+2026-02-19 14:25:43,451 [INFO] rit_api: MARKET SELL 100 RTM1P45 -> order_id=162
+2026-02-19 14:25:43,472 [INFO] rit_api: MARKET BUY 100 RTM1C50 -> order_id=164
+2026-02-19 14:25:43,490 [INFO] rit_api: MARKET BUY 100 RTM1P50 -> order_id=165
+2026-02-19 14:25:43,516 [INFO] rit_api: MARKET SELL 75 RTM1C54 -> order_id=167
+2026-02-19 14:25:43,535 [INFO] rit_api: MARKET SELL 75 RTM1P45 -> order_id=169
+2026-02-19 14:25:43,544 [INFO] rit_api: MARKET BUY 75 RTM1C50 -> order_id=173
+2026-02-19 14:25:43,554 [INFO] rit_api: MARKET BUY 75 RTM1P50 -> order_id=180
+2026-02-19 14:25:43,554 [INFO] trading_engine: STRADDLE BUY 875/875 @ K=50: 26 orders | ATM 875C+875P | EXTREME C54 375 + P45 375
+2026-02-19 14:25:43,555 [INFO] trading_engine: POSITIONED: 875 LONG straddles @ 50 (week 1, expected $0)
+2026-02-19 14:25:44,177 [INFO] rit_api: MARKET BUY 3165 RTM -> order_id=273
+2026-02-19 14:25:44,178 [INFO] trading_engine: HEDGE BUY 3165 RTM | delta -3165 -> ~0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:25:45,294 [INFO] rit_api: MARKET SELL 5771 RTM -> order_id=368
+2026-02-19 14:25:45,294 [INFO] trading_engine: HEDGE SELL 5771 RTM | delta 5771 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:25:46,231 [INFO] rit_api: MARKET SELL 3902 RTM -> order_id=455
+2026-02-19 14:25:46,232 [INFO] trading_engine: HEDGE SELL 3902 RTM | delta 3902 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:25:47,335 [INFO] rit_api: MARKET BUY 1795 RTM -> order_id=516
+2026-02-19 14:25:47,335 [INFO] trading_engine: HEDGE BUY 1795 RTM | delta -1795 -> ~0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:25:48,261 [INFO] rit_api: MARKET SELL 4914 RTM -> order_id=593
+2026-02-19 14:25:48,261 [INFO] trading_engine: HEDGE SELL 4914 RTM | delta 4914 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:25:49,251 [INFO] rit_api: MARKET BUY 2287 RTM -> order_id=658
+2026-02-19 14:25:49,251 [INFO] trading_engine: HEDGE BUY 2287 RTM | delta -2287 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:25:50,375 [INFO] rit_api: MARKET BUY 2060 RTM -> order_id=783
+2026-02-19 14:25:50,375 [INFO] trading_engine: HEDGE BUY 2060 RTM | delta -2060 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:25:51,335 [INFO] rit_api: MARKET BUY 4467 RTM -> order_id=894
+2026-02-19 14:25:51,335 [INFO] trading_engine: HEDGE BUY 4467 RTM | delta -4467 -> ~0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:25:52,352 [INFO] rit_api: MARKET BUY 260 RTM -> order_id=1039
+2026-02-19 14:25:52,352 [INFO] trading_engine: HEDGE BUY 260 RTM | delta -260 -> ~0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:25:53,291 [INFO] rit_api: MARKET SELL 2399 RTM -> order_id=1145
+2026-02-19 14:25:53,291 [INFO] trading_engine: HEDGE SELL 2399 RTM | delta 2399 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:25:54,307 [INFO] rit_api: MARKET SELL 5532 RTM -> order_id=1196
+2026-02-19 14:25:54,307 [INFO] trading_engine: HEDGE SELL 5532 RTM | delta 5532 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:25:55,300 [INFO] rit_api: MARKET BUY 3388 RTM -> order_id=1249
+2026-02-19 14:25:55,300 [INFO] trading_engine: HEDGE BUY 3388 RTM | delta -3388 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:25:56,311 [INFO] rit_api: MARKET SELL 809 RTM -> order_id=1414
+2026-02-19 14:25:56,311 [INFO] trading_engine: HEDGE SELL 809 RTM | delta 809 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:25:57,319 [INFO] rit_api: MARKET SELL 1073 RTM -> order_id=1520
+2026-02-19 14:25:57,320 [INFO] trading_engine: HEDGE SELL 1073 RTM | delta 1073 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:25:58,285 [INFO] rit_api: MARKET BUY 1304 RTM -> order_id=1587
+2026-02-19 14:25:58,285 [INFO] trading_engine: HEDGE BUY 1304 RTM | delta -1304 -> ~0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:25:59,431 [INFO] rit_api: MARKET SELL 18 RTM -> order_id=1650
+2026-02-19 14:25:59,431 [INFO] trading_engine: HEDGE SELL 18 RTM | delta 18 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:26:00,345 [INFO] rit_api: MARKET SELL 2405 RTM -> order_id=1725
+2026-02-19 14:26:00,347 [INFO] trading_engine: HEDGE SELL 2405 RTM | delta 2405 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:26:01,334 [INFO] rit_api: MARKET SELL 4468 RTM -> order_id=1777
+2026-02-19 14:26:01,349 [INFO] trading_engine: HEDGE SELL 4468 RTM | delta 4468 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:26:02,387 [INFO] rit_api: MARKET SELL 1064 RTM -> order_id=1860
+2026-02-19 14:26:02,388 [INFO] trading_engine: HEDGE SELL 1064 RTM | delta 1064 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:26:03,377 [INFO] rit_api: MARKET SELL 2587 RTM -> order_id=1940
+2026-02-19 14:26:03,377 [INFO] trading_engine: HEDGE SELL 2587 RTM | delta 2587 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:26:04,337 [INFO] rit_api: MARKET SELL 41 RTM -> order_id=2029
+2026-02-19 14:26:04,337 [INFO] trading_engine: HEDGE SELL 41 RTM | delta 41 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:26:05,484 [INFO] rit_api: MARKET SELL 3051 RTM -> order_id=2078
+2026-02-19 14:26:05,485 [INFO] trading_engine: HEDGE SELL 3051 RTM | delta 3051 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:26:06,357 [INFO] rit_api: MARKET BUY 5798 RTM -> order_id=2143
+2026-02-19 14:26:06,357 [INFO] trading_engine: HEDGE BUY 5798 RTM | delta -5798 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:26:07,375 [INFO] rit_api: MARKET SELL 2614 RTM -> order_id=2194
+2026-02-19 14:26:07,375 [INFO] trading_engine: HEDGE SELL 2614 RTM | delta 2614 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:26:08,410 [INFO] rit_api: MARKET SELL 552 RTM -> order_id=2244
+2026-02-19 14:26:08,411 [INFO] trading_engine: HEDGE SELL 552 RTM | delta 552 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:26:09,495 [INFO] rit_api: MARKET SELL 2572 RTM -> order_id=2294
+2026-02-19 14:26:09,496 [INFO] trading_engine: HEDGE SELL 2572 RTM | delta 2572 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:26:10,372 [INFO] rit_api: MARKET BUY 1976 RTM -> order_id=2344
+2026-02-19 14:26:10,373 [INFO] trading_engine: HEDGE BUY 1976 RTM | delta -1976 -> ~0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:26:11,393 [INFO] rit_api: MARKET BUY 7841 RTM -> order_id=2393
+2026-02-19 14:26:11,394 [INFO] trading_engine: HEDGE BUY 7841 RTM | delta -7841 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:26:12,408 [INFO] rit_api: MARKET BUY 1871 RTM -> order_id=2448
+2026-02-19 14:26:12,409 [INFO] trading_engine: HEDGE BUY 1871 RTM | delta -1871 -> ~0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:26:13,502 [INFO] rit_api: MARKET SELL 5670 RTM -> order_id=2511
+2026-02-19 14:26:13,502 [INFO] trading_engine: HEDGE SELL 5670 RTM | delta 5670 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:26:14,390 [INFO] rit_api: MARKET SELL 6006 RTM -> order_id=2558
+2026-02-19 14:26:14,390 [INFO] trading_engine: HEDGE SELL 6006 RTM | delta 6006 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:26:15,380 [INFO] rit_api: MARKET BUY 1229 RTM -> order_id=2615
+2026-02-19 14:26:15,382 [INFO] trading_engine: HEDGE BUY 1229 RTM | delta -1229 -> ~0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:26:16,532 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-19 14:26:16,576 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=2669
+2026-02-19 14:26:16,584 [INFO] rit_api: MARKET SELL 46 RTM1C50 -> order_id=2671
+2026-02-19 14:26:16,594 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=2672
+2026-02-19 14:26:16,605 [INFO] rit_api: MARKET SELL 46 RTM1P50 -> order_id=2673
+2026-02-19 14:26:16,625 [INFO] rit_api: MARKET BUY 63 RTM1C54 -> order_id=2674
+2026-02-19 14:26:16,648 [INFO] rit_api: MARKET BUY 3002 RTM -> order_id=2676
+2026-02-19 14:26:16,648 [INFO] trading_engine: SCHEDULED CLOSE tick 35: options_closed=355 stock_closed=3002 orders=6
+2026-02-19 14:26:16,649 [INFO] trading_engine: Scheduled close week 1 tick 35 (window 35-40), trades=6
+2026-02-19 14:26:17,375 [INFO] news_parser: NEWS: Current realized vol = 33.0% (history: ['17%', '33%']) [NOW USING REALIZED]
+2026-02-19 14:26:17,375 [INFO] news_parser: NEWS: Forecast vol next week = 33.0% - 38.0% (mid=35.5%) [NOW USING FORECAST]
+2026-02-19 14:26:17,395 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=2723
+2026-02-19 14:26:17,402 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=2725
+2026-02-19 14:26:17,410 [INFO] rit_api: MARKET SELL 46 RTM1C50 -> order_id=2726
+2026-02-19 14:26:17,417 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=2727
+2026-02-19 14:26:17,424 [INFO] rit_api: MARKET SELL 46 RTM1P50 -> order_id=2728
+2026-02-19 14:26:17,431 [INFO] rit_api: MARKET BUY 63 RTM1C54 -> order_id=2729
+2026-02-19 14:26:17,440 [INFO] rit_api: MARKET BUY 3001 RTM -> order_id=2730
+2026-02-19 14:26:17,440 [INFO] trading_engine: SCHEDULED CLOSE tick 36: options_closed=430 stock_closed=3001 orders=7
+2026-02-19 14:26:17,441 [INFO] trading_engine: Scheduled close week 1 tick 36 (window 35-40), trades=7
+2026-02-19 14:26:18,388 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=2790
+2026-02-19 14:26:18,399 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=2791
+2026-02-19 14:26:18,407 [INFO] rit_api: MARKET SELL 46 RTM1C50 -> order_id=2792
+2026-02-19 14:26:18,415 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=2793
+2026-02-19 14:26:18,448 [INFO] rit_api: MARKET SELL 46 RTM1P50 -> order_id=2794
+2026-02-19 14:26:18,457 [INFO] rit_api: MARKET BUY 63 RTM1C54 -> order_id=2795
+2026-02-19 14:26:18,466 [INFO] rit_api: MARKET BUY 3001 RTM -> order_id=2796
+2026-02-19 14:26:18,467 [INFO] trading_engine: SCHEDULED CLOSE tick 37: options_closed=430 stock_closed=3001 orders=7
+2026-02-19 14:26:18,468 [INFO] trading_engine: Scheduled close week 1 tick 37 (window 35-40), trades=7
+2026-02-19 14:26:19,414 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=2852
+2026-02-19 14:26:19,432 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=2853
+2026-02-19 14:26:19,444 [INFO] rit_api: MARKET SELL 46 RTM1C50 -> order_id=2855
+2026-02-19 14:26:19,454 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=2856
+2026-02-19 14:26:19,467 [INFO] rit_api: MARKET SELL 46 RTM1P50 -> order_id=2857
+2026-02-19 14:26:19,479 [INFO] rit_api: MARKET BUY 62 RTM1C54 -> order_id=2858
+2026-02-19 14:26:19,509 [INFO] rit_api: MARKET BUY 3001 RTM -> order_id=2859
+2026-02-19 14:26:19,510 [INFO] trading_engine: SCHEDULED CLOSE tick 38: options_closed=429 stock_closed=3001 orders=7
+2026-02-19 14:26:19,511 [INFO] trading_engine: Scheduled close week 1 tick 38 (window 35-40), trades=7
+2026-02-19 14:26:20,398 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=2908
+2026-02-19 14:26:20,426 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=2910
+2026-02-19 14:26:20,436 [INFO] rit_api: MARKET SELL 46 RTM1C50 -> order_id=2911
+2026-02-19 14:26:20,444 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=2912
+2026-02-19 14:26:20,452 [INFO] rit_api: MARKET SELL 46 RTM1P50 -> order_id=2913
+2026-02-19 14:26:20,459 [INFO] rit_api: MARKET BUY 62 RTM1C54 -> order_id=2914
+2026-02-19 14:26:20,468 [INFO] rit_api: MARKET BUY 3001 RTM -> order_id=2915
+2026-02-19 14:26:20,469 [INFO] trading_engine: SCHEDULED CLOSE tick 39: options_closed=429 stock_closed=3001 orders=7
+2026-02-19 14:26:20,470 [INFO] trading_engine: Scheduled close week 1 tick 39 (window 35-40), trades=7
+2026-02-19 14:26:21,473 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=2972
+2026-02-19 14:26:21,480 [INFO] rit_api: MARKET SELL 100 RTM1C50 -> order_id=2973
+2026-02-19 14:26:21,489 [INFO] rit_api: MARKET SELL 45 RTM1C50 -> order_id=2974
+2026-02-19 14:26:21,496 [INFO] rit_api: MARKET SELL 100 RTM1P50 -> order_id=2975
+2026-02-19 14:26:21,506 [INFO] rit_api: MARKET SELL 45 RTM1P50 -> order_id=2977
+2026-02-19 14:26:21,525 [INFO] rit_api: MARKET BUY 62 RTM1C54 -> order_id=2979
+2026-02-19 14:26:21,532 [INFO] rit_api: MARKET BUY 3001 RTM -> order_id=2980
+2026-02-19 14:26:21,533 [INFO] trading_engine: SCHEDULED CLOSE tick 40: options_closed=427 stock_closed=3001 orders=7
+2026-02-19 14:26:21,533 [INFO] trading_engine: Scheduled close week 1 tick 40 (window 35-40), trades=7
+2026-02-19 14:26:22,415 [INFO] trading_engine: Position flat. Waiting for next scheduled positioning tick.
+2026-02-19 14:26:55,562 [INFO] trading_engine: WEEK 2 positioning tick 74
+2026-02-19 14:26:55,562 [INFO] trading_engine: Immediate positioning at week 2 tick 74
+2026-02-19 14:26:55,575 [INFO] trading_engine: FORCED SIZE: |IV-RV|=18.40% > 3.00% => n=875 LONG @ K=51
+2026-02-19 14:26:55,582 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=4918
+2026-02-19 14:26:55,591 [INFO] rit_api: MARKET BUY 100 RTM1P51 -> order_id=4919
+2026-02-19 14:26:55,601 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=4920
+2026-02-19 14:26:55,608 [INFO] rit_api: MARKET BUY 100 RTM1P51 -> order_id=4921
+2026-02-19 14:26:55,616 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=4922
+2026-02-19 14:26:55,625 [INFO] rit_api: MARKET BUY 100 RTM1P51 -> order_id=4923
+2026-02-19 14:26:55,632 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=4924
+2026-02-19 14:26:55,642 [INFO] rit_api: MARKET BUY 100 RTM1P51 -> order_id=4925
+2026-02-19 14:26:55,650 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=4926
+2026-02-19 14:26:55,660 [INFO] rit_api: MARKET BUY 100 RTM1P51 -> order_id=4927
+2026-02-19 14:26:55,666 [INFO] rit_api: MARKET SELL 100 RTM1C54 -> order_id=4929
+2026-02-19 14:26:55,673 [INFO] rit_api: MARKET SELL 100 RTM1P45 -> order_id=4930
+2026-02-19 14:26:55,685 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=4931
+2026-02-19 14:26:55,694 [INFO] rit_api: MARKET BUY 100 RTM1P51 -> order_id=4932
+2026-02-19 14:26:55,701 [INFO] rit_api: MARKET SELL 100 RTM1C54 -> order_id=4933
+2026-02-19 14:26:55,708 [INFO] rit_api: MARKET SELL 100 RTM1P45 -> order_id=4934
+2026-02-19 14:26:55,715 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=4935
+2026-02-19 14:26:55,722 [INFO] rit_api: MARKET BUY 100 RTM1P51 -> order_id=4936
+2026-02-19 14:26:55,729 [INFO] rit_api: MARKET SELL 100 RTM1C54 -> order_id=4937
+2026-02-19 14:26:55,740 [INFO] rit_api: MARKET SELL 100 RTM1P45 -> order_id=4938
+2026-02-19 14:26:55,755 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=4939
+2026-02-19 14:26:55,764 [INFO] rit_api: MARKET BUY 100 RTM1P51 -> order_id=4941
+2026-02-19 14:26:55,778 [INFO] rit_api: MARKET SELL 75 RTM1C54 -> order_id=4943
+2026-02-19 14:26:55,798 [INFO] rit_api: MARKET SELL 75 RTM1P45 -> order_id=4944
+2026-02-19 14:26:55,821 [INFO] rit_api: MARKET BUY 75 RTM1C51 -> order_id=4946
+2026-02-19 14:26:55,828 [INFO] rit_api: MARKET BUY 75 RTM1P51 -> order_id=4947
+2026-02-19 14:26:55,829 [INFO] trading_engine: STRADDLE BUY 875/875 @ K=51: 26 orders | ATM 875C+875P | EXTREME C54 375 + P45 375
+2026-02-19 14:26:55,829 [INFO] trading_engine: POSITIONED: 875 LONG straddles @ 51 (week 2, expected $0)
+2026-02-19 14:26:56,599 [INFO] news_parser: NEWS: Current realized vol = 33.0% (history: ['17%', '33%', '33%']) [NOW USING REALIZED]
+2026-02-19 14:26:56,630 [INFO] rit_api: MARKET BUY 7202 RTM -> order_id=5017
+2026-02-19 14:26:56,630 [INFO] trading_engine: HEDGE BUY 7202 RTM | delta -7202 -> ~0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:26:57,591 [INFO] rit_api: MARKET SELL 1902 RTM -> order_id=5103
+2026-02-19 14:26:57,591 [INFO] trading_engine: HEDGE SELL 1902 RTM | delta 1902 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:26:58,608 [INFO] rit_api: MARKET SELL 1523 RTM -> order_id=5260
+2026-02-19 14:26:58,609 [INFO] trading_engine: HEDGE SELL 1523 RTM | delta 1523 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:26:59,610 [INFO] rit_api: MARKET SELL 2787 RTM -> order_id=5341
+2026-02-19 14:26:59,611 [INFO] trading_engine: HEDGE SELL 2787 RTM | delta 2787 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:00,653 [INFO] rit_api: MARKET SELL 4501 RTM -> order_id=5441
+2026-02-19 14:27:00,654 [INFO] trading_engine: HEDGE SELL 4501 RTM | delta 4501 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:01,640 [INFO] rit_api: MARKET BUY 1840 RTM -> order_id=5521
+2026-02-19 14:27:01,640 [INFO] trading_engine: HEDGE BUY 1840 RTM | delta -1840 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:02,696 [INFO] rit_api: MARKET SELL 3607 RTM -> order_id=5591
+2026-02-19 14:27:02,696 [INFO] trading_engine: HEDGE SELL 3607 RTM | delta 3607 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:03,597 [INFO] rit_api: MARKET SELL 2215 RTM -> order_id=5678
+2026-02-19 14:27:03,598 [INFO] trading_engine: HEDGE SELL 2215 RTM | delta 2215 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:04,649 [INFO] rit_api: MARKET SELL 395 RTM -> order_id=5747
+2026-02-19 14:27:04,650 [INFO] trading_engine: HEDGE SELL 395 RTM | delta 395 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:05,664 [INFO] rit_api: MARKET BUY 934 RTM -> order_id=5797
+2026-02-19 14:27:05,664 [INFO] trading_engine: HEDGE BUY 934 RTM | delta -934 -> ~0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:06,660 [INFO] rit_api: MARKET SELL 2804 RTM -> order_id=5870
+2026-02-19 14:27:06,661 [INFO] trading_engine: HEDGE SELL 2804 RTM | delta 2804 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:07,686 [INFO] rit_api: MARKET BUY 4091 RTM -> order_id=6133
+2026-02-19 14:27:07,686 [INFO] trading_engine: HEDGE BUY 4091 RTM | delta -4091 -> ~0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:08,660 [INFO] rit_api: MARKET SELL 772 RTM -> order_id=6385
+2026-02-19 14:27:08,661 [INFO] trading_engine: HEDGE SELL 772 RTM | delta 772 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:09,640 [INFO] rit_api: MARKET BUY 961 RTM -> order_id=6463
+2026-02-19 14:27:09,641 [INFO] trading_engine: HEDGE BUY 961 RTM | delta -961 -> ~0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:10,705 [INFO] rit_api: MARKET SELL 2382 RTM -> order_id=6537
+2026-02-19 14:27:10,705 [INFO] trading_engine: HEDGE SELL 2382 RTM | delta 2382 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:11,696 [INFO] rit_api: MARKET SELL 1502 RTM -> order_id=6808
+2026-02-19 14:27:11,697 [INFO] trading_engine: HEDGE SELL 1502 RTM | delta 1502 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:12,756 [INFO] rit_api: MARKET BUY 203 RTM -> order_id=7055
+2026-02-19 14:27:12,758 [INFO] trading_engine: HEDGE BUY 203 RTM | delta -203 -> ~0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:13,731 [INFO] rit_api: MARKET SELL 285 RTM -> order_id=7123
+2026-02-19 14:27:13,732 [INFO] trading_engine: HEDGE SELL 285 RTM | delta 285 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:14,790 [INFO] rit_api: MARKET BUY 2932 RTM -> order_id=7178
+2026-02-19 14:27:14,790 [INFO] trading_engine: HEDGE BUY 2932 RTM | delta -2932 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:15,691 [INFO] rit_api: MARKET SELL 4355 RTM -> order_id=7229
+2026-02-19 14:27:15,691 [INFO] trading_engine: HEDGE SELL 4355 RTM | delta 4355 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:16,688 [INFO] rit_api: MARKET BUY 3657 RTM -> order_id=7307
+2026-02-19 14:27:16,689 [INFO] trading_engine: HEDGE BUY 3657 RTM | delta -3657 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:17,783 [INFO] rit_api: MARKET SELL 3262 RTM -> order_id=7408
+2026-02-19 14:27:17,784 [INFO] trading_engine: HEDGE SELL 3262 RTM | delta 3262 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:18,722 [INFO] rit_api: MARKET SELL 3410 RTM -> order_id=7672
+2026-02-19 14:27:18,723 [INFO] trading_engine: HEDGE SELL 3410 RTM | delta 3410 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:19,722 [INFO] rit_api: MARKET SELL 2608 RTM -> order_id=7955
+2026-02-19 14:27:19,723 [INFO] trading_engine: HEDGE SELL 2608 RTM | delta 2608 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:20,718 [INFO] rit_api: MARKET SELL 177 RTM -> order_id=8226
+2026-02-19 14:27:20,719 [INFO] trading_engine: HEDGE SELL 177 RTM | delta 177 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:21,719 [INFO] rit_api: MARKET BUY 2617 RTM -> order_id=8464
+2026-02-19 14:27:21,720 [INFO] trading_engine: HEDGE BUY 2617 RTM | delta -2617 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:22,751 [INFO] rit_api: MARKET BUY 2973 RTM -> order_id=8540
+2026-02-19 14:27:22,752 [INFO] trading_engine: HEDGE BUY 2973 RTM | delta -2973 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:23,778 [INFO] rit_api: MARKET SELL 2368 RTM -> order_id=8605
+2026-02-19 14:27:23,779 [INFO] trading_engine: HEDGE SELL 2368 RTM | delta 2368 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:24,760 [INFO] rit_api: MARKET BUY 672 RTM -> order_id=8654
+2026-02-19 14:27:24,760 [INFO] trading_engine: HEDGE BUY 672 RTM | delta -672 -> ~0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:25,719 [INFO] trading_engine: Hedge qty capped: requested 12784, capped 10000
+2026-02-19 14:27:25,748 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=8725
+2026-02-19 14:27:25,748 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -12784 -> ~-2784 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:26,736 [INFO] rit_api: MARKET SELL 2467 RTM -> order_id=8838
+2026-02-19 14:27:26,737 [INFO] trading_engine: HEDGE SELL 2467 RTM | delta 2467 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:27,708 [INFO] rit_api: MARKET BUY 3720 RTM -> order_id=8903
+2026-02-19 14:27:27,708 [INFO] trading_engine: HEDGE BUY 3720 RTM | delta -3720 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:28,798 [INFO] rit_api: MARKET SELL 1781 RTM -> order_id=9039
+2026-02-19 14:27:28,798 [INFO] trading_engine: HEDGE SELL 1781 RTM | delta 1781 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:29,856 [INFO] rit_api: MARKET BUY 7274 RTM -> order_id=9154
+2026-02-19 14:27:29,857 [INFO] trading_engine: HEDGE BUY 7274 RTM | delta -7274 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:30,750 [INFO] rit_api: MARKET BUY 3101 RTM -> order_id=9230
+2026-02-19 14:27:30,751 [INFO] trading_engine: HEDGE BUY 3101 RTM | delta -3101 -> ~0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:31,749 [INFO] rit_api: MARKET BUY 8555 RTM -> order_id=9307
+2026-02-19 14:27:31,750 [INFO] trading_engine: HEDGE BUY 8555 RTM | delta -8555 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:27:32,775 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-19 14:27:32,799 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=9559
+2026-02-19 14:27:32,807 [INFO] rit_api: MARKET SELL 46 RTM1C51 -> order_id=9561
+2026-02-19 14:27:32,814 [INFO] rit_api: MARKET SELL 100 RTM1P51 -> order_id=9562
+2026-02-19 14:27:32,821 [INFO] rit_api: MARKET SELL 46 RTM1P51 -> order_id=9563
+2026-02-19 14:27:32,829 [INFO] rit_api: MARKET BUY 63 RTM1C54 -> order_id=9575
+2026-02-19 14:27:32,836 [INFO] rit_api: MARKET SELL 2605 RTM -> order_id=9576
+2026-02-19 14:27:32,836 [INFO] trading_engine: SCHEDULED CLOSE tick 111: options_closed=355 stock_closed=2605 orders=6
+2026-02-19 14:27:32,836 [INFO] trading_engine: Scheduled close week 2 tick 111 (window 111-116), trades=6
+2026-02-19 14:27:33,745 [INFO] news_parser: NEWS: Current realized vol = 30.0% (history: ['17%', '33%', '33%', '30%']) [NOW USING REALIZED]
+2026-02-19 14:27:33,745 [INFO] news_parser: NEWS: Forecast vol next week = 30.0% - 35.0% (mid=32.5%) [NOW USING FORECAST]
+2026-02-19 14:27:33,756 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=9666
+2026-02-19 14:27:33,763 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=9667
+2026-02-19 14:27:33,771 [INFO] rit_api: MARKET SELL 46 RTM1C51 -> order_id=9668
+2026-02-19 14:27:33,778 [INFO] rit_api: MARKET SELL 100 RTM1P51 -> order_id=9670
+2026-02-19 14:27:33,795 [INFO] rit_api: MARKET SELL 46 RTM1P51 -> order_id=9671
+2026-02-19 14:27:33,802 [INFO] rit_api: MARKET BUY 63 RTM1C54 -> order_id=9672
+2026-02-19 14:27:33,809 [INFO] rit_api: MARKET SELL 2605 RTM -> order_id=9673
+2026-02-19 14:27:33,809 [INFO] trading_engine: SCHEDULED CLOSE tick 112: options_closed=430 stock_closed=2605 orders=7
+2026-02-19 14:27:33,809 [INFO] trading_engine: Scheduled close week 2 tick 112 (window 111-116), trades=7
+2026-02-19 14:27:34,759 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=9759
+2026-02-19 14:27:34,792 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=9770
+2026-02-19 14:27:34,800 [INFO] rit_api: MARKET SELL 46 RTM1C51 -> order_id=9771
+2026-02-19 14:27:34,832 [INFO] rit_api: MARKET SELL 100 RTM1P51 -> order_id=9772
+2026-02-19 14:27:34,841 [INFO] rit_api: MARKET SELL 46 RTM1P51 -> order_id=9774
+2026-02-19 14:27:34,852 [INFO] rit_api: MARKET BUY 63 RTM1C54 -> order_id=9775
+2026-02-19 14:27:34,894 [INFO] rit_api: MARKET SELL 2605 RTM -> order_id=9782
+2026-02-19 14:27:34,895 [INFO] trading_engine: SCHEDULED CLOSE tick 113: options_closed=430 stock_closed=2605 orders=7
+2026-02-19 14:27:34,895 [INFO] trading_engine: Scheduled close week 2 tick 113 (window 111-116), trades=7
+2026-02-19 14:27:35,772 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=9893
+2026-02-19 14:27:35,922 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=9916
+2026-02-19 14:27:35,957 [INFO] rit_api: MARKET SELL 46 RTM1C51 -> order_id=9917
+2026-02-19 14:27:35,974 [INFO] rit_api: MARKET SELL 100 RTM1P51 -> order_id=9918
+2026-02-19 14:27:35,989 [INFO] rit_api: MARKET SELL 46 RTM1P51 -> order_id=9919
+2026-02-19 14:27:36,023 [INFO] rit_api: MARKET BUY 62 RTM1C54 -> order_id=9922
+2026-02-19 14:27:36,032 [INFO] rit_api: MARKET SELL 2605 RTM -> order_id=9924
+2026-02-19 14:27:36,033 [INFO] trading_engine: SCHEDULED CLOSE tick 114: options_closed=429 stock_closed=2605 orders=7
+2026-02-19 14:27:36,033 [INFO] trading_engine: Scheduled close week 2 tick 114 (window 111-116), trades=7
+2026-02-19 14:27:36,758 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=9994
+2026-02-19 14:27:36,791 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=10004
+2026-02-19 14:27:36,799 [INFO] rit_api: MARKET SELL 46 RTM1C51 -> order_id=10005
+2026-02-19 14:27:36,809 [INFO] rit_api: MARKET SELL 100 RTM1P51 -> order_id=10006
+2026-02-19 14:27:36,819 [INFO] rit_api: MARKET SELL 46 RTM1P51 -> order_id=10007
+2026-02-19 14:27:36,828 [INFO] rit_api: MARKET BUY 62 RTM1C54 -> order_id=10008
+2026-02-19 14:27:36,837 [INFO] rit_api: MARKET SELL 2605 RTM -> order_id=10009
+2026-02-19 14:27:36,838 [INFO] trading_engine: SCHEDULED CLOSE tick 115: options_closed=429 stock_closed=2605 orders=7
+2026-02-19 14:27:36,838 [INFO] trading_engine: Scheduled close week 2 tick 115 (window 111-116), trades=7
+2026-02-19 14:27:37,780 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=10156
+2026-02-19 14:27:37,789 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=10159
+2026-02-19 14:27:37,802 [INFO] rit_api: MARKET SELL 45 RTM1C51 -> order_id=10160
+2026-02-19 14:27:37,811 [INFO] rit_api: MARKET SELL 100 RTM1P51 -> order_id=10161
+2026-02-19 14:27:37,819 [INFO] rit_api: MARKET SELL 45 RTM1P51 -> order_id=10162
+2026-02-19 14:27:37,830 [INFO] rit_api: MARKET BUY 62 RTM1C54 -> order_id=10163
+2026-02-19 14:27:37,841 [INFO] rit_api: MARKET SELL 2604 RTM -> order_id=10164
+2026-02-19 14:27:37,841 [INFO] trading_engine: SCHEDULED CLOSE tick 116: options_closed=427 stock_closed=2604 orders=7
+2026-02-19 14:27:37,841 [INFO] trading_engine: Scheduled close week 2 tick 116 (window 111-116), trades=7
+2026-02-19 14:27:38,777 [INFO] trading_engine: Position flat. Waiting for next scheduled positioning tick.
+2026-02-19 14:28:10,945 [INFO] trading_engine: WEEK 3 positioning tick 149
+2026-02-19 14:28:10,946 [INFO] trading_engine: Immediate positioning at week 3 tick 149
+2026-02-19 14:28:10,993 [INFO] optimizer: Not profitable: gain/contract=$2.8879, pos_cost=$4.0200
+2026-02-19 14:28:10,994 [INFO] trading_engine: No profitable trade for this week (n*=0)
+2026-02-19 14:28:11,929 [INFO] news_parser: NEWS: Current realized vol = 35.0% (history: ['17%', '33%', '33%', '30%', '35%']) [NOW USING REALIZED]
+2026-02-19 14:28:48,244 [INFO] trading_engine: Scheduled close complete week 3 by tick 186
+2026-02-19 14:28:49,215 [INFO] news_parser: NEWS: Current realized vol = 20.0% (history: ['17%', '33%', '33%', '30%', '35%', '20%']) [NOW USING REALIZED]
+2026-02-19 14:28:49,216 [INFO] news_parser: NEWS: Forecast vol next week = 20.0% - 25.0% (mid=22.5%) [NOW USING FORECAST]
+2026-02-19 14:28:49,226 [INFO] trading_engine: Scheduled close complete week 3 by tick 187
+2026-02-19 14:28:50,159 [INFO] trading_engine: Scheduled close complete week 3 by tick 188
+2026-02-19 14:28:51,160 [INFO] trading_engine: Scheduled close complete week 3 by tick 189
+2026-02-19 14:28:52,178 [INFO] trading_engine: Scheduled close complete week 3 by tick 190
+2026-02-19 14:28:53,189 [INFO] trading_engine: Scheduled close complete week 3 by tick 191
+2026-02-19 14:29:26,403 [INFO] trading_engine: WEEK 4 positioning tick 224
+2026-02-19 14:29:26,404 [INFO] trading_engine: Immediate positioning at week 4 tick 224
+2026-02-19 14:29:26,411 [INFO] trading_engine: FORCED SIZE: |IV-RV|=14.08% > 3.00% => n=875 SHORT @ K=47
+2026-02-19 14:29:26,420 [INFO] rit_api: MARKET SELL 100 RTM1C47 -> order_id=19973
+2026-02-19 14:29:26,428 [INFO] rit_api: MARKET SELL 100 RTM1P47 -> order_id=19974
+2026-02-19 14:29:26,438 [INFO] rit_api: MARKET SELL 100 RTM1C47 -> order_id=19976
+2026-02-19 14:29:26,446 [INFO] rit_api: MARKET SELL 100 RTM1P47 -> order_id=19977
+2026-02-19 14:29:26,453 [INFO] rit_api: MARKET SELL 100 RTM1C47 -> order_id=19978
+2026-02-19 14:29:26,461 [INFO] rit_api: MARKET SELL 100 RTM1P47 -> order_id=19979
+2026-02-19 14:29:26,468 [INFO] rit_api: MARKET SELL 100 RTM1C47 -> order_id=19980
+2026-02-19 14:29:26,475 [INFO] rit_api: MARKET SELL 100 RTM1P47 -> order_id=19981
+2026-02-19 14:29:26,482 [INFO] rit_api: MARKET SELL 100 RTM1C47 -> order_id=19982
+2026-02-19 14:29:26,490 [INFO] rit_api: MARKET SELL 100 RTM1P47 -> order_id=19983
+2026-02-19 14:29:26,497 [INFO] rit_api: MARKET BUY 100 RTM1C54 -> order_id=19984
+2026-02-19 14:29:26,504 [INFO] rit_api: MARKET BUY 100 RTM1P45 -> order_id=19985
+2026-02-19 14:29:26,511 [INFO] rit_api: MARKET SELL 100 RTM1C47 -> order_id=19986
+2026-02-19 14:29:26,521 [INFO] rit_api: MARKET SELL 100 RTM1P47 -> order_id=19987
+2026-02-19 14:29:26,532 [INFO] rit_api: MARKET BUY 100 RTM1C54 -> order_id=19988
+2026-02-19 14:29:26,547 [INFO] rit_api: MARKET BUY 100 RTM1P45 -> order_id=19990
+2026-02-19 14:29:26,565 [INFO] rit_api: MARKET SELL 100 RTM1C47 -> order_id=19991
+2026-02-19 14:29:26,573 [INFO] rit_api: MARKET SELL 100 RTM1P47 -> order_id=19993
+2026-02-19 14:29:26,582 [INFO] rit_api: MARKET BUY 100 RTM1C54 -> order_id=19995
+2026-02-19 14:29:26,591 [INFO] rit_api: MARKET BUY 100 RTM1P45 -> order_id=19996
+2026-02-19 14:29:26,601 [INFO] rit_api: MARKET SELL 100 RTM1C47 -> order_id=19998
+2026-02-19 14:29:26,611 [INFO] rit_api: MARKET SELL 100 RTM1P47 -> order_id=19999
+2026-02-19 14:29:26,618 [INFO] rit_api: MARKET BUY 75 RTM1C54 -> order_id=20002
+2026-02-19 14:29:26,625 [INFO] rit_api: MARKET BUY 75 RTM1P45 -> order_id=20003
+2026-02-19 14:29:26,631 [INFO] rit_api: MARKET SELL 75 RTM1C47 -> order_id=20004
+2026-02-19 14:29:26,639 [INFO] rit_api: MARKET SELL 75 RTM1P47 -> order_id=20005
+2026-02-19 14:29:26,639 [INFO] trading_engine: STRADDLE SELL 875/875 @ K=47: 26 orders | ATM 875C+875P | EXTREME C54 375 + P45 375
+2026-02-19 14:29:26,639 [INFO] trading_engine: POSITIONED: 875 SHORT straddles @ 47 (week 4, expected $0)
+2026-02-19 14:29:27,465 [INFO] news_parser: NEWS: Current realized vol = 23.0% (history: ['17%', '33%', '33%', '30%', '35%', '20%', '23%']) [NOW USING REALIZED]
+2026-02-19 14:29:27,499 [INFO] trading_engine: Hedge qty capped: requested 16042, capped 10000
+2026-02-19 14:29:27,507 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=20083
+2026-02-19 14:29:27,508 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -16042 -> ~-6042 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:28,409 [INFO] rit_api: MARKET BUY 1556 RTM -> order_id=20160
+2026-02-19 14:29:28,409 [INFO] trading_engine: HEDGE BUY 1556 RTM | delta -1556 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:29,383 [INFO] trading_engine: Hedge qty capped: requested 14283, capped 10000
+2026-02-19 14:29:29,415 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=20329
+2026-02-19 14:29:29,415 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -14283 -> ~-4283 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:30,453 [INFO] rit_api: MARKET BUY 3584 RTM -> order_id=20410
+2026-02-19 14:29:30,454 [INFO] trading_engine: HEDGE BUY 3584 RTM | delta -3584 -> ~0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:31,459 [INFO] rit_api: MARKET SELL 3167 RTM -> order_id=20483
+2026-02-19 14:29:31,460 [INFO] trading_engine: HEDGE SELL 3167 RTM | delta 3167 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:32,492 [INFO] rit_api: MARKET BUY 8211 RTM -> order_id=20570
+2026-02-19 14:29:32,493 [INFO] trading_engine: HEDGE BUY 8211 RTM | delta -8211 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:33,433 [INFO] rit_api: MARKET SELL 7216 RTM -> order_id=20619
+2026-02-19 14:29:33,433 [INFO] trading_engine: HEDGE SELL 7216 RTM | delta 7216 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:34,479 [INFO] rit_api: MARKET BUY 91 RTM -> order_id=20670
+2026-02-19 14:29:34,480 [INFO] trading_engine: HEDGE BUY 91 RTM | delta -91 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:35,470 [INFO] rit_api: MARKET SELL 8053 RTM -> order_id=20746
+2026-02-19 14:29:35,471 [INFO] trading_engine: HEDGE SELL 8053 RTM | delta 8053 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:36,474 [INFO] rit_api: MARKET BUY 5243 RTM -> order_id=20825
+2026-02-19 14:29:36,475 [INFO] trading_engine: HEDGE BUY 5243 RTM | delta -5243 -> ~0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:37,441 [INFO] rit_api: MARKET SELL 2106 RTM -> order_id=20892
+2026-02-19 14:29:37,443 [INFO] trading_engine: HEDGE SELL 2106 RTM | delta 2106 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:38,487 [INFO] rit_api: MARKET SELL 5720 RTM -> order_id=20954
+2026-02-19 14:29:38,487 [INFO] trading_engine: HEDGE SELL 5720 RTM | delta 5720 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:39,509 [INFO] rit_api: MARKET SELL 3150 RTM -> order_id=21011
+2026-02-19 14:29:39,510 [INFO] trading_engine: HEDGE SELL 3150 RTM | delta 3150 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:40,521 [INFO] rit_api: MARKET SELL 1843 RTM -> order_id=21063
+2026-02-19 14:29:40,522 [INFO] trading_engine: HEDGE SELL 1843 RTM | delta 1843 -> ~0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:41,493 [INFO] rit_api: MARKET BUY 1349 RTM -> order_id=21117
+2026-02-19 14:29:41,494 [INFO] trading_engine: HEDGE BUY 1349 RTM | delta -1349 -> ~0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:42,593 [INFO] rit_api: MARKET SELL 6064 RTM -> order_id=21167
+2026-02-19 14:29:42,593 [INFO] trading_engine: HEDGE SELL 6064 RTM | delta 6064 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:43,451 [INFO] trading_engine: Hedge qty capped: requested 12113, capped 10000
+2026-02-19 14:29:43,502 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=21247
+2026-02-19 14:29:43,503 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -12113 -> ~-2113 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:44,493 [INFO] rit_api: MARKET BUY 1683 RTM -> order_id=21358
+2026-02-19 14:29:44,493 [INFO] trading_engine: HEDGE BUY 1683 RTM | delta -1683 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:45,512 [INFO] rit_api: MARKET BUY 4771 RTM -> order_id=21408
+2026-02-19 14:29:45,513 [INFO] trading_engine: HEDGE BUY 4771 RTM | delta -4771 -> ~0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:46,540 [INFO] rit_api: MARKET BUY 7566 RTM -> order_id=21484
+2026-02-19 14:29:46,541 [INFO] trading_engine: HEDGE BUY 7566 RTM | delta -7566 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:47,545 [INFO] rit_api: MARKET BUY 5182 RTM -> order_id=21558
+2026-02-19 14:29:47,546 [INFO] trading_engine: HEDGE BUY 5182 RTM | delta -5182 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:48,498 [INFO] rit_api: MARKET SELL 240 RTM -> order_id=21607
+2026-02-19 14:29:48,498 [INFO] trading_engine: HEDGE SELL 240 RTM | delta 240 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:49,545 [INFO] rit_api: MARKET SELL 5382 RTM -> order_id=21659
+2026-02-19 14:29:49,546 [INFO] trading_engine: HEDGE SELL 5382 RTM | delta 5382 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:50,523 [INFO] rit_api: MARKET BUY 172 RTM -> order_id=21708
+2026-02-19 14:29:50,524 [INFO] trading_engine: HEDGE BUY 172 RTM | delta -172 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:51,549 [INFO] trading_engine: Hedge qty capped: requested 10221, capped 10000
+2026-02-19 14:29:51,565 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=21783
+2026-02-19 14:29:51,566 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 10221 -> ~221 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:52,538 [INFO] rit_api: MARKET BUY 4916 RTM -> order_id=21852
+2026-02-19 14:29:52,538 [INFO] trading_engine: HEDGE BUY 4916 RTM | delta -4916 -> ~0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:53,581 [INFO] rit_api: MARKET SELL 7049 RTM -> order_id=21902
+2026-02-19 14:29:53,582 [INFO] trading_engine: HEDGE SELL 7049 RTM | delta 7049 -> ~-0 | target 0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:54,575 [INFO] rit_api: MARKET BUY 586 RTM -> order_id=21953
+2026-02-19 14:29:54,575 [INFO] trading_engine: HEDGE BUY 586 RTM | delta -586 -> ~0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:55,612 [INFO] rit_api: MARKET BUY 1657 RTM -> order_id=22002
+2026-02-19 14:29:55,612 [INFO] trading_engine: HEDGE BUY 1657 RTM | delta -1657 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:56,703 [INFO] rit_api: MARKET BUY 4862 RTM -> order_id=22051
+2026-02-19 14:29:56,703 [INFO] trading_engine: HEDGE BUY 4862 RTM | delta -4862 -> ~-0 | target -0 (0% of limit 13000) | interval 1t
+2026-02-19 14:29:57,589 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-19 14:29:57,600 [INFO] rit_api: MARKET BUY 100 RTM1C47 -> order_id=22100
+2026-02-19 14:29:57,610 [INFO] rit_api: MARKET BUY 46 RTM1C47 -> order_id=22101
+2026-02-19 14:29:57,622 [INFO] rit_api: MARKET BUY 100 RTM1P47 -> order_id=22102
+2026-02-19 14:29:57,636 [INFO] rit_api: MARKET BUY 46 RTM1P47 -> order_id=22104
+2026-02-19 14:29:57,644 [INFO] rit_api: MARKET SELL 63 RTM1C54 -> order_id=22105
+2026-02-19 14:29:57,652 [INFO] rit_api: MARKET SELL 3574 RTM -> order_id=22106
+2026-02-19 14:29:57,652 [INFO] trading_engine: SCHEDULED CLOSE tick 255: options_closed=355 stock_closed=3574 orders=6
+2026-02-19 14:29:57,653 [INFO] trading_engine: Scheduled close week 4 tick 255 (window 255-260), trades=6
+2026-02-19 14:29:58,636 [INFO] rit_api: MARKET SELL 75 RTM1P45 -> order_id=22153
+2026-02-19 14:29:58,645 [INFO] rit_api: MARKET BUY 100 RTM1C47 -> order_id=22154
+2026-02-19 14:29:58,653 [INFO] rit_api: MARKET BUY 46 RTM1C47 -> order_id=22155
+2026-02-19 14:29:58,661 [INFO] rit_api: MARKET BUY 100 RTM1P47 -> order_id=22156
+2026-02-19 14:29:58,669 [INFO] rit_api: MARKET BUY 46 RTM1P47 -> order_id=22157
+2026-02-19 14:29:58,678 [INFO] rit_api: MARKET SELL 63 RTM1C54 -> order_id=22158
+2026-02-19 14:29:58,687 [INFO] rit_api: MARKET SELL 3573 RTM -> order_id=22159
+2026-02-19 14:29:58,688 [INFO] trading_engine: SCHEDULED CLOSE tick 256: options_closed=430 stock_closed=3573 orders=7
+2026-02-19 14:29:58,688 [INFO] trading_engine: Scheduled close week 4 tick 256 (window 255-260), trades=7
+2026-02-19 14:29:59,660 [INFO] rit_api: MARKET SELL 75 RTM1P45 -> order_id=22209
+2026-02-19 14:29:59,671 [INFO] rit_api: MARKET BUY 100 RTM1C47 -> order_id=22210
+2026-02-19 14:29:59,679 [INFO] rit_api: MARKET BUY 46 RTM1C47 -> order_id=22211
+2026-02-19 14:29:59,689 [INFO] rit_api: MARKET BUY 100 RTM1P47 -> order_id=22212
+2026-02-19 14:29:59,696 [INFO] rit_api: MARKET BUY 46 RTM1P47 -> order_id=22213
+2026-02-19 14:29:59,704 [INFO] rit_api: MARKET SELL 63 RTM1C54 -> order_id=22214
+2026-02-19 14:29:59,713 [INFO] rit_api: MARKET SELL 3573 RTM -> order_id=22215
+2026-02-19 14:29:59,714 [INFO] trading_engine: SCHEDULED CLOSE tick 257: options_closed=430 stock_closed=3573 orders=7
+2026-02-19 14:29:59,714 [INFO] trading_engine: Scheduled close week 4 tick 257 (window 255-260), trades=7
+2026-02-19 14:30:00,593 [INFO] rit_api: MARKET SELL 75 RTM1P45 -> order_id=22265
+2026-02-19 14:30:00,627 [INFO] rit_api: MARKET BUY 100 RTM1C47 -> order_id=22266
+2026-02-19 14:30:00,638 [INFO] rit_api: MARKET BUY 46 RTM1C47 -> order_id=22267
+2026-02-19 14:30:00,647 [INFO] rit_api: MARKET BUY 100 RTM1P47 -> order_id=22268
+2026-02-19 14:30:00,656 [INFO] rit_api: MARKET BUY 46 RTM1P47 -> order_id=22269
+2026-02-19 14:30:00,666 [INFO] rit_api: MARKET SELL 62 RTM1C54 -> order_id=22270
+2026-02-19 14:30:00,676 [INFO] rit_api: MARKET SELL 3573 RTM -> order_id=22271
+2026-02-19 14:30:00,676 [INFO] trading_engine: SCHEDULED CLOSE tick 258: options_closed=429 stock_closed=3573 orders=7
+2026-02-19 14:30:00,677 [INFO] trading_engine: Scheduled close week 4 tick 258 (window 255-260), trades=7
+2026-02-19 14:30:01,686 [INFO] rit_api: MARKET SELL 75 RTM1P45 -> order_id=22320
+2026-02-19 14:30:01,712 [INFO] rit_api: MARKET BUY 100 RTM1C47 -> order_id=22321
+2026-02-19 14:30:01,724 [INFO] rit_api: MARKET BUY 46 RTM1C47 -> order_id=22322
+2026-02-19 14:30:01,732 [INFO] rit_api: MARKET BUY 100 RTM1P47 -> order_id=22323
+2026-02-19 14:30:01,742 [INFO] rit_api: MARKET BUY 46 RTM1P47 -> order_id=22324
+2026-02-19 14:30:01,749 [INFO] rit_api: MARKET SELL 62 RTM1C54 -> order_id=22325
+2026-02-19 14:30:01,757 [INFO] rit_api: MARKET SELL 3573 RTM -> order_id=22326
+2026-02-19 14:30:01,757 [INFO] trading_engine: SCHEDULED CLOSE tick 259: options_closed=429 stock_closed=3573 orders=7
+2026-02-19 14:30:01,758 [INFO] trading_engine: Scheduled close week 4 tick 259 (window 255-260), trades=7
+2026-02-19 14:30:02,628 [INFO] rit_api: MARKET SELL 75 RTM1P45 -> order_id=22379
+2026-02-19 14:30:02,657 [INFO] rit_api: MARKET BUY 100 RTM1C47 -> order_id=22380
+2026-02-19 14:30:02,666 [INFO] rit_api: MARKET BUY 45 RTM1C47 -> order_id=22382
+2026-02-19 14:30:02,674 [INFO] rit_api: MARKET BUY 100 RTM1P47 -> order_id=22383
+2026-02-19 14:30:02,683 [INFO] rit_api: MARKET BUY 45 RTM1P47 -> order_id=22385
+2026-02-19 14:30:02,692 [INFO] rit_api: MARKET SELL 62 RTM1C54 -> order_id=22386
+2026-02-19 14:30:02,701 [INFO] rit_api: MARKET SELL 3573 RTM -> order_id=22387
+2026-02-19 14:30:02,701 [INFO] trading_engine: SCHEDULED CLOSE tick 260: options_closed=427 stock_closed=3573 orders=7
+2026-02-19 14:30:02,702 [INFO] trading_engine: Scheduled close week 4 tick 260 (window 255-260), trades=7
+2026-02-19 14:30:03,626 [INFO] trading_engine: Position flat. Waiting for next scheduled positioning tick.
+2026-02-19 14:30:56,959 [WARNING] rit_api: POST /commands/cancel returned 401: {"code":"UNAUTHORIZED","message":"Simulation must be running."}
