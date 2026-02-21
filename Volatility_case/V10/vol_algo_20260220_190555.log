@@ -1,0 +1,9 @@
+2026-02-20 19:05:55,506 [INFO] news_parser: NEWS: Current realized vol = 32.0% (history: ['32%']) [NOW USING REALIZED]
+2026-02-20 19:05:55,506 [INFO] news_parser: NEWS: Delta limit = 12000
+2026-02-20 19:05:55,507 [INFO] news_parser: NEWS: Penalty rate = 1.00%
+2026-02-20 19:05:55,507 [INFO] news_parser: NEWS: Current realized vol = 25.0% (history: ['32%', '25%']) [NOW USING REALIZED]
+2026-02-20 19:05:55,507 [INFO] news_parser: NEWS: Forecast vol next week = 25.0% - 30.0% (mid=27.5%) [NOW USING FORECAST]
+2026-02-20 19:05:55,508 [INFO] news_parser: NEWS: Current realized vol = 27.0% (history: ['32%', '25%', '27%']) [NOW USING REALIZED]
+2026-02-20 19:05:55,509 [INFO] news_parser: NEWS: Current realized vol = 23.0% (history: ['32%', '25%', '27%', '23%']) [NOW USING REALIZED]
+2026-02-20 19:05:55,509 [INFO] news_parser: NEWS: Forecast vol next week = 23.0% - 28.0% (mid=25.5%) [NOW USING FORECAST]
+2026-02-20 19:05:55,509 [INFO] news_parser: NEWS: Current realized vol = 23.0% (history: ['32%', '25%', '27%', '23%', '23%']) [NOW USING REALIZED]

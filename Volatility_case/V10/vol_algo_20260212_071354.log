@@ -1,0 +1,216 @@
+2026-02-12 07:13:54,313 [INFO] news_parser: NEWS: Delta limit = 11000
+2026-02-12 07:13:54,313 [INFO] news_parser: NEWS: Penalty rate = 4.00%
+2026-02-12 07:14:26,121 [INFO] news_parser: NEWS: Forecast vol next week = 37.0% - 42.0% (mid=39.5%) [NOW USING FORECAST]
+2026-02-12 07:15:05,363 [INFO] news_parser: NEWS: Current realized vol = 40.0% (history: ['40%']) [NOW USING REALIZED]
+2026-02-12 07:15:05,370 [INFO] trading_engine: WEEK 2 positioning tick 75
+2026-02-12 07:15:06,330 [INFO] optimizer: ============================================================
+2026-02-12 07:15:06,330 [INFO] optimizer: OPTIMIZER RESULT: n*=490 LONG straddles @ strike 51
+2026-02-12 07:15:06,330 [INFO] optimizer:   Expected profit: $26238.21
+2026-02-12 07:15:06,331 [INFO] optimizer:   Gain/contract: $58.8941 | Pos cost/contract: $4.0200
+2026-02-12 07:15:06,331 [INFO] optimizer:   Rebalancing cost: $650.11 | Z=1.43
+2026-02-12 07:15:06,331 [INFO] optimizer:   Inputs: S0=50.88 sigma=0.4000 sigma_hat=0.0982 L=11000 Gamma=15.7112
+2026-02-12 07:15:06,331 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-12 07:15:06,332 [INFO] optimizer: ============================================================
+2026-02-12 07:15:06,414 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=3225
+2026-02-12 07:15:06,514 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=3227
+2026-02-12 07:15:06,637 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=3229
+2026-02-12 07:15:06,743 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=3231
+2026-02-12 07:15:06,853 [INFO] rit_api: MARKET BUY 90 RTM1C51 -> order_id=3233
+2026-02-12 07:15:06,979 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-OPT."}
+2026-02-12 07:15:06,979 [INFO] trading_engine: STRADDLE BUY 0/490 @ K=51: 5 orders (490C+0P filled)
+2026-02-12 07:15:06,979 [INFO] trading_engine: POSITIONED: 490 LONG straddles @ 51 (week 2, expected $26238)
+2026-02-12 07:15:07,540 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=3278
+2026-02-12 07:15:07,541 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 49248 -> ~0 | limit 11000 (448%)
+2026-02-12 07:15:08,436 [WARNING] trading_engine: EMERGENCY hedge bypass: delta=25507 limit=11000
+2026-02-12 07:15:08,549 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=3325
+2026-02-12 07:15:08,550 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 25507 -> ~0 | limit 11000 (232%)
+2026-02-12 07:15:11,444 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=3456
+2026-02-12 07:15:11,444 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 11161 -> ~0 | limit 11000 (101%)
+2026-02-12 07:15:22,676 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=3927
+2026-02-12 07:15:22,677 [INFO] trading_engine: HEDGE BUY 10000 RTM | delta -11619 -> ~0 | limit 11000 (106%)
+2026-02-12 07:15:25,647 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=4058
+2026-02-12 07:15:25,647 [INFO] trading_engine: HEDGE SELL 10000 RTM | delta 11489 -> ~0 | limit 11000 (104%)
+2026-02-12 07:15:42,467 [INFO] news_parser: NEWS: Forecast vol next week = 21.0% - 26.0% (mid=23.5%) [NOW USING FORECAST]
+2026-02-12 07:15:43,736 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:15:44,727 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:15:45,637 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:15:46,624 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:15:47,617 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:15:48,624 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:15:49,622 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:15:50,622 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:15:51,780 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:15:52,685 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:15:53,671 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:15:54,666 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:15:55,675 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:15:56,820 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:15:57,807 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:15:58,818 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:15:59,719 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:16:00,716 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:16:01,703 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:16:02,841 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:16:03,853 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:16:04,832 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:16:08,768 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:16:10,800 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:16:11,785 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:16:12,788 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:16:13,805 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:16:14,792 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:16:15,935 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:16:16,920 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:16:17,827 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:16:18,920 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:16:19,828 [WARNING] rit_api: POST /orders returned 500: {"code":"INTERNAL_SERVER_ERROR","message":"Order request cannot be submitted because it will exceed net trading limits in the risk category Limit-ETF."}
+2026-02-12 07:16:20,804 [INFO] news_parser: NEWS: Current realized vol = 23.0% (history: ['40%', '23%']) [NOW USING REALIZED]
+2026-02-12 07:16:20,859 [INFO] trading_engine: WEEK 3 positioning tick 150
+2026-02-12 07:16:20,860 [INFO] optimizer: ============================================================
+2026-02-12 07:16:20,860 [INFO] optimizer: OPTIMIZER RESULT: n*=490 SHORT straddles @ strike 53
+2026-02-12 07:16:20,860 [INFO] optimizer:   Expected profit: $41344.19
+2026-02-12 07:16:20,860 [INFO] optimizer:   Gain/contract: $90.5689 | Pos cost/contract: $4.0200
+2026-02-12 07:16:20,860 [INFO] optimizer:   Rebalancing cost: $1064.79 | Z=0.71
+2026-02-12 07:16:20,860 [INFO] optimizer:   Inputs: S0=53.24 sigma=0.2300 sigma_hat=0.3971 L=11000 Gamma=31.6933
+2026-02-12 07:16:20,860 [INFO] optimizer:   Spreads: Bo=0.0400 Bs=0.0200 T=0.019231
+2026-02-12 07:16:20,860 [INFO] optimizer: ============================================================
+2026-02-12 07:16:20,860 [INFO] trading_engine: REPOSITIONING: dir 1->-1, strike 51->53
+2026-02-12 07:16:21,082 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=6557
+2026-02-12 07:16:21,190 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=6559
+2026-02-12 07:16:21,308 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=6561
+2026-02-12 07:16:21,415 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=6563
+2026-02-12 07:16:21,527 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=6565
+2026-02-12 07:16:21,640 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=6567
+2026-02-12 07:16:21,746 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=6612
+2026-02-12 07:16:21,872 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=6620
+2026-02-12 07:16:21,979 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=6626
+2026-02-12 07:16:22,064 [INFO] rit_api: MARKET SELL 80 RTM1C51 -> order_id=6631
+2026-02-12 07:16:22,123 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=6634
+2026-02-12 07:16:26,969 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=6851
+2026-02-12 07:16:27,076 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=6853
+2026-02-12 07:16:27,195 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=6855
+2026-02-12 07:16:27,321 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=6857
+2026-02-12 07:16:27,431 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=6859
+2026-02-12 07:16:27,554 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=6861
+2026-02-12 07:16:27,665 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=6863
+2026-02-12 07:16:27,776 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=6907
+2026-02-12 07:16:27,908 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=6909
+2026-02-12 07:16:28,017 [INFO] rit_api: MARKET BUY 80 RTM1C51 -> order_id=6911
+2026-02-12 07:16:28,124 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=6913
+2026-02-12 07:16:28,571 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=6918
+2026-02-12 07:16:28,690 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=6920
+2026-02-12 07:16:28,796 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=6964
+2026-02-12 07:16:28,923 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=6966
+2026-02-12 07:16:29,031 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=6968
+2026-02-12 07:16:29,136 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=6970
+2026-02-12 07:16:29,245 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=6973
+2026-02-12 07:16:29,351 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=6975
+2026-02-12 07:16:29,468 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=6977
+2026-02-12 07:16:29,526 [INFO] rit_api: MARKET SELL 80 RTM1C51 -> order_id=6978
+2026-02-12 07:16:29,603 [INFO] rit_api: MARKET BUY 10000 RTM -> order_id=6979
+2026-02-12 07:16:30,094 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=7026
+2026-02-12 07:16:30,206 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=7028
+2026-02-12 07:16:30,312 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=7030
+2026-02-12 07:16:30,417 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=7032
+2026-02-12 07:16:30,536 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=7034
+2026-02-12 07:16:30,654 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=7036
+2026-02-12 07:16:30,791 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=7080
+2026-02-12 07:16:30,868 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=7082
+2026-02-12 07:16:30,924 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=7083
+2026-02-12 07:16:30,981 [INFO] rit_api: MARKET BUY 80 RTM1C51 -> order_id=7084
+2026-02-12 07:16:31,038 [INFO] rit_api: MARKET SELL 10000 RTM -> order_id=7085
+2026-02-12 07:16:31,518 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=7091
+2026-02-12 07:16:31,624 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=7093
+2026-02-12 07:16:31,742 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=7137
+2026-02-12 07:16:31,868 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=7139
+2026-02-12 07:16:31,959 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=7140
+2026-02-12 07:16:32,018 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=7141
+2026-02-12 07:16:32,075 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=7142
+2026-02-12 07:16:32,179 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=7143
+2026-02-12 07:16:32,300 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=7145
+2026-02-12 07:16:32,407 [INFO] rit_api: MARKET SELL 80 RTM1C51 -> order_id=7147
+2026-02-12 07:16:32,679 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=7148
+2026-02-12 07:16:32,739 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=7191
+2026-02-12 07:16:32,814 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=7192
+2026-02-12 07:16:32,870 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=7193
+2026-02-12 07:16:32,925 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=7194
+2026-02-12 07:16:33,033 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=7195
+2026-02-12 07:16:33,499 [INFO] rit_api: MARKET SELL 20 RTM1C51 -> order_id=7202
+2026-02-12 07:16:33,499 [WARNING] trading_engine: Could not fully flatten after 10 ticks, moving on
+2026-02-12 07:16:57,964 [INFO] news_parser: NEWS: Forecast vol next week = 35.0% - 40.0% (mid=37.5%) [NOW USING FORECAST]
+2026-02-12 07:17:36,154 [INFO] news_parser: NEWS: Current realized vol = 37.0% (history: ['40%', '23%', '37%']) [NOW USING REALIZED]
+2026-02-12 07:18:33,584 [INFO] trading_engine: ENTERING UNWIND at tick 282
+2026-02-12 07:18:33,691 [INFO] rit_api: LIMIT SELL 100 RTM1C51 @ 0.05 -> order_id=12558
+2026-02-12 07:18:33,798 [INFO] rit_api: LIMIT SELL 100 RTM1C51 @ 0.05 -> order_id=12561
+2026-02-12 07:18:33,913 [INFO] rit_api: LIMIT SELL 100 RTM1C51 @ 0.05 -> order_id=12563
+2026-02-12 07:18:34,021 [INFO] rit_api: LIMIT SELL 100 RTM1C51 @ 0.05 -> order_id=12565
+2026-02-12 07:18:34,131 [INFO] rit_api: LIMIT SELL 80 RTM1C51 @ 0.05 -> order_id=12567
+2026-02-12 07:18:34,510 [INFO] rit_api: LIMIT BUY 100 RTM1C51 @ 0.03 -> order_id=12610
+2026-02-12 07:18:34,569 [INFO] rit_api: LIMIT BUY 100 RTM1C51 @ 0.03 -> order_id=12611
+2026-02-12 07:18:34,631 [INFO] rit_api: LIMIT BUY 100 RTM1C51 @ 0.03 -> order_id=12612
+2026-02-12 07:18:34,687 [INFO] rit_api: LIMIT BUY 100 RTM1C51 @ 0.03 -> order_id=12613
+2026-02-12 07:18:34,794 [INFO] rit_api: LIMIT BUY 80 RTM1C51 @ 0.03 -> order_id=12615
+2026-02-12 07:18:35,593 [INFO] rit_api: LIMIT SELL 100 RTM1C51 @ 0.02 -> order_id=12663
+2026-02-12 07:18:35,699 [INFO] rit_api: LIMIT SELL 100 RTM1C51 @ 0.02 -> order_id=12666
+2026-02-12 07:18:35,808 [INFO] rit_api: LIMIT SELL 100 RTM1C51 @ 0.02 -> order_id=12668
+2026-02-12 07:18:35,916 [INFO] rit_api: LIMIT SELL 80 RTM1C51 @ 0.02 -> order_id=12670
+2026-02-12 07:18:36,599 [INFO] rit_api: LIMIT BUY 100 RTM1C51 @ 0.06 -> order_id=12715
+2026-02-12 07:18:36,706 [INFO] rit_api: LIMIT BUY 100 RTM1C51 @ 0.06 -> order_id=12717
+2026-02-12 07:18:36,814 [INFO] rit_api: LIMIT BUY 100 RTM1C51 @ 0.06 -> order_id=12719
+2026-02-12 07:18:36,933 [INFO] rit_api: LIMIT BUY 80 RTM1C51 @ 0.06 -> order_id=12721
+2026-02-12 07:18:37,551 [INFO] rit_api: LIMIT SELL 100 RTM1C51 @ 0.02 -> order_id=12765
+2026-02-12 07:18:37,607 [INFO] rit_api: LIMIT SELL 100 RTM1C51 @ 0.02 -> order_id=12766
+2026-02-12 07:18:37,663 [INFO] rit_api: LIMIT SELL 100 RTM1C51 @ 0.02 -> order_id=12767
+2026-02-12 07:18:37,772 [INFO] rit_api: LIMIT SELL 80 RTM1C51 @ 0.02 -> order_id=12770
+2026-02-12 07:18:38,573 [INFO] rit_api: LIMIT BUY 100 RTM1C51 @ 0.03 -> order_id=12817
+2026-02-12 07:18:38,680 [INFO] rit_api: LIMIT BUY 100 RTM1C51 @ 0.03 -> order_id=12819
+2026-02-12 07:18:38,789 [INFO] rit_api: LIMIT BUY 100 RTM1C51 @ 0.03 -> order_id=12821
+2026-02-12 07:18:38,901 [INFO] rit_api: LIMIT BUY 80 RTM1C51 @ 0.03 -> order_id=12823
+2026-02-12 07:18:39,520 [INFO] rit_api: LIMIT SELL 100 RTM1C51 @ 0.01 -> order_id=12867
+2026-02-12 07:18:39,582 [INFO] rit_api: LIMIT SELL 100 RTM1C51 @ 0.01 -> order_id=12868
+2026-02-12 07:18:39,642 [INFO] rit_api: LIMIT SELL 100 RTM1C51 @ 0.01 -> order_id=12869
+2026-02-12 07:18:39,748 [INFO] rit_api: LIMIT SELL 80 RTM1C51 @ 0.01 -> order_id=12871
+2026-02-12 07:18:40,606 [INFO] rit_api: LIMIT BUY 100 RTM1C51 @ 0.03 -> order_id=12917
+2026-02-12 07:18:40,715 [INFO] rit_api: LIMIT BUY 100 RTM1C51 @ 0.03 -> order_id=12919
+2026-02-12 07:18:40,823 [INFO] rit_api: LIMIT BUY 100 RTM1C51 @ 0.03 -> order_id=12921
+2026-02-12 07:18:40,931 [INFO] rit_api: LIMIT BUY 80 RTM1C51 @ 0.03 -> order_id=12923
+2026-02-12 07:18:41,761 [INFO] rit_api: LIMIT SELL 100 RTM1C51 @ 0.01 -> order_id=12971
+2026-02-12 07:18:41,817 [INFO] rit_api: LIMIT SELL 100 RTM1C51 @ 0.01 -> order_id=12972
+2026-02-12 07:18:41,873 [INFO] rit_api: LIMIT SELL 100 RTM1C51 @ 0.01 -> order_id=12973
+2026-02-12 07:18:41,930 [INFO] rit_api: LIMIT SELL 80 RTM1C51 @ 0.01 -> order_id=12974
+2026-02-12 07:18:42,695 [INFO] rit_api: LIMIT BUY 100 RTM1C51 @ 0.03 -> order_id=13017
+2026-02-12 07:18:42,802 [INFO] rit_api: LIMIT BUY 100 RTM1C51 @ 0.03 -> order_id=13020
+2026-02-12 07:18:42,909 [INFO] rit_api: LIMIT BUY 100 RTM1C51 @ 0.03 -> order_id=13022
+2026-02-12 07:18:43,015 [INFO] rit_api: LIMIT BUY 80 RTM1C51 @ 0.03 -> order_id=13024
+2026-02-12 07:18:43,523 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=13068
+2026-02-12 07:18:43,585 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=13069
+2026-02-12 07:18:43,641 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=13070
+2026-02-12 07:18:43,748 [INFO] rit_api: MARKET SELL 80 RTM1C51 -> order_id=13073
+2026-02-12 07:18:44,556 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=13119
+2026-02-12 07:18:44,613 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=13120
+2026-02-12 07:18:44,669 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=13121
+2026-02-12 07:18:44,775 [INFO] rit_api: MARKET BUY 80 RTM1C51 -> order_id=13123
+2026-02-12 07:18:45,618 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=13171
+2026-02-12 07:18:45,725 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=13173
+2026-02-12 07:18:45,832 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=13175
+2026-02-12 07:18:45,943 [INFO] rit_api: MARKET SELL 80 RTM1C51 -> order_id=13178
+2026-02-12 07:18:46,565 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=13221
+2026-02-12 07:18:46,621 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=13222
+2026-02-12 07:18:46,678 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=13223
+2026-02-12 07:18:46,783 [INFO] rit_api: MARKET BUY 80 RTM1C51 -> order_id=13225
+2026-02-12 07:18:47,625 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=13272
+2026-02-12 07:18:47,731 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=13274
+2026-02-12 07:18:47,838 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=13276
+2026-02-12 07:18:47,948 [INFO] rit_api: MARKET SELL 80 RTM1C51 -> order_id=13278
+2026-02-12 07:18:48,596 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=13322
+2026-02-12 07:18:48,722 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=13324
+2026-02-12 07:18:48,829 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=13326
+2026-02-12 07:18:48,934 [INFO] rit_api: MARKET BUY 80 RTM1C51 -> order_id=13328
+2026-02-12 07:18:49,686 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=13373
+2026-02-12 07:18:49,792 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=13375
+2026-02-12 07:18:49,899 [INFO] rit_api: MARKET SELL 100 RTM1C51 -> order_id=13377
+2026-02-12 07:18:50,011 [INFO] rit_api: MARKET SELL 80 RTM1C51 -> order_id=13380
+2026-02-12 07:18:50,622 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=13423
+2026-02-12 07:18:50,678 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=13424
+2026-02-12 07:18:50,735 [INFO] rit_api: MARKET BUY 100 RTM1C51 -> order_id=13425
+2026-02-12 07:18:50,841 [INFO] rit_api: MARKET BUY 80 RTM1C51 -> order_id=13427
