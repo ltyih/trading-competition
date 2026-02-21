@@ -18,15 +18,15 @@ MAX_ORDER_SIZE = 10_000   # RIT hard cap per order
 # ========== Timing ==========
 SLEEP_SEC = 0.08          # Faster than V2 (0.2) for more ticks/sec
 MAX_TICK = 600
-ENDGAME_TICKS = 130       # Switch to endgame with 130 ticks left
-FINAL_SPRINT_TICKS = 25   # Pure flatten sprint in last 25 ticks
+ENDGAME_TICKS = 15       # Switch to endgame with 130 ticks left
+FINAL_SPRINT_TICKS = 5   # Pure flatten sprint in last 25 ticks
 ENDGAME_MAX_SLICES = 5    # Max order slices per tick in endgame
 BOOK_DEPTH = 100          # Order book depth to fetch
 
 # ========== Tender Acceptance (AGGRESSIVE) ==========
-MIN_PROFIT_PER_SHARE = 0.005   # Accept almost any profitable tender
+MIN_PROFIT_PER_SHARE = 0.01   # Accept almost any profitable tender
 MAX_DEPTH_RATIO = 0.8         # Accept even if liquidity is thin
-MIN_CONFIDENCE = 0.005          # Very low confidence threshold
+MIN_CONFIDENCE = 0.0075          # Very low confidence threshold
 AUCTION_AGGRESSION = 0.001     # Tight margin on auction bids to WIN
 
 # ========== Almgren-Chriss Parameters ==========
