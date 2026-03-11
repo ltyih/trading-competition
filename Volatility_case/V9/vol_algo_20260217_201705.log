@@ -1,1 +1,0 @@
-2026-02-17 20:17:32,913 [WARNING] rit_api: POST /commands/cancel returned 401: {"code":"UNAUTHORIZED","message":"Simulation must be running."}
