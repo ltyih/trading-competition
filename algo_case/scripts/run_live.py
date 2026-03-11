@@ -24,12 +24,12 @@ SRC_PATH = PROJECT_ROOT / "src"
 if str(SRC_PATH) not in sys.path:
     sys.path.insert(0, str(SRC_PATH))
 
-from ritc_mm.api.client import ApiClient
-from ritc_mm.api.models import CaseStatus
-from ritc_mm.config import ConfigError, load_config, validate_required_keys
-from ritc_mm.data.state import GlobalState
-from ritc_mm.strategy.engine import StrategyEngine
-from ritc_mm.telemetry.logger import LoggerConfig, bind_context, get_logger, new_request_id
+from *REMOVED*_mm.api.client import ApiClient
+from *REMOVED*_mm.api.models import CaseStatus
+from *REMOVED*_mm.config import ConfigError, load_config, validate_required_keys
+from *REMOVED*_mm.data.state import GlobalState
+from *REMOVED*_mm.strategy.engine import StrategyEngine
+from *REMOVED*_mm.telemetry.logger import LoggerConfig, bind_context, get_logger, new_request_id
 
 
 REQUIRED_CONFIG_KEYS: tuple[str, ...] = (
@@ -226,7 +226,7 @@ def _summarize_top_of_book(state: GlobalState) -> dict[str, dict[str, float | No
 
 def main() -> int:
     """Run startup initialization and ingestion polling loop."""
-    parser = argparse.ArgumentParser(description="Run RITC ingestion loop.")
+    parser = argparse.ArgumentParser(description="Run *REMOVED* ingestion loop.")
     parser.add_argument(
         "--config",
         default="config/default.yaml",
@@ -248,7 +248,7 @@ def main() -> int:
 
     logging_cfg = config["logging"]
     logger = get_logger(
-        name="ritc_mm.run_live",
+        name="*REMOVED*_mm.run_live",
         config=LoggerConfig(
             level=str(logging_cfg["level"]),
             console_enabled=bool(logging_cfg["console_enabled"]),
@@ -259,7 +259,7 @@ def main() -> int:
     )
 
     logger.info(
-        "Starting RITC ingestion runner",
+        "Starting *REMOVED* ingestion runner",
         extra={
             "request_id": new_request_id(),
             "ticker": None,

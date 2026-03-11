@@ -6,7 +6,7 @@ from collections import deque
 from dataclasses import dataclass
 import time
 
-from ritc_mm.api.models import NewsItem
+from *REMOVED*_mm.api.models import NewsItem
 
 
 @dataclass(frozen=True)

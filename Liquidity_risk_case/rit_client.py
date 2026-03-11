@@ -35,22 +35,22 @@ from config import (
 logger = logging.getLogger(__name__)
 
 
-class RITClientError(Exception):
+class *REMOVED*lientError(Exception):
     """Custom exception for RIT Client errors."""
     pass
 
 
-class AuthenticationError(RITClientError):
+class AuthenticationError(*REMOVED*lientError):
     """Raised when authentication fails."""
     pass
 
 
-class ConnectionError(RITClientError):
+class ConnectionError(*REMOVED*lientError):
     """Raised when connection fails."""
     pass
 
 
-class RITClient:
+class *REMOVED*lient:
     """
     RIT Client REST API wrapper with auto-reconnection.
 
@@ -238,8 +238,8 @@ class RITClient:
 
         # Common RIT Client paths on Windows
         possible_paths = [
-            r"C:\Program Files\Rotman Interactive Trader\RIT.exe",
-            r"C:\Program Files (x86)\Rotman Interactive Trader\RIT.exe",
+            r"C:\Program Files\*REMOVED* Interactive Trader\RIT.exe",
+            r"C:\Program Files (x86)\*REMOVED* Interactive Trader\RIT.exe",
             r"C:\RIT\RIT.exe",
         ]
 
@@ -331,7 +331,7 @@ class RITClient:
             # Look for windows with RIT in the title
             windows = gw.getWindowsWithTitle('RIT')
             if not windows:
-                windows = gw.getWindowsWithTitle('Rotman')
+                windows = gw.getWindowsWithTitle('*REMOVED*')
             if not windows:
                 windows = gw.getWindowsWithTitle('Interactive Trader')
             if windows:
@@ -548,7 +548,7 @@ class RITClient:
         return success
 
 
-class RITClientManager:
+class *REMOVED*lientManager:
     """
     Manager class for handling RIT Client lifecycle and monitoring.
 
@@ -559,7 +559,7 @@ class RITClientManager:
     """
 
     def __init__(self, api_key: str = None):
-        self.client = RITClient(api_key)
+        self.client = *REMOVED*lient(api_key)
         self.is_monitoring = False
         self.status_callbacks = []
 
@@ -617,7 +617,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
     # You need to provide your API key here or get it from RIT Client
-    client = RITClient(api_key="YOUR_API_KEY_HERE")
+    client = *REMOVED*lient(api_key="YOUR_API_KEY_HERE")
 
     print("Testing RIT Client connection...")
     success, data = client.get_case()

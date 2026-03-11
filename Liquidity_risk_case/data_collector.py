@@ -23,7 +23,7 @@ from config import (
     SAVE_TICK_SNAPSHOTS, TRACK_PLAYER_ORDERS
 )
 from session_manager import SessionManager, SessionDataStore
-from rit_client import RITClient, RITClientManager
+from rit_client import *REMOVED*lient, *REMOVED*lientManager
 
 logger = logging.getLogger(__name__)
 
@@ -37,8 +37,8 @@ class DataCollector:
     """
 
     def __init__(self, api_key: str = None):
-        self.client = RITClient(api_key)
-        self.rit_manager = RITClientManager(api_key)
+        self.client = *REMOVED*lient(api_key)
+        self.rit_manager = *REMOVED*lientManager(api_key)
 
         # Session management
         self.session_manager = SessionManager()
@@ -485,7 +485,7 @@ class TenderMonitor:
     Provides real-time alerts and analysis of incoming tenders.
     """
 
-    def __init__(self, client: RITClient, data_store: SessionDataStore):
+    def __init__(self, client: *REMOVED*lient, data_store: SessionDataStore):
         self.client = client
         self.data_store = data_store
         self.active_tenders: Dict[int, Dict[str, Any]] = {}

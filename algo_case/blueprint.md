@@ -18,7 +18,7 @@
 ### 1.1 Repository structure (implementation-ready)
 
 ```
-ritc-mm-bot/
+*REMOVED*-mm-bot/
   README.md
   pyproject.toml
   config/
@@ -29,7 +29,7 @@ ritc-mm-bot/
     record_session.py
     replay_offline.py
     analyze_kpis.py
-  src/ritc_mm/
+  src/*REMOVED*_mm/
     __init__.py
     api/
       client.py

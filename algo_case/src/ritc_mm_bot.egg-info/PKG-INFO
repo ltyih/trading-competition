@@ -1,7 +1,7 @@
 Metadata-Version: 2.4
-Name: ritc-mm-bot
+Name: *REMOVED*-mm-bot
 Version: 0.1.0
-Summary: Rotman Interactive Trader algorithmic market making bot
+Summary: *REMOVED* Interactive Trader algorithmic market making bot
 Requires-Python: >=3.11
 Description-Content-Type: text/plain
 Requires-Dist: requests==2.32.3
@@ -9,4 +9,4 @@ Requires-Dist: pydantic==2.10.6
 Requires-Dist: PyYAML==6.0.2
 Requires-Dist: pytest==8.3.4
 
-RITC market making bot scaffold.
+*REMOVED* market making bot scaffold.

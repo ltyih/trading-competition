@@ -1,4 +1,4 @@
-"""Structured logging utilities for the RITC market making bot."""
+"""Structured logging utilities for the *REMOVED* market making bot."""
 
 from __future__ import annotations
 
@@ -32,7 +32,7 @@ class LoggerConfig:
     level: str = "INFO"
     console_enabled: bool = True
     file_enabled: bool = False
-    file_path: str = "logs/ritc_mm.log"
+    file_path: str = "logs/*REMOVED*_mm.log"
 
 
 class JsonFormatter(logging.Formatter):

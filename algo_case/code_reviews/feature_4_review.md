@@ -11,7 +11,7 @@
   - Implementation of `NORMAL_MM`, `NEWS_LOCKOUT`, `CLOSEOUT` regimes.
   - EMA-based Fair Value with one-shot news impulse.
 - **What was actually delivered:**
-  - `src/ritc_mm/strategy/` populated with `regimes.py`, `fair_value.py`, `quoting.py`, `engine.py`.
+  - `src/*REMOVED*_mm/strategy/` populated with `regimes.py`, `fair_value.py`, `quoting.py`, `engine.py`.
   - `StrategyEngine` orchestrates components correctly in `step()`.
   - `run_live.py` supports `runtime.run_mode="strategy_dry_run"` and logs targets.
   - Comprehensive unit tests: `test_regimes.py`, `test_fair_value.py`, `test_quoting.py`, `test_strategy_engine.py`.
@@ -37,11 +37,11 @@
 *None.*
 
 ## 4) Non-critical Improvements
-- **File:** `src/ritc_mm/strategy/regimes.py`
+- **File:** `src/*REMOVED*_mm/strategy/regimes.py`
   - **Observation:** `detect_jump` (Regime C) and `INVENTORY_REBALANCE` (Regime D) are not yet implemented.
   - **Impact:** Feature 4 is a "Day-1 subset". This is consistent with the decision log to defer advanced regimes to avoid complexity explosion.
   - **Mitigation:** Documented in `context.md`; harmless placeholder.
-- **File:** `src/ritc_mm/strategy/fair_value.py`
+- **File:** `src/*REMOVED*_mm/strategy/fair_value.py`
   - **Observation:** `_polarity` is a simple keyword counter.
   - **Impact:** Nuanced news (e.g., "Earnings miss was expected") might be misclassified.
   - **Mitigation:** Sufficient for baseline; online calibration (Feature 4b in blueprint) is a planned future upgrade.
@@ -51,7 +51,7 @@
   ```bash
   cd algo_case
   python3 -m venv .venv && .venv/bin/pip install -e .
-  .venv/bin/python -m pytest src/ritc_mm/tests/ -v
+  .venv/bin/python -m pytest src/*REMOVED*_mm/tests/ -v
   ```
 - **Expected (Tests):** `81 passed` (61 existing + 20 Feature 4).
 - **Expected (Live Dry-Run):**

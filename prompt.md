@@ -1,4 +1,4 @@
-You are Codex acting as an expert algorithmic trading engineer implementing a Rotman Interactive Trader (RIT) “Algorithmic Market Making” bot in Python.
+You are Codex acting as an expert algorithmic trading engineer implementing a *REMOVED* Interactive Trader (RIT) “Algorithmic Market Making” bot in Python.
 
 ### Inputs available in this repo
 - `@blueprint.md`: the full implementation blueprint/spec (source of truth).
@@ -83,7 +83,7 @@ Deliverables:
    - pytest
 3. Add `config/default.yaml` with placeholders for:
    - api_key, base_url, tickers (optional), polling intervals, logging level, and key tunables referenced in blueprint.
-4. Implement `src/ritc_mm/telemetry/logger.py`:
+4. Implement `src/*REMOVED*_mm/telemetry/logger.py`:
    - a logger factory that outputs structured logs
    - supports console + file logging
    - includes correlation/request ids and per-ticker fields

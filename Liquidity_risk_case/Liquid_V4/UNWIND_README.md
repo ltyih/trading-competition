@@ -172,7 +172,7 @@ Ticker-specific execution profiles are configured in `UNWIND_TICKER_PROFILE`:
   - higher participation
   - softer breakeven (higher tolerance and batch fraction)
   - wider pseudo-marketable limit offset
-- `RITC` (medium liquidity, lower vol):
+- `*REMOVED*` (medium liquidity, lower vol):
   - slower risk pace (`risk_mult` lower)
   - lower participation
   - stricter breakeven

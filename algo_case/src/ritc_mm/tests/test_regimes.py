@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from ritc_mm.api.models import CaseResponse, NewsItem
-from ritc_mm.data.state import GlobalState
-from ritc_mm.strategy.regimes import Regime, RegimeEngine
+from *REMOVED*_mm.api.models import CaseResponse, NewsItem
+from *REMOVED*_mm.data.state import GlobalState
+from *REMOVED*_mm.strategy.regimes import Regime, RegimeEngine
 
 
 def _case(tick: int) -> CaseResponse:

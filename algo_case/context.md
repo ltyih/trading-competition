@@ -4,7 +4,7 @@
 - Phase: Feature 4 implementation complete and ready for review.
 - Last completed feature: Feature 4 - Core strategy logic (3-regime dry-run + fair value + quote targets).
 - Next feature queued: Feature 5 - Execution and risk management (order reconciliation + limits enforcement).
-- How to run: `cd algo_case && python3 -m venv .venv && .venv/bin/pip install -e . && .venv/bin/python -m pytest src/ritc_mm/tests/ -v`
+- How to run: `cd algo_case && python3 -m venv .venv && .venv/bin/pip install -e . && .venv/bin/python -m pytest src/*REMOVED*_mm/tests/ -v`
 - Known issues: Unit tests are fully mocked and platform-independent; live runner validation still requires a reachable RIT Client API (commonly Windows VM from macOS). Feature 4 strategy mode is dry-run only and does not submit/cancel orders.
 
 ## Decisions (with rationale)
@@ -63,34 +63,34 @@
   - `algo_case/pyproject.toml`
   - `algo_case/config/default.yaml`
   - `algo_case/scripts/run_live.py`
-  - `algo_case/src/ritc_mm/__init__.py`
-  - `algo_case/src/ritc_mm/config.py`
-  - `algo_case/src/ritc_mm/api/__init__.py`
-  - `algo_case/src/ritc_mm/data/__init__.py`
-  - `algo_case/src/ritc_mm/strategy/__init__.py`
-  - `algo_case/src/ritc_mm/execution/__init__.py`
-  - `algo_case/src/ritc_mm/risk/__init__.py`
-  - `algo_case/src/ritc_mm/telemetry/__init__.py`
-  - `algo_case/src/ritc_mm/telemetry/logger.py`
-  - `algo_case/src/ritc_mm/sim/__init__.py`
-  - `algo_case/src/ritc_mm/tests/__init__.py`
-  - `algo_case/src/ritc_mm/tests/test_config.py`
-  - `algo_case/src/ritc_mm/tests/test_logging.py`
+  - `algo_case/src/*REMOVED*_mm/__init__.py`
+  - `algo_case/src/*REMOVED*_mm/config.py`
+  - `algo_case/src/*REMOVED*_mm/api/__init__.py`
+  - `algo_case/src/*REMOVED*_mm/data/__init__.py`
+  - `algo_case/src/*REMOVED*_mm/strategy/__init__.py`
+  - `algo_case/src/*REMOVED*_mm/execution/__init__.py`
+  - `algo_case/src/*REMOVED*_mm/risk/__init__.py`
+  - `algo_case/src/*REMOVED*_mm/telemetry/__init__.py`
+  - `algo_case/src/*REMOVED*_mm/telemetry/logger.py`
+  - `algo_case/src/*REMOVED*_mm/sim/__init__.py`
+  - `algo_case/src/*REMOVED*_mm/tests/__init__.py`
+  - `algo_case/src/*REMOVED*_mm/tests/test_config.py`
+  - `algo_case/src/*REMOVED*_mm/tests/test_logging.py`
   - `algo_case/context.md`
 - What was implemented:
-  - Blueprint-aligned project scaffold under `src/ritc_mm` with module directories and package markers.
+  - Blueprint-aligned project scaffold under `src/*REMOVED*_mm` with module directories and package markers.
   - Pinned dependency configuration in `pyproject.toml` for Python 3.11+.
   - Baseline runtime config file with API, polling, logging, and strategy tunables from blueprint section 4.1.
-  - Config loader + required-key validator (`ritc_mm.config`).
-  - Structured JSON logger factory with console/file handlers and context binding (`ritc_mm.telemetry.logger`).
+  - Config loader + required-key validator (`*REMOVED*_mm.config`).
+  - Structured JSON logger factory with console/file handlers and context binding (`*REMOVED*_mm.telemetry.logger`).
   - Live runner stub that loads config, initializes logging, performs a single `GET /case` health check, maps failure modes to exit codes, and logs startup outcomes.
 - Tests added/updated:
-  - `src/ritc_mm/tests/test_config.py` validates config loading and required keys.
-  - `src/ritc_mm/tests/test_logging.py` validates logger initialization and JSON field output.
+  - `src/*REMOVED*_mm/tests/test_config.py` validates config loading and required keys.
+  - `src/*REMOVED*_mm/tests/test_logging.py` validates logger initialization and JSON field output.
 - How to verify:
   - `cd algo_case`
   - `python3 -m venv .venv && .venv/bin/pip install -e .`
-  - `.venv/bin/python -m pytest src/ritc_mm/tests/test_config.py src/ritc_mm/tests/test_logging.py -q`
+  - `.venv/bin/python -m pytest src/*REMOVED*_mm/tests/test_config.py src/*REMOVED*_mm/tests/test_logging.py -q`
   - `.venv/bin/python scripts/run_live.py --config config/default.yaml`
 - Notes:
   - `run_live.py` uses `X-API-Key` and calls `/case` under configured `base_url`, aligned with `rit_api_documentation.yaml` (`/v1/case`).
@@ -98,12 +98,12 @@
 
 ### Feature 2: API client skeleton with robust error handling
 - Files added/changed:
-  - `algo_case/src/ritc_mm/api/errors.py` — Custom exception hierarchy (6 types: `AuthenticationError`, `RateLimitError`, `ServerError`, `ConnectionFailure`, `EndpointNotFoundError`, `UnexpectedStatusError`).
-  - `algo_case/src/ritc_mm/api/models.py` — Pydantic models for every endpoint response (`CaseResponse`, `SecurityResponse`, `BookResponse`, `OrderResponse`, `TasEntry`, `NewsItem`, `LimitInfo`, `CancelResult`, `OhlcEntry`, `TraderResponse`).
-  - `algo_case/src/ritc_mm/api/ratelimit.py` — Per-ticker + global rate-limit tracker using monotonic clock.
-  - `algo_case/src/ritc_mm/api/client.py` — Central `ApiClient` class with `requests.Session`, GET retry/backoff/jitter, 429 handling, proactive rate-limit gating, and typed return values.
-  - `algo_case/src/ritc_mm/api/__init__.py` — Updated with public re-exports.
-  - `algo_case/src/ritc_mm/tests/test_api.py` — 47 mocked test cases.
+  - `algo_case/src/*REMOVED*_mm/api/errors.py` — Custom exception hierarchy (6 types: `AuthenticationError`, `RateLimitError`, `ServerError`, `ConnectionFailure`, `EndpointNotFoundError`, `UnexpectedStatusError`).
+  - `algo_case/src/*REMOVED*_mm/api/models.py` — Pydantic models for every endpoint response (`CaseResponse`, `SecurityResponse`, `BookResponse`, `OrderResponse`, `TasEntry`, `NewsItem`, `LimitInfo`, `CancelResult`, `OhlcEntry`, `TraderResponse`).
+  - `algo_case/src/*REMOVED*_mm/api/ratelimit.py` — Per-ticker + global rate-limit tracker using monotonic clock.
+  - `algo_case/src/*REMOVED*_mm/api/client.py` — Central `ApiClient` class with `requests.Session`, GET retry/backoff/jitter, 429 handling, proactive rate-limit gating, and typed return values.
+  - `algo_case/src/*REMOVED*_mm/api/__init__.py` — Updated with public re-exports.
+  - `algo_case/src/*REMOVED*_mm/tests/test_api.py` — 47 mocked test cases.
 - What was implemented:
   - `ApiClient` using `requests.Session` for connection pooling with `X-API-Key` header.
   - Methods for all endpoints: `/case`, `/trader`, `/securities`, `/securities/book`, `/securities/history`, `/securities/tas`, `/news`, `/limits`, `/orders`, `/orders/{id}`, `/commands/cancel`.
@@ -113,7 +113,7 @@
   - Every HTTP call logs with unique `request_id` for full traceability.
   - Error mapping: 401→`AuthenticationError`, 404→`EndpointNotFoundError`, 429→`RateLimitError`, 5xx→`ServerError`, connection/timeout→`ConnectionFailure`.
 - Tests added/updated:
-  - `src/ritc_mm/tests/test_api.py` — 47 tests covering:
+  - `src/*REMOVED*_mm/tests/test_api.py` — 47 tests covering:
     - Pydantic model parsing (9 classes × multiple payloads).
     - Error hierarchy attributes.
     - `RateLimitTracker` per-ticker and global cooldown logic.
@@ -121,7 +121,7 @@
 - How to verify:
   - `cd algo_case`
   - `python3 -m venv .venv && .venv/bin/pip install -e .`
-  - `.venv/bin/python -m pytest src/ritc_mm/tests/ -v`
+  - `.venv/bin/python -m pytest src/*REMOVED*_mm/tests/ -v`
   - Expected: `50 passed` (3 Feature 1 + 47 Feature 2).
 - Notes:
   - All tests use mocked HTTP via `unittest.mock` — no live RIT Client required.
@@ -130,17 +130,17 @@
 
 ### Feature 3: Market data ingestion and global state
 - Files added/changed:
-  - `algo_case/src/ritc_mm/data/book.py` — L2 aggregation + L1 projection data structures and parsing helpers.
-  - `algo_case/src/ritc_mm/data/tape.py` — Per-ticker TAS ring buffers, monotonic deduplication, incremental pointers.
-  - `algo_case/src/ritc_mm/data/news.py` — Incremental news storage, deduplication, and query helpers.
-  - `algo_case/src/ritc_mm/data/state.py` — `GlobalState` aggregator polling `/case`, `/securities`, `/orders`, `/limits`, `/news`, `/securities/book`, `/securities/tas`.
-  - `algo_case/src/ritc_mm/data/__init__.py` — Public exports for new data/state interfaces.
+  - `algo_case/src/*REMOVED*_mm/data/book.py` — L2 aggregation + L1 projection data structures and parsing helpers.
+  - `algo_case/src/*REMOVED*_mm/data/tape.py` — Per-ticker TAS ring buffers, monotonic deduplication, incremental pointers.
+  - `algo_case/src/*REMOVED*_mm/data/news.py` — Incremental news storage, deduplication, and query helpers.
+  - `algo_case/src/*REMOVED*_mm/data/state.py` — `GlobalState` aggregator polling `/case`, `/securities`, `/orders`, `/limits`, `/news`, `/securities/book`, `/securities/tas`.
+  - `algo_case/src/*REMOVED*_mm/data/__init__.py` — Public exports for new data/state interfaces.
   - `algo_case/scripts/run_live.py` — Ingestion-only polling loop using `ApiClient` + `GlobalState` with startup health check preserved.
   - `algo_case/config/default.yaml` — Added polling keys: `loop_sleep_ms`, `book_depth`, `tape_maxlen_per_ticker`, `news_max_items`.
-  - `algo_case/src/ritc_mm/tests/test_book.py` — Book aggregation and L1 tests.
-  - `algo_case/src/ritc_mm/tests/test_tape.py` — TAS incremental/dedup/ring-buffer tests.
-  - `algo_case/src/ritc_mm/tests/test_news.py` — News incremental/dedup/query tests.
-  - `algo_case/src/ritc_mm/tests/test_state.py` — Global state aggregation and per-endpoint failure resilience tests.
+  - `algo_case/src/*REMOVED*_mm/tests/test_book.py` — Book aggregation and L1 tests.
+  - `algo_case/src/*REMOVED*_mm/tests/test_tape.py` — TAS incremental/dedup/ring-buffer tests.
+  - `algo_case/src/*REMOVED*_mm/tests/test_news.py` — News incremental/dedup/query tests.
+  - `algo_case/src/*REMOVED*_mm/tests/test_state.py` — Global state aggregation and per-endpoint failure resilience tests.
 - What was implemented:
   - Added pure data-layer dataclasses for books, prints, and news events.
   - Implemented incremental ingestion primitives:
@@ -157,14 +157,14 @@
     - exits cleanly on non-`ACTIVE` case status or keyboard interrupt.
   - Confirmed no order-placement behavior is introduced in Feature 3.
 - Tests added/updated:
-  - `src/ritc_mm/tests/test_book.py` (3 tests)
-  - `src/ritc_mm/tests/test_tape.py` (3 tests)
-  - `src/ritc_mm/tests/test_news.py` (3 tests)
-  - `src/ritc_mm/tests/test_state.py` (2 tests)
+  - `src/*REMOVED*_mm/tests/test_book.py` (3 tests)
+  - `src/*REMOVED*_mm/tests/test_tape.py` (3 tests)
+  - `src/*REMOVED*_mm/tests/test_news.py` (3 tests)
+  - `src/*REMOVED*_mm/tests/test_state.py` (2 tests)
 - How to verify:
   - `cd algo_case`
   - `python3 -m venv .venv && .venv/bin/pip install -e .`
-  - `.venv/bin/python -m pytest src/ritc_mm/tests/ -v`
+  - `.venv/bin/python -m pytest src/*REMOVED*_mm/tests/ -v`
   - Expected: `61 passed` (50 existing + 11 Feature 3 tests).
   - Optional live ingestion check: `.venv/bin/python scripts/run_live.py --config config/default.yaml`
 - Notes:
@@ -173,17 +173,17 @@
 
 ### Feature 4: Core strategy logic (dry-run)
 - Files added/changed:
-  - `algo_case/src/ritc_mm/strategy/regimes.py` — 3-regime state machine with per-ticker persistent state and decision reasons.
-  - `algo_case/src/ritc_mm/strategy/fair_value.py` — EMA fair value engine with one-shot rule-based news impulse.
-  - `algo_case/src/ritc_mm/strategy/quoting.py` — Typed quote target construction, inventory skew, hard-cap gating, and cancel logic.
-  - `algo_case/src/ritc_mm/strategy/engine.py` — Orchestrator composing regimes, fair value, and quote builder.
-  - `algo_case/src/ritc_mm/strategy/__init__.py` — Public exports for Feature 4 strategy interfaces.
+  - `algo_case/src/*REMOVED*_mm/strategy/regimes.py` — 3-regime state machine with per-ticker persistent state and decision reasons.
+  - `algo_case/src/*REMOVED*_mm/strategy/fair_value.py` — EMA fair value engine with one-shot rule-based news impulse.
+  - `algo_case/src/*REMOVED*_mm/strategy/quoting.py` — Typed quote target construction, inventory skew, hard-cap gating, and cancel logic.
+  - `algo_case/src/*REMOVED*_mm/strategy/engine.py` — Orchestrator composing regimes, fair value, and quote builder.
+  - `algo_case/src/*REMOVED*_mm/strategy/__init__.py` — Public exports for Feature 4 strategy interfaces.
   - `algo_case/scripts/run_live.py` — Added `runtime.run_mode` gating; strategy dry-run computes and logs targets after ingestion updates.
   - `algo_case/config/default.yaml` — Added `runtime.run_mode` and FV/news keyword tunables.
-  - `algo_case/src/ritc_mm/tests/test_regimes.py` — Regime transition and closeout-priority tests.
-  - `algo_case/src/ritc_mm/tests/test_fair_value.py` — EMA and news-impulse tests.
-  - `algo_case/src/ritc_mm/tests/test_quoting.py` — Quote math, skew, hard-cap, and cancel behavior tests.
-  - `algo_case/src/ritc_mm/tests/test_strategy_engine.py` — End-to-end strategy orchestration tests.
+  - `algo_case/src/*REMOVED*_mm/tests/test_regimes.py` — Regime transition and closeout-priority tests.
+  - `algo_case/src/*REMOVED*_mm/tests/test_fair_value.py` — EMA and news-impulse tests.
+  - `algo_case/src/*REMOVED*_mm/tests/test_quoting.py` — Quote math, skew, hard-cap, and cancel behavior tests.
+  - `algo_case/src/*REMOVED*_mm/tests/test_strategy_engine.py` — End-to-end strategy orchestration tests.
 - What was implemented:
   - Added a `RegimeEngine` for `NORMAL_MM`, `NEWS_LOCKOUT`, and `CLOSEOUT`.
     - `CLOSEOUT` has highest priority based on minute and heat windows.
@@ -203,14 +203,14 @@
     - `runtime.run_mode=strategy_dry_run` logs per-ticker regime/FV/target payloads.
     - no execution methods are called.
 - Tests added/updated:
-  - `src/ritc_mm/tests/test_regimes.py` (5 tests)
-  - `src/ritc_mm/tests/test_fair_value.py` (6 tests)
-  - `src/ritc_mm/tests/test_quoting.py` (5 tests)
-  - `src/ritc_mm/tests/test_strategy_engine.py` (4 tests)
+  - `src/*REMOVED*_mm/tests/test_regimes.py` (5 tests)
+  - `src/*REMOVED*_mm/tests/test_fair_value.py` (6 tests)
+  - `src/*REMOVED*_mm/tests/test_quoting.py` (5 tests)
+  - `src/*REMOVED*_mm/tests/test_strategy_engine.py` (4 tests)
 - How to verify:
   - `cd algo_case`
   - `python3 -m venv .venv && .venv/bin/pip install -e .`
-  - `.venv/bin/python -m pytest src/ritc_mm/tests/ -v`
+  - `.venv/bin/python -m pytest src/*REMOVED*_mm/tests/ -v`
   - Expected: `81 passed` (61 existing + 20 Feature 4 tests).
   - Optional dry-run strategy check: set `runtime.run_mode: strategy_dry_run` in `config/default.yaml`, then run `.venv/bin/python scripts/run_live.py --config config/default.yaml`.
 - Notes:

@@ -1,4 +1,4 @@
-"""Configuration for Electricity Trading Algorithm - RITC 2026."""
+"""Configuration for Electricity Trading Algorithm - *REMOVED* 2026."""
 
 # =============================================================================
 # RIT API CONFIGURATION

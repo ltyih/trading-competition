@@ -32,17 +32,17 @@ from config import (
 logger = logging.getLogger(__name__)
 
 
-class RITClientError(Exception):
+class *REMOVED*lientError(Exception):
     pass
 
-class AuthenticationError(RITClientError):
+class AuthenticationError(*REMOVED*lientError):
     pass
 
-class ConnectionError(RITClientError):
+class ConnectionError(*REMOVED*lientError):
     pass
 
 
-class RITClient:
+class *REMOVED*lient:
     def __init__(self, api_key: str = None):
         self.base_url = API_BASE_URL
         self.api_key = api_key or API_KEY
@@ -164,8 +164,8 @@ class RITClient:
 
     def _start_rit_client(self) -> bool:
         possible_paths = [
-            r"C:\Program Files\Rotman Interactive Trader\RIT.exe",
-            r"C:\Program Files (x86)\Rotman Interactive Trader\RIT.exe",
+            r"C:\Program Files\*REMOVED* Interactive Trader\RIT.exe",
+            r"C:\Program Files (x86)\*REMOVED* Interactive Trader\RIT.exe",
             r"C:\RIT\RIT.exe",
         ]
         for path in possible_paths:
@@ -223,7 +223,7 @@ class RITClient:
         if not PYGETWINDOW_AVAILABLE:
             return None
         try:
-            for title in ['RIT', 'Rotman', 'Interactive Trader']:
+            for title in ['RIT', '*REMOVED*', 'Interactive Trader']:
                 windows = gw.getWindowsWithTitle(title)
                 if windows:
                     return windows[0]
@@ -366,9 +366,9 @@ class RITClient:
         return success
 
 
-class RITClientManager:
+class *REMOVED*lientManager:
     def __init__(self, api_key: str = None):
-        self.client = RITClient(api_key)
+        self.client = *REMOVED*lient(api_key)
 
     def wait_for_connection(self, timeout: int = 300) -> bool:
         start_time = time.time()

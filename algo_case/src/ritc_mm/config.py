@@ -1,4 +1,4 @@
-"""Configuration loading and validation utilities for the RITC MM bot."""
+"""Configuration loading and validation utilities for the *REMOVED* MM bot."""
 
 from __future__ import annotations
 

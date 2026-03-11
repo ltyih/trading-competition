@@ -3,13 +3,13 @@ import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.rit_client import MockRITClient
+from src.rit_client import Mock*REMOVED*lient
 from src.models import CaseState, Position, TenderOffer
 
 
 def test_mock_client_creation():
     """Test mock client creation"""
-    client = MockRITClient(
+    client = Mock*REMOVED*lient(
         host="localhost",
         port=9999,
         api_key="test_key",
@@ -24,7 +24,7 @@ def test_mock_client_creation():
 
 def test_mock_get_case():
     """Test mock case retrieval"""
-    client = MockRITClient("localhost", 9999, "key", "UBCT-P")
+    client = Mock*REMOVED*lient("localhost", 9999, "key", "UBCT-P")
 
     client.set_mock_tick(90)
     case = client.get_case()
@@ -44,7 +44,7 @@ def test_mock_get_case():
 
 def test_mock_positions():
     """Test mock position tracking"""
-    client = MockRITClient("localhost", 9999, "key", "UBCT-P")
+    client = Mock*REMOVED*lient("localhost", 9999, "key", "UBCT-P")
 
     client.set_mock_positions({
         'ELEC-F': -10,
@@ -65,7 +65,7 @@ def test_mock_positions():
 
 def test_mock_news():
     """Test mock news feed"""
-    client = MockRITClient("localhost", 9999, "key", "UBCT-P")
+    client = Mock*REMOVED*lient("localhost", 9999, "key", "UBCT-P")
 
     client.add_mock_news({
         'news_id': 1,
@@ -94,7 +94,7 @@ def test_mock_news():
 
 def test_mock_tenders():
     """Test mock tender handling"""
-    client = MockRITClient("localhost", 9999, "key", "UBCT-T1")
+    client = Mock*REMOVED*lient("localhost", 9999, "key", "UBCT-T1")
     client.set_mock_tick(100)
 
     client.add_mock_tender({
@@ -124,7 +124,7 @@ def test_mock_tenders():
 
 def test_mock_order_book():
     """Test mock order book"""
-    client = MockRITClient("localhost", 9999, "key", "UBCT-P")
+    client = Mock*REMOVED*lient("localhost", 9999, "key", "UBCT-P")
 
     book = client.get_order_book('ELEC-F')
 
@@ -140,7 +140,7 @@ def test_mock_order_book():
 
 def test_mock_assets():
     """Test mock assets"""
-    client = MockRITClient("localhost", 9999, "key", "UBCT-P")
+    client = Mock*REMOVED*lient("localhost", 9999, "key", "UBCT-P")
 
     assets = client.get_assets()
     assert len(assets) == 1

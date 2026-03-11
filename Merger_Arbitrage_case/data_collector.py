@@ -19,7 +19,7 @@ from config import (
     SEPARATE_DB_PER_SESSION, EXPORT_CSV, CSV_EXPORT_INTERVAL_SEC, DATA_DIR
 )
 from session_manager import SessionManager, SessionDataStore
-from rit_client import RITClient, RITClientManager
+from rit_client import *REMOVED*lient, *REMOVED*lientManager
 from deal_analyzer import DealAnalyzer
 
 logger = logging.getLogger(__name__)
@@ -35,8 +35,8 @@ class DataCollector:
     """
 
     def __init__(self, api_key: str = None):
-        self.client = RITClient(api_key)
-        self.rit_manager = RITClientManager(api_key)
+        self.client = *REMOVED*lient(api_key)
+        self.rit_manager = *REMOVED*lientManager(api_key)
 
         # Session management
         self.session_manager = SessionManager()

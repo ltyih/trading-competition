@@ -1,6 +1,6 @@
 """
 Volatility Trading Algorithm V9 - Liam's Optimal Straddle Method
-RITC 2026 Volatility Case
+*REMOVED* 2026 Volatility Case
 
 Strategy:
   - Trade delta-hedged straddles with mathematically optimal sizing
@@ -20,7 +20,7 @@ from trading_engine import StraddleEngine, Phase
 
 BANNER = r"""
 ================================================================
-  RITC 2026 - Volatility Algorithm V9
+  *REMOVED* 2026 - Volatility Algorithm V9
   Liam's Optimal Straddle Method
   Strategy: Eq5 Optimization + MFPT Delta Hedging
 ================================================================

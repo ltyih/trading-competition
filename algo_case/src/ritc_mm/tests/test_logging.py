@@ -5,14 +5,14 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from ritc_mm.telemetry.logger import LoggerConfig, REQUIRED_STRUCTURED_FIELDS, build_logger, get_logger
+from *REMOVED*_mm.telemetry.logger import LoggerConfig, REQUIRED_STRUCTURED_FIELDS, build_logger, get_logger
 
 
 def test_logger_initializes_console_and_file_handlers(tmp_path: Path) -> None:
     """Logger factory should configure both console and file handlers when enabled."""
-    log_path = tmp_path / "ritc_mm.log"
+    log_path = tmp_path / "*REMOVED*_mm.log"
     logger = build_logger(
-        name="ritc_mm.test.handlers",
+        name="*REMOVED*_mm.test.handlers",
         config=LoggerConfig(
             level="INFO",
             console_enabled=True,
@@ -26,9 +26,9 @@ def test_logger_initializes_console_and_file_handlers(tmp_path: Path) -> None:
 
 def test_logger_emits_expected_structured_fields(tmp_path: Path) -> None:
     """Structured log records should include required keys and bound context values."""
-    log_path = tmp_path / "ritc_mm_structured.log"
+    log_path = tmp_path / "*REMOVED*_mm_structured.log"
     logger = get_logger(
-        name="ritc_mm.test.records",
+        name="*REMOVED*_mm.test.records",
         config=LoggerConfig(
             level="INFO",
             console_enabled=False,

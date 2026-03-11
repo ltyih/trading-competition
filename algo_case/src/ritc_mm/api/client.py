@@ -28,7 +28,7 @@ from typing import Any, Mapping
 
 import requests
 
-from ritc_mm.api.errors import (
+from *REMOVED*_mm.api.errors import (
     ApiError,
     AuthenticationError,
     ConnectionFailure,
@@ -37,7 +37,7 @@ from ritc_mm.api.errors import (
     ServerError,
     UnexpectedStatusError,
 )
-from ritc_mm.api.models import (
+from *REMOVED*_mm.api.models import (
     BookResponse,
     CancelResult,
     CaseResponse,
@@ -49,8 +49,8 @@ from ritc_mm.api.models import (
     TasEntry,
     TraderResponse,
 )
-from ritc_mm.api.ratelimit import RateLimitTracker
-from ritc_mm.telemetry.logger import StructuredLoggerAdapter, bind_context, new_request_id
+from *REMOVED*_mm.api.ratelimit import RateLimitTracker
+from *REMOVED*_mm.telemetry.logger import StructuredLoggerAdapter, bind_context, new_request_id
 
 
 class ApiClient:

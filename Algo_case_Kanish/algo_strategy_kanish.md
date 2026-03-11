@@ -1,4 +1,4 @@
-# RITC 2026 — Algorithmic Market Making Strategy
+# Algorithmic Market Making Strategy
 ## Master Strategy Document for Claude Code
 
 ---

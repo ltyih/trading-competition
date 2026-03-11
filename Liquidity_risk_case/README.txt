@@ -1,6 +1,6 @@
 ================================================================================
                     RIT DATA COLLECTOR - LIQUIDITY RISK CASE
-                    RITC 2026 - Rotman International Trading Competition
+                    *REMOVED* 2026 - *REMOVED* International Trading Competition
 ================================================================================
 
 OVERVIEW
@@ -27,7 +27,7 @@ QUICK START
    - Python 3.8+ installed
    - RIT Client application installed and running
    - Login credentials:
-     * Server: flserver.rotman.utoronto.ca
+     * Server: flserver.*REMOVED*.utoronto.ca
      * Port: 16500
      * Username: kanish10
      * Password: Kanish@123
@@ -131,7 +131,7 @@ To query the database:
     import pandas as pd
 
     conn = sqlite3.connect('data/rit_data.db')
-    df = pd.read_sql_query("SELECT * FROM securities WHERE ticker='RITC'", conn)
+    df = pd.read_sql_query("SELECT * FROM securities WHERE ticker='*REMOVED*'", conn)
 
 ================================================================================
 TROUBLESHOOTING
@@ -185,6 +185,6 @@ CONTACT / SUPPORT
 
 For issues with this collector, check the logs in the logs/ folder.
 
-For RIT platform issues: https://rit.rotman.utoronto.ca
+For RIT platform issues: https://rit.*REMOVED*.utoronto.ca
 
 ================================================================================

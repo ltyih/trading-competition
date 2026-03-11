@@ -10,7 +10,7 @@ delta-hedged straddles per week.
 # RIT API
 # =============================================================================
 # RIT Server (for GUI login - not used by algo directly)
-RIT_SERVER = "flserver.rotman.utoronto.ca"
+RIT_SERVER = "flserver.*REMOVED*.utoronto.ca"
 RIT_SERVER_PORT = 14950
 USERNAME = "UBCT-4"
 PASSWORD = "target"

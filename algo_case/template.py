@@ -1,4 +1,4 @@
-"""RITC 2026 Algorithmic Market Making Trading Case - REST API Basic Script"""
+"""*REMOVED* 2026 Algorithmic Market Making Trading Case - REST API Basic Script"""
 
 import requests
 from time import sleep

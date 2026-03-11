@@ -38,7 +38,7 @@ COLLECTOR_NAME = os.environ.get("RIT_COLLECTOR_NAME", None)
 # =============================================================================
 # RIT CONNECTION
 # =============================================================================
-RIT_SERVER = "flserver.rotman.utoronto.ca"
+RIT_SERVER = "flserver.*REMOVED*.utoronto.ca"
 RIT_PORT = 16540
 
 API_HOST = "localhost"

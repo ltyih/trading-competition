@@ -38,9 +38,9 @@ shutdown = False
 # ---- Sub-heat definitions (all 5 sub-heats) ----
 SUB_HEATS = {
     1: {
-        'tickers': {'RITC', 'COMP'},
-        'start_prices': {'RITC': 50.0, 'COMP': 40.0},
-        'commissions': {'RITC': 0.02, 'COMP': 0.02},
+        'tickers': {'*REMOVED*', 'COMP'},
+        'start_prices': {'*REMOVED*': 50.0, 'COMP': 40.0},
+        'commissions': {'*REMOVED*': 0.02, 'COMP': 0.02},
         'tender_window': 30,
     },
     2: {

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-MERGER ARBITRAGE TRADING SYSTEM V8 - RITC 2026
+MERGER ARBITRAGE TRADING SYSTEM V8 - *REMOVED* 2026
 ================================================
 V8 FIXES from V7 (which LOST money: $-17K final NLV):
 
@@ -559,7 +559,7 @@ HEADLINE_META = {
     'CONVERTIBLE DEBT REFINANCED': {
         'category': 'FIN', 'severity': 'small', 'body_hint': 'ambiguous',
     },
-    'WELCOME TO THE RITC 2026 MERGER ARBITRAGE CASE - PRACTICE SERVER': {
+    'WELCOME TO THE *REMOVED* 2026 MERGER ARBITRAGE CASE - PRACTICE SERVER': {
         'category': 'FIN', 'severity': 'small', 'body_hint': 'ambiguous',
     },
 }

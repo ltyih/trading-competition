@@ -353,7 +353,7 @@ class DataLogger:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="RITC Algo Market Making Data Logger")
+    parser = argparse.ArgumentParser(description="Market Making Data Logger")
     parser.add_argument("--output-dir", default="logs", help="Output directory for CSV files")
     args = parser.parse_args()
 

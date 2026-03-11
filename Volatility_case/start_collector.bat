@@ -20,7 +20,7 @@ echo (Press Ctrl+C to stop)
 echo.
 echo Auto-login credentials from config.py:
 echo   Username: UBCT-2
-echo   Server: flserver.rotman.utoronto.ca
+echo   Server: flserver.*REMOVED*.utoronto.ca
 echo   Port: 16520
 echo.
 

@@ -1,6 +1,6 @@
 """
 Electricity Case - News Monitor & Demand Calculator
-RITC 2026
+*REMOVED* 2026
 
 Polls the RIT news feed every 2 ticks and prints temperature forecasts
 with computed electricity demand using:
@@ -16,7 +16,7 @@ from news_parser import TemperatureState, compute_demand
 
 BANNER = r"""
 ============================================================
-  RITC 2026 - Electricity Case: Demand Monitor
+  *REMOVED* 2026 - Electricity Case: Demand Monitor
   Model: ELEC = 200 - 15*AT + 0.8*AT^2 - 0.01*AT^3
 ============================================================
 """
@@ -24,7 +24,7 @@ BANNER = r"""
 POLL_EVERY_N_TICKS = 2
 
 
-class RITConnection:
+class *REMOVED*onnection:
     """Minimal RIT API client — just enough for news + tick polling."""
 
     def __init__(self):
@@ -118,7 +118,7 @@ def print_demand_table(state: TemperatureState):
 
 def main():
     print(BANNER)
-    api = RITConnection()
+    api = *REMOVED*onnection()
 
     print("Waiting for RIT connection...")
     while not api.is_connected():

@@ -7,11 +7,11 @@ import logging
 import time
 from typing import Any
 
-from ritc_mm.api.client import ApiClient
-from ritc_mm.api.models import CaseResponse, LimitInfo, OrderResponse, SecurityResponse
-from ritc_mm.data.book import L1, L2Book, parse_book_response, to_l1
-from ritc_mm.data.news import NewsStorage
-from ritc_mm.data.tape import TapeBuffer
+from *REMOVED*_mm.api.client import ApiClient
+from *REMOVED*_mm.api.models import CaseResponse, LimitInfo, OrderResponse, SecurityResponse
+from *REMOVED*_mm.data.book import L1, L2Book, parse_book_response, to_l1
+from *REMOVED*_mm.data.news import NewsStorage
+from *REMOVED*_mm.data.tape import TapeBuffer
 
 
 class GlobalState:

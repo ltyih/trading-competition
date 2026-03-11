@@ -1,4 +1,4 @@
-"""News parsers for RITC 2026 Electricity case.
+"""News parsers for *REMOVED* 2026 Electricity case.
 
 Parses SUNLIGHT forecast news (exact or range hours, delivery_day) and
 SPOT BULLETIN news (spot_price, spot_contract_volume, delivery_day).

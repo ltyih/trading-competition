@@ -4,11 +4,11 @@ from __future__ import annotations
 
 from unittest.mock import patch
 
-from ritc_mm.api.models import CaseResponse, NewsItem, SecurityResponse
-from ritc_mm.data.book import L1
-from ritc_mm.data.state import GlobalState
-from ritc_mm.strategy.engine import StrategyEngine
-from ritc_mm.strategy.regimes import Regime
+from *REMOVED*_mm.api.models import CaseResponse, NewsItem, SecurityResponse
+from *REMOVED*_mm.data.book import L1
+from *REMOVED*_mm.data.state import GlobalState
+from *REMOVED*_mm.strategy.engine import StrategyEngine
+from *REMOVED*_mm.strategy.regimes import Regime
 
 
 def _case(tick: int) -> CaseResponse:
@@ -111,7 +111,7 @@ def test_strategy_step_does_not_call_execution_api_methods() -> None:
     state = _state()
     engine = StrategyEngine(_tunables())
 
-    with patch("ritc_mm.api.client.ApiClient.submit_order", side_effect=AssertionError("unexpected")):
-        with patch("ritc_mm.api.client.ApiClient.cancel_order", side_effect=AssertionError("unexpected")):
-            with patch("ritc_mm.api.client.ApiClient.bulk_cancel", side_effect=AssertionError("unexpected")):
+    with patch("*REMOVED*_mm.api.client.ApiClient.submit_order", side_effect=AssertionError("unexpected")):
+        with patch("*REMOVED*_mm.api.client.ApiClient.cancel_order", side_effect=AssertionError("unexpected")):
+            with patch("*REMOVED*_mm.api.client.ApiClient.bulk_cancel", side_effect=AssertionError("unexpected")):
                 engine.step(state, now_ts=100.0)

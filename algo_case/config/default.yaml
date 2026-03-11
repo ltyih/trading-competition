@@ -31,7 +31,7 @@ logging:
   format: "json"
   console_enabled: true
   file_enabled: true
-  file_path: "logs/ritc_mm.log"
+  file_path: "logs/*REMOVED*_mm.log"
   include_fields:
     - timestamp
     - level

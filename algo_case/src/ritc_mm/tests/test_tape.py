@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from ritc_mm.api.models import TasEntry
-from ritc_mm.data.tape import TapeBuffer
+from *REMOVED*_mm.api.models import TasEntry
+from *REMOVED*_mm.data.tape import TapeBuffer
 
 
 def _tas(entry_id: int, tick: int = 1, px: float = 25.0, qty: float = 100.0) -> TasEntry:

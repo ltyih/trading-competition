@@ -5,8 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 import time
 
-from ritc_mm.data.news import StoredNews
-from ritc_mm.data.state import GlobalState
+from *REMOVED*_mm.data.news import StoredNews
+from *REMOVED*_mm.data.state import GlobalState
 
 
 @dataclass

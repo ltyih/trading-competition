@@ -72,7 +72,7 @@ def print_banner():
 ║              COLLECTOR - Liquidity Risk Case                     ║
 ║                                                                  ║
 ║     24/7 Market Data Collection System                           ║
-║     RITC 2026 - Rotman International Trading Competition         ║
+║     *REMOVED* 2026 - *REMOVED* International Trading Competition         ║
 ║                                                                  ║
 ╚══════════════════════════════════════════════════════════════════╝
     """
@@ -115,7 +115,7 @@ def main():
 To get your API key:
 1. Open the RIT Client application
 2. Login with your credentials:
-   - Server: flserver.rotman.utoronto.ca
+   - Server: flserver.*REMOVED*.utoronto.ca
    - Port: 16500
    - Username: kanish10
    - Password: Kanish@123

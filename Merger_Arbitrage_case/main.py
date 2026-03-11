@@ -2,7 +2,7 @@
 """
 RIT Merger Arbitrage Case - Data Collector Entry Point
 
-24/7 data collection system for the RITC 2026 Merger Arbitrage Case.
+24/7 data collection system for the *REMOVED* 2026 Merger Arbitrage Case.
 Captures all market data including prices, order books, news, deal spreads,
 implied probabilities, and more.
 
@@ -51,7 +51,7 @@ def setup_logging():
 
 def print_banner():
     print("=" * 60)
-    print("  MERGER ARBITRAGE Data Collector - RITC 2026")
+    print("  MERGER ARBITRAGE Data Collector - *REMOVED* 2026")
     print("  5 Deals | 10 Securities | News-Driven Probabilities")
     print("  24/7 Market Data Collection System")
     print("=" * 60)

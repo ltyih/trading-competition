@@ -181,7 +181,7 @@ These profiles control **how limit orders are placed** during unwinding.
 4. **Monitor and adjust** → Recalculate schedule if needed
 
 ### Example Scenario:
-- **Tender**: BUY 10,000 RITC @ $50.00
+- **Tender**: BUY 10,000 *REMOVED* @ $50.00
 - **Book depth**: 20,000 shares (ratio = 0.50, passes `MAX_DEPTH_RATIO`)
 - **Net profit**: $0.005/share (passes `MIN_PROFIT_PER_SHARE`)
 - **Confidence**: 0.15 (passes `MIN_CONFIDENCE`)

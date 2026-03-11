@@ -1,6 +1,6 @@
 """Planner: pure functions to compute fuel conversion recommendations.
 
-Encodes RITC 2026 Electricity case mechanics and the exact decision rule.
+Encodes *REMOVED* 2026 Electricity case mechanics and the exact decision rule.
 Unit-testable; no I/O.
 """
 

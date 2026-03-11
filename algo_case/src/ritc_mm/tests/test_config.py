@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from ritc_mm.config import load_config, validate_required_keys
+from *REMOVED*_mm.config import load_config, validate_required_keys
 
 
 def test_default_config_loads_and_has_required_keys() -> None:

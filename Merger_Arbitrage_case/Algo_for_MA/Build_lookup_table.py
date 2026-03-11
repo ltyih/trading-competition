@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-RITC 2026 Merger Arbitrage — Multi-Heat News Extraction & Lookup Table Builder
+*REMOVED* 2026 Merger Arbitrage — Multi-Heat News Extraction & Lookup Table Builder
 ================================================================================
 Usage:
   1. Place all your heat databases (.db files) or extracted data in a folder
@@ -421,7 +421,7 @@ def classify_category(text: str) -> str:
 def generate_python_output(master: dict, output_path: str):
     """Generate a Python file with the MASTER_LOOKUP dict."""
     lines = [
-        '# Auto-generated MASTER LOOKUP TABLE for RITC 2026 Merger Arbitrage',
+        '# Auto-generated MASTER LOOKUP TABLE for *REMOVED* 2026 Merger Arbitrage',
         f'# Generated from {sum(v["n_observations"] for v in master.values())} observations',
         f'# across {len(master)} unique headlines',
         '',

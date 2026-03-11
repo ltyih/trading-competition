@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from enum import Enum
 import time
 
-from ritc_mm.data.state import GlobalState
+from *REMOVED*_mm.data.state import GlobalState
 
 
 class Regime(Enum):

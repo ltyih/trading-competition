@@ -22,7 +22,7 @@ MAX_RESTARTS_PER_HOUR = 5
 LOG_FILE = Path(__file__).parent / "logs" / "watchdog.log"
 
 # RIT Client detection
-RIT_PROCESS_NAMES = ['RIT.exe', 'rit.exe', 'RIT2.exe', 'Rotman']
+RIT_PROCESS_NAMES = ['RIT.exe', 'rit.exe', 'RIT2.exe', '*REMOVED*']
 
 # Setup logging
 LOG_FILE.parent.mkdir(exist_ok=True)

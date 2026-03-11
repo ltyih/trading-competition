@@ -1,4 +1,4 @@
-"""Configuration for RITC 2026 Producer Fuel Planner.
+"""Configuration for *REMOVED* 2026 Producer Fuel Planner.
 
 API base URL, API key (from env or default), and poll intervals for
 case, news, securities, and limits endpoints.

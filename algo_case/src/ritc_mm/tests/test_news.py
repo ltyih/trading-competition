@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from ritc_mm.api.models import NewsItem
-from ritc_mm.data.news import NewsStorage
+from *REMOVED*_mm.api.models import NewsItem
+from *REMOVED*_mm.data.news import NewsStorage
 
 
 def _news(news_id: int, ticker: str) -> NewsItem:

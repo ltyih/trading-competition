@@ -3,10 +3,10 @@ requires = ["setuptools>=69.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ritc-mm-bot"
+name = "*REMOVED*-mm-bot"
 version = "0.1.0"
-description = "Rotman Interactive Trader algorithmic market making bot"
-readme = {text = "RITC market making bot scaffold.", content-type = "text/plain"}
+description = "*REMOVED* Interactive Trader algorithmic market making bot"
+readme = {text = "*REMOVED* market making bot scaffold.", content-type = "text/plain"}
 requires-python = ">=3.11"
 dependencies = [
   "requests==2.32.3",
@@ -22,6 +22,6 @@ package-dir = {"" = "src"}
 where = ["src"]
 
 [tool.pytest.ini_options]
-testpaths = ["src/ritc_mm/tests"]
+testpaths = ["src/*REMOVED*_mm/tests"]
 pythonpath = ["src"]
 addopts = "-q"

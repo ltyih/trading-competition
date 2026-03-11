@@ -1,6 +1,6 @@
-# RITC 2026 Producer Fuel Planner
+# *REMOVED* 2026 Producer Fuel Planner
 
-Minimal decision-support tool for a Producer in the RITC 2026 Electricity case: it recommends **how much fuel to convert into next-day electricity** using SUNLIGHT news, RAE spot bulletins, market prices, limits, and manual distributor demand.
+Minimal decision-support tool for a Producer in the *REMOVED* 2026 Electricity case: it recommends **how much fuel to convert into next-day electricity** using SUNLIGHT news, RAE spot bulletins, market prices, limits, and manual distributor demand.
 
 ---
 

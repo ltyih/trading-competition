@@ -1,4 +1,4 @@
-# RITC 2026 Merger Arbitrage — V7 Strategy & Analysis
+# *REMOVED* 2026 Merger Arbitrage — V7 Strategy & Analysis
 
 ## Executive Summary: Why You're Making $90K Instead of $2M+
 

@@ -55,7 +55,7 @@ COLLECTOR_USERNAME = getpass.getuser()
 COLLECTOR_NAME = os.environ.get("RIT_COLLECTOR_NAME", None)
 
 # RIT Server Configuration
-RIT_SERVER = "flserver.rotman.utoronto.ca"
+RIT_SERVER = "flserver.*REMOVED*.utoronto.ca"
 RIT_PORT = 16500
 
 # RIT Client REST API Configuration (connects to local RIT Client)
@@ -106,7 +106,7 @@ LOG_FILE = LOGS_DIR / "data_collector.log"
 # These are known securities from the Liquidity Risk Case
 KNOWN_SECURITIES = {
     # Sub-heat 1
-    "RITC", "COMP",
+    "*REMOVED*", "COMP",
     # Sub-heat 2
     "TRNT", "MTRL",
     # Sub-heat 3
@@ -122,7 +122,7 @@ KNOWN_SECURITIES = {
 # Commission rates by security (from case brief)
 COMMISSIONS = {
     # Sub-heat 1
-    "RITC": 0.02, "COMP": 0.02,
+    "*REMOVED*": 0.02, "COMP": 0.02,
     # Sub-heat 2
     "TRNT": 0.01, "MTRL": 0.01,
     # Sub-heat 3

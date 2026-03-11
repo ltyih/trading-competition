@@ -193,7 +193,7 @@ Ticks 580-600:  NO NEW TRADES. Let positions ride to close-out.
 
 ## 1. Executive Summary
 
-**Goal**: Build a fully automated merger arbitrage trading bot for the RITC 2026 competition that reads news from the RIT API, classifies each news item by deal/direction/severity/category, updates deal completion probabilities, computes intrinsic target prices, and trades on the difference between intrinsic price and market price. Target: $200k+ NLV per heat (top teams hit $600k+).
+**Goal**: Build a fully automated merger arbitrage trading bot for the *REMOVED* 2026 competition that reads news from the RIT API, classifies each news item by deal/direction/severity/category, updates deal completion probabilities, computes intrinsic target prices, and trades on the difference between intrinsic price and market price. Target: $200k+ NLV per heat (top teams hit $600k+).
 
 **The single most important thing**: Getting the news direction RIGHT (positive vs negative vs ambiguous). Every dollar of P&L flows from this one classification. A wrong direction = trading the wrong way = doubled loss (you lose what you should have gained AND lose from the wrong position).
 

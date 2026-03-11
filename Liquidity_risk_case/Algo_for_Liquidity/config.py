@@ -47,11 +47,11 @@ PROFIT_MARGIN = 0.02           # Minimum profit above breakeven for limit orders
 # ========== Sub-Heat Configurations ==========
 SUBHEAT_CONFIG = {
     1: {
-        'tickers': {'RITC', 'COMP'},
-        'commissions': {'RITC': 0.02, 'COMP': 0.02},
-        'start_prices': {'RITC': 50, 'COMP': 40},
-        'volatility': {'RITC': 'LOW', 'COMP': 'MEDIUM'},
-        'liquidity': {'RITC': 'MEDIUM', 'COMP': 'HIGH'},
+        'tickers': {'*REMOVED*', 'COMP'},
+        'commissions': {'*REMOVED*': 0.02, 'COMP': 0.02},
+        'start_prices': {'*REMOVED*': 50, 'COMP': 40},
+        'volatility': {'*REMOVED*': 'LOW', 'COMP': 'MEDIUM'},
+        'liquidity': {'*REMOVED*': 'MEDIUM', 'COMP': 'HIGH'},
         'tender_window': 30,
     },
     2: {
@@ -111,7 +111,7 @@ EXECUTION_PROFILES = {
 # If None, will use dynamic calculation from live mid-price history
 STATIC_VOLATILITY = {
     # Example format - replace with your calculated values:
-    # 'RITC': 0.0005,   # LOW volatility
+    # '*REMOVED*': 0.0005,   # LOW volatility
     # 'COMP': 0.0012,   # MEDIUM volatility
     # 'TRNT': 0.0025,   # HIGH volatility
     # Add your tickers here with pre-calculated volatility values

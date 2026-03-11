@@ -4,10 +4,10 @@ from __future__ import annotations
 
 import pytest
 
-from ritc_mm.api.models import NewsItem
-from ritc_mm.data.book import L1
-from ritc_mm.data.state import GlobalState
-from ritc_mm.strategy.fair_value import FairValueEngine
+from *REMOVED*_mm.api.models import NewsItem
+from *REMOVED*_mm.data.book import L1
+from *REMOVED*_mm.data.state import GlobalState
+from *REMOVED*_mm.strategy.fair_value import FairValueEngine
 
 
 def _state() -> GlobalState:

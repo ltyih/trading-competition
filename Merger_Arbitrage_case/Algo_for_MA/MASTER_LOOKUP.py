@@ -1,4 +1,4 @@
-# Auto-generated MASTER LOOKUP TABLE for RITC 2026 Merger Arbitrage
+# Auto-generated MASTER LOOKUP TABLE for *REMOVED* 2026 Merger Arbitrage
 # Generated from 1934 observations
 # across 255 unique headlines
 
@@ -2797,7 +2797,7 @@ MASTER_LOOKUP = {
         "n_clean": 0,
         # example: Material Breach of Merger Covenant Alleged
     },
-    'WELCOME TO THE RITC 2026 MERGER ARBITRAGE CASE - PRACTICE SERVER': {
+    'WELCOME TO THE *REMOVED* 2026 MERGER ARBITRAGE CASE - PRACTICE SERVER': {
         "direction": "ambiguous",
         "severity": "small",
         "category": "FIN",
@@ -2806,7 +2806,7 @@ MASTER_LOOKUP = {
         "confidence": 0.17,
         "n_obs": 1,
         "n_clean": 0,
-        # example: Welcome to the RITC 2026 Merger Arbitrage Case - practice se
+        # example: Welcome to the *REMOVED* 2026 Merger Arbitrage Case - practice se
     },
 }
 

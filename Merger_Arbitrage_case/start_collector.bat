@@ -1,9 +1,9 @@
 @echo off
-title Merger Arbitrage Data Collector - RITC 2026
+title Merger Arbitrage Data Collector - *REMOVED* 2026
 color 0A
 
 echo ============================================================
-echo   MERGER ARBITRAGE DATA COLLECTOR - RITC 2026
+echo   MERGER ARBITRAGE DATA COLLECTOR - *REMOVED* 2026
 echo   24/7 Market Data Collection System
 echo ============================================================
 echo.

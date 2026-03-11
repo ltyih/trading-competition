@@ -9,11 +9,11 @@ API_KEY = {'X-API-Key': 'ZXCVB'}
 BASE_URL = 'http://localhost:10005/v1'
 
 # ========== Watchlist ==========
-WATCHLIST = {'RITC', 'COMP'}
+WATCHLIST = {'*REMOVED*', 'COMP'}
 
 # ========== Trading Parameters ==========
 COMMISSION_PER_SHARE = 0.02
-MAX_ORDER_SIZE = {'RITC': 25000, 'COMP': 10000}
+MAX_ORDER_SIZE = {'*REMOVED*': 25000, 'COMP': 10000}
 POSITION_LIMITS = {'net': 100000, 'gross': 250000}
 
 # ========== Risk / Execution Knobs ==========

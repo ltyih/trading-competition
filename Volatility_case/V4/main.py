@@ -1,6 +1,6 @@
 """
 Volatility Trading Algorithm V4 - Maximum Profit
-RITC 2026 Volatility Case
+*REMOVED* 2026 Volatility Case
 
 Strategy: Target portfolio approach with aggressive position building,
 vega-weighted ATM straddles, gamma-aware delta hedging.
@@ -17,7 +17,7 @@ from trading_engine import TradingEngine
 
 BANNER = r"""
 ============================================================
-  RITC 2026 - Volatility Trading Algorithm V4
+  *REMOVED* 2026 - Volatility Trading Algorithm V4
   Strategy: Max Profit - Target Portfolio + Gamma Scalping
 ============================================================
 """

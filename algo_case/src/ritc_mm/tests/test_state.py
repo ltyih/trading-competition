@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock
 
-from ritc_mm.api.models import (
+from *REMOVED*_mm.api.models import (
     BookResponse,
     CaseResponse,
     LimitInfo,
@@ -13,7 +13,7 @@ from ritc_mm.api.models import (
     SecurityResponse,
     TasEntry,
 )
-from ritc_mm.data.state import GlobalState
+from *REMOVED*_mm.data.state import GlobalState
 
 
 def _case() -> CaseResponse:

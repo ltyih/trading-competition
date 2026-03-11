@@ -4,9 +4,9 @@
 
 ## 1) Feature Summary
 - **What the feature claims to deliver (from context.md):**
-  - Project scaffold (`src/ritc_mm`, `config/`, `scripts/`, `tests/`).
+  - Project scaffold (`src/*REMOVED*_mm`, `config/`, `scripts/`, `tests/`).
   - Configuration loading (`pyproject.toml`, `config/default.yaml`).
-  - Structured logging foundation (`ritc_mm.telemetry.logger`).
+  - Structured logging foundation (`*REMOVED*_mm.telemetry.logger`).
   - Live runner stub (`scripts/run_live.py`).
 - **What was actually delivered (files + behavior):**
   - All claimed files exist and are populated with correct content.
@@ -18,8 +18,8 @@
 
 ## 2) Spec Compliance Checklist
 - **Blueprint alignment:** **PASS**
-  - **Correction:** The `tests/` directory was initially at the project root `algo_case/tests/`. It has been moved to `algo_case/src/ritc_mm/tests/` to comply with Blueprint Section 1.1.
-  - Repository structure matches Blueprint 1.1 (`src/ritc_mm/`, `config/`, `scripts/`).
+  - **Correction:** The `tests/` directory was initially at the project root `algo_case/tests/`. It has been moved to `algo_case/src/*REMOVED*_mm/tests/` to comply with Blueprint Section 1.1.
+  - Repository structure matches Blueprint 1.1 (`src/*REMOVED*_mm/`, `config/`, `scripts/`).
   - Config values match Blueprint 4.1 (`base_hs_ticks: 2`, `vol_k: 3.0`, etc.).
 - **API correctness vs rit_api_documentation.yaml:** **PASS**
   - `run_live.py` uses correct endpoint `/case` (mapped to `http://localhost:9999/v1/case`).
@@ -44,8 +44,8 @@
 - **Configuration centralized in config/*.yaml:** **PASS**
   - All tunables and API settings are in `config/default.yaml`.
 - **Tests added and meaningful:** **PASS**
-  - `src/ritc_mm/tests/test_config.py` verifies config loading and key presence.
-  - `src/ritc_mm/tests/test_logging.py` verifies JSON structure and field presence.
+  - `src/*REMOVED*_mm/tests/test_config.py` verifies config loading and key presence.
+  - `src/*REMOVED*_mm/tests/test_logging.py` verifies JSON structure and field presence.
 
 ## 3) Critical Issues (must-fix before next feature)
 *None. High-severity structure deviation was remediated.*
@@ -60,8 +60,8 @@
 - **Commands to run:**
   ```bash
   cd algo_case
-  # Verify tests pass (now in src/ritc_mm/tests/)
-  pytest src/ritc_mm/tests/test_config.py src/ritc_mm/tests/test_logging.py -q
+  # Verify tests pass (now in src/*REMOVED*_mm/tests/)
+  pytest src/*REMOVED*_mm/tests/test_config.py src/*REMOVED*_mm/tests/test_logging.py -q
   # Verify runner stub
   python scripts/run_live.py --config config/default.yaml
   ```

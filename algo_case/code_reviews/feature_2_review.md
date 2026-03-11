@@ -19,7 +19,7 @@
 
 ## 2) Spec Compliance Checklist
 - **Blueprint alignment:** **PASS**
-  - `client.py` placed in `src/ritc_mm/api/` per Blueprint 1.1.
+  - `client.py` placed in `src/*REMOVED*_mm/api/` per Blueprint 1.1.
   - `models.py`, `ratelimit.py`, `errors.py` populate the blueprint's `api/` directory.
 - **API correctness vs rit_api_documentation.yaml:** **PASS**
   - All endpoint paths verified: `/case`, `/trader`, `/securities`, `/securities/book`, `/securities/history`, `/securities/tas`, `/news`, `/limits`, `/orders`, `/orders/{id}`, `/commands/cancel`.
@@ -54,7 +54,7 @@
   ```bash
   cd algo_case
   python3 -m venv .venv && .venv/bin/pip install -e .
-  .venv/bin/python -m pytest src/ritc_mm/tests/ -v
+  .venv/bin/python -m pytest src/*REMOVED*_mm/tests/ -v
   ```
 - **Expected:** `50 passed` (3 Feature 1 + 47 Feature 2).
 - **Missing steps:** None.

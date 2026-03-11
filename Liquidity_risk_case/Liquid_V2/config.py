@@ -12,7 +12,7 @@ BASE_URL = 'http://localhost:9999/v1'
 # All tickers across all 5 heats
 WATCHLIST = {
     # Heat 1
-    'RITC', 'COMP',
+    '*REMOVED*', 'COMP',
     # Heat 2
     'TRNT', 'MTRL',
     # Heat 3
@@ -27,7 +27,7 @@ WATCHLIST = {
 COMMISSION_PER_SHARE = 0.02
 MAX_ORDER_SIZE = {
     # Heat 1
-    'RITC': 25000, 'COMP': 10000,
+    '*REMOVED*': 25000, 'COMP': 10000,
     # Heat 2
     'TRNT': 10000, 'MTRL': 10000,
     # Heat 3
@@ -70,8 +70,8 @@ SOFT_BREAKEVEN_BATCH_FRACTION = 0.35
 MARKETABLE_LIMIT_EPS = 0.01        # pseudo-marketable limit offset
 UNWIND_TICKER_PROFILE = {
     # Heat 1
-    # RITC: medium liquidity / low vol -> unwind smoother, stricter on price.
-    'RITC': {
+    # *REMOVED*: medium liquidity / low vol -> unwind smoother, stricter on price.
+    '*REMOVED*': {
         'risk_mult': 0.8,
         'base_participation': 0.06,
         'max_participation': 0.22,

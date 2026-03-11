@@ -1,4 +1,4 @@
-"""Comprehensive tests for the ``ritc_mm.api`` package.
+"""Comprehensive tests for the ``*REMOVED*_mm.api`` package.
 
 All HTTP interactions are mocked via ``unittest.mock.patch`` so these tests
 run on **any OS** without a live RIT Client connection.  This is essential
@@ -21,8 +21,8 @@ from unittest.mock import MagicMock, PropertyMock, patch
 import pytest
 import requests
 
-from ritc_mm.api.client import ApiClient
-from ritc_mm.api.errors import (
+from *REMOVED*_mm.api.client import ApiClient
+from *REMOVED*_mm.api.errors import (
     AuthenticationError,
     ConnectionFailure,
     EndpointNotFoundError,
@@ -30,7 +30,7 @@ from ritc_mm.api.errors import (
     ServerError,
     UnexpectedStatusError,
 )
-from ritc_mm.api.models import (
+from *REMOVED*_mm.api.models import (
     BookResponse,
     CancelResult,
     CaseResponse,
@@ -46,8 +46,8 @@ from ritc_mm.api.models import (
     TasEntry,
     TraderResponse,
 )
-from ritc_mm.api.ratelimit import RateLimitTracker, TickerCooldown
-from ritc_mm.telemetry.logger import LoggerConfig, get_logger
+from *REMOVED*_mm.api.ratelimit import RateLimitTracker, TickerCooldown
+from *REMOVED*_mm.telemetry.logger import LoggerConfig, get_logger
 
 
 # -----------------------------------------------------------------------

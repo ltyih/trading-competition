@@ -6,7 +6,7 @@ from collections import deque
 from dataclasses import dataclass
 import time
 
-from ritc_mm.api.models import TasEntry
+from *REMOVED*_mm.api.models import TasEntry
 
 
 @dataclass(frozen=True)

@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import pytest
 
-from ritc_mm.api.models import BookResponse
-from ritc_mm.data.book import parse_book_response, to_l1
+from *REMOVED*_mm.api.models import BookResponse
+from *REMOVED*_mm.data.book import parse_book_response, to_l1
 
 
 def _order(order_id: int, action: str, price: float, qty: float, filled: float = 0.0) -> dict:

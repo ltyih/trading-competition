@@ -2,7 +2,7 @@
 
 ## Current status
 
-- **App**: Minimal RITC 2026 Producer decision-support tool (4–6 files). Recommends how much fuel (NG + crude) to convert into next-day electricity using SUNLIGHT news, spot bulletins, market prices, limits, and manual distributor demand.
+- **App**: Minimal *REMOVED* 2026 Producer decision-support tool (4–6 files). Recommends how much fuel (NG + crude) to convert into next-day electricity using SUNLIGHT news, spot bulletins, market prices, limits, and manual distributor demand.
 - **Location**: `GBE_Energy/producer_planner/`
 - **Run**: `python3 main.py` (requires RIT API at `http://localhost:9999/v1` and `RIT_API_KEY`). Self-tests: `python3 parsers.py`, `python3 planner.py`.
 
